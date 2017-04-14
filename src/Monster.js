@@ -1,4 +1,4 @@
-export default function Monster (x, y, color = 'black') {
+export default function Monster (x, y, color = 'green') {
   this.x = x
   this.y = y
   this.size = 10
@@ -12,7 +12,9 @@ Monster.prototype.draw = function draw (ctx) {
 }
 
 Monster.prototype.step = function step (monsters) {
+
   const next = {x: this.x, y: this.y}
+
   switch (Math.floor(Math.random() * 4)) {
     case 0: // up.
       next.y -= this.speed
@@ -27,7 +29,10 @@ Monster.prototype.step = function step (monsters) {
       next.x -= this.speed
       break;
   }
+
   let canMove = true
+
+  // Collision detection.
   monsters.forEach(function (monster) {
     if (monster === this) return
     if (!canMove) return
@@ -39,6 +44,7 @@ Monster.prototype.step = function step (monsters) {
       canMove = false
     }
   }, this)
+
   if (canMove) {
     this.x = next.x
     this.y = next.y
