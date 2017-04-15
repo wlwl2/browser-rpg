@@ -1,4 +1,4 @@
-export default function Character (x, y, color = 'black') {
+export default function Player (x, y, color = 'black') {
   this.x = x
   this.y = y
   this.size = 10
@@ -6,7 +6,12 @@ export default function Character (x, y, color = 'black') {
   this.speed = 1
 }
 
-Character.prototype.draw = function draw (ctx) {
+Player.prototype.draw = function draw (ctx) {
+  ctx.fillStyle = this.color
+  ctx.fillRect(this.x, this.y, this.size, this.size)
+}
+
+Player.prototype.move = function move (players) {
   ctx.fillStyle = this.color
   ctx.fillRect(this.x, this.y, this.size, this.size)
 }
