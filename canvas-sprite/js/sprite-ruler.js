@@ -27,39 +27,16 @@ ctx.drawImage(img,
 )
 
 //ctx.fillRect(x, y, width, height)
-
-function xLines () {
-
-  var intervalX = 13
-  var differenceX = 10
-  var startX = 9
-  var endX = 727
-  var maxWidthX = Math.floor(spriteWidth/10)*10
-  var intervalTotalX = Math.floor(maxWidthX/intervalX)
-
-  ctx.fillStyle = 'blue'
-  ctx.fillRect(startX, 0, 1, 10)
-  ctx.fillRect(endX, 0, 1, 10)
-  for (var i = 1; i < intervalTotalX-1; i++) {
-    ctx.fillRect((i*intervalX+differenceX), 0, 1, 10)
-  }
+function xLines1 (xStart, xEnd) {
+  ctx.fillStyle = 'rgba(10, 58, 164, 0.5)'
+  ctx.fillRect(xStart, 0, 1, 40)
+  ctx.fillRect(xEnd, 0, 1, 40)
 }
-xLines()
+xLines1(9, 23)
 
-function yLines () {
-
-  var intervalY = 13
-  var differenceY = 10
-  var startY = 10
-  var endY = 119
-  var maxWidthY = Math.floor(spriteWidth/10)*10
-  var intervalTotalY = Math.floor(maxWidthY/intervalY)
-
-  ctx.fillStyle = 'blue'
-  ctx.fillRect(0, startY, 20, 1)
-  ctx.fillRect(0, endY, 10, 1)
-  for (var i = 1; i < intervalTotalY-1; i++) {
-    ctx.fillRect(0, (i*intervalY+differenceY), 10, 1)
-  }
+function yLines2 (yStart, yEnd) {
+  ctx.fillStyle = 'rgba(10, 58, 164, 0.5)'
+  ctx.fillRect(0, yStart, 40, 1)
+  ctx.fillRect(0, yEnd, 40, 1)
 }
-yLines()
+yLines2(12, 31)

@@ -42,7 +42,6 @@ function characterMove (direction) {
   })
 }
 
-
 // Monsters randomly move on keypress.
 window.addEventListener("keydown", function(event){
   if (event.key === 'ArrowRight') characterMove('right')
