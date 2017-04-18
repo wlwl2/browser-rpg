@@ -10,7 +10,7 @@ function init () {
   var ctx = canvas.getContext('2d')
 
   document.body.appendChild(canvas)
-
+  console.log(ctx);
   return { ctx: ctx, canvas: canvas }
 }
 
@@ -29,21 +29,23 @@ function step () {
     monster.draw(ctx)
   })
 
-  players.forEach(function (player) {
-    player.draw(ctx)
-  })
+  // players.forEach(function (player) {
+  //   player.draw(ctx)
+  // })
 }
-
-function characterMove (direction) {
-  players.forEach(function (player) {
-    player.move(ctx)
-    player.draw(ctx)
-  })
-}
+//
+// function characterMove (direction) {
+//   players.forEach(function (player) {
+//     player.move(ctx)
+//     player.draw(ctx)
+//   })
+// }
 
 // Monsters randomly move on keypress.
 window.addEventListener("keydown", function(event){
-  if (event.key === 'ArrowRight') characterMove('right')
+  // if (event.key === 'ArrowRight') characterMove('right')
+  // if (event.key === ' ') step()
+  step()
 }, false);
 
 // Monsters move randomly every second.
