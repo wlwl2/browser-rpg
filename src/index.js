@@ -1,6 +1,5 @@
 import Monster from './Monster'
 import World from './World'
-import Sprite from './Sprite'
 
 function init () {
   var canvas = document.createElement("canvas")

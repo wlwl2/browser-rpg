@@ -12,7 +12,7 @@ function Sprite(img, width, height, positions){
 }
 
 Sprite.prototype = {
-  draw: function(position, x, y){
+  draw: function(x, y, position){
 
       var pos = this.positions[position];
 
@@ -30,18 +30,12 @@ Sprite.prototype = {
     }
 };
 
-var sprite = new Sprite(
-  img,
-  30,
-  30,
-  [
-    // specify a few sprite locations
-    [160, 40],  // warrior
-    [190, 70], // archer
-    [190, 10]  // monk
-  ]
-);
+var monk = new Sprite(img, 30, 30,  [[9, 12]]);
+var warrior = new Sprite(img, 30, 30,  [[9, 42]]);
+var archer = new Sprite(img, 30, 30,  [[6, 73]]);
+var monster = new Sprite(img, 30, 30,  [[8, 114]]);
 
-sprite.draw(0, 10, 200);
-sprite.draw(1, 50, 200);
-sprite.draw(2, 90, 200);
+monk.draw(10, 200, 0);
+warrior.draw(50, 200, 0);
+archer.draw(90, 200, 0);
+monster.draw(140, 200, 0);

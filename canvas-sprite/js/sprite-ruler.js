@@ -26,17 +26,66 @@ ctx.drawImage(img,
     spriteHeight // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
 )
 
-//ctx.fillRect(x, y, width, height)
+// Note: ctx.fillRect(x, y, width, height)
+
+// // x-axis rulers. Top left x is xStart
+// function xLines1 (xStart, xEnd) {
+//   ctx.fillStyle = 'rgba(10, 58, 164, 0.5)'
+//   ctx.fillRect(xStart, 0, 1, 40)
+//   ctx.fillRect(xEnd, 0, 1, 40)
+// }
+// xLines1(9, 23)
+//
+// // y-axis rulers. Top left y is yStart
+// function yLines2 (yStart, yEnd) {
+//   ctx.fillStyle = 'rgba(10, 58, 164, 0.5)'
+//   ctx.fillRect(0, yStart, 40, 1)
+//   ctx.fillRect(0, yEnd, 40, 1)
+// }
+// yLines2(12, 31)
+
+
+// function xLines1 (xStart, xEnd) {
+//   ctx.fillStyle = 'rgba(10, 164, 11, 0.5)'
+//   ctx.fillRect(xStart, 0, 1, 80)
+//   ctx.fillRect(xEnd, 0, 1, 80)
+// }
+// xLines1(9, 23)
+//
+// // y-axis rulers. Top left y is yStart
+// function yLines2 (yStart, yEnd) {
+//   ctx.fillStyle = 'rgba(10, 164, 11, 0.5)'
+//   ctx.fillRect(0, yStart, 40, 1)
+//   ctx.fillRect(0, yEnd, 40, 1)
+// }
+// yLines2(42, 63)
+
+// function xLines1 (xStart, xEnd) {
+//   ctx.fillStyle = 'rgba(193, 212, 46, 0.5)'
+//   ctx.fillRect(xStart, 0, 1, 120)
+//   ctx.fillRect(xEnd, 0, 1, 120)
+// }
+// xLines1(6, 23)
+//
+// // y-axis rulers. Top left y is yStart
+// function yLines2 (yStart, yEnd) {
+//   ctx.fillStyle = 'rgba(193, 212, 46, 0.5)'
+//   ctx.fillRect(0, yStart, 40, 1)
+//   ctx.fillRect(0, yEnd, 40, 1)
+// }
+// yLines2(73, 95)
+
 function xLines1 (xStart, xEnd) {
   ctx.fillStyle = 'rgba(10, 58, 164, 0.5)'
-  ctx.fillRect(xStart, 0, 1, 40)
-  ctx.fillRect(xEnd, 0, 1, 40)
+  ctx.fillRect(xStart, 0, 1, 160)
+  ctx.fillRect(xEnd, 0, 1, 160)
 }
-xLines1(9, 23)
+xLines1(8, 23)
 
+// y-axis rulers. Top left y is yStart
 function yLines2 (yStart, yEnd) {
   ctx.fillStyle = 'rgba(10, 58, 164, 0.5)'
   ctx.fillRect(0, yStart, 40, 1)
   ctx.fillRect(0, yEnd, 40, 1)
 }
-yLines2(12, 31)
+yLines2(114, 127)
