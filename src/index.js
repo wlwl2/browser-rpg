@@ -1,4 +1,5 @@
 import Monster from './Monster'
+import Players from './Player'
 import World from './World'
 
 function init () {
@@ -10,7 +11,6 @@ function init () {
   var ctx = canvas.getContext('2d')
 
   document.body.appendChild(canvas)
-  console.log(ctx);
   return { ctx: ctx, canvas: canvas }
 }
 
@@ -29,30 +29,45 @@ function step () {
     monster.draw(ctx)
   })
 
-  // players.forEach(function (player) {
-  //   player.draw(ctx)
-  // })
+  players.forEach(function (player) {
+    player.draw(ctx)
+  })
 }
-//
-// function characterMove (direction) {
-//   players.forEach(function (player) {
-//     player.move(ctx)
-//     player.draw(ctx)
-//   })
-// }
 
-// Monsters randomly move on keypress.
-window.addEventListener("keydown", function(event){
-  // if (event.key === 'ArrowRight') characterMove('right')
-  // if (event.key === ' ') step()
-  step()
-}, false);
+function characterDraw () {
+  players.forEach(function (player) {
+    player.draw(ctx)
+  })
+}
 
-// Monsters move randomly every second.
-//setInterval(function(){ step()}, 1000)
+function characterMove (direction) {
+  players.forEach(function (player) {
+    console.log(direction);
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    player.move(ctx, direction)
+    player.draw(ctx)
+  })
+}
 
 var _init = init(),
     ctx = _init.ctx,
     canvas = _init.canvas;
 
 step()
+characterDraw()
+
+// Monsters randomly move on keydown.
+// window.addEventListener("keydown", function(event){
+//   step()
+// }, false);
+
+// Monsters move randomly every second.
+setInterval(function(){ step()}, 1000)
+
+
+window.addEventListener("keydown", function(event){
+  if (event.key === 'ArrowRight') characterMove('right')
+  if (event.key === 'ArrowLeft') characterMove('left')
+  if (event.key === 'ArrowUp') characterMove('up')
+  if (event.key === 'ArrowDown') characterMove('down')
+}, false);

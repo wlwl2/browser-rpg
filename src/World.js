@@ -1,6 +1,6 @@
 // people and monsters
 import Monster from './Monster'
-import Character from './Character'
+import Player from './Player'
 
 export default function World () {
 
@@ -15,11 +15,11 @@ export default function World () {
 
   monsters.push(monster1, monster2, monster3, monster4, monster5, monster6)
 
-  const characters = []
+  const players = []
 
-  var character1 = new Character(10, 50)
+  var player1 = new Player(10, 50)
 
-  characters.push(character1)
+  players.push(player1)
 
-  return { monsters, characters }
+  return { monsters, players }
 }
