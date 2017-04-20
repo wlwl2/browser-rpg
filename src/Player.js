@@ -22,18 +22,17 @@ Player.prototype.draw = function draw (ctx) {
 }
 
 Player.prototype.move = function move (ctx, direction) {
-  console.log(direction);
   switch (direction) {
-    case 'left': // up.
+    case 'up': // up.
       this.y -= this.speed
       break;
-    case 'right': // down.
+    case 'down': // down.
       this.y += this.speed
       break;
-    case 'up': // right.
+    case 'right': // right.
       this.x += this.speed
       break;
-    case 'down': // left.
+    case 'left': // left.
       this.x -= this.speed
       break;
   }

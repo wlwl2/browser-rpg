@@ -18,7 +18,7 @@ const monsters = World().monsters
 const players = World().players
 
 // For each of these steps, re-create the world.
-function step () {
+function step (direction) {
 
   // sets all pixels in the rectangle defined by starting point and
   // size to transparent black, erasing any previously drawn content.
@@ -30,20 +30,6 @@ function step () {
   })
 
   players.forEach(function (player) {
-    player.draw(ctx)
-  })
-}
-
-function characterDraw () {
-  players.forEach(function (player) {
-    player.draw(ctx)
-  })
-}
-
-function characterMove (direction) {
-  players.forEach(function (player) {
-    console.log(direction);
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
     player.move(ctx, direction)
     player.draw(ctx)
   })
@@ -54,20 +40,10 @@ var _init = init(),
     canvas = _init.canvas;
 
 step()
-characterDraw()
-
-// Monsters randomly move on keydown.
-// window.addEventListener("keydown", function(event){
-//   step()
-// }, false);
-
-// Monsters move randomly every second.
-setInterval(function(){ step()}, 1000)
-
 
 window.addEventListener("keydown", function(event){
-  if (event.key === 'ArrowRight') characterMove('right')
-  if (event.key === 'ArrowLeft') characterMove('left')
-  if (event.key === 'ArrowUp') characterMove('up')
-  if (event.key === 'ArrowDown') characterMove('down')
+  if (event.key === 'ArrowUp') step('up')
+  if (event.key === 'ArrowDown') step('down')
+  if (event.key === 'ArrowRight') step('right')
+  if (event.key === 'ArrowLeft') step('left')
 }, false);
