@@ -3,10 +3,11 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-color: grey;
+  background-color: white;
 }
 
 canvas {
+  background-color: grey;
   height: 98vh;
   width: 98vh;
 }

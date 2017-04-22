@@ -42,8 +42,18 @@ var _init = init(),
 step()
 
 window.addEventListener("keydown", function(event){
-  if (event.key === 'ArrowUp') step('up')
-  if (event.key === 'ArrowDown') step('down')
-  if (event.key === 'ArrowRight') step('right')
-  if (event.key === 'ArrowLeft') step('left')
+  switch (event.key) {
+    case 'ArrowUp':
+      step('up')
+      break;
+    case 'ArrowDown':
+      step('down')
+      break;
+    case 'ArrowRight':
+      step('right')
+      break;
+    case 'ArrowLeft':
+      step('left')
+    break;
+  }
 }, false);
