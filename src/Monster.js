@@ -63,6 +63,3 @@ Monster.prototype.step = function step (monsters) {
     this.step(monsters)
   }
 }
-
-
-//uuid ietf rfc namespace network card
