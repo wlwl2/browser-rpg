@@ -63,313 +63,68 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/* exports provided: default */
+/* exports used: default */
+/*!************************!*\
+  !*** ./src/Monster.js ***!
+  \************************/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Monster;
-function Monster (x, y) {
-  this.x = x
-  this.y = y
-  this.size = 30
-  this.speed = 1
-}
-
-Monster.prototype.draw = function draw (ctx) {
-  var img = new Image()
-  img.src = 'src/sprites/characters.png'
-  ctx.drawImage(
-    img,
-    8, // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-    114, // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-    this.size, // The width of the sub-rectangle of the source image to draw into the destination context. If not specified, the entire rectangle from the coordinates specified by sx and sy to the bottom-right corner of the image is used.
-    this.size, // The height of the sub-rectangle of the source image to draw into the destination context.
-    this.x, // The X coordinate in the destination canvas at which to place the top-left corner of the source image.
-    this.y, // The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
-    this.size, // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
-    this.size // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
-  )
-}
-
-Monster.prototype.step = function step (monsters) {
-  const next = {x: this.x, y: this.y}
-
-  switch (Math.floor(Math.random() * 4)) {
-    case 0: // up.
-      next.y -= this.speed
-      break
-    case 1: // down.
-      next.y += this.speed
-      break
-    case 2: // right.
-      next.x += this.speed
-      break
-    case 3: // left.
-      next.x -= this.speed
-      break
-  }
-
-  let canMove = true
-
-  // Collision detection.
-  monsters.forEach(function (monster) {
-    if (monster === this) return
-    if (!canMove) return
-    if (!(monster.x > next.x + this.size ||
-        monster.x + monster.size <= next.x ||
-        monster.y > next.y + this.size ||
-        monster.y + monster.size <= next.y)
-    ) {
-      canMove = false
-    }
-  }, this)
-
-  if (canMove) {
-    this.x = next.x
-    this.y = next.y
-  } else {
-    this.step(monsters)
-  }
-}
-
+eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Monster;\nfunction Monster (x, y) {\r\n  this.x = x\r\n  this.y = y\r\n  this.size = 30\r\n  this.speed = 1\r\n}\r\n\r\nMonster.prototype.draw = function draw (ctx) {\r\n  var img = new Image()\r\n  img.src = 'src/sprites/characters.png'\r\n  ctx.drawImage(\r\n    img,\r\n    8, // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.\r\n    114, // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.\r\n    this.size, // The width of the sub-rectangle of the source image to draw into the destination context. If not specified, the entire rectangle from the coordinates specified by sx and sy to the bottom-right corner of the image is used.\r\n    this.size, // The height of the sub-rectangle of the source image to draw into the destination context.\r\n    this.x, // The X coordinate in the destination canvas at which to place the top-left corner of the source image.\r\n    this.y, // The Y coordinate in the destination canvas at which to place the top-left corner of the source image.\r\n    this.size, // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.\r\n    this.size // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.\r\n  )\r\n}\r\n\r\nMonster.prototype.step = function step (monsters) {\r\n  const next = {x: this.x, y: this.y}\r\n\r\n  switch (Math.floor(Math.random() * 4)) {\r\n    case 0: // up.\r\n      next.y -= this.speed\r\n      break\r\n    case 1: // down.\r\n      next.y += this.speed\r\n      break\r\n    case 2: // right.\r\n      next.x += this.speed\r\n      break\r\n    case 3: // left.\r\n      next.x -= this.speed\r\n      break\r\n  }\r\n\r\n  let canMove = true\r\n\r\n  // Collision detection.\r\n  monsters.forEach(function (monster) {\r\n    if (monster === this) return\r\n    if (!canMove) return\r\n    if (!(monster.x > next.x + this.size ||\r\n        monster.x + monster.size <= next.x ||\r\n        monster.y > next.y + this.size ||\r\n        monster.y + monster.size <= next.y)\r\n    ) {\r\n      canMove = false\r\n    }\r\n  }, this)\r\n\r\n  if (canMove) {\r\n    this.x = next.x\r\n    this.y = next.y\r\n  } else {\r\n    this.step(monsters)\r\n  }\r\n}\r\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9Nb25zdGVyLmpzPzQ4MTkiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gTW9uc3RlciAoeCwgeSkge1xyXG4gIHRoaXMueCA9IHhcclxuICB0aGlzLnkgPSB5XHJcbiAgdGhpcy5zaXplID0gMzBcclxuICB0aGlzLnNwZWVkID0gMVxyXG59XHJcblxyXG5Nb25zdGVyLnByb3RvdHlwZS5kcmF3ID0gZnVuY3Rpb24gZHJhdyAoY3R4KSB7XHJcbiAgdmFyIGltZyA9IG5ldyBJbWFnZSgpXHJcbiAgaW1nLnNyYyA9ICdzcmMvc3ByaXRlcy9jaGFyYWN0ZXJzLnBuZydcclxuICBjdHguZHJhd0ltYWdlKFxyXG4gICAgaW1nLFxyXG4gICAgOCwgLy8gVGhlIFggY29vcmRpbmF0ZSBvZiB0aGUgdG9wIGxlZnQgY29ybmVyIG9mIHRoZSBzdWItcmVjdGFuZ2xlIG9mIHRoZSBzb3VyY2UgaW1hZ2UgdG8gZHJhdyBpbnRvIHRoZSBkZXN0aW5hdGlvbiBjb250ZXh0LlxyXG4gICAgMTE0LCAvLyBUaGUgWSBjb29yZGluYXRlIG9mIHRoZSB0b3AgbGVmdCBjb3JuZXIgb2YgdGhlIHN1Yi1yZWN0YW5nbGUgb2YgdGhlIHNvdXJjZSBpbWFnZSB0byBkcmF3IGludG8gdGhlIGRlc3RpbmF0aW9uIGNvbnRleHQuXHJcbiAgICB0aGlzLnNpemUsIC8vIFRoZSB3aWR0aCBvZiB0aGUgc3ViLXJlY3RhbmdsZSBvZiB0aGUgc291cmNlIGltYWdlIHRvIGRyYXcgaW50byB0aGUgZGVzdGluYXRpb24gY29udGV4dC4gSWYgbm90IHNwZWNpZmllZCwgdGhlIGVudGlyZSByZWN0YW5nbGUgZnJvbSB0aGUgY29vcmRpbmF0ZXMgc3BlY2lmaWVkIGJ5IHN4IGFuZCBzeSB0byB0aGUgYm90dG9tLXJpZ2h0IGNvcm5lciBvZiB0aGUgaW1hZ2UgaXMgdXNlZC5cclxuICAgIHRoaXMuc2l6ZSwgLy8gVGhlIGhlaWdodCBvZiB0aGUgc3ViLXJlY3RhbmdsZSBvZiB0aGUgc291cmNlIGltYWdlIHRvIGRyYXcgaW50byB0aGUgZGVzdGluYXRpb24gY29udGV4dC5cclxuICAgIHRoaXMueCwgLy8gVGhlIFggY29vcmRpbmF0ZSBpbiB0aGUgZGVzdGluYXRpb24gY2FudmFzIGF0IHdoaWNoIHRvIHBsYWNlIHRoZSB0b3AtbGVmdCBjb3JuZXIgb2YgdGhlIHNvdXJjZSBpbWFnZS5cclxuICAgIHRoaXMueSwgLy8gVGhlIFkgY29vcmRpbmF0ZSBpbiB0aGUgZGVzdGluYXRpb24gY2FudmFzIGF0IHdoaWNoIHRvIHBsYWNlIHRoZSB0b3AtbGVmdCBjb3JuZXIgb2YgdGhlIHNvdXJjZSBpbWFnZS5cclxuICAgIHRoaXMuc2l6ZSwgLy8gVGhlIHdpZHRoIHRvIGRyYXcgdGhlIGltYWdlIGluIHRoZSBkZXN0aW5hdGlvbiBjYW52YXMuIFRoaXMgYWxsb3dzIHNjYWxpbmcgb2YgdGhlIGRyYXduIGltYWdlLiBJZiBub3Qgc3BlY2lmaWVkLCB0aGUgaW1hZ2UgaXMgbm90IHNjYWxlZCBpbiB3aWR0aCB3aGVuIGRyYXduLlxyXG4gICAgdGhpcy5zaXplIC8vIFRoZSBoZWlnaHQgdG8gZHJhdyB0aGUgaW1hZ2UgaW4gdGhlIGRlc3RpbmF0aW9uIGNhbnZhcy4gVGhpcyBhbGxvd3Mgc2NhbGluZyBvZiB0aGUgZHJhd24gaW1hZ2UuIElmIG5vdCBzcGVjaWZpZWQsIHRoZSBpbWFnZSBpcyBub3Qgc2NhbGVkIGluIGhlaWdodCB3aGVuIGRyYXduLlxyXG4gIClcclxufVxyXG5cclxuTW9uc3Rlci5wcm90b3R5cGUuc3RlcCA9IGZ1bmN0aW9uIHN0ZXAgKG1vbnN0ZXJzKSB7XHJcbiAgY29uc3QgbmV4dCA9IHt4OiB0aGlzLngsIHk6IHRoaXMueX1cclxuXHJcbiAgc3dpdGNoIChNYXRoLmZsb29yKE1hdGgucmFuZG9tKCkgKiA0KSkge1xyXG4gICAgY2FzZSAwOiAvLyB1cC5cclxuICAgICAgbmV4dC55IC09IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICAgIGNhc2UgMTogLy8gZG93bi5cclxuICAgICAgbmV4dC55ICs9IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICAgIGNhc2UgMjogLy8gcmlnaHQuXHJcbiAgICAgIG5leHQueCArPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgICBjYXNlIDM6IC8vIGxlZnQuXHJcbiAgICAgIG5leHQueCAtPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgfVxyXG5cclxuICBsZXQgY2FuTW92ZSA9IHRydWVcclxuXHJcbiAgLy8gQ29sbGlzaW9uIGRldGVjdGlvbi5cclxuICBtb25zdGVycy5mb3JFYWNoKGZ1bmN0aW9uIChtb25zdGVyKSB7XHJcbiAgICBpZiAobW9uc3RlciA9PT0gdGhpcykgcmV0dXJuXHJcbiAgICBpZiAoIWNhbk1vdmUpIHJldHVyblxyXG4gICAgaWYgKCEobW9uc3Rlci54ID4gbmV4dC54ICsgdGhpcy5zaXplIHx8XHJcbiAgICAgICAgbW9uc3Rlci54ICsgbW9uc3Rlci5zaXplIDw9IG5leHQueCB8fFxyXG4gICAgICAgIG1vbnN0ZXIueSA+IG5leHQueSArIHRoaXMuc2l6ZSB8fFxyXG4gICAgICAgIG1vbnN0ZXIueSArIG1vbnN0ZXIuc2l6ZSA8PSBuZXh0LnkpXHJcbiAgICApIHtcclxuICAgICAgY2FuTW92ZSA9IGZhbHNlXHJcbiAgICB9XHJcbiAgfSwgdGhpcylcclxuXHJcbiAgaWYgKGNhbk1vdmUpIHtcclxuICAgIHRoaXMueCA9IG5leHQueFxyXG4gICAgdGhpcy55ID0gbmV4dC55XHJcbiAgfSBlbHNlIHtcclxuICAgIHRoaXMuc3RlcChtb25zdGVycylcclxuICB9XHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvTW9uc3Rlci5qc1xuLy8gbW9kdWxlIGlkID0gMFxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==");
 
 /***/ }),
 /* 1 */
+/* exports provided: default */
+/* exports used: default */
+/*!***********************!*\
+  !*** ./src/Player.js ***!
+  \***********************/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Player;
-function Player (x, y) {
-  this.x = x
-  this.y = y
-  this.size = 30
-  this.speed = 1
-}
-
-Player.prototype.draw = function draw (ctx) {
-  var img = new Image()
-  img.src = 'src/sprites/characters.png'
-  ctx.drawImage(
-
-    // An element to draw into the context.
-    img,
-
-    // The X coordinate of the top left corner of the sub-rectangle of the
-    // source image to draw into the destination context.
-    9,
-
-    // The Y coordinate of the top left corner of the sub-rectangle of the
-    // source image to draw into the destination context.
-    42,
-
-    // The width of the sub-rectangle of the source image to draw into the
-    // destination context. If not specified, the entire rectangle from the
-    // coordinates specified by sx and sy to the bottom-right
-    // corner of the image is used.
-    this.size,
-
-    // The height of the sub-rectangle of the source image to draw into
-    // the destination context.
-    this.size,
-
-    // The X coordinate in the destination canvas at which to place the
-    // top-left corner of the source image.
-    this.x,
-
-    // The Y coordinate in the destination canvas at which to place the
-    // top-left corner of the source image.
-    this.y,
-
-    // The width to draw the image in the destination canvas. This allows
-    // scaling of the drawn image. If not specified, the image is not
-    // scaled in width when drawn.
-    this.size,
-
-    // The height to draw the image in the destination canvas. This allows
-    // scaling of the drawn image. If not specified, the image is not
-    // scaled in height when drawn.
-    this.size
-  )
-}
-
-Player.prototype.move = function move (ctx, direction) {
-  switch (direction) {
-    case 'up': // up.
-      this.y -= this.speed
-      break
-    case 'down': // down.
-      this.y += this.speed
-      break
-    case 'right': // right.
-      this.x += this.speed
-      break
-    case 'left': // left.
-      this.x -= this.speed
-      break
-  }
-}
-
+eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Player;\nfunction Player (x, y) {\r\n  this.x = x\r\n  this.y = y\r\n  this.size = 30\r\n  this.speed = 1\r\n}\r\n\r\nPlayer.prototype.draw = function draw (ctx) {\r\n  var img = new Image()\r\n  img.src = 'src/sprites/characters.png'\r\n  ctx.drawImage(\r\n\r\n    // An element to draw into the context.\r\n    img,\r\n\r\n    // The X coordinate of the top left corner of the sub-rectangle of the\r\n    // source image to draw into the destination context.\r\n    9,\r\n\r\n    // The Y coordinate of the top left corner of the sub-rectangle of the\r\n    // source image to draw into the destination context.\r\n    42,\r\n\r\n    // The width of the sub-rectangle of the source image to draw into the\r\n    // destination context. If not specified, the entire rectangle from the\r\n    // coordinates specified by sx and sy to the bottom-right\r\n    // corner of the image is used.\r\n    this.size,\r\n\r\n    // The height of the sub-rectangle of the source image to draw into\r\n    // the destination context.\r\n    this.size,\r\n\r\n    // The X coordinate in the destination canvas at which to place the\r\n    // top-left corner of the source image.\r\n    this.x,\r\n\r\n    // The Y coordinate in the destination canvas at which to place the\r\n    // top-left corner of the source image.\r\n    this.y,\r\n\r\n    // The width to draw the image in the destination canvas. This allows\r\n    // scaling of the drawn image. If not specified, the image is not\r\n    // scaled in width when drawn.\r\n    this.size,\r\n\r\n    // The height to draw the image in the destination canvas. This allows\r\n    // scaling of the drawn image. If not specified, the image is not\r\n    // scaled in height when drawn.\r\n    this.size\r\n  )\r\n}\r\n\r\nPlayer.prototype.move = function move (ctx, direction) {\r\n  switch (direction) {\r\n    case 'up':\r\n      this.y -= this.speed\r\n      break\r\n    case 'down':\r\n      this.y += this.speed\r\n      break\r\n    case 'right':\r\n      this.x += this.speed\r\n      break\r\n    case 'left':\r\n      this.x -= this.speed\r\n      break\r\n    case 'left up':\r\n      this.x -= this.speed\r\n      this.y += this.speed\r\n      break\r\n    case 'left down':\r\n      this.x -= this.speed\r\n      this.y += this.speed\r\n      break\r\n    case 'right up':\r\n      this.x += this.speed\r\n      this.y -= this.speed\r\n      break\r\n    case 'right down':\r\n      this.x += this.speed\r\n      this.y += this.speed\r\n      break\r\n  }\r\n}\r\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9QbGF5ZXIuanM/YWFkZSJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBQbGF5ZXIgKHgsIHkpIHtcclxuICB0aGlzLnggPSB4XHJcbiAgdGhpcy55ID0geVxyXG4gIHRoaXMuc2l6ZSA9IDMwXHJcbiAgdGhpcy5zcGVlZCA9IDFcclxufVxyXG5cclxuUGxheWVyLnByb3RvdHlwZS5kcmF3ID0gZnVuY3Rpb24gZHJhdyAoY3R4KSB7XHJcbiAgdmFyIGltZyA9IG5ldyBJbWFnZSgpXHJcbiAgaW1nLnNyYyA9ICdzcmMvc3ByaXRlcy9jaGFyYWN0ZXJzLnBuZydcclxuICBjdHguZHJhd0ltYWdlKFxyXG5cclxuICAgIC8vIEFuIGVsZW1lbnQgdG8gZHJhdyBpbnRvIHRoZSBjb250ZXh0LlxyXG4gICAgaW1nLFxyXG5cclxuICAgIC8vIFRoZSBYIGNvb3JkaW5hdGUgb2YgdGhlIHRvcCBsZWZ0IGNvcm5lciBvZiB0aGUgc3ViLXJlY3RhbmdsZSBvZiB0aGVcclxuICAgIC8vIHNvdXJjZSBpbWFnZSB0byBkcmF3IGludG8gdGhlIGRlc3RpbmF0aW9uIGNvbnRleHQuXHJcbiAgICA5LFxyXG5cclxuICAgIC8vIFRoZSBZIGNvb3JkaW5hdGUgb2YgdGhlIHRvcCBsZWZ0IGNvcm5lciBvZiB0aGUgc3ViLXJlY3RhbmdsZSBvZiB0aGVcclxuICAgIC8vIHNvdXJjZSBpbWFnZSB0byBkcmF3IGludG8gdGhlIGRlc3RpbmF0aW9uIGNvbnRleHQuXHJcbiAgICA0MixcclxuXHJcbiAgICAvLyBUaGUgd2lkdGggb2YgdGhlIHN1Yi1yZWN0YW5nbGUgb2YgdGhlIHNvdXJjZSBpbWFnZSB0byBkcmF3IGludG8gdGhlXHJcbiAgICAvLyBkZXN0aW5hdGlvbiBjb250ZXh0LiBJZiBub3Qgc3BlY2lmaWVkLCB0aGUgZW50aXJlIHJlY3RhbmdsZSBmcm9tIHRoZVxyXG4gICAgLy8gY29vcmRpbmF0ZXMgc3BlY2lmaWVkIGJ5IHN4IGFuZCBzeSB0byB0aGUgYm90dG9tLXJpZ2h0XHJcbiAgICAvLyBjb3JuZXIgb2YgdGhlIGltYWdlIGlzIHVzZWQuXHJcbiAgICB0aGlzLnNpemUsXHJcblxyXG4gICAgLy8gVGhlIGhlaWdodCBvZiB0aGUgc3ViLXJlY3RhbmdsZSBvZiB0aGUgc291cmNlIGltYWdlIHRvIGRyYXcgaW50b1xyXG4gICAgLy8gdGhlIGRlc3RpbmF0aW9uIGNvbnRleHQuXHJcbiAgICB0aGlzLnNpemUsXHJcblxyXG4gICAgLy8gVGhlIFggY29vcmRpbmF0ZSBpbiB0aGUgZGVzdGluYXRpb24gY2FudmFzIGF0IHdoaWNoIHRvIHBsYWNlIHRoZVxyXG4gICAgLy8gdG9wLWxlZnQgY29ybmVyIG9mIHRoZSBzb3VyY2UgaW1hZ2UuXHJcbiAgICB0aGlzLngsXHJcblxyXG4gICAgLy8gVGhlIFkgY29vcmRpbmF0ZSBpbiB0aGUgZGVzdGluYXRpb24gY2FudmFzIGF0IHdoaWNoIHRvIHBsYWNlIHRoZVxyXG4gICAgLy8gdG9wLWxlZnQgY29ybmVyIG9mIHRoZSBzb3VyY2UgaW1hZ2UuXHJcbiAgICB0aGlzLnksXHJcblxyXG4gICAgLy8gVGhlIHdpZHRoIHRvIGRyYXcgdGhlIGltYWdlIGluIHRoZSBkZXN0aW5hdGlvbiBjYW52YXMuIFRoaXMgYWxsb3dzXHJcbiAgICAvLyBzY2FsaW5nIG9mIHRoZSBkcmF3biBpbWFnZS4gSWYgbm90IHNwZWNpZmllZCwgdGhlIGltYWdlIGlzIG5vdFxyXG4gICAgLy8gc2NhbGVkIGluIHdpZHRoIHdoZW4gZHJhd24uXHJcbiAgICB0aGlzLnNpemUsXHJcblxyXG4gICAgLy8gVGhlIGhlaWdodCB0byBkcmF3IHRoZSBpbWFnZSBpbiB0aGUgZGVzdGluYXRpb24gY2FudmFzLiBUaGlzIGFsbG93c1xyXG4gICAgLy8gc2NhbGluZyBvZiB0aGUgZHJhd24gaW1hZ2UuIElmIG5vdCBzcGVjaWZpZWQsIHRoZSBpbWFnZSBpcyBub3RcclxuICAgIC8vIHNjYWxlZCBpbiBoZWlnaHQgd2hlbiBkcmF3bi5cclxuICAgIHRoaXMuc2l6ZVxyXG4gIClcclxufVxyXG5cclxuUGxheWVyLnByb3RvdHlwZS5tb3ZlID0gZnVuY3Rpb24gbW92ZSAoY3R4LCBkaXJlY3Rpb24pIHtcclxuICBzd2l0Y2ggKGRpcmVjdGlvbikge1xyXG4gICAgY2FzZSAndXAnOlxyXG4gICAgICB0aGlzLnkgLT0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gICAgY2FzZSAnZG93bic6XHJcbiAgICAgIHRoaXMueSArPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgICBjYXNlICdyaWdodCc6XHJcbiAgICAgIHRoaXMueCArPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgICBjYXNlICdsZWZ0JzpcclxuICAgICAgdGhpcy54IC09IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICAgIGNhc2UgJ2xlZnQgdXAnOlxyXG4gICAgICB0aGlzLnggLT0gdGhpcy5zcGVlZFxyXG4gICAgICB0aGlzLnkgKz0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gICAgY2FzZSAnbGVmdCBkb3duJzpcclxuICAgICAgdGhpcy54IC09IHRoaXMuc3BlZWRcclxuICAgICAgdGhpcy55ICs9IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICAgIGNhc2UgJ3JpZ2h0IHVwJzpcclxuICAgICAgdGhpcy54ICs9IHRoaXMuc3BlZWRcclxuICAgICAgdGhpcy55IC09IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICAgIGNhc2UgJ3JpZ2h0IGRvd24nOlxyXG4gICAgICB0aGlzLnggKz0gdGhpcy5zcGVlZFxyXG4gICAgICB0aGlzLnkgKz0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gIH1cclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9QbGF5ZXIuanNcbi8vIG1vZHVsZSBpZCA9IDFcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==");
 
 /***/ }),
 /* 2 */
+/* exports provided: default */
+/* exports used: default */
+/*!**********************!*\
+  !*** ./src/World.js ***!
+  \**********************/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Monster__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Player__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Scene__ = __webpack_require__(4);
-/* harmony export (immutable) */ __webpack_exports__["a"] = World;
-// people and monsters
-
-
-
-
-function World () {
-  const monsters = this.monsters = []
-
-  var monster1 = new __WEBPACK_IMPORTED_MODULE_0__Monster__["a" /* default */](10, 10)
-  var monster2 = new __WEBPACK_IMPORTED_MODULE_0__Monster__["a" /* default */](50, 50)
-  var monster3 = new __WEBPACK_IMPORTED_MODULE_0__Monster__["a" /* default */](81, 50)
-  var monster4 = new __WEBPACK_IMPORTED_MODULE_0__Monster__["a" /* default */](111, 50)
-  var monster5 = new __WEBPACK_IMPORTED_MODULE_0__Monster__["a" /* default */](141, 50)
-  var monster6 = new __WEBPACK_IMPORTED_MODULE_0__Monster__["a" /* default */](171, 50)
-
-  monsters.push(monster1, monster2, monster3, monster4, monster5, monster6)
-
-  const players = this.players = []
-
-  var player1 = new __WEBPACK_IMPORTED_MODULE_1__Player__["a" /* default */](10, 50)
-
-  players.push(player1)
-  this.scene = new __WEBPACK_IMPORTED_MODULE_2__Scene__["a" /* default */](16, 16)
-}
-
+eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Monster__ = __webpack_require__(/*! ./Monster */ 0);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Player__ = __webpack_require__(/*! ./Player */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Scene__ = __webpack_require__(/*! ./Scene */ 3);\n/* harmony export (immutable) */ __webpack_exports__[\"a\"] = World;\n// people and monsters\r\n\r\n\r\n\r\n\r\nfunction World () {\r\n  const monsters = this.monsters = []\r\n\r\n  var monster1 = new __WEBPACK_IMPORTED_MODULE_0__Monster__[\"a\" /* default */](10, 10)\r\n  var monster2 = new __WEBPACK_IMPORTED_MODULE_0__Monster__[\"a\" /* default */](50, 50)\r\n  var monster3 = new __WEBPACK_IMPORTED_MODULE_0__Monster__[\"a\" /* default */](81, 50)\r\n  var monster4 = new __WEBPACK_IMPORTED_MODULE_0__Monster__[\"a\" /* default */](111, 50)\r\n  var monster5 = new __WEBPACK_IMPORTED_MODULE_0__Monster__[\"a\" /* default */](141, 50)\r\n  var monster6 = new __WEBPACK_IMPORTED_MODULE_0__Monster__[\"a\" /* default */](171, 50)\r\n\r\n  monsters.push(monster1, monster2, monster3, monster4, monster5, monster6)\r\n\r\n  const players = this.players = []\r\n\r\n  var player1 = new __WEBPACK_IMPORTED_MODULE_1__Player__[\"a\" /* default */](10, 50)\r\n\r\n  players.push(player1)\r\n  this.scene = new __WEBPACK_IMPORTED_MODULE_2__Scene__[\"a\" /* default */](16, 16)\r\n}\r\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9Xb3JsZC5qcz9jOWIzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIHBlb3BsZSBhbmQgbW9uc3RlcnNcclxuaW1wb3J0IE1vbnN0ZXIgZnJvbSAnLi9Nb25zdGVyJ1xyXG5pbXBvcnQgUGxheWVyIGZyb20gJy4vUGxheWVyJ1xyXG5pbXBvcnQgU2NlbmUgZnJvbSAnLi9TY2VuZSdcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFdvcmxkICgpIHtcclxuICBjb25zdCBtb25zdGVycyA9IHRoaXMubW9uc3RlcnMgPSBbXVxyXG5cclxuICB2YXIgbW9uc3RlcjEgPSBuZXcgTW9uc3RlcigxMCwgMTApXHJcbiAgdmFyIG1vbnN0ZXIyID0gbmV3IE1vbnN0ZXIoNTAsIDUwKVxyXG4gIHZhciBtb25zdGVyMyA9IG5ldyBNb25zdGVyKDgxLCA1MClcclxuICB2YXIgbW9uc3RlcjQgPSBuZXcgTW9uc3RlcigxMTEsIDUwKVxyXG4gIHZhciBtb25zdGVyNSA9IG5ldyBNb25zdGVyKDE0MSwgNTApXHJcbiAgdmFyIG1vbnN0ZXI2ID0gbmV3IE1vbnN0ZXIoMTcxLCA1MClcclxuXHJcbiAgbW9uc3RlcnMucHVzaChtb25zdGVyMSwgbW9uc3RlcjIsIG1vbnN0ZXIzLCBtb25zdGVyNCwgbW9uc3RlcjUsIG1vbnN0ZXI2KVxyXG5cclxuICBjb25zdCBwbGF5ZXJzID0gdGhpcy5wbGF5ZXJzID0gW11cclxuXHJcbiAgdmFyIHBsYXllcjEgPSBuZXcgUGxheWVyKDEwLCA1MClcclxuXHJcbiAgcGxheWVycy5wdXNoKHBsYXllcjEpXHJcbiAgdGhpcy5zY2VuZSA9IG5ldyBTY2VuZSgxNiwgMTYpXHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvV29ybGQuanNcbi8vIG1vZHVsZSBpZCA9IDJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=");
 
 /***/ }),
 /* 3 */
+/* exports provided: default */
+/* exports used: default */
+/*!**********************!*\
+  !*** ./src/Scene.js ***!
+  \**********************/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Monster__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Player__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__World__ = __webpack_require__(2);
-
-
-
-
-function init () {
-  var canvas = document.createElement('canvas')
-
-  canvas.height = 256
-  canvas.width = 256
-
-  var ctx = canvas.getContext('2d')
-
-  document.body.appendChild(canvas)
-  return { ctx: ctx, canvas: canvas }
-}
-
-// For each of these steps, re-create the world.
-function step (direction) {
-  // sets all pixels in the rectangle defined by starting point and
-  // size to transparent black, erasing any previously drawn content.
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  world.scene.draw(ctx, canvas)
-  world.monsters.forEach(function (monster) {
-    monster.step(world.monsters)
-    monster.draw(ctx)
-  })
-
-  world.players.forEach(function (player) {
-    player.move(ctx, direction)
-    player.draw(ctx)
-  })
-}
-
-var _init = init(),
-  ctx = _init.ctx,
-  canvas = _init.canvas
-
-const world = new __WEBPACK_IMPORTED_MODULE_2__World__["a" /* default */]()
-
-step()
-
-window.addEventListener('keydown', function (event) {
-  switch (event.key) {
-    case 'ArrowUp':
-      step('up')
-      break
-    case 'ArrowDown':
-      step('down')
-      break
-    case 'ArrowRight':
-      step('right')
-      break
-    case 'ArrowLeft':
-      step('left')
-      break
-  }
-}, false)
-
+eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Scene;\nfunction Scene (height, width) {\r\n  this.height = height\r\n  this.width = width\r\n  this.tiles = ['rgb(223, 215, 138)', 'rgb(38, 38, 35)']\r\n  this.grid = []\r\n  this.initialize()\r\n  this.setBorder()\r\n}\r\n\r\nScene.prototype.draw = function (ctx, canvas) {\r\n  const cellWidth = canvas.width / this.width\r\n  const cellHeight = canvas.height / this.height\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = this.grid[y]\r\n    for (let x = 0; x < this.width; x++) {\r\n      const value = row[x]\r\n      ctx.fillStyle = this.tiles[value]\r\n      ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight)\r\n    }\r\n  }\r\n}\r\n\r\nScene.prototype.initialize = function initialize () {\r\n  this.grid = []\r\n\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = []\r\n    for (let x = 0; x < this.width; x++) {\r\n      row.push(0)\r\n    }\r\n    this.grid.push(row)\r\n  }\r\n}\r\n\r\nScene.prototype.setBorder = function setBorder () {\r\n\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = this.grid[y]\r\n    for (let x = 0; x < this.width; x++) {\r\n      const col = row[x]\r\n      if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {\r\n        row[x] = 1\r\n      }\r\n    }\r\n  }\r\n}\r\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9TY2VuZS5qcz82YzY2Il0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFNjZW5lIChoZWlnaHQsIHdpZHRoKSB7XHJcbiAgdGhpcy5oZWlnaHQgPSBoZWlnaHRcclxuICB0aGlzLndpZHRoID0gd2lkdGhcclxuICB0aGlzLnRpbGVzID0gWydyZ2IoMjIzLCAyMTUsIDEzOCknLCAncmdiKDM4LCAzOCwgMzUpJ11cclxuICB0aGlzLmdyaWQgPSBbXVxyXG4gIHRoaXMuaW5pdGlhbGl6ZSgpXHJcbiAgdGhpcy5zZXRCb3JkZXIoKVxyXG59XHJcblxyXG5TY2VuZS5wcm90b3R5cGUuZHJhdyA9IGZ1bmN0aW9uIChjdHgsIGNhbnZhcykge1xyXG4gIGNvbnN0IGNlbGxXaWR0aCA9IGNhbnZhcy53aWR0aCAvIHRoaXMud2lkdGhcclxuICBjb25zdCBjZWxsSGVpZ2h0ID0gY2FudmFzLmhlaWdodCAvIHRoaXMuaGVpZ2h0XHJcbiAgZm9yIChsZXQgeSA9IDA7IHkgPCB0aGlzLmhlaWdodDsgeSsrKSB7XHJcbiAgICBjb25zdCByb3cgPSB0aGlzLmdyaWRbeV1cclxuICAgIGZvciAobGV0IHggPSAwOyB4IDwgdGhpcy53aWR0aDsgeCsrKSB7XHJcbiAgICAgIGNvbnN0IHZhbHVlID0gcm93W3hdXHJcbiAgICAgIGN0eC5maWxsU3R5bGUgPSB0aGlzLnRpbGVzW3ZhbHVlXVxyXG4gICAgICBjdHguZmlsbFJlY3QoeCAqIGNlbGxXaWR0aCwgeSAqIGNlbGxIZWlnaHQsIGNlbGxXaWR0aCwgY2VsbEhlaWdodClcclxuICAgIH1cclxuICB9XHJcbn1cclxuXHJcblNjZW5lLnByb3RvdHlwZS5pbml0aWFsaXplID0gZnVuY3Rpb24gaW5pdGlhbGl6ZSAoKSB7XHJcbiAgdGhpcy5ncmlkID0gW11cclxuXHJcbiAgZm9yIChsZXQgeSA9IDA7IHkgPCB0aGlzLmhlaWdodDsgeSsrKSB7XHJcbiAgICBjb25zdCByb3cgPSBbXVxyXG4gICAgZm9yIChsZXQgeCA9IDA7IHggPCB0aGlzLndpZHRoOyB4KyspIHtcclxuICAgICAgcm93LnB1c2goMClcclxuICAgIH1cclxuICAgIHRoaXMuZ3JpZC5wdXNoKHJvdylcclxuICB9XHJcbn1cclxuXHJcblNjZW5lLnByb3RvdHlwZS5zZXRCb3JkZXIgPSBmdW5jdGlvbiBzZXRCb3JkZXIgKCkge1xyXG5cclxuICBmb3IgKGxldCB5ID0gMDsgeSA8IHRoaXMuaGVpZ2h0OyB5KyspIHtcclxuICAgIGNvbnN0IHJvdyA9IHRoaXMuZ3JpZFt5XVxyXG4gICAgZm9yIChsZXQgeCA9IDA7IHggPCB0aGlzLndpZHRoOyB4KyspIHtcclxuICAgICAgY29uc3QgY29sID0gcm93W3hdXHJcbiAgICAgIGlmICh4ID09PSAwIHx8IHggPT09IHRoaXMud2lkdGggLSAxIHx8IHkgPT09IDAgfHwgeSA9PT0gdGhpcy5oZWlnaHQgLSAxKSB7XHJcbiAgICAgICAgcm93W3hdID0gMVxyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL1NjZW5lLmpzXG4vLyBtb2R1bGUgaWQgPSAzXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=");
 
 /***/ }),
 /* 4 */
+/* unknown exports provided */
+/* all exports used */
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Scene;
-function Scene (height, width) {
-  this.height = height
-  this.width = width
-  this.tiles = ['rgb(223, 215, 138)', 'rgb(38, 38, 35)']
-  this.grid = []
-  this.initialize()
-  this.setBorder()
-}
-
-Scene.prototype.draw = function (ctx, canvas) {
-  const cellWidth = canvas.width / this.width
-  const cellHeight = canvas.height / this.height
-  for (let y = 0; y < this.height; y++) {
-    const row = this.grid[y]
-    for (let x = 0; x < this.width; x++) {
-      const value = row[x]
-      ctx.fillStyle = this.tiles[value]
-      ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight)
-    }
-  }
-}
-
-Scene.prototype.initialize = function initialize () {
-  this.grid = []
-
-  for (let y = 0; y < this.height; y++) {
-    const row = []
-    for (let x = 0; x < this.width; x++) {
-      row.push(0)
-    }
-    this.grid.push(row)
-  }
-}
-
-Scene.prototype.setBorder = function setBorder () {
-
-  for (let y = 0; y < this.height; y++) {
-    const row = this.grid[y]
-    for (let x = 0; x < this.width; x++) {
-      const col = row[x]
-      if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {
-        row[x] = 1
-      }
-    }
-  }
-}
-
+eval("Object.defineProperty(__webpack_exports__, \"__esModule\", { value: true });\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Monster__ = __webpack_require__(/*! ./Monster */ 0);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Player__ = __webpack_require__(/*! ./Player */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__World__ = __webpack_require__(/*! ./World */ 2);\n\r\n\r\n\r\n\r\nfunction init () {\r\n  var canvas = document.createElement('canvas')\r\n\r\n  canvas.height = 256\r\n  canvas.width = 256\r\n\r\n  var ctx = canvas.getContext('2d')\r\n\r\n  document.body.appendChild(canvas)\r\n  return { ctx: ctx, canvas: canvas }\r\n}\r\n\r\n// For each of these steps, re-create the world.\r\nfunction step (direction) {\r\n  // sets all pixels in the rectangle defined by starting point and\r\n  // size to transparent black, erasing any previously drawn content.\r\n  ctx.clearRect(0, 0, canvas.width, canvas.height)\r\n  world.scene.draw(ctx, canvas)\r\n  world.monsters.forEach(function (monster) {\r\n    monster.step(world.monsters)\r\n    monster.draw(ctx)\r\n  })\r\n\r\n  world.players.forEach(function (player) {\r\n    player.move(ctx, direction)\r\n    player.draw(ctx)\r\n  })\r\n}\r\n\r\nvar _init = init(),\r\n  ctx = _init.ctx,\r\n  canvas = _init.canvas\r\n\r\nconst world = new __WEBPACK_IMPORTED_MODULE_2__World__[\"a\" /* default */]()\r\n\r\nstep()\r\n\r\nvar map = {};\r\nonkeydown = onkeyup = function(event){\r\n  map[event.key] = event.type == 'keydown';\r\n  /* insert conditional here */\n  // console.log(map);\n  if (map['ArrowUp'] && map['ArrowRight']) {\r\n    step('up right');\r\n  }\r\n  else if (map['ArrowUp'] && map['ArrowLeft']) {\r\n    step('up left');\r\n  }\r\n  else if (map['ArrowDown'] && map['ArrowRight']) {\r\n    step('down right');\r\n  }\r\n  else if (map['ArrowDown'] && map['ArrowLeft']) {\r\n    step('down left');\r\n  }\r\n  // else if (map['ArrowUp']) {\r\n  //   step('up');\r\n  // }\r\n  // else if (map['ArrowDown']) {\r\n  //   step('down');\r\n  // }\r\n  // else if (map['ArrowLeft']) {\r\n  //   step('left');\r\n  // }\r\n  // else if (map['ArrowRight']) {\r\n  //   step('right');\r\n  // }\r\n}\r\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9pbmRleC5qcz85NTUyIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBNb25zdGVyIGZyb20gJy4vTW9uc3RlcidcclxuaW1wb3J0IFBsYXllcnMgZnJvbSAnLi9QbGF5ZXInXHJcbmltcG9ydCBXb3JsZCBmcm9tICcuL1dvcmxkJ1xyXG5cclxuZnVuY3Rpb24gaW5pdCAoKSB7XHJcbiAgdmFyIGNhbnZhcyA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2NhbnZhcycpXHJcblxyXG4gIGNhbnZhcy5oZWlnaHQgPSAyNTZcclxuICBjYW52YXMud2lkdGggPSAyNTZcclxuXHJcbiAgdmFyIGN0eCA9IGNhbnZhcy5nZXRDb250ZXh0KCcyZCcpXHJcblxyXG4gIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoY2FudmFzKVxyXG4gIHJldHVybiB7IGN0eDogY3R4LCBjYW52YXM6IGNhbnZhcyB9XHJcbn1cclxuXHJcbi8vIEZvciBlYWNoIG9mIHRoZXNlIHN0ZXBzLCByZS1jcmVhdGUgdGhlIHdvcmxkLlxyXG5mdW5jdGlvbiBzdGVwIChkaXJlY3Rpb24pIHtcclxuICAvLyBzZXRzIGFsbCBwaXhlbHMgaW4gdGhlIHJlY3RhbmdsZSBkZWZpbmVkIGJ5IHN0YXJ0aW5nIHBvaW50IGFuZFxyXG4gIC8vIHNpemUgdG8gdHJhbnNwYXJlbnQgYmxhY2ssIGVyYXNpbmcgYW55IHByZXZpb3VzbHkgZHJhd24gY29udGVudC5cclxuICBjdHguY2xlYXJSZWN0KDAsIDAsIGNhbnZhcy53aWR0aCwgY2FudmFzLmhlaWdodClcclxuICB3b3JsZC5zY2VuZS5kcmF3KGN0eCwgY2FudmFzKVxyXG4gIHdvcmxkLm1vbnN0ZXJzLmZvckVhY2goZnVuY3Rpb24gKG1vbnN0ZXIpIHtcclxuICAgIG1vbnN0ZXIuc3RlcCh3b3JsZC5tb25zdGVycylcclxuICAgIG1vbnN0ZXIuZHJhdyhjdHgpXHJcbiAgfSlcclxuXHJcbiAgd29ybGQucGxheWVycy5mb3JFYWNoKGZ1bmN0aW9uIChwbGF5ZXIpIHtcclxuICAgIHBsYXllci5tb3ZlKGN0eCwgZGlyZWN0aW9uKVxyXG4gICAgcGxheWVyLmRyYXcoY3R4KVxyXG4gIH0pXHJcbn1cclxuXHJcbnZhciBfaW5pdCA9IGluaXQoKSxcclxuICBjdHggPSBfaW5pdC5jdHgsXHJcbiAgY2FudmFzID0gX2luaXQuY2FudmFzXHJcblxyXG5jb25zdCB3b3JsZCA9IG5ldyBXb3JsZCgpXHJcblxyXG5zdGVwKClcclxuXHJcbnZhciBtYXAgPSB7fTtcclxub25rZXlkb3duID0gb25rZXl1cCA9IGZ1bmN0aW9uKGV2ZW50KXtcclxuICBtYXBbZXZlbnQua2V5XSA9IGV2ZW50LnR5cGUgPT0gJ2tleWRvd24nO1xyXG4gIC8qIGluc2VydCBjb25kaXRpb25hbCBoZXJlICovXG4gIC8vIGNvbnNvbGUubG9nKG1hcCk7XG4gIGlmIChtYXBbJ0Fycm93VXAnXSAmJiBtYXBbJ0Fycm93UmlnaHQnXSkge1xyXG4gICAgc3RlcCgndXAgcmlnaHQnKTtcclxuICB9XHJcbiAgZWxzZSBpZiAobWFwWydBcnJvd1VwJ10gJiYgbWFwWydBcnJvd0xlZnQnXSkge1xyXG4gICAgc3RlcCgndXAgbGVmdCcpO1xyXG4gIH1cclxuICBlbHNlIGlmIChtYXBbJ0Fycm93RG93biddICYmIG1hcFsnQXJyb3dSaWdodCddKSB7XHJcbiAgICBzdGVwKCdkb3duIHJpZ2h0Jyk7XHJcbiAgfVxyXG4gIGVsc2UgaWYgKG1hcFsnQXJyb3dEb3duJ10gJiYgbWFwWydBcnJvd0xlZnQnXSkge1xyXG4gICAgc3RlcCgnZG93biBsZWZ0Jyk7XHJcbiAgfVxyXG4gIC8vIGVsc2UgaWYgKG1hcFsnQXJyb3dVcCddKSB7XHJcbiAgLy8gICBzdGVwKCd1cCcpO1xyXG4gIC8vIH1cclxuICAvLyBlbHNlIGlmIChtYXBbJ0Fycm93RG93biddKSB7XHJcbiAgLy8gICBzdGVwKCdkb3duJyk7XHJcbiAgLy8gfVxyXG4gIC8vIGVsc2UgaWYgKG1hcFsnQXJyb3dMZWZ0J10pIHtcclxuICAvLyAgIHN0ZXAoJ2xlZnQnKTtcclxuICAvLyB9XHJcbiAgLy8gZWxzZSBpZiAobWFwWydBcnJvd1JpZ2h0J10pIHtcclxuICAvLyAgIHN0ZXAoJ3JpZ2h0Jyk7XHJcbiAgLy8gfVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2luZGV4LmpzXG4vLyBtb2R1bGUgaWQgPSA0XG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==");
 
 /***/ })
 /******/ ]);

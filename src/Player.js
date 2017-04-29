@@ -53,17 +53,33 @@ Player.prototype.draw = function draw (ctx) {
 
 Player.prototype.move = function move (ctx, direction) {
   switch (direction) {
-    case 'up': // up.
+    case 'up':
       this.y -= this.speed
       break
-    case 'down': // down.
+    case 'down':
       this.y += this.speed
       break
-    case 'right': // right.
+    case 'right':
       this.x += this.speed
       break
-    case 'left': // left.
+    case 'left':
       this.x -= this.speed
+      break
+    case 'left up':
+      this.x -= this.speed
+      this.y += this.speed
+      break
+    case 'left down':
+      this.x -= this.speed
+      this.y += this.speed
+      break
+    case 'right up':
+      this.x += this.speed
+      this.y -= this.speed
+      break
+    case 'right down':
+      this.x += this.speed
+      this.y += this.speed
       break
   }
 }

@@ -39,19 +39,33 @@ const world = new World()
 
 step()
 
-window.addEventListener('keydown', function (event) {
-  switch (event.key) {
-    case 'ArrowUp':
-      step('up')
-      break
-    case 'ArrowDown':
-      step('down')
-      break
-    case 'ArrowRight':
-      step('right')
-      break
-    case 'ArrowLeft':
-      step('left')
-      break
+var map = {};
+onkeydown = onkeyup = function(event){
+  map[event.key] = event.type == 'keydown';
+  /* insert conditional here */
+  // console.log(map);
+  if (map['ArrowUp'] && map['ArrowRight']) {
+    step('up right');
   }
-}, false)
+  else if (map['ArrowUp'] && map['ArrowLeft']) {
+    step('up left');
+  }
+  else if (map['ArrowDown'] && map['ArrowRight']) {
+    step('down right');
+  }
+  else if (map['ArrowDown'] && map['ArrowLeft']) {
+    step('down left');
+  }
+  // else if (map['ArrowUp']) {
+  //   step('up');
+  // }
+  // else if (map['ArrowDown']) {
+  //   step('down');
+  // }
+  // else if (map['ArrowLeft']) {
+  //   step('left');
+  // }
+  // else if (map['ArrowRight']) {
+  //   step('right');
+  // }
+}
