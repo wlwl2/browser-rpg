@@ -9,11 +9,10 @@ function Sprite (img, width, height, positions) {
 }
 
 Sprite.prototype = {
-  draw: function(x, y, position){
+  draw: function (x, y, position) {
+    var pos = this.positions[position]
 
-      var pos = this.positions[position]
-
-      ctx.drawImage(
+    ctx.drawImage(
         this.img,
         pos[0], // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
         pos[1], // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
@@ -24,8 +23,8 @@ Sprite.prototype = {
         this.width, // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
         this.height // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
       )
-    }
+  }
 }
 
-var monster = new Sprite(img, 30, 30,  [[8, 114]]);
-monster.draw(140, 200, 0);
+var monster = new Sprite(img, 30, 30, [[8, 114]])
+monster.draw(140, 200, 0)

@@ -25,15 +25,15 @@ Player.prototype.move = function move (ctx, direction) {
   switch (direction) {
     case 'up': // up.
       this.y -= this.speed
-      break;
+      break
     case 'down': // down.
       this.y += this.speed
-      break;
+      break
     case 'right': // right.
       this.x += this.speed
-      break;
+      break
     case 'left': // left.
       this.x -= this.speed
-      break;
+      break
   }
 }

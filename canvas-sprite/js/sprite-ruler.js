@@ -1,19 +1,18 @@
 var canvas = document.querySelector('.canvas'),
-ctx = canvas.getContext('2d')
+  ctx = canvas.getContext('2d')
 
 var img = new Image()
 img.src = 'characters.png'
 
-var spriteWidth  = 736,
-    spriteHeight = 128,
-    pixelsLeft   = 0,
-    pixelsTop    = 0,
+var spriteWidth = 736,
+  spriteHeight = 128,
+  pixelsLeft = 0,
+  pixelsTop = 0,
 
     // Where are we going to draw
     // the sprite on the canvas
-    canvasPosX   = 0,
-    canvasPosY   = 0
-
+  canvasPosX = 0,
+  canvasPosY = 0
 
 ctx.drawImage(img,
     pixelsLeft, // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
@@ -43,7 +42,6 @@ ctx.drawImage(img,
 //   ctx.fillRect(0, yEnd, 40, 1)
 // }
 // yLines2(12, 31)
-
 
 // function xLines1 (xStart, xEnd) {
 //   ctx.fillStyle = 'rgba(10, 164, 11, 0.5)'

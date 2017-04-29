@@ -1,10 +1,10 @@
 // people and monsters
 import Monster from './Monster'
 import Player from './Player'
+import Scene from './Scene'
 
 export default function World () {
-
-  const monsters = []
+  const monsters = this.monsters = []
 
   var monster1 = new Monster(10, 10)
   var monster2 = new Monster(50, 50)
@@ -15,11 +15,10 @@ export default function World () {
 
   monsters.push(monster1, monster2, monster3, monster4, monster5, monster6)
 
-  const players = []
+  const players = this.players = []
 
   var player1 = new Player(10, 50)
 
   players.push(player1)
-
-  return { monsters, players }
+  this.scene = new Scene(16, 16)
 }

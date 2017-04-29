@@ -3,7 +3,7 @@ import Players from './Player'
 import World from './World'
 
 function init () {
-  var canvas = document.createElement("canvas")
+  var canvas = document.createElement('canvas')
 
   canvas.height = 256
   canvas.width = 256
@@ -14,46 +14,45 @@ function init () {
   return { ctx: ctx, canvas: canvas }
 }
 
-const monsters = World().monsters
-const players = World().players
 
 // For each of these steps, re-create the world.
 function step (direction) {
-
   // sets all pixels in the rectangle defined by starting point and
   // size to transparent black, erasing any previously drawn content.
   ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-  monsters.forEach(function (monster) {
-    monster.step(monsters)
+  world.scene.draw(ctx, canvas)
+  world.monsters.forEach(function (monster) {
+    monster.step(world.monsters)
     monster.draw(ctx)
   })
 
-  players.forEach(function (player) {
+  world.players.forEach(function (player) {
     player.move(ctx, direction)
     player.draw(ctx)
   })
 }
 
 var _init = init(),
-    ctx = _init.ctx,
-    canvas = _init.canvas;
+  ctx = _init.ctx,
+  canvas = _init.canvas
+
+const world = new World()
 
 step()
 
-window.addEventListener("keydown", function(event){
+window.addEventListener('keydown', function (event) {
   switch (event.key) {
     case 'ArrowUp':
       step('up')
-      break;
+      break
     case 'ArrowDown':
       step('down')
-      break;
+      break
     case 'ArrowRight':
       step('right')
-      break;
+      break
     case 'ArrowLeft':
       step('left')
-    break;
+      break
   }
-}, false);
+}, false)

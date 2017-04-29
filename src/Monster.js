@@ -6,7 +6,6 @@ export default function Monster (x, y) {
 }
 
 Monster.prototype.draw = function draw (ctx) {
-
   var img = new Image()
   img.src = 'src/sprites/characters.png'
   ctx.drawImage(
@@ -23,22 +22,21 @@ Monster.prototype.draw = function draw (ctx) {
 }
 
 Monster.prototype.step = function step (monsters) {
-
   const next = {x: this.x, y: this.y}
 
   switch (Math.floor(Math.random() * 4)) {
     case 0: // up.
       next.y -= this.speed
-      break;
+      break
     case 1: // down.
       next.y += this.speed
-      break;
+      break
     case 2: // right.
       next.x += this.speed
-      break;
+      break
     case 3: // left.
       next.x -= this.speed
-      break;
+      break
   }
 
   let canMove = true
@@ -47,10 +45,10 @@ Monster.prototype.step = function step (monsters) {
   monsters.forEach(function (monster) {
     if (monster === this) return
     if (!canMove) return
-    if (!(monster.x > next.x + this.size
-        || monster.x + monster.size <= next.x
-        || monster.y > next.y + this.size
-        || monster.y + monster.size <= next.y)
+    if (!(monster.x > next.x + this.size ||
+        monster.x + monster.size <= next.x ||
+        monster.y > next.y + this.size ||
+        monster.y + monster.size <= next.y)
     ) {
       canMove = false
     }
