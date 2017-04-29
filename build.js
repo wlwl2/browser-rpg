@@ -274,7 +274,6 @@ function init () {
   return { ctx: ctx, canvas: canvas }
 }
 
-
 // For each of these steps, re-create the world.
 function step (direction) {
   // sets all pixels in the rectangle defined by starting point and
