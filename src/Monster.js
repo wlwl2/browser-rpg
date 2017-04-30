@@ -7,7 +7,7 @@ export default function Monster (x, y) {
 
 Monster.prototype.draw = function draw (ctx) {
   var img = new Image()
-  img.src = 'src/sprites/characters.png'
+  img.src = 'src/sprites/characters-min.png'
   ctx.drawImage(
     img,
     8, // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.

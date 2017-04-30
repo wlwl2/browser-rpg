@@ -40,10 +40,11 @@ const world = new World()
 step()
 
 var map = {};
-onkeydown = onkeyup = function(event){
+onkeydown = onkeyup = function controls (event){
   map[event.key] = event.type == 'keydown';
   /* insert conditional here */
   // console.log(map);
+
   if (map['ArrowUp'] && map['ArrowRight']) {
     step('up right');
   }
@@ -56,16 +57,17 @@ onkeydown = onkeyup = function(event){
   else if (map['ArrowDown'] && map['ArrowLeft']) {
     step('down left');
   }
-  // else if (map['ArrowUp']) {
-  //   step('up');
-  // }
-  // else if (map['ArrowDown']) {
-  //   step('down');
-  // }
-  // else if (map['ArrowLeft']) {
-  //   step('left');
-  // }
-  // else if (map['ArrowRight']) {
-  //   step('right');
-  // }
+  else if (map['ArrowUp']) {
+    step('up');
+  }
+  else if (map['ArrowDown']) {
+    step('down');
+  }
+  else if (map['ArrowLeft']) {
+    step('left');
+  }
+  else if (map['ArrowRight']) {
+    step('right');
+  }
+
 }

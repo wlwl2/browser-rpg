@@ -7,7 +7,7 @@ export default function Player (x, y) {
 
 Player.prototype.draw = function draw (ctx) {
   var img = new Image()
-  img.src = 'src/sprites/characters.png'
+  img.src = 'src/sprites/characters-min.png'
   ctx.drawImage(
 
     // An element to draw into the context.
@@ -65,19 +65,19 @@ Player.prototype.move = function move (ctx, direction) {
     case 'left':
       this.x -= this.speed
       break
-    case 'left up':
+    case 'up left':
+      this.x -= this.speed
+      this.y -= this.speed
+      break
+    case 'down left':
       this.x -= this.speed
       this.y += this.speed
       break
-    case 'left down':
-      this.x -= this.speed
-      this.y += this.speed
-      break
-    case 'right up':
+    case 'up right':
       this.x += this.speed
       this.y -= this.speed
       break
-    case 'right down':
+    case 'down right':
       this.x += this.speed
       this.y += this.speed
       break
