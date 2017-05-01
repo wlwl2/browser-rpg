@@ -5,8 +5,8 @@ import World from './World'
 function init () {
   var canvas = document.createElement('canvas')
 
-  canvas.height = 256
-  canvas.width = 256
+  canvas.height = 512
+  canvas.width = 512
 
   var ctx = canvas.getContext('2d')
 
@@ -45,19 +45,7 @@ onkeydown = onkeyup = function controls (event){
   /* insert conditional here */
   // console.log(map);
 
-  if (map['ArrowUp'] && map['ArrowRight']) {
-    step('up right');
-  }
-  else if (map['ArrowUp'] && map['ArrowLeft']) {
-    step('up left');
-  }
-  else if (map['ArrowDown'] && map['ArrowRight']) {
-    step('down right');
-  }
-  else if (map['ArrowDown'] && map['ArrowLeft']) {
-    step('down left');
-  }
-  else if (map['ArrowUp']) {
+  if (map['ArrowUp']) {
     step('up');
   }
   else if (map['ArrowDown']) {

@@ -2,7 +2,7 @@ export default function Player (x, y) {
   this.x = x
   this.y = y
   this.size = 30
-  this.speed = 1
+  this.speed = 16
 }
 
 Player.prototype.draw = function draw (ctx) {
