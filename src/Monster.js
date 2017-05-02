@@ -7,9 +7,8 @@ export default function Monster (x, y) {
 
 Monster.prototype.draw = function draw (ctx) {
   var img = new Image()
-  img.src = 'src/sprites/characters-min.png'
 
-  // img.addEventListener('load', function () {
+  img.addEventListener('load', () => {
     ctx.drawImage(
       img,
       8, // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
@@ -21,7 +20,8 @@ Monster.prototype.draw = function draw (ctx) {
       this.size, // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
       this.size // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
     )
-  // }, false)
+  }, false)
+  img.src = 'src/sprites/characters-min.png'
 }
 
 Monster.prototype.step = function step (monsters) {
