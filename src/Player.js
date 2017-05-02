@@ -6,8 +6,7 @@ export default function Player (x, y) {
 }
 
 Player.prototype.draw = function draw (ctx) {
-  var img = new Image()
-  img.src = 'src/sprites/characters-min.png'
+  var img = document.querySelector('img.spritesheet')
   ctx.drawImage(
 
     // An element to draw into the context.

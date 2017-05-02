@@ -8,10 +8,10 @@ export default function World () {
 
   var monster1 = new Monster(10, 10)
   var monster2 = new Monster(50, 50)
-  var monster3 = new Monster(81, 50)
-  var monster4 = new Monster(111, 50)
-  var monster5 = new Monster(141, 50)
-  var monster6 = new Monster(171, 50)
+  var monster3 = new Monster(100, 100)
+  var monster4 = new Monster(150, 150)
+  var monster5 = new Monster(200, 200)
+  var monster6 = new Monster(250, 250)
 
   monsters.push(monster1, monster2, monster3, monster4, monster5, monster6)
 

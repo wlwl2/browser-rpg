@@ -1,5 +1,3 @@
-import Monster from './Monster'
-import Players from './Player'
 import World from './World'
 
 function init () {
@@ -31,31 +29,27 @@ function step (direction) {
   })
 }
 
-var _init = init(),
-  ctx = _init.ctx,
-  canvas = _init.canvas
+var _init = init()
+var ctx = _init.ctx
+var canvas = _init.canvas
 
 const world = new World()
 
 step()
 
-var map = {};
-onkeydown = onkeyup = function controls (event){
-  map[event.key] = event.type == 'keydown';
+var map = {}
+window.onkeydown = window.onkeyup = function controls (event) {
+  map[event.key] = event.type === 'keydown'
   /* insert conditional here */
   // console.log(map);
 
   if (map['ArrowUp']) {
-    step('up');
+    step('up')
+  } else if (map['ArrowDown']) {
+    step('down')
+  } else if (map['ArrowLeft']) {
+    step('left')
+  } else if (map['ArrowRight']) {
+    step('right')
   }
-  else if (map['ArrowDown']) {
-    step('down');
-  }
-  else if (map['ArrowLeft']) {
-    step('left');
-  }
-  else if (map['ArrowRight']) {
-    step('right');
-  }
-
 }
