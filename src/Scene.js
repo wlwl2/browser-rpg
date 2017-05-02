@@ -33,11 +33,9 @@ Scene.prototype.initialize = function initialize () {
 }
 
 Scene.prototype.setBorder = function setBorder () {
-
   for (let y = 0; y < this.height; y++) {
     const row = this.grid[y]
     for (let x = 0; x < this.width; x++) {
-      const col = row[x]
       if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {
         row[x] = 1
       }

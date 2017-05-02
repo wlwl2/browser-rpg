@@ -3,13 +3,15 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-color: white;
+  background-color: rgb(230, 230, 230);
 }
 
 canvas {
   background-color: grey;
   height: 98vh;
   width: 98vh;
+  margin: 0 auto;
+  display: block;
 }
 
 img {

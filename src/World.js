@@ -20,5 +20,5 @@ export default function World () {
   var player1 = new Player(10, 50)
 
   players.push(player1)
-  this.scene = new Scene(16, 16)
+  this.scene = new Scene(32, 32)
 }
