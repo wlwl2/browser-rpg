@@ -17,8 +17,8 @@ Monster.prototype.draw = function draw (ctx) {
       this.size, // The height of the sub-rectangle of the source image to draw into the destination context.
       this.x, // The X coordinate in the destination canvas at which to place the top-left corner of the source image.
       this.y, // The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
-      this.size, // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
-      this.size // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
+      30, // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
+      32 // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
     )
   }, false)
   img.src = 'src/sprites/characters-min.png'

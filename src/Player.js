@@ -43,12 +43,12 @@ Player.prototype.draw = function draw (ctx) {
       // The width to draw the image in the destination canvas. This allows
       // scaling of the drawn image. If not specified, the image is not
       // scaled in width when drawn.
-      this.size,
+      32,
 
       // The height to draw the image in the destination canvas. This allows
       // scaling of the drawn image. If not specified, the image is not
       // scaled in height when drawn.
-      this.size
+      22
     )
   })
   img.src = 'src/sprites/characters-min.png'
