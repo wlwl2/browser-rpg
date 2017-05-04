@@ -2,12 +2,9 @@ import World from './World'
 
 function init () {
   var canvas = document.createElement('canvas')
-
   canvas.height = 600
   canvas.width = 600
-
   var ctx = canvas.getContext('2d')
-
   document.body.appendChild(canvas)
   return { ctx: ctx, canvas: canvas }
 }
