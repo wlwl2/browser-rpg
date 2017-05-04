@@ -2,7 +2,7 @@ export default function Player (x, y) {
   this.x = x
   this.y = y
   this.size = 30
-  this.speed = 16
+  this.speed = 30
 }
 
 Player.prototype.draw = function draw (ctx) {
@@ -43,12 +43,12 @@ Player.prototype.draw = function draw (ctx) {
       // The width to draw the image in the destination canvas. This allows
       // scaling of the drawn image. If not specified, the image is not
       // scaled in width when drawn.
-      32,
+      this.size,
 
       // The height to draw the image in the destination canvas. This allows
       // scaling of the drawn image. If not specified, the image is not
       // scaled in height when drawn.
-      22
+      this.size
     )
   })
   img.src = 'src/sprites/characters-min.png'

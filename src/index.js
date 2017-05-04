@@ -3,8 +3,8 @@ import World from './World'
 function init () {
   var canvas = document.createElement('canvas')
 
-  canvas.height = 512
-  canvas.width = 512
+  canvas.height = 600
+  canvas.width = 600
 
   var ctx = canvas.getContext('2d')
 
