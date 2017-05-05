@@ -50,3 +50,23 @@ window.onkeydown = window.onkeyup = function controls (event) {
     step('right')
   }
 }
+
+var dragged
+var canvas = document.querySelector('canvas')
+
+document.addEventListener('dragstart', function (event) {
+  // store a ref. on the dragged elem
+  dragged = event.target
+  // make it half transparent
+  canvas.style.opacity = 0.5
+}, false)
+
+document.addEventListener('dragend', function (event) {
+  // reset the transparency
+  canvas.style.opacity = ''
+}, false)
+
+canvas.addEventListener('dragover', function (event) {
+  // prevent default to allow drop
+  event.preventDefault()
+}, false)

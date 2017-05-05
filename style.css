@@ -9,7 +9,7 @@ body {
 
 canvas {
   display: block;
-  height: 100vh;
+  height: 98vh;
   background-color: grey;
 }
 
@@ -17,10 +17,25 @@ img {
   display: none;
 }
 
+img.monster {
+  display: block;
+  object-fit: none;
+  width: 30px;
+  height: 30px;
+}
+
+img.player {
+  display: block;
+  object-fit: none;
+  object-position: 9px 42px;
+  width: 30px;
+  height: 30px;
+}
+
 .menu {
   position: absolute;
   width: 30vw;
-  height: 100vh;
+  height: 98vh;
   top: 0;
   right: 0;
 }
@@ -30,8 +45,7 @@ img {
   font-weight: bold;
   padding: 20px;
   text-align: center;
-  width: 100%;
-  height: 100%;
+  height: 500px;
   background-color: white;
 }
 
