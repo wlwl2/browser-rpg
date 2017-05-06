@@ -13,23 +13,24 @@ canvas {
   background-color: grey;
 }
 
-img {
+img.spritesheet {
   display: none;
 }
 
-img.monster {
-  display: block;
-  object-fit: none;
-  width: 30px;
-  height: 30px;
+.monster {
+  width: 16px;
+  height: 14px;
+  background-image: url('src/sprites/characters-min.png');
+  background-position: -8px -114px;
+  margin: 10px;
 }
 
-img.player {
-  display: block;
-  object-fit: none;
-  object-position: 9px 42px;
-  width: 30px;
-  height: 30px;
+.player {
+  width: 15px;
+  height: 22px;
+  background-image: url('src/sprites/characters-min.png');
+  background-position: -9px -42px;
+  margin: 10px;
 }
 
 .menu {
@@ -54,4 +55,5 @@ img.player {
   width: 30px;
   background-color: rgb(38, 38, 35);
   display: block;
+  margin: 10px;
 }
