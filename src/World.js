@@ -15,7 +15,7 @@ export default function World () {
   for (var i = 0; i < 10; i++) {
     var monsterName = 'monster' + i
     monsterName = new Monster((i * 30), 300)
-    monsters.push(monsterName)
+    monsters.push(monsterName) // use addEntity
   }
 
   const players = this.players = []
@@ -23,6 +23,18 @@ export default function World () {
   var player1 = new Player(240, 240)
 
   players.push(player1)
-  
+
   this.scene = new Scene(20, 20)
+}
+
+// Add entity properties to this function.
+World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
+  if (entityType <= 1) {
+    this.scene.grid[worldY][worldX] = entityType
+  }
+}
+
+World.prototype.screenToWorld = function screenToWorld ([screenX, screenY]) {
+  console.log('s2w', screenX, screenY, this.scene.width, this.scene.height)
+  return [Math.floor(screenX / this.scene.width), Math.floor(screenY / this.scene.height)]
 }

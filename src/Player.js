@@ -1,8 +1,9 @@
-export default function Player (x, y) {
+export default function Player (x, y, world) {
   this.x = x
   this.y = y
   this.size = 30
   this.speed = 30
+  this.world = world
 }
 
 Player.prototype.draw = function draw (ctx) {

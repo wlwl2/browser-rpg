@@ -54,11 +54,27 @@ window.onkeydown = window.onkeyup = function controls (event) {
 var dragged
 var canvas = document.querySelector('canvas')
 
+canvas.addEventListener('click', function (event) {
+  const pos = world.screenToWorld([
+    event.clientX,
+    event.clientY
+  ])
+  console.log(event)
+  world.addEntity(pos, 1)
+}, false)
+
 document.addEventListener('dragstart', function (event) {
   // store a ref. on the dragged elem
   dragged = event.target
   // make it half transparent
   canvas.style.opacity = 0.5
+  console.log(event)
+  const pos = world.screenToWorld(
+    event.clientX,
+    event.clientY
+  )
+  world.addEntity(pos, 1)
+
 }, false)
 
 document.addEventListener('dragend', function (event) {
