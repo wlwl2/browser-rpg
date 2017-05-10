@@ -56,7 +56,7 @@ img.spritesheet {
   font-weight: bold;
   padding: 20px;
   text-align: center;
-  height: 500px;
+  min-height: 30%;
   background-color: white;
 }
 
@@ -76,4 +76,17 @@ img.spritesheet {
   min-width: 30px;
   min-height: 30px;
   border: 1px solid black;
+}
+
+.reset-tile-button {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.mouse-info {
+  position: absolute;
+}
+
+.mouse-info div {
+  border: 1px solid blue;
 }
