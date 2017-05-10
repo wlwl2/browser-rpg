@@ -5,7 +5,6 @@ export default function Scene (height, width) {
   this.grid = []
   this.initialize()
   this.setBorder()
-  // this.setItems()
   this.setRandomWalls()
 }
 
@@ -43,17 +42,6 @@ Scene.prototype.setBorder = function setBorder () {
     }
   }
 }
-
-// Scene.prototype.setItems = function setItems () {
-//   for (let y = 1; y < this.height - 1; y++) {
-//     const row = this.grid[y]
-//     for (let x = 1; x < this.width - 1; x++) {
-//       if (x === Math.floor(Math.random() * 18) + 1 || y === Math.floor(Math.random() * 18) + 1) {
-//         row[x] = 2
-//       }
-//     }
-//   }
-// }
 
 Scene.prototype.setRandomWalls = function setRandomWalls () {
   for (let y = 1; y < this.height - 1; y++) {

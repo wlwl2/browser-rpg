@@ -54,3 +54,14 @@
 //   // prevent default to allow drop
 //   event.preventDefault()
 // }, false)
+
+// Scene.prototype.setItems = function setItems () {
+//   for (let y = 1; y < this.height - 1; y++) {
+//     const row = this.grid[y]
+//     for (let x = 1; x < this.width - 1; x++) {
+//       if (x === Math.floor(Math.random() * 18) + 1 || y === Math.floor(Math.random() * 18) + 1) {
+//         row[x] = 2
+//       }
+//     }
+//   }
+// }

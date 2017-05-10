@@ -5,7 +5,7 @@ import Scene from './Scene'
 
 export default function World () {
   const monsters = this.monsters = []
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 20; i++) {
     var monsterName = 'monster' + i
     monsterName = new Monster((i * 30), 300)
     monsters.push(monsterName) // use addEntity
