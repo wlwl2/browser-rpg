@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/ico" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
     <title>browser-rpg</title>
   </head>
@@ -12,9 +13,14 @@
     <div class="menu">
       <section class="tile-selector">
         <div>Tile selector</div>
-        <a class="wall" draggable="true"></a>
-        <div class="player" draggable="true"></div>
-        <div class="monster" draggable="true"></div>
+        <div class="tile-list">
+          <div class="wall" draggable="true"></div>
+          <div class="player" draggable="true"></div>
+          <div class="monster" draggable="true"></div>
+        </div>
+        <div class="currently-selected-tile">
+          Currently selected tile:
+        </div>
       </section>
     </div>
 

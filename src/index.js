@@ -1,3 +1,4 @@
+import TileSelector from './TileSelector'
 import World from './World'
 
 function init () {
@@ -32,14 +33,16 @@ var canvas = _init.canvas
 
 const world = new World()
 
+TileSelector()
+
 step()
 
+// Refactor.
 var map = {}
 window.onkeydown = window.onkeyup = function controls (event) {
   map[event.key] = event.type === 'keydown'
   /* insert conditional here */
   // console.log(map);
-
   if (map['ArrowUp']) {
     step('up')
   } else if (map['ArrowDown']) {
@@ -62,6 +65,8 @@ canvas.addEventListener('click', function (event) {
   console.log(event)
   world.addEntity(pos, 1)
 }, false)
+
+
 
 // document.addEventListener('dragstart', function (event) {
 //   // store a ref. on the dragged elem

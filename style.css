@@ -57,3 +57,12 @@ img.spritesheet {
   display: block;
   margin: 10px;
 }
+
+.currently-selected-tile {
+  font-size: 14px;
+  font-weight: normal;
+  text-align: left;
+  min-width: 30px;
+  min-height: 30px;
+  border: 1px solid black;
+}
