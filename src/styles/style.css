@@ -20,7 +20,7 @@ img.spritesheet {
 .monster {
   width: 16px;
   height: 14px;
-  background-image: url('src/sprites/characters-min.png');
+  background-image: url('../sprites/characters-min.png');
   background-position: -8px -114px;
   margin: 10px;
 }
@@ -28,7 +28,7 @@ img.spritesheet {
 .player {
   width: 15px;
   height: 22px;
-  background-image: url('src/sprites/characters-min.png');
+  background-image: url('../sprites/characters-min.png');
   background-position: -9px -42px;
   margin: 10px;
 }
@@ -48,6 +48,14 @@ img.spritesheet {
   text-align: center;
   height: 500px;
   background-color: white;
+}
+
+.tile-list div {
+  cursor: pointer;
+}
+
+.tile-list div:hover {
+  opacity: .5;
 }
 
 .wall {

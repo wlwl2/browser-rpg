@@ -30,3 +30,27 @@
 // function getRandomInt (min, max) {
 //   return Math.floor(Math.random() * (max - min + 1)) + min
 // }
+
+// document.addEventListener('dragstart', function (event) {
+//   // store a ref. on the dragged elem
+//   dragged = event.target
+//   // make it half transparent
+//   canvas.style.opacity = 0.5
+//   console.log(event)
+//   const pos = world.screenToWorld(
+//     event.clientX,
+//     event.clientY
+//   )
+//   world.addEntity(pos, 1)
+//
+// }, false)
+//
+// document.addEventListener('dragend', function (event) {
+//   // reset the transparency
+//   canvas.style.opacity = ''
+// }, false)
+//
+// canvas.addEventListener('dragover', function (event) {
+//   // prevent default to allow drop
+//   event.preventDefault()
+// }, false)

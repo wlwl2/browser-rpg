@@ -24,6 +24,6 @@ World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
 }
 
 World.prototype.screenToWorld = function screenToWorld ([screenX, screenY]) {
-  console.log('s2w', 'screenX: ' + screenX, 'screenY: ' + screenY, this.scene.width, this.scene.height)
+  console.log('s2w', 'screenX:' + screenX, 'screenY:' + screenY, this.scene.width, this.scene.height)
   return [Math.floor(screenX / this.scene.width), Math.floor(screenY / this.scene.height)]
 }

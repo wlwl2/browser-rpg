@@ -12,8 +12,8 @@ function init () {
 
 // For each of these steps, re-create the world.
 function step (direction) {
-  // sets all pixels in the rectangle defined by starting point and
-  // size to transparent black, erasing any previously drawn content.
+  /* Sets all pixels in the rectangle defined by starting point and
+  size to transparent black, erasing any previously drawn content. */
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   world.scene.draw(ctx, canvas)
   world.monsters.forEach(function (monster) {
@@ -41,8 +41,7 @@ step()
 var map = {}
 window.onkeydown = window.onkeyup = function controls (event) {
   map[event.key] = event.type === 'keydown'
-  /* insert conditional here */
-  // console.log(map);
+  // console.log(map)
   if (map['ArrowUp']) {
     step('up')
   } else if (map['ArrowDown']) {
@@ -54,9 +53,6 @@ window.onkeydown = window.onkeyup = function controls (event) {
   }
 }
 
-var dragged
-var canvas = document.querySelector('canvas')
-
 canvas.addEventListener('click', function (event) {
   const pos = world.screenToWorld([
     event.clientX,
@@ -65,29 +61,3 @@ canvas.addEventListener('click', function (event) {
   console.log(event)
   world.addEntity(pos, 1)
 }, false)
-
-
-
-// document.addEventListener('dragstart', function (event) {
-//   // store a ref. on the dragged elem
-//   dragged = event.target
-//   // make it half transparent
-//   canvas.style.opacity = 0.5
-//   console.log(event)
-//   const pos = world.screenToWorld(
-//     event.clientX,
-//     event.clientY
-//   )
-//   world.addEntity(pos, 1)
-//
-// }, false)
-//
-// document.addEventListener('dragend', function (event) {
-//   // reset the transparency
-//   canvas.style.opacity = ''
-// }, false)
-//
-// canvas.addEventListener('dragover', function (event) {
-//   // prevent default to allow drop
-//   event.preventDefault()
-// }, false)
