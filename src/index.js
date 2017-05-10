@@ -54,10 +54,14 @@ window.onkeydown = window.onkeyup = function controls (event) {
   }
 }
 canvas.addEventListener('click', function (event) {
+  const selectedTile = document.querySelector('.currently-selected-tile')
+  if (!selectedTile.children[0]) return
+  const selectedEntityNumber =
+  selectedTile.children[0].getAttribute('data-entity-number')
   const pos = world.screenToWorld([
     event.clientX,
     event.clientY
   ], canvas)
-  world.addEntity(pos, 1)
+  world.addEntity(pos, selectedEntityNumber)
   redraw()
 }, false)

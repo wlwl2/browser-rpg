@@ -18,12 +18,10 @@ export default function World () {
 World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
   if (entityType <= 1) {
     this.scene.grid[worldY][worldX] = entityType
-    console.log(this.scene.grid)
   }
 }
 World.prototype.screenToWorld = function screenToWorld ([screenX, screenY], canvas) {
   const tilesWidth = canvas.width / this.scene.width
   const tilesHeight = canvas.height / this.scene.height
-  // console.log('s2w', 'screenX:' + screenX, 'screenY:' + screenY, tilesHeight, tilesWidth)
   return [Math.floor(screenX / tilesWidth), Math.floor(screenY / tilesHeight)]
 }

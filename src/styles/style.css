@@ -17,12 +17,16 @@ img.spritesheet {
   display: none;
 }
 
-.monster {
-  width: 16px;
-  height: 14px;
-  background-image: url('../sprites/characters-min.png');
-  background-position: -8px -114px;
-  margin: 10px;
+.floor {
+  height: 30px;
+  width: 30px;
+  background-color: rgb(223, 215, 138);
+}
+
+.wall {
+  height: 30px;
+  width: 30px;
+  background-color: rgb(38, 38, 35);
 }
 
 .player {
@@ -30,7 +34,13 @@ img.spritesheet {
   height: 22px;
   background-image: url('../sprites/characters-min.png');
   background-position: -9px -42px;
-  margin: 10px;
+}
+
+.monster {
+  width: 16px;
+  height: 14px;
+  background-image: url('../sprites/characters-min.png');
+  background-position: -8px -114px;
 }
 
 .menu {
@@ -52,18 +62,11 @@ img.spritesheet {
 
 .tile-list div {
   cursor: pointer;
+  margin: 10px;
 }
 
 .tile-list div:hover {
   opacity: .5;
-}
-
-.wall {
-  height: 30px;
-  width: 30px;
-  background-color: rgb(38, 38, 35);
-  display: block;
-  margin: 10px;
 }
 
 .currently-selected-tile {
