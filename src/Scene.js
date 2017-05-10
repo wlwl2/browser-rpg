@@ -7,7 +7,6 @@ export default function Scene (height, width) {
   this.setBorder()
   this.setRandomWalls()
 }
-
 Scene.prototype.draw = function (ctx, canvas) {
   const cellWidth = canvas.width / this.width
   const cellHeight = canvas.height / this.height
@@ -20,7 +19,6 @@ Scene.prototype.draw = function (ctx, canvas) {
     }
   }
 }
-
 Scene.prototype.initialize = function initialize () {
   this.grid = []
   for (let y = 0; y < this.height; y++) {
@@ -31,7 +29,6 @@ Scene.prototype.initialize = function initialize () {
     this.grid.push(row)
   }
 }
-
 Scene.prototype.setBorder = function setBorder () {
   for (let y = 0; y < this.height; y++) {
     const row = this.grid[y]
@@ -42,7 +39,6 @@ Scene.prototype.setBorder = function setBorder () {
     }
   }
 }
-
 Scene.prototype.setRandomWalls = function setRandomWalls () {
   for (let y = 1; y < this.height - 1; y++) {
     const row = this.grid[y]

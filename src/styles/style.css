@@ -9,7 +9,7 @@ body {
 
 canvas {
   display: block;
-  height: 98vh;
+  /*height: 98vh;*/
   background-color: grey;
 }
 

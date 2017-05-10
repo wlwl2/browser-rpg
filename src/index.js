@@ -1,6 +1,5 @@
 import TileSelector from './TileSelector'
 import World from './World'
-
 function init () {
   var canvas = document.createElement('canvas')
   canvas.height = 600
@@ -9,7 +8,6 @@ function init () {
   document.body.appendChild(canvas)
   return { ctx: ctx, canvas: canvas }
 }
-
 // For each of these steps, re-create the world.
 function step (direction) {
   /* Sets all pixels in the rectangle defined by starting point and
@@ -20,28 +18,31 @@ function step (direction) {
     monster.step(world.monsters)
     monster.draw(ctx)
   })
-
   world.players.forEach(function (player) {
     player.move(ctx, direction)
     player.draw(ctx)
   })
 }
 
+function redraw () {
+  world.scene.draw(ctx, canvas)
+  world.monsters.forEach(function (monster) {
+    monster.draw(ctx)
+  })
+  world.players.forEach(function (player) {
+    player.draw(ctx)
+  })
+}
 var _init = init()
 var ctx = _init.ctx
 var canvas = _init.canvas
-
 const world = new World()
-
 TileSelector()
-
 step()
-
 // Refactor.
 var map = {}
 window.onkeydown = window.onkeyup = function controls (event) {
   map[event.key] = event.type === 'keydown'
-  // console.log(map)
   if (map['ArrowUp']) {
     step('up')
   } else if (map['ArrowDown']) {
@@ -52,12 +53,11 @@ window.onkeydown = window.onkeyup = function controls (event) {
     step('right')
   }
 }
-
 canvas.addEventListener('click', function (event) {
   const pos = world.screenToWorld([
     event.clientX,
     event.clientY
-  ])
-  console.log(event)
+  ], canvas)
   world.addEntity(pos, 1)
+  redraw()
 }, false)
