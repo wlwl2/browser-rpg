@@ -25,13 +25,17 @@ export default function TileSelector () {
       mouseInfo.appendChild(sprite2)
     }, false)
   }
-  if (!resetTileButton) return
-  resetTileButton.addEventListener('click', function (event) {
-    removeCurrentlySelectedTile()
-  }, false)
+
+  if (resetTileButton) {
+    resetTileButton.addEventListener('click', function (event) {
+      removeCurrentlySelectedTile()
+    }, false)
+  }
 
   document.addEventListener('mousemove', function mouseInfoPosition (event) {
-    mouseInfo.style.left = String(event.pageX + 20) + 'px'
-    mouseInfo.style.top = String(event.pageY + 20) + 'px'
+    if (currentTile.children[0]) {
+      mouseInfo.style.left = String(event.pageX + 20) + 'px'
+      mouseInfo.style.top = String(event.pageY + 20) + 'px'
+    }
   }, false)
 }

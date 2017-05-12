@@ -6,7 +6,7 @@ export default function World () {
   const monsters = this.monsters = []
   for (var i = 0; i < 20; i++) {
     var monsterName = 'monster' + i
-    monsterName = new Monster((i * 30), 300)
+    monsterName = new Monster((i * 30), ((Math.floor(Math.random() * 20) * 30)))
     monsters.push(monsterName) // use addEntity
   }
   const players = this.players = []
