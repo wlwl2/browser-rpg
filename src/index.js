@@ -39,6 +39,7 @@ var canvas = _init.canvas
 const world = new World()
 TileSelector()
 step()
+
 // Refactor.
 var map = {}
 window.onkeydown = window.onkeyup = function controls (event) {
