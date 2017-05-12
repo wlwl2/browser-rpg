@@ -33,6 +33,7 @@ export default function TileSelector () {
   }
 
   document.addEventListener('mousemove', function mouseInfoPosition (event) {
+    if (!currentTile) return
     if (currentTile.children[0]) {
       mouseInfo.style.left = String(event.pageX + 20) + 'px'
       mouseInfo.style.top = String(event.pageY + 20) + 'px'
