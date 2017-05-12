@@ -6,7 +6,7 @@ export default function Player (x, y, world) {
   this.world = world
 }
 Player.prototype.draw = function draw (ctx) {
-  var img = new Image()
+  var img = document.createElement('img')
   img.addEventListener('load', () => {
     ctx.drawImage(
       // An element to draw into the context.

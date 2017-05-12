@@ -1,4 +1,5 @@
-export default function Monster (x, y) {
+export default function Monster (x, y, entityNumber) {
+  this.entityNumber = 4
   this.x = x
   this.y = y
   this.size = 30
@@ -6,8 +7,7 @@ export default function Monster (x, y) {
 }
 
 Monster.prototype.draw = function draw (ctx) {
-  var img = new Image()
-
+  var img = document.createElement('img')
   img.addEventListener('load', () => {
     ctx.drawImage(
       img,
