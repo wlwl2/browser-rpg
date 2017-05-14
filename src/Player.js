@@ -1,7 +1,7 @@
 export default function Player (x, y, world) {
   this.x = x
   this.y = y
-  this.entityNumber = 3
+  this.entityNumber = 2
   this.size = 30
   this.speed = 30
   this.world = world

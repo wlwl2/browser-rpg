@@ -1,7 +1,7 @@
 export default function Monster (x, y, entityNumber) {
   this.x = x
   this.y = y
-  this.entityNumber = 4
+  this.entityNumber = 3
   this.size = 30
   this.speed = 30
 }

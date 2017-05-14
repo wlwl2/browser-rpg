@@ -1,3 +1,6 @@
+import Wall from './terrain/Wall'
+import Floor from './terrain/Floor'
+
 export default function Scene (height, width) {
   this.height = height
   this.width = width
