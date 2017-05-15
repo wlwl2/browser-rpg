@@ -11,14 +11,18 @@ export default function Scene (height, width) {
   this.setRandomWalls()
 }
 Scene.prototype.draw = function (ctx, canvas) {
-  const cellWidth = canvas.width / this.width
+  // cellHeight is the height of each tile in px.
   const cellHeight = canvas.height / this.height
+  const cellWidth = canvas.width / this.width
   for (let y = 0; y < this.height; y++) {
     const row = this.grid[y]
     for (let x = 0; x < this.width; x++) {
       const value = row[x]
-      ctx.fillStyle = this.tiles[value]
-      ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight)
+      // ctx.fillStyle = this.tiles[value]
+
+      // img.addEventListener('load', () => {
+      //   ctx.drawImage(img, 0, 0, cellWidth, cellHeight, x * cellWidth, y * cellHeight, cellWidth, cellHeight)
+      // })
     }
   }
 }

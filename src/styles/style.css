@@ -17,6 +17,14 @@ img.spritesheet {
   display: none;
 }
 
+img.wallimg {
+  display: none;
+}
+
+img.floorimg {
+  display: none;
+}
+
 .floor {
   height: 30px;
   width: 30px;
