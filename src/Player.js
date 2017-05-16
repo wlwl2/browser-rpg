@@ -5,6 +5,7 @@ export default function Player (x, y, world) {
   this.size = 30
   this.speed = 30
   this.world = world
+  this.category = 'character'
 }
 Player.prototype.draw = function draw (ctx) {
   var img = document.createElement('img')

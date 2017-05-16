@@ -1,14 +1,13 @@
 import Wall from './terrain/Wall'
 import Floor from './terrain/Floor'
-
 export default function Scene (height, width) {
   this.height = height
   this.width = width
-  this.tiles = ['rgb(223, 215, 138)', 'rgb(38, 38, 35)', 'rgb(247, 115, 41)', 'rgb(33, 62, 134)']
   this.grid = []
   this.initialize()
   this.setBorder()
   this.setRandomWalls()
+  this.tiles = [Floor, Wall]
 }
 Scene.prototype.draw = function (ctx, canvas) {
   // cellHeight is the height of each tile in px.
@@ -18,11 +17,22 @@ Scene.prototype.draw = function (ctx, canvas) {
     const row = this.grid[y]
     for (let x = 0; x < this.width; x++) {
       const value = row[x]
-      // ctx.fillStyle = this.tiles[value]
-
-      // img.addEventListener('load', () => {
-      //   ctx.drawImage(img, 0, 0, cellWidth, cellHeight, x * cellWidth, y * cellHeight, cellWidth, cellHeight)
-      // })
+      const tile = new this.tiles[value]()
+      const img = document.createElement('img')
+      img.addEventListener('load', () => {
+        ctx.drawImage(
+          img,
+          tile.sourceX,
+          tile.sourceY,
+          cellWidth,
+          cellHeight,
+          x * cellWidth,
+          y * cellHeight,
+          cellWidth,
+          cellHeight
+        )
+      })
+      img.src = tile.source
     }
   }
 }

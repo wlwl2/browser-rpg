@@ -4,6 +4,7 @@ export default function Monster (x, y, entityNumber) {
   this.entityNumber = 3
   this.size = 30
   this.speed = 30
+  this.category = 'monster'
 }
 
 Monster.prototype.draw = function draw (ctx) {
