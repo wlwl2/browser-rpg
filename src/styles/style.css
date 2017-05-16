@@ -28,13 +28,15 @@ img.floorimg {
 .floor {
   height: 30px;
   width: 30px;
-  background-color: rgb(223, 215, 138);
+  background-image: url('../sprites/floor.png');
+  background-position: 0px 0px;
 }
 
 .wall {
   height: 30px;
   width: 30px;
-  background-color: rgb(38, 38, 35);
+  background-image: url('../sprites/wall.png');
+  background-position: 0px 0px;
 }
 
 .player {
