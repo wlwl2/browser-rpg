@@ -1,5 +1,11 @@
 import Wall from './terrain/Wall'
 import Floor from './terrain/Floor'
+import Monster from './Monster'
+import Player from './Player'
+
+//const img = document.createElement('img')
+//img.src = tile.source
+
 export default function Scene (height, width) {
   this.height = height
   this.width = width
@@ -7,34 +13,21 @@ export default function Scene (height, width) {
   this.initialize()
   this.setBorder()
   this.setRandomWalls()
-  this.tiles = [Floor, Wall]
+  this.tiles = [Floor, Wall, Player, Monster]
 }
 Scene.prototype.draw = function (ctx, canvas) {
   // cellHeight is the height of each tile in px.
   const cellHeight = canvas.height / this.height
   const cellWidth = canvas.width / this.width
-  for (let y = 0; y < this.height; y++) {
-    const row = this.grid[y]
-    for (let x = 0; x < this.width; x++) {
-      const value = row[x]
-      const tile = new this.tiles[value]()
-      const img = document.createElement('img')
-      img.addEventListener('load', () => {
-        ctx.drawImage(
-          img,
-          tile.sourceX,
-          tile.sourceY,
-          cellWidth,
-          cellHeight,
-          x * cellWidth,
-          y * cellHeight,
-          cellWidth,
-          cellHeight
-        )
-      })
-      img.src = tile.source
-    }
-  }
+  // for (let y = 0; y < this.height; y++) {
+  //   const row = this.grid[y]
+  //   for (let x = 0; x < this.width; x++) {
+  //     const value = row[x]
+  //     const tile = new this.tiles[value]()
+  //     ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,
+  //       x * cellWidth, y * cellHeight, cellWidth, cellHeight)
+  //   }
+  // }
 }
 Scene.prototype.initialize = function initialize () {
   this.grid = []

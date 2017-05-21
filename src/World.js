@@ -15,8 +15,13 @@ export default function World () {
   this.scene = new Scene(20, 20)
 }
 // Add entity properties to this function?
+// Different tiles can be added to the grid by restricting the limits
+// for the entityType below.
 World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
-  if (entityType <= 1) {
+  // if (entityType <= 1) {
+  //   this.scene.grid[worldY][worldX] = entityType
+  // }
+  if (entityType) {
     this.scene.grid[worldY][worldX] = entityType
   }
 }

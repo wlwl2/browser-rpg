@@ -1,3 +1,6 @@
+var img = document.createElement('img')
+img.src = 'src/sprites/characters-min.png'
+
 export default function Player (x, y, world) {
   this.x = x
   this.y = y
@@ -6,52 +9,51 @@ export default function Player (x, y, world) {
   this.speed = 30
   this.world = world
   this.category = 'character'
+  this.sourceX = 9
+  this.sourceY = 42
 }
+
 Player.prototype.draw = function draw (ctx) {
-  var img = document.createElement('img')
-  img.addEventListener('load', () => {
-    ctx.drawImage(
-      // An element to draw into the context.
-      img,
+  ctx.drawImage(
+    // An element to draw into the context.
+    img,
 
-      /* The X coordinate of the top left corner of the sub-rectangle of the
-      source image to draw into the destination context. */
-      9,
+    /* The X coordinate of the top left corner of the sub-rectangle of the
+    source image to draw into the destination context. */
+    this.sourceX,
 
-      /* The Y coordinate of the top left corner of the sub-rectangle of the
-       source image to draw into the destination context. */
-      42,
+    /* The Y coordinate of the top left corner of the sub-rectangle of the
+     source image to draw into the destination context. */
+    this.sourceY,
 
-      /* The width of the sub-rectangle of the source image to draw into the
-      destination context. If not specified, the entire rectangle from the
-      coordinates specified by sx and sy to the bottom-right
-      corner of the image is used. */
-      this.size,
+    /* The width of the sub-rectangle of the source image to draw into the
+    destination context. If not specified, the entire rectangle from the
+    coordinates specified by sx and sy to the bottom-right
+    corner of the image is used. */
+    this.size,
 
-      /* The height of the sub-rectangle of the source image to draw into
-      the destination context. */
-      this.size,
+    /* The height of the sub-rectangle of the source image to draw into
+    the destination context. */
+    this.size,
 
-      /* The X coordinate in the destination canvas at which to place the
-      top-left corner of the source image. */
-      this.x,
+    /* The X coordinate in the destination canvas at which to place the
+    top-left corner of the source image. */
+    this.x,
 
-      /* The Y coordinate in the destination canvas at which to place the
-      top-left corner of the source image. */
-      this.y,
+    /* The Y coordinate in the destination canvas at which to place the
+    top-left corner of the source image. */
+    this.y,
 
-      /* The width to draw the image in the destination canvas. This allows
-      scaling of the drawn image. If not specified, the image is not
-      scaled in width when drawn. */
-      this.size,
+    /* The width to draw the image in the destination canvas. This allows
+    scaling of the drawn image. If not specified, the image is not
+    scaled in width when drawn. */
+    this.size,
 
-      /* The height to draw the image in the destination canvas. This allows
-      scaling of the drawn image. If not specified, the image is not
-      scaled in height when drawn. */
-      this.size
-    )
-  })
-  img.src = 'src/sprites/characters-min.png'
+    /* The height to draw the image in the destination canvas. This allows
+    scaling of the drawn image. If not specified, the image is not
+    scaled in height when drawn. */
+    this.size
+  )
 }
 Player.prototype.move = function move (ctx, direction) {
   switch (direction) {
