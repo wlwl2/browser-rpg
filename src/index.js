@@ -1,5 +1,8 @@
 import TileSelector from './TileSelector'
 import World from './World'
+
+
+
 function init () {
   var canvas = document.createElement('canvas')
   canvas.height = 600
@@ -33,12 +36,16 @@ function redraw () {
     player.draw(ctx)
   })
 }
+
 var _init = init()
 var ctx = _init.ctx
 var canvas = _init.canvas
 const world = new World()
 TileSelector()
-step()
+
+window.addEventListener('load', function (event) {
+  step()
+}, false)
 
 // Refactor.
 var map = {}

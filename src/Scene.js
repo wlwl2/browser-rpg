@@ -3,8 +3,9 @@ import Floor from './terrain/Floor'
 import Monster from './Monster'
 import Player from './Player'
 
-//const img = document.createElement('img')
-//img.src = tile.source
+// const img = document.createElement('img')
+// img.src = tile.source
+// img.src = 'src/sprites/characters-min.png'
 
 export default function Scene (height, width) {
   this.height = height
@@ -19,15 +20,17 @@ Scene.prototype.draw = function (ctx, canvas) {
   // cellHeight is the height of each tile in px.
   const cellHeight = canvas.height / this.height
   const cellWidth = canvas.width / this.width
-  // for (let y = 0; y < this.height; y++) {
-  //   const row = this.grid[y]
-  //   for (let x = 0; x < this.width; x++) {
-  //     const value = row[x]
-  //     const tile = new this.tiles[value]()
-  //     ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,
-  //       x * cellWidth, y * cellHeight, cellWidth, cellHeight)
-  //   }
-  // }
+  for (let y = 0; y < this.height; y++) {
+    const row = this.grid[y]
+    for (let x = 0; x < this.width; x++) {
+      const value = row[x]
+      const tile = new this.tiles[value]()
+      const img = document.createElement('img')
+      img.src = tile.source
+      ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,
+        x * cellWidth, y * cellHeight, cellWidth, cellHeight)
+    }
+  }
 }
 Scene.prototype.initialize = function initialize () {
   this.grid = []
