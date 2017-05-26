@@ -43,9 +43,17 @@ var canvas = _init.canvas
 const world = new World()
 TileSelector()
 
-window.addEventListener('load', function (event) {
-  step()
-}, false)
+// Waits for all the images etc. to load, then runs the step function.
+function assetLoader () {
+  // const images = document.querySelectorAll(".")
+  // for (var i = 0; i < array.length; i++) {
+  //   array[i]
+  // }
+  window.addEventListener('load', function (event) {
+    step()
+  }, false)
+}
+assetLoader()
 
 // Refactor.
 var map = {}
