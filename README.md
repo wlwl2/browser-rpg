@@ -1,1 +1,3 @@
-webpack -d -w
+## browser-rpg
+
+A role-playing game in the browser.
