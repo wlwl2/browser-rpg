@@ -10,6 +10,7 @@ export default function Monster (x, y, entityNumber) {
   this.category = 'monster'
   this.sourceX = 8
   this.sourceY = 114
+  this.source = 'src/sprites/characters-min.png'
 }
 
 Monster.prototype.draw = function draw (ctx) {

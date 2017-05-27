@@ -1,4 +1,4 @@
-var img = document.createElement('img')
+const img = document.createElement('img')
 img.src = 'src/sprites/characters-min.png'
 
 export default function Player (x, y, world) {
@@ -11,6 +11,7 @@ export default function Player (x, y, world) {
   this.category = 'character'
   this.sourceX = 9
   this.sourceY = 42
+  this.source = 'src/sprites/characters-min.png'
 }
 
 Player.prototype.draw = function draw (ctx) {
