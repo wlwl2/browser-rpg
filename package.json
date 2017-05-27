@@ -1,7 +1,7 @@
 {
   "name": "browser-rpg",
   "version": "1.0.0",
-  "description": "webpack -d -w",
+  "description": "A role-playing game in the browser.",
   "main": "build.js",
   "dependencies": {
 
