@@ -14,6 +14,7 @@ export default function TileSelector () {
     }
   }
 
+  // When each of the tiles are clicked, update the tile selected.
   if (tiles.length === 0) return
   for (var i = 0; i < tiles.length; i++) {
     tiles[i].addEventListener('click', function (event) {
@@ -29,19 +30,21 @@ export default function TileSelector () {
     }, false)
   }
 
+  // On reset button click, reset the currently selected tile.
   if (resetTileButton) {
-    // On reset button click, reset the currently selected tile.
     resetTileButton.addEventListener('click', function (event) {
       removeCurrentlySelectedTile()
     }, false)
   }
 
+  // When the esc key is pressed, clear the currently selected tile.
   window.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
       removeCurrentlySelectedTile()
     }
   }, false)
 
+  // Displays the tile near the mouse cursor when a tile is selected.
   document.addEventListener('mousemove', function mouseInfoPosition (event) {
     if (!currentTile) return
     if (currentTile.children[0]) {

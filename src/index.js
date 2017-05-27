@@ -1,8 +1,6 @@
 import TileSelector from './TileSelector'
 import World from './World'
 
-
-
 function init () {
   var canvas = document.createElement('canvas')
   canvas.height = 600
