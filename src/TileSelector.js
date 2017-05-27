@@ -3,6 +3,8 @@ export default function TileSelector () {
   const currentTile = document.querySelector('.currently-selected-tile')
   const resetTileButton = document.querySelector('.reset-tile-button')
   const mouseInfo = document.querySelector('.mouse-info')
+
+  // Resets currently selected tile.
   function removeCurrentlySelectedTile () {
     if (currentTile.childNodes[1]) {
       currentTile.removeChild(currentTile.childNodes[1])
@@ -11,6 +13,7 @@ export default function TileSelector () {
       mouseInfo.removeChild(mouseInfo.childNodes[1])
     }
   }
+
   if (tiles.length === 0) return
   for (var i = 0; i < tiles.length; i++) {
     tiles[i].addEventListener('click', function (event) {
@@ -27,10 +30,17 @@ export default function TileSelector () {
   }
 
   if (resetTileButton) {
+    // On reset button click, reset the currently selected tile.
     resetTileButton.addEventListener('click', function (event) {
       removeCurrentlySelectedTile()
     }, false)
   }
+
+  window.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      removeCurrentlySelectedTile()
+    }
+  }, false)
 
   document.addEventListener('mousemove', function mouseInfoPosition (event) {
     if (!currentTile) return
