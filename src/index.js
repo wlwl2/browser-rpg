@@ -1,5 +1,5 @@
-import TileSelector from './TileSelector'
 import World from './World'
+import TileSelector from './TileSelector'
 
 function init () {
   var canvas = document.createElement('canvas')
@@ -52,7 +52,7 @@ function assetLoader () {
     images[i].addEventListener('load', function (event) {
       loadedImagesCounter += 1
       // console.log(loadedImagesCounter)
-      if (imageListLength === loadedImagesCounter + 1) {
+      if (imageListLength === (loadedImagesCounter + 1)) {
         // console.log('all done')
         step()
       }

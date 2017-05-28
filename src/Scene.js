@@ -17,7 +17,7 @@ export default function Scene (height, width) {
   this.tiles = [Floor, Wall, Player, Monster]
 }
 
-// What does this do???
+// Allows different tiles to be used in each grid cell.
 Scene.prototype.draw = function (ctx, canvas) {
   // cellHeight is the height of each tile in px.
   const cellHeight = canvas.height / this.height

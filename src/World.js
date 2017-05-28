@@ -2,6 +2,7 @@
 import Monster from './Monster'
 import Player from './Player'
 import Scene from './Scene'
+
 export default function World () {
   const monsters = this.monsters = []
   for (var i = 0; i < 20; i++) {
@@ -12,6 +13,7 @@ export default function World () {
   const players = this.players = []
   var player1 = new Player(240, 240)
   players.push(player1)
+  // Set the initial height and width of the grid (or game board) in cells.
   this.scene = new Scene(20, 20)
 }
 // Add entity properties to this function?
