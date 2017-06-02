@@ -25,6 +25,10 @@ img.floorimg {
   display: none;
 }
 
+img.grassimg {
+  display: none;
+}
+
 .floor {
   height: 30px;
   width: 30px;
@@ -36,6 +40,13 @@ img.floorimg {
   height: 30px;
   width: 30px;
   background-image: url('../sprites/wall.png');
+  background-position: 0px 0px;
+}
+
+.grass {
+  height: 30px;
+  width: 30px;
+  background-image: url('../sprites/grass-attempt-1.png');
   background-position: 0px 0px;
 }
 

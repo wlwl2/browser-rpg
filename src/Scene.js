@@ -2,6 +2,7 @@ import Wall from './terrain/Wall'
 import Floor from './terrain/Floor'
 import Monster from './Monster'
 import Player from './Player'
+import Grass from './terrain/Grass'
 
 // const img = document.createElement('img')
 // img.src = tile.source
@@ -14,7 +15,7 @@ export default function Scene (height, width) {
   this.initialize()
   this.setBorder()
   this.setRandomWalls()
-  this.tiles = [Floor, Wall, Player, Monster]
+  this.tiles = [Floor, Wall, Player, Monster, Grass]
 }
 
 // Allows different tiles to be used in each grid cell.

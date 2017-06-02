@@ -1,5 +1,9 @@
 import World from './World'
 import TileSelector from './TileSelector'
+import Dragging from './Dragging'
+
+console.log(Dragging)
+Dragging
 
 function init () {
   var canvas = document.createElement('canvas')
