@@ -1,4 +1,4 @@
-export default function Dragging () {
+export default function dragging () {
   const canvasElement = document.querySelector('canvas')
   if (!canvasElement) return
   let mouseHeld = false
@@ -13,7 +13,9 @@ export default function Dragging () {
     console.log(mouseHeld)
   }, false)
 
-  canvasElement.addEventListener('mouseover', function (event) {
-    // console.log(event.target)
+  canvasElement.addEventListener('mousemove', function (event) {
+    if (mouseHeld === true) {
+      console.log('x:' + String(event.clientX), 'y:' + event.clientY)
+    }
   }, false)
 }

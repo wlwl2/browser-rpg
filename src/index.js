@@ -1,6 +1,6 @@
 import World from './World'
 import TileSelector from './TileSelector'
-import Dragging from './Dragging'
+import dragging from './dragging'
 
 
 function init () {
@@ -42,28 +42,8 @@ var ctx = _init.ctx
 var canvas = _init.canvas
 const world = new World()
 TileSelector()
+dragging()
 
-// console.log(Dragging)
-Dragging()
-
-// Waits for all the images etc. to load, then runs the step function.
-// function assetLoader () {
-//   const images = document.querySelectorAll('img')
-//   if (images.length === 0) return
-//   const imageListLength = images.length
-//   // console.log(imageListLength)
-//   let loadedImagesCounter = 0
-//   for (var i = 0; i < imageListLength; i++) {
-//     images[i].addEventListener('load', function (event) {
-//       loadedImagesCounter += 1
-//       // console.log(loadedImagesCounter)
-//       if (imageListLength === (loadedImagesCounter + 1)) {
-//         // console.log('all done')
-//         step()
-//       }
-//     }, false)
-//   }
-// }
 window.addEventListener('load', function (event) {
   // assetLoader()
   step()
@@ -83,6 +63,8 @@ window.onkeydown = window.onkeyup = function controls (event) {
     step('right')
   }
 }
+
+// When the canvas is clicked, add the selected tile to the canvas.
 canvas.addEventListener('click', function (event) {
   const selectedTile = document.querySelector('.currently-selected-tile')
   if (!selectedTile.children[0]) return
