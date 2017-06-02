@@ -29,6 +29,10 @@ img.grassimg {
   display: none;
 }
 
+img.treeimg {
+  display: none;
+}
+
 .floor {
   height: 30px;
   width: 30px;
@@ -47,6 +51,13 @@ img.grassimg {
   height: 30px;
   width: 30px;
   background-image: url('../sprites/grass-attempt-1.png');
+  background-position: 0px 0px;
+}
+
+.tree {
+  height: 30px;
+  width: 30px;
+  background-image: url('../sprites/tree.png');
   background-position: 0px 0px;
 }
 
