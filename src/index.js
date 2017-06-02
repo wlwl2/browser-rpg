@@ -2,8 +2,6 @@ import World from './World'
 import TileSelector from './TileSelector'
 import Dragging from './Dragging'
 
-console.log(Dragging)
-Dragging
 
 function init () {
   var canvas = document.createElement('canvas')
@@ -44,6 +42,9 @@ var ctx = _init.ctx
 var canvas = _init.canvas
 const world = new World()
 TileSelector()
+
+// console.log(Dragging)
+Dragging()
 
 // Waits for all the images etc. to load, then runs the step function.
 // function assetLoader () {

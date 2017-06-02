@@ -1,10 +1,19 @@
 export default function Dragging () {
-  let dragged
-  document.addEventListener('dragstart', function (event) {
-    // store a ref. on the dragged elem
-    dragged = event.target
-    // make it half transparent
-    event.target.style.opacity = 0.5
-    console.log(dragged)
+  const canvasElement = document.querySelector('canvas')
+  if (!canvasElement) return
+  let mouseHeld = false
+
+  canvasElement.addEventListener('mousedown', function (event) {
+    mouseHeld = true
+    console.log(mouseHeld)
+  }, false)
+
+  canvasElement.addEventListener('mouseup', function (event) {
+    mouseHeld = false
+    console.log(mouseHeld)
+  }, false)
+
+  canvasElement.addEventListener('mouseover', function (event) {
+    // console.log(event.target)
   }, false)
 }
