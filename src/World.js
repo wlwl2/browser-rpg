@@ -27,6 +27,7 @@ World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
     this.scene.grid[worldY][worldX] = entityType
   }
 }
+// Returns the x and y coordinates in terms of grid cells.
 World.prototype.screenToWorld = function screenToWorld ([screenX, screenY], canvas) {
   const tilesWidth = canvas.width / this.scene.width
   const tilesHeight = canvas.height / this.scene.height

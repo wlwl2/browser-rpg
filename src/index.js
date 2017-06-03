@@ -2,7 +2,6 @@ import World from './World'
 import TileSelector from './TileSelector'
 import dragging from './dragging'
 
-
 function init () {
   var canvas = document.createElement('canvas')
   canvas.height = 600
@@ -42,7 +41,7 @@ var ctx = _init.ctx
 var canvas = _init.canvas
 const world = new World()
 TileSelector()
-dragging()
+dragging(canvas, world, ctx)
 
 window.addEventListener('load', function (event) {
   // assetLoader()
@@ -65,15 +64,15 @@ window.onkeydown = window.onkeyup = function controls (event) {
 }
 
 // When the canvas is clicked, add the selected tile to the canvas.
-canvas.addEventListener('click', function (event) {
-  const selectedTile = document.querySelector('.currently-selected-tile')
-  if (!selectedTile.children[0]) return
-  const selectedEntityNumber =
-  selectedTile.children[0].getAttribute('data-entity-number')
-  const pos = world.screenToWorld([
-    event.clientX,
-    event.clientY
-  ], canvas)
-  world.addEntity(pos, selectedEntityNumber)
-  redraw()
-}, false)
+// canvas.addEventListener('click', function (event) {
+//   const selectedTile = document.querySelector('.currently-selected-tile')
+//   if (!selectedTile.children[0]) return
+//   const selectedEntityNumber =
+//   selectedTile.children[0].getAttribute('data-entity-number')
+//   const pos = world.screenToWorld([
+//     event.clientX,
+//     event.clientY
+//   ], canvas)
+//   world.addEntity(pos, selectedEntityNumber)
+//   redraw()
+// }, false)
