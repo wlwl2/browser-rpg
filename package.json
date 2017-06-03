@@ -8,7 +8,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "standard": "^10.0.2"
+    "standard": "^10.0.2",
+    "grunt": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
