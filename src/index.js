@@ -26,16 +26,6 @@ function step (direction) {
   })
 }
 
-function redraw () {
-  world.scene.draw(ctx, canvas)
-  world.monsters.forEach(function (monster) {
-    monster.draw(ctx)
-  })
-  world.players.forEach(function (player) {
-    player.draw(ctx)
-  })
-}
-
 var _init = init()
 var ctx = _init.ctx
 var canvas = _init.canvas
@@ -44,7 +34,6 @@ TileSelector()
 dragging(canvas, world, ctx)
 
 window.addEventListener('load', function (event) {
-  // assetLoader()
   step()
 }, false)
 
@@ -62,17 +51,3 @@ window.onkeydown = window.onkeyup = function controls (event) {
     step('right')
   }
 }
-
-// When the canvas is clicked, add the selected tile to the canvas.
-// canvas.addEventListener('click', function (event) {
-//   const selectedTile = document.querySelector('.currently-selected-tile')
-//   if (!selectedTile.children[0]) return
-//   const selectedEntityNumber =
-//   selectedTile.children[0].getAttribute('data-entity-number')
-//   const pos = world.screenToWorld([
-//     event.clientX,
-//     event.clientY
-//   ], canvas)
-//   world.addEntity(pos, selectedEntityNumber)
-//   redraw()
-// }, false)
