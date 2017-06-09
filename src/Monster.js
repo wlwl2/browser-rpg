@@ -14,17 +14,8 @@ export default function Monster (x, y, entityNumber) {
 }
 
 Monster.prototype.draw = function draw (ctx) {
-  ctx.drawImage(
-    img,
-    this.sourceX, // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-    this.sourceY, // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-    this.size, // The width of the sub-rectangle of the source image to draw into the destination context. If not specified, the entire rectangle from the coordinates specified by sx and sy to the bottom-right corner of the image is used.
-    this.size, // The height of the sub-rectangle of the source image to draw into the destination context.
-    this.x, // The X coordinate in the destination canvas at which to place the top-left corner of the source image.
-    this.y, // The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
-    this.size, // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
-    this.size // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
-  )
+  ctx.drawImage(img, this.sourceX, this.sourceY, this.size, this.size,
+    this.x, this.y, this.size, this.size)
 }
 
 Monster.prototype.step = function step (monsters) {
