@@ -1,0 +1,61 @@
+img.spritesheet {
+  display: none;
+}
+
+img.wallimg {
+  display: none;
+}
+
+img.floorimg {
+  display: none;
+}
+
+img.grassimg {
+  display: none;
+}
+
+img.treeimg {
+  display: none;
+}
+
+.floor {
+  height: 30px;
+  width: 30px;
+  background-image: url('../sprites/floor.png');
+  background-position: 0px 0px;
+}
+
+.wall {
+  height: 30px;
+  width: 30px;
+  background-image: url('../sprites/wall.png');
+  background-position: 0px 0px;
+}
+
+.grass {
+  height: 30px;
+  width: 30px;
+  background-image: url('../sprites/grass-attempt-1.png');
+  background-position: 0px 0px;
+}
+
+.tree {
+  height: 30px;
+  width: 30px;
+  background-image: url('../sprites/tree.png');
+  background-position: 0px 0px;
+}
+
+.player {
+  width: 15px;
+  height: 22px;
+  background-image: url('../sprites/characters-min.png');
+  background-position: -9px -42px;
+}
+
+.monster {
+  width: 16px;
+  height: 14px;
+  background-image: url('../sprites/characters-min.png');
+  background-position: -8px -114px;
+}

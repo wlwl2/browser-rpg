@@ -3,85 +3,21 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-color: rgb(230, 230, 230);
-  position: relative;
-}
+  background-color: #e6e6e6;
+  position: relative; }
 
 canvas {
   display: block;
   width: 100vw;
-  background-color: grey;
-}
-
-img.spritesheet {
-  display: none;
-}
-
-img.wallimg {
-  display: none;
-}
-
-img.floorimg {
-  display: none;
-}
-
-img.grassimg {
-  display: none;
-}
-
-img.treeimg {
-  display: none;
-}
-
-.floor {
-  height: 30px;
-  width: 30px;
-  background-image: url('../sprites/floor.png');
-  background-position: 0px 0px;
-}
-
-.wall {
-  height: 30px;
-  width: 30px;
-  background-image: url('../sprites/wall.png');
-  background-position: 0px 0px;
-}
-
-.grass {
-  height: 30px;
-  width: 30px;
-  background-image: url('../sprites/grass-attempt-1.png');
-  background-position: 0px 0px;
-}
-
-.tree {
-  height: 30px;
-  width: 30px;
-  background-image: url('../sprites/tree.png');
-  background-position: 0px 0px;
-}
-
-.player {
-  width: 15px;
-  height: 22px;
-  background-image: url('../sprites/characters-min.png');
-  background-position: -9px -42px;
-}
-
-.monster {
-  width: 16px;
-  height: 14px;
-  background-image: url('../sprites/characters-min.png');
-  background-position: -8px -114px;
-}
+  height: 100vw;
+  background-color: grey; }
 
 .menu {
   position: absolute;
   width: 30vw;
   height: 98vh;
   top: 0;
-  right: 0;
-}
+  right: 0; }
 
 .tile-selector {
   font-size: 20px;
@@ -89,17 +25,14 @@ img.treeimg {
   padding: 20px;
   text-align: center;
   min-height: 30%;
-  background-color: white;
-}
+  background-color: white; }
 
 .tile-list div {
   cursor: pointer;
-  margin: 10px;
-}
+  margin: 10px; }
 
 .tile-list div:hover {
-  opacity: .5;
-}
+  opacity: .5; }
 
 .currently-selected-tile {
   font-size: 14px;
@@ -107,18 +40,67 @@ img.treeimg {
   text-align: left;
   min-width: 30px;
   min-height: 30px;
-  border: 1px solid black;
-}
+  border: 1px solid black; }
 
 .reset-tile-button {
   font-size: 14px;
-  font-weight: normal;
-}
+  font-weight: normal; }
 
 .mouse-info {
-  position: absolute;
-}
+  position: absolute; }
 
 .mouse-info div {
-  border: 1px solid blue;
-}
+  border: 1px solid blue; }
+
+img.spritesheet {
+  display: none; }
+
+img.wallimg {
+  display: none; }
+
+img.floorimg {
+  display: none; }
+
+img.grassimg {
+  display: none; }
+
+img.treeimg {
+  display: none; }
+
+.floor {
+  height: 30px;
+  width: 30px;
+  background-image: url("../sprites/floor.png");
+  background-position: 0px 0px; }
+
+.wall {
+  height: 30px;
+  width: 30px;
+  background-image: url("../sprites/wall.png");
+  background-position: 0px 0px; }
+
+.grass {
+  height: 30px;
+  width: 30px;
+  background-image: url("../sprites/grass-attempt-1.png");
+  background-position: 0px 0px; }
+
+.tree {
+  height: 30px;
+  width: 30px;
+  background-image: url("../sprites/tree.png");
+  background-position: 0px 0px; }
+
+.player {
+  width: 15px;
+  height: 22px;
+  background-image: url("../sprites/characters-min.png");
+  background-position: -9px -42px; }
+
+.monster {
+  width: 16px;
+  height: 14px;
+  background-image: url("../sprites/characters-min.png");
+  background-position: -8px -114px; }
+
+/*# sourceMappingURL=style.css.map */
