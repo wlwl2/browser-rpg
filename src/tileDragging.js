@@ -1,4 +1,4 @@
-export default function dragging (canvas, world, ctx) {
+export default function tileDragging (canvas, world, ctx) {
   const currentTile = document.querySelector('.currently-selected-tile')
   if (!currentTile) return
   let mouseHeld = false

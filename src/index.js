@@ -1,6 +1,6 @@
 import World from './World'
 import TileSelector from './TileSelector'
-import dragging from './dragging'
+import tileDragging from './tileDragging'
 
 function init () {
   var canvas = document.createElement('canvas')
@@ -31,7 +31,7 @@ var ctx = _init.ctx
 var canvas = _init.canvas
 const world = new World()
 TileSelector()
-dragging(canvas, world, ctx)
+tileDragging(canvas, world, ctx)
 
 window.addEventListener('load', function (event) {
   step()
