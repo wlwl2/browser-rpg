@@ -12,46 +12,6 @@ canvas {
   height: 100vw;
   background-color: grey; }
 
-.menu {
-  position: absolute;
-  width: 30vw;
-  height: 98vh;
-  top: 0;
-  right: 0; }
-
-.tile-selector {
-  font-size: 20px;
-  font-weight: bold;
-  padding: 20px;
-  text-align: center;
-  min-height: 30%;
-  background-color: white; }
-
-.tile-list div {
-  cursor: pointer;
-  margin: 10px; }
-
-.tile-list div:hover {
-  opacity: .5; }
-
-.currently-selected-tile {
-  font-size: 14px;
-  font-weight: normal;
-  text-align: left;
-  min-width: 30px;
-  min-height: 30px;
-  border: 1px solid black; }
-
-.reset-tile-button {
-  font-size: 14px;
-  font-weight: normal; }
-
-.mouse-info {
-  position: absolute; }
-
-.mouse-info div {
-  border: 1px solid blue; }
-
 img.spritesheet {
   display: none; }
 
@@ -102,5 +62,45 @@ img.treeimg {
   height: 14px;
   background-image: url("../sprites/characters-min.png");
   background-position: -8px -114px; }
+
+.menu {
+  position: absolute;
+  width: 30vw;
+  height: 98vh;
+  top: 0;
+  right: 0; }
+
+.tile-selector {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  min-height: 30%;
+  background-color: white; }
+
+.tile-list div {
+  cursor: pointer;
+  margin: 10px; }
+
+.tile-list div:hover {
+  opacity: .5; }
+
+.currently-selected-tile {
+  font-size: 14px;
+  font-weight: normal;
+  text-align: left;
+  min-width: 30px;
+  min-height: 30px;
+  border: 1px solid black; }
+
+.reset-tile-button {
+  font-size: 14px;
+  font-weight: normal; }
+
+.mouse-info {
+  position: absolute; }
+
+.mouse-info div {
+  border: 1px solid blue; }
 
 /*# sourceMappingURL=style.css.map */
