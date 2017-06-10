@@ -1,4 +1,5 @@
 export default function TileSelector () {
+  if (!document.querySelector('.tile-list')) return
   const tiles = document.querySelector('.tile-list').children
   const currentTile = document.querySelector('.currently-selected-tile')
   const resetTileButton = document.querySelector('.reset-tile-button')

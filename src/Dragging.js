@@ -1,5 +1,6 @@
 export default function dragging (canvas, world, ctx) {
   const currentTile = document.querySelector('.currently-selected-tile')
+  if (!currentTile) return
   let mouseHeld = false
   let hoveredOverTiles = []
   let duplicate = 0
@@ -24,6 +25,7 @@ export default function dragging (canvas, world, ctx) {
 
   // Canvas is redrawn with the tiles in hoveredOverTiles array.
   canvas.addEventListener('mouseup', function (event) {
+    if (!currentTile) return
     mouseHeld = false
     if (!currentTile.children[0]) return
     if (!currentTile.children[0].getAttribute('data-entity-number')) return
@@ -36,6 +38,7 @@ export default function dragging (canvas, world, ctx) {
   // Positions of the tiles that were hovered on during the mouse hold will be
   // added to the hoveredOverTiles array. This is then drawn on canvas.
   canvas.addEventListener('mousemove', function (event) {
+    if (!currentTile) return
     if (!currentTile.children[0]) return
     if (!currentTile.children[0].getAttribute('data-entity-number')) return
     if (mouseHeld === true) {
