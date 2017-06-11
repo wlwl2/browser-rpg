@@ -10,14 +10,16 @@ function init () {
   document.body.appendChild(canvas)
   return { ctx: ctx, canvas: canvas }
 }
+
 // For each of these steps, re-create the world.
 function step (direction) {
   /* Sets all pixels in the rectangle defined by starting point and
   size to transparent black, erasing any previously drawn content. */
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   world.scene.draw(ctx, canvas)
+  const canvasLength = canvas.height
   world.monsters.forEach(function (monster) {
-    monster.step(world.monsters)
+    monster.step(world.monsters, canvasLength)
     monster.draw(ctx)
   })
   world.players.forEach(function (player) {

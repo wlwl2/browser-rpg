@@ -18,7 +18,7 @@ Monster.prototype.draw = function draw (ctx) {
     this.x, this.y, this.size, this.size)
 }
 
-Monster.prototype.step = function step (monsters, canvas) {
+Monster.prototype.step = function step (monsters, canvasLength) {
   // Randomly makes the monster move one step in one of 4 directions.
   const next = {x: this.x, y: this.y}
   switch (Math.floor(Math.random() * 4)) {
@@ -27,11 +27,11 @@ Monster.prototype.step = function step (monsters, canvas) {
       next.y -= this.speed
       break
     case 1: // down.
-      if (this.y + this.speed * 2 > 600) return
+      if (this.y + this.speed * 2 > canvasLength) return
       next.y += this.speed
       break
     case 2: // right.
-      if (this.x + this.speed * 2 > 600) return
+      if (this.x + this.speed * 2 > canvasLength) return
       next.x += this.speed
       break
     case 3: // left.
@@ -45,7 +45,7 @@ Monster.prototype.step = function step (monsters, canvas) {
   monsters.forEach(function (monster) {
     if (monster === this) return
     if (!canMove) return
-    console.log(monster.x, monster.y, 'next:', next.x, next.y)
+    // console.log(monster.x, monster.y, 'next:', next.x, next.y)
     if (!(monster.x > next.x + this.size ||
         monster.x + monster.size <= next.x ||
         monster.y > next.y + this.size ||
