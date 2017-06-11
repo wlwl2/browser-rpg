@@ -8,7 +8,8 @@ body {
 
 canvas {
   display: block;
-  height: 100vh;
+  height: 600px;
+  width: 600px;
   background-color: grey; }
 
 @media screen and (max-width: 767px) {

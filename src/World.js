@@ -4,19 +4,15 @@ import Player from './Player'
 import Scene from './Scene'
 
 export default function World () {
+  const gridcells = 20
   const monsters = this.monsters = []
   let spawnNumber = 30
-  for (let i = 0; i < spawnNumber; i++) {
-    let monsterName = 'monster' + i
-    monsterName = new Monster((i * 30), ((Math.floor(Math.random() * spawnNumber) * 30)))
-    monsters.push(monsterName) // use addEntity
-  }
-  // monsters.push(new Monster(0, 0), new Monster(30, 30))
+  monsters.push(new Monster(0, 0), new Monster(60, 60))
   const players = this.players = []
   var player1 = new Player(240, 240)
   players.push(player1)
   // Set the initial height and width of the grid (or game board) in cells.
-  this.scene = new Scene(20, 20)
+  this.scene = new Scene(gridcells, gridcells)
 }
 // Add entity properties to this function?
 // Different tiles can be added to the grid by restricting the limits
