@@ -9,6 +9,12 @@ body {
 
 canvas {
   display: block;
-  height: 98vh;
+  height: 100vh;
   background-color: grey;
+}
+
+@media screen and (max-width: 767px) {
+  canvas {
+    height: 100vw;
+  }
 }

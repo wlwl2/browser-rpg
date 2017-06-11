@@ -19,18 +19,31 @@ Player.prototype.draw = function draw (ctx) {
     this.x, this.y, this.size, this.size)
 }
 
-Player.prototype.move = function move (ctx, direction) {
+// Moves the player one step.
+Player.prototype.move = function move (ctx, direction, canvas) {
   switch (direction) {
     case 'up':
+      // Prevents player from moving outside the canvas when moving up.
+      if (this.y - this.speed < 0) return
+
       this.y -= this.speed
       break
     case 'down':
+      // Prevents player from moving outside the canvas when moving down.
+      if (this.y + this.speed * 2 > canvas.height) return
+
       this.y += this.speed
       break
     case 'right':
+      // Prevents player from moving outside the canvas when moving right.
+      if (this.x + this.speed * 2 > canvas.width) return
+
       this.x += this.speed
       break
     case 'left':
+      // Prevents player from moving outside the canvas when moving left.
+      if (this.x - this.speed < 0) return
+
       this.x -= this.speed
       break
   }

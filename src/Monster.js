@@ -1,7 +1,7 @@
 const img = document.createElement('img')
 img.src = 'src/sprites/characters-min.png'
 
-export default function Monster (x, y, entityNumber) {
+export default function Monster (x, y) {
   this.x = x
   this.y = y
   this.entityNumber = 3
@@ -19,8 +19,8 @@ Monster.prototype.draw = function draw (ctx) {
 }
 
 Monster.prototype.step = function step (monsters) {
+  // Randomly makes the monster move one step in one of 4 directions.
   const next = {x: this.x, y: this.y}
-
   switch (Math.floor(Math.random() * 4)) {
     case 0: // up.
       next.y -= this.speed
@@ -36,9 +36,8 @@ Monster.prototype.step = function step (monsters) {
       break
   }
 
+  // Collision detection. next is now the next position of the monster.
   let canMove = true
-
-  // Collision detection.
   monsters.forEach(function (monster) {
     if (monster === this) return
     if (!canMove) return

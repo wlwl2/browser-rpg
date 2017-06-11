@@ -21,7 +21,7 @@ function step (direction) {
     monster.draw(ctx)
   })
   world.players.forEach(function (player) {
-    player.move(ctx, direction)
+    player.move(ctx, direction, canvas)
     player.draw(ctx)
   })
 }
@@ -33,6 +33,7 @@ const world = new World()
 TileSelector()
 tileDragging(canvas, world, ctx)
 
+// This is probably not the best way to check asset loading. Refactor.
 window.addEventListener('load', function (event) {
   step()
 }, false)

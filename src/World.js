@@ -5,11 +5,13 @@ import Scene from './Scene'
 
 export default function World () {
   const monsters = this.monsters = []
-  for (var i = 0; i < 20; i++) {
-    var monsterName = 'monster' + i
-    monsterName = new Monster((i * 30), ((Math.floor(Math.random() * 20) * 30)))
+  let spawnNumber = 30
+  for (let i = 0; i < spawnNumber; i++) {
+    let monsterName = 'monster' + i
+    monsterName = new Monster((i * 30), ((Math.floor(Math.random() * spawnNumber) * 30)))
     monsters.push(monsterName) // use addEntity
   }
+  // monsters.push(new Monster(0, 0), new Monster(30, 30))
   const players = this.players = []
   var player1 = new Player(240, 240)
   players.push(player1)
