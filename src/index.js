@@ -17,13 +17,14 @@ function step (direction) {
   size to transparent black, erasing any previously drawn content. */
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   world.scene.draw(ctx, canvas)
+  // console.log(world.scene.grid)
   const canvasLength = canvas.height
   world.monsters.forEach(function (monster) {
     monster.step(world.monsters, canvasLength)
     monster.draw(ctx)
   })
   world.players.forEach(function (player) {
-    player.move(ctx, direction, canvas)
+    player.move(ctx, direction, canvas, world.scene.grid)
     player.draw(ctx)
   })
 }

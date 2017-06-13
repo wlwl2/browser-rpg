@@ -33,7 +33,6 @@ Scene.prototype.draw = function (ctx, canvas) {
       img.src = tile.source
       ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,
         x * cellWidth, y * cellHeight, cellWidth, cellHeight)
-        console.log(tile)
     }
   }
 }
