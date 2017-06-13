@@ -24,7 +24,7 @@ function step (direction) {
     monster.draw(ctx)
   })
   world.players.forEach(function (player) {
-    player.move(ctx, direction, canvas, world.scene.grid)
+    player.move(ctx, direction, canvas, world.scene.grid, world.scene.tiles)
     player.draw(ctx)
   })
 }
