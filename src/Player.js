@@ -22,15 +22,17 @@ Player.prototype.draw = function draw (ctx) {
 // Moves the player one step.
 Player.prototype.move = function move (ctx, direction, canvas, grid) {
   // console.log(grid[2][1]) // grid[y][x]
+  const speed = this.speed / 30
+  const y = this.y / 30
+  const x = this.x / 30
+
   switch (direction) {
     case 'up':
       // Prevents player from moving outside the canvas when moving up.
       if (this.y - this.speed < 0) return
 
       // Collidable terrain detection.
-      const upY = (this.y - this.speed) / 30
-      const upX = this.x / 30
-      if (grid[upY][upX] === 1) return
+      if (grid[y - speed][x] === 1) return
 
       this.y -= this.speed
       break
@@ -39,9 +41,7 @@ Player.prototype.move = function move (ctx, direction, canvas, grid) {
       if (this.y + this.speed * 2 > canvas.height) return
 
       // Collidable terrain detection.
-      const downY = (this.y + this.speed) / 30
-      const downX = this.x / 30
-      if (grid[downY][downX] === 1) return
+      if (grid[y + speed][x] === 1) return
 
       this.y += this.speed
       break
@@ -50,9 +50,7 @@ Player.prototype.move = function move (ctx, direction, canvas, grid) {
       if (this.x + this.speed * 2 > canvas.width) return
 
       // Collidable terrain detection.
-      const rightY = this.y / 30
-      const rightX = (this.x + this.speed) / 30
-      if (grid[rightY][rightX] === 1) return
+      if (grid[y][x + speed] === 1) return
 
       this.x += this.speed
       break
@@ -61,9 +59,7 @@ Player.prototype.move = function move (ctx, direction, canvas, grid) {
       if (this.x - this.speed < 0) return
 
       // Collidable terrain detection.
-      const leftY = this.y / 30
-      const leftX = (this.x - this.speed) / 30
-      if (grid[leftY][leftX] === 1) return
+      if (grid[y][x - speed] === 1) return
 
       this.x -= this.speed
       break
