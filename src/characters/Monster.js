@@ -11,6 +11,7 @@ export default function Monster (x, y) {
   this.sourceX = 8
   this.sourceY = 114
   this.source = 'src/sprites/characters-min.png'
+  this.collidable = 'yes'
 }
 
 Monster.prototype.draw = function draw (ctx) {

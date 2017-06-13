@@ -1,6 +1,6 @@
 // people and monsters
-import Monster from './Monster'
-import Player from './Player'
+import Monster from './characters/Monster'
+import Player from './characters/Player'
 import Scene from './Scene'
 
 export default function World () {

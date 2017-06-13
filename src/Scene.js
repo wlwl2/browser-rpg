@@ -1,7 +1,7 @@
 import Wall from './terrain/Wall'
 import Floor from './terrain/Floor'
-import Monster from './Monster'
-import Player from './Player'
+import Monster from './characters/Monster'
+import Player from './characters/Player'
 import Grass from './terrain/Grass'
 import Tree from './terrain/Tree'
 

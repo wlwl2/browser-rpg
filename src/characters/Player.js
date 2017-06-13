@@ -12,6 +12,7 @@ export default function Player (x, y, world) {
   this.sourceX = 9
   this.sourceY = 42
   this.source = 'src/sprites/characters-min.png'
+  this.collidable = 'yes'
 }
 
 Player.prototype.draw = function draw (ctx) {
