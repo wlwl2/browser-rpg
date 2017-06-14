@@ -12,6 +12,7 @@ export default function Monster (x, y) {
   this.sourceY = 114
   this.source = 'src/sprites/characters-min.png'
   this.collidable = 'yes'
+  this.collidableTiles = []
 }
 
 Monster.prototype.draw = function draw (ctx) {
@@ -19,28 +20,41 @@ Monster.prototype.draw = function draw (ctx) {
     this.x, this.y, this.size, this.size)
 }
 
-Monster.prototype.step = function step (monsters, canvasLength) {
+Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
+  tiles.forEach(function (Tile) {
+    let tileObj = new Tile()
+    if (tileObj.collidable === 'yes') {
+      this.collidableTiles.push(tileObj.entityNumber)
+    }
+  }, this)
   // Randomly makes the monster move one step in one of 4 directions.
   const next = {x: this.x, y: this.y}
   switch (Math.floor(Math.random() * 4)) {
     case 0: // up.
       if (next.y - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[(next.y / 30) - (this.speed / 30)][this.x / 30]) >= 0) return
       next.y -= this.speed
       break
     case 1: // down.
       if (this.y + this.speed * 2 > canvasLength) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[(next.y / 30) + (this.speed / 30) * 2][this.x]) >= 0) return
       next.y += this.speed
       break
     case 2: // right.
       if (this.x + this.speed * 2 > canvasLength) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[this.y / 30][(next.x / 30) + (this.speed / 30) * 2]) >= 0) return
       next.x += this.speed
       break
     case 3: // left.
       if (this.x - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[this.y / 30][(next.x / 30) - (this.speed / 30)]) >= 0) return
       next.x -= this.speed
       break
   }
-
   // Collision detection. next is now: next position of the monster.
   let canMove = true
   monsters.forEach(function (monster) {

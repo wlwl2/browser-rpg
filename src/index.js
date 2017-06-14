@@ -20,7 +20,7 @@ function step (direction) {
   // console.log(world.scene.grid)
   const canvasLength = canvas.height
   world.monsters.forEach(function (monster) {
-    monster.step(world.monsters, canvasLength)
+    monster.step(world.monsters, canvasLength, world.scene.grid, world.scene.tiles)
     monster.draw(ctx)
   })
   world.players.forEach(function (player) {

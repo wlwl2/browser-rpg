@@ -14,7 +14,8 @@ canvas {
 
 @media screen and (max-width: 767px) {
   canvas {
-    height: 100vw; } }
+    height: 100vw;
+    width: 100vw; } }
 img.spritesheet {
   display: none; }
 
