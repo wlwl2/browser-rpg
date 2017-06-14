@@ -13,6 +13,7 @@ export default function Player (x, y, world) {
   this.sourceY = 42
   this.source = 'src/sprites/characters-min.png'
   this.collidable = 'yes'
+  this.collidableTiles = []
 }
 
 Player.prototype.draw = function draw (ctx) {
@@ -26,9 +27,12 @@ Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
   const speed = this.speed / 30
   const y = this.y / 30
   const x = this.x / 30
-  tiles.forEach(function (tile) {
-    console.log(new tile())
-  })
+  tiles.forEach(function (Tile) {
+    let tileObj = new Tile()
+    if (tileObj.collidable === 'yes') {
+      this.collidableTiles.push(tileObj.entityNumber)
+    }
+  }, this)
 
   switch (direction) {
     case 'up':
@@ -36,7 +40,7 @@ Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
       if (this.y - this.speed < 0) return
 
       // Collidable terrain detection.
-      if (grid[y - speed][x] === 1) return
+      if (this.collidableTiles.indexOf(grid[y - speed][x]) >= 0) return
 
       this.y -= this.speed
       break
@@ -45,7 +49,7 @@ Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
       if (this.y + this.speed * 2 > canvas.height) return
 
       // Collidable terrain detection.
-      if (grid[y + speed][x] === 1) return
+      if (this.collidableTiles.indexOf(grid[y + speed][x]) >= 0) return
 
       this.y += this.speed
       break
@@ -54,7 +58,7 @@ Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
       if (this.x + this.speed * 2 > canvas.width) return
 
       // Collidable terrain detection.
-      if (grid[y][x + speed] === 1) return
+      if (this.collidableTiles.indexOf(grid[y][x + speed]) >= 0) return
 
       this.x += this.speed
       break
@@ -63,7 +67,7 @@ Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
       if (this.x - this.speed < 0) return
 
       // Collidable terrain detection.
-      if (grid[y][x - speed] === 1) return
+      if (this.collidableTiles.indexOf(grid[y][x - speed]) >= 0) return
 
       this.x -= this.speed
       break
