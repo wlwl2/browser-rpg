@@ -41,9 +41,8 @@ window.addEventListener('load', function (event) {
   step()
 }, false)
 
-// Refactor.
 var map = {}
-window.onkeydown = window.onkeyup = function controls (event) {
+function playerControls (event) {
   map[event.key] = event.type === 'keydown'
   if (map['ArrowUp']) {
     step('up')
@@ -55,3 +54,9 @@ window.onkeydown = window.onkeyup = function controls (event) {
     step('right')
   }
 }
+document.addEventListener('keyup', function (event) {
+  playerControls(event)
+}, false)
+document.addEventListener('keydown', function (event) {
+  playerControls(event)
+}, false)
