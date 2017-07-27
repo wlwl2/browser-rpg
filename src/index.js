@@ -8,7 +8,7 @@ function init () {
   canvas.width = 600
   var ctx = canvas.getContext('2d')
   document.body.appendChild(canvas)
-  return { ctx: ctx, canvas: canvas }
+  return { ctx, canvas }
 }
 
 // For each of these steps, re-create the world.
