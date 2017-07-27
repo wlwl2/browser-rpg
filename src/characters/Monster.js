@@ -21,6 +21,7 @@ Monster.prototype.draw = function draw (ctx) {
 }
 
 Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
+  if (!tiles) return
   tiles.forEach(function (Tile) {
     let tileObj = new Tile()
     if (tileObj.collidable === 'yes') {
