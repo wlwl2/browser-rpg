@@ -1,6 +1,7 @@
 import World from './World'
 import TileSelector from './TileSelector'
 import tileDragging from './tileDragging'
+import playerControls from './playerControls'
 
 function init () {
   var canvas = document.createElement('canvas')
@@ -13,8 +14,7 @@ function init () {
 
 // For each of these steps, re-create the world.
 function step (direction) {
-  /* Sets all pixels in the rectangle defined by starting point and
-  size to transparent black, erasing any previously drawn content. */
+  // Erases canvas.
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   world.scene.draw(ctx, canvas)
   // console.log(world.scene.grid)
@@ -36,27 +36,8 @@ const world = new World()
 TileSelector()
 tileDragging(canvas, world, ctx)
 
-// This is probably not the best way to check asset loading. Refactor.
 window.addEventListener('load', function (event) {
   step()
 }, false)
 
-var map = {}
-function playerControls (event) {
-  map[event.key] = event.type === 'keydown'
-  if (map['ArrowUp']) {
-    step('up')
-  } else if (map['ArrowDown']) {
-    step('down')
-  } else if (map['ArrowLeft']) {
-    step('left')
-  } else if (map['ArrowRight']) {
-    step('right')
-  }
-}
-document.addEventListener('keyup', function (event) {
-  playerControls(event)
-}, false)
-document.addEventListener('keydown', function (event) {
-  playerControls(event)
-}, false)
+playerControls(step)
