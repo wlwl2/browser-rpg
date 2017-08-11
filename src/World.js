@@ -1,6 +1,6 @@
 // people and monsters
-import Monster from './characters/Monster'
-import Player from './characters/Player'
+import Monster from './entities/characters/Monster'
+import Player from './entities/characters/Player'
 import Scene from './Scene'
 
 export default function World () {
@@ -13,11 +13,13 @@ export default function World () {
   // Set the initial height and width of the grid (or game board) in cells.
   this.scene = new Scene(gridcells, gridcells)
 }
+
 World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
   if (entityType) {
-    this.scene.grid[worldY][worldX] = entityType
+    this.scene.grid[worldY][worldX] = Number(entityType)
   }
 }
+
 // Returns the x and y coordinates in terms of grid cells.
 World.prototype.screenToWorld = function screenToWorld ([screenX, screenY], canvas) {
   const tilesWidth = canvas.width / this.scene.width

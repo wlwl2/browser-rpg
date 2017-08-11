@@ -23,7 +23,6 @@ Player.prototype.draw = function draw (ctx) {
 
 // Moves the player one step.
 Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
-  // console.log(grid[2][1]) // grid[y][x]
   const speed = this.speed / 30
   const y = this.y / 30
   const x = this.x / 30

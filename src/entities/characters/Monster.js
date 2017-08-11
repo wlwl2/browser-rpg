@@ -21,6 +21,7 @@ Monster.prototype.draw = function draw (ctx) {
 }
 
 Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
+  // Collates all the colliable tiles into this.collidableTiles.
   if (!tiles) return
   tiles.forEach(function (Tile) {
     let tileObj = new Tile()
@@ -32,31 +33,36 @@ Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
   const next = {x: this.x, y: this.y}
   switch (Math.floor(Math.random() * 4)) {
     case 0: // up.
+      // Prevents monster from moving outside the canvas when moving up.
       if (next.y - this.speed < 0) return
       // Collidable terrain detection.
+      console.log(grid)
       if (this.collidableTiles.indexOf(grid[(next.y / 30) - (this.speed / 30)][this.x / 30]) >= 0) return
       next.y -= this.speed
       break
     case 1: // down.
+      // Prevents monster from moving outside the canvas when moving down.
       if (this.y + this.speed * 2 > canvasLength) return
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(grid[(next.y / 30) + (this.speed / 30) * 2][this.x]) >= 0) return
       next.y += this.speed
       break
     case 2: // right.
+      // Prevents monster from moving outside the canvas when moving right.
       if (this.x + this.speed * 2 > canvasLength) return
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(grid[this.y / 30][(next.x / 30) + (this.speed / 30) * 2]) >= 0) return
       next.x += this.speed
       break
     case 3: // left.
+      // Prevents monster from moving outside the canvas when moving left.
       if (this.x - this.speed < 0) return
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(grid[this.y / 30][(next.x / 30) - (this.speed / 30)]) >= 0) return
       next.x -= this.speed
       break
   }
-  // Collision detection. next is now: next position of the monster.
+  // Collision detection. next is now the next position of the monster.
   let canMove = true
   monsters.forEach(function (monster) {
     if (monster === this) return

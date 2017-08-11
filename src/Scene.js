@@ -1,9 +1,9 @@
-import Wall from './terrain/Wall'
-import Floor from './terrain/Floor'
-import Monster from './characters/Monster'
-import Player from './characters/Player'
-import Grass from './terrain/Grass'
-import Tree from './terrain/Tree'
+import Monster from './entities/characters/Monster'
+import Player from './entities/characters/Player'
+import Wall from './entities/terrain/Wall'
+import Floor from './entities/terrain/Floor'
+import Grass from './entities/terrain/Grass'
+import Tree from './entities/terrain/Tree'
 
 // const img = document.createElement('img')
 // img.src = tile.source
