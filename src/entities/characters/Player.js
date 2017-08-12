@@ -32,42 +32,33 @@ Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
       this.collidableTiles.push(tileObj.entityNumber)
     }
   }, this)
-
   switch (direction) {
     case 'up':
       // Prevents player from moving outside the canvas when moving up.
       if (this.y - this.speed < 0) return
-
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(grid[y - speed][x]) >= 0) return
-
       this.y -= this.speed
       break
     case 'down':
       // Prevents player from moving outside the canvas when moving down.
       if (this.y + this.speed * 2 > canvas.height) return
-
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(grid[y + speed][x]) >= 0) return
-
       this.y += this.speed
       break
     case 'right':
       // Prevents player from moving outside the canvas when moving right.
       if (this.x + this.speed * 2 > canvas.width) return
-
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(grid[y][x + speed]) >= 0) return
-
       this.x += this.speed
       break
     case 'left':
       // Prevents player from moving outside the canvas when moving left.
       if (this.x - this.speed < 0) return
-
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(grid[y][x - speed]) >= 0) return
-
       this.x -= this.speed
       break
   }

@@ -34,33 +34,35 @@ Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
   }, this)
   // Randomly makes the monster move one step in one of 4 directions.
   const next = {x: this.x, y: this.y}
+  const nextY = next.y / 30
+  const nextX = next.x / 30
   switch (Math.floor(Math.random() * 4)) {
     case 0: // up.
       // Prevents monster from moving outside the canvas when moving up.
       if (next.y - this.speed < 0) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[(next.y / 30) - speed][x]) >= 0) return
+      if (this.collidableTiles.indexOf(grid[nextY - speed][x]) >= 0) return
       next.y -= this.speed
       break
     case 1: // down.
       // Prevents monster from moving outside the canvas when moving down.
       if (this.y + this.speed * 2 > canvasLength) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[(next.y / 30) + speed][x]) >= 0) return
+      if (this.collidableTiles.indexOf(grid[nextY + speed][x]) >= 0) return
       next.y += this.speed
       break
     case 2: // right.
       // Prevents monster from moving outside the canvas when moving right.
       if (this.x + this.speed * 2 > canvasLength) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[y][(next.x / 30) + speed]) >= 0) return
+      if (this.collidableTiles.indexOf(grid[y][nextX + speed]) >= 0) return
       next.x += this.speed
       break
     case 3: // left.
       // Prevents monster from moving outside the canvas when moving left.
       if (this.x - this.speed < 0) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[y][(next.x / 30) - speed]) >= 0) return
+      if (this.collidableTiles.indexOf(grid[y][nextX - speed]) >= 0) return
       next.x -= this.speed
       break
   }
