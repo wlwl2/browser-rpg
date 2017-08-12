@@ -21,6 +21,9 @@ Monster.prototype.draw = function draw (ctx) {
 }
 
 Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
+  const speed = this.speed / 30
+  const y = this.y / 30
+  const x = this.x / 30
   // Collates all the colliable tiles into this.collidableTiles.
   if (!tiles) return
   tiles.forEach(function (Tile) {
@@ -36,29 +39,28 @@ Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
       // Prevents monster from moving outside the canvas when moving up.
       if (next.y - this.speed < 0) return
       // Collidable terrain detection.
-      console.log(grid)
-      if (this.collidableTiles.indexOf(grid[(next.y / 30) - (this.speed / 30)][this.x / 30]) >= 0) return
+      if (this.collidableTiles.indexOf(grid[(next.y / 30) - speed][x]) >= 0) return
       next.y -= this.speed
       break
     case 1: // down.
       // Prevents monster from moving outside the canvas when moving down.
       if (this.y + this.speed * 2 > canvasLength) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[(next.y / 30) + (this.speed / 30) * 2][this.x]) >= 0) return
+      if (this.collidableTiles.indexOf(grid[(next.y / 30) + speed][x]) >= 0) return
       next.y += this.speed
       break
     case 2: // right.
       // Prevents monster from moving outside the canvas when moving right.
       if (this.x + this.speed * 2 > canvasLength) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[this.y / 30][(next.x / 30) + (this.speed / 30) * 2]) >= 0) return
+      if (this.collidableTiles.indexOf(grid[y][(next.x / 30) + speed]) >= 0) return
       next.x += this.speed
       break
     case 3: // left.
       // Prevents monster from moving outside the canvas when moving left.
       if (this.x - this.speed < 0) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[this.y / 30][(next.x / 30) - (this.speed / 30)]) >= 0) return
+      if (this.collidableTiles.indexOf(grid[y][(next.x / 30) - speed]) >= 0) return
       next.x -= this.speed
       break
   }
