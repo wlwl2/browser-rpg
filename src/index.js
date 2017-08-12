@@ -8,7 +8,7 @@ function init () {
   canvas.height = 600
   canvas.width = 600
   var ctx = canvas.getContext('2d')
-  document.body.appendChild(canvas)
+  document.querySelector('.canvas').appendChild(canvas)
   return { ctx, canvas }
 }
 
