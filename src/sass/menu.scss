@@ -4,6 +4,7 @@
   height: 98vh;
   top: 0;
   right: 0;
+  display: none;
 }
 
 .tile-selector {
@@ -38,14 +39,4 @@
 .reset-tile-button {
   font-size: 14px;
   font-weight: normal;
-}
-
-.mouse-info {
-  position: absolute;
-}
-
-.mouse-info div {
-  position: relative;
-  z-index: 3;
-  border: 1px solid blue;
 }

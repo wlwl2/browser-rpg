@@ -4,27 +4,71 @@ body {
   margin: 0;
   padding: 0;
   background-color: #e6e6e6;
-  position: relative; }
+  position: relative;
+  height: 100%;
+  width: 100%; }
+
+.game {
+  height: 100%;
+  width: 100%; }
 
 .canvas {
   position: absolute;
   left: 0;
   top: 0;
   display: block;
-  height: 100vh;
-  width: 100vh;
-  background-color: grey; }
+  background-color: grey;
+  height: 100%;
+  width: 100%; }
 
 canvas {
   position: relative;
   height: 100vh;
-  width: 100vh;
-  z-index: 1; }
+  z-index: 1;
+  display: block;
+  margin: 0 auto; }
 
 @media screen and (max-width: 767px) {
   canvas {
     height: 100vw;
     width: 100vw; } }
+.menu {
+  position: absolute;
+  width: 30vw;
+  height: 98vh;
+  top: 0;
+  right: 0;
+  display: none; }
+
+.tile-selector {
+  position: relative;
+  z-index: 2;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  min-height: 30%;
+  background-color: white; }
+
+.tile-list div {
+  cursor: pointer;
+  margin: 10px; }
+
+.tile-list div:hover {
+  opacity: .5; }
+
+.currently-selected-tile {
+  font-size: 14px;
+  font-weight: normal;
+  text-align: left;
+  min-width: 30px;
+  min-height: 30px;
+  border: 1px solid black; }
+
+.reset-tile-button {
+  font-size: 14px;
+  font-weight: normal; }
+
 img.spritesheet {
   display: none; }
 
@@ -75,42 +119,6 @@ img.treeimg {
   height: 14px;
   background-image: url("../sprites/characters-min.png");
   background-position: -8px -114px; }
-
-.menu {
-  position: absolute;
-  width: 30vw;
-  height: 98vh;
-  top: 0;
-  right: 0; }
-
-.tile-selector {
-  position: relative;
-  z-index: 2;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 20px;
-  text-align: center;
-  min-height: 30%;
-  background-color: white; }
-
-.tile-list div {
-  cursor: pointer;
-  margin: 10px; }
-
-.tile-list div:hover {
-  opacity: .5; }
-
-.currently-selected-tile {
-  font-size: 14px;
-  font-weight: normal;
-  text-align: left;
-  min-width: 30px;
-  min-height: 30px;
-  border: 1px solid black; }
-
-.reset-tile-button {
-  font-size: 14px;
-  font-weight: normal; }
 
 .mouse-info {
   position: absolute; }
