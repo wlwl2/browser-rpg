@@ -17,7 +17,6 @@ function step (direction) {
   // Erases canvas.
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   world.scene.draw(ctx, canvas)
-  // console.log(world.scene.grid)
   const canvasLength = canvas.height
   world.monsters.forEach(function (monster) {
     monster.step(world.monsters, canvasLength, world.scene.grid, world.scene.tiles)

@@ -5,10 +5,6 @@ import Floor from './entities/terrain/Floor'
 import Grass from './entities/terrain/Grass'
 import Tree from './entities/terrain/Tree'
 
-// const img = document.createElement('img')
-// img.src = tile.source
-// img.src = 'src/sprites/characters-min.png'
-
 export default function Scene (height, width) {
   this.height = height
   this.width = width

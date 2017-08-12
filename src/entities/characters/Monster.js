@@ -66,12 +66,11 @@ Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
       next.x -= this.speed
       break
   }
-  // Collision detection. next is now the next position of the monster.
+  // Collision detection between monsters.
   let canMove = true
   monsters.forEach(function (monster) {
     if (monster === this) return
     if (!canMove) return
-    // console.log(monster.x, monster.y, 'next:', next.x, next.y)
     if (!(monster.x > next.x + this.size ||
         monster.x + monster.size <= next.x ||
         monster.y > next.y + this.size ||
