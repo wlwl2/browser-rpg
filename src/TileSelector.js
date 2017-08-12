@@ -47,6 +47,7 @@ export default function TileSelector () {
 
   // Displays the tile near the mouse cursor when a tile is selected.
   document.addEventListener('mousemove', function mouseInfoPosition (event) {
+    console.log(event.pageX, event.pageY)
     if (!currentTile) return
     if (currentTile.children[0]) {
       mouseInfo.style.left = String(event.pageX + 20) + 'px'
