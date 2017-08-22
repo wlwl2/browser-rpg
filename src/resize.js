@@ -1,7 +1,6 @@
 export default function resize () {
-  console.log(document.getBound)
-  var height = document.body.getBoundingClientRect().height
-  var width = document.body.getBoundingClientRect().width
+  var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+  var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
 
   if (width > height) {
     document.querySelector('canvas').setAttribute('data-horizontal', 'yes')
@@ -10,8 +9,8 @@ export default function resize () {
   }
 
   window.addEventListener('resize', function (event) {
-    var height = document.body.getBoundingClientRect().height
-    var width = document.body.getBoundingClientRect().width
+    var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+    var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
 
     if (width > height) {
       document.querySelector('canvas').setAttribute('data-horizontal', 'yes')
