@@ -26,7 +26,11 @@ canvas {
 @media screen and (max-width: 767px) {
   canvas {
     height: 100vw;
-    width: 100vw; } }
+    width: 100vw; }
+
+  canvas[data-horizontal="yes"] {
+    height: 100vh;
+    width: 100vh; } }
 .menu[data-hidden="yes"] {
   display: none; }
 
