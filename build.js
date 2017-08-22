@@ -64,155 +64,585 @@
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */,
-/* 2 */
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! exports provided:  */
-/*! all exports used */
+/* 0 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("Object.defineProperty(__webpack_exports__, \"__esModule\", { value: true });\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__World__ = __webpack_require__(/*! ./World */ 4);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TileSelector__ = __webpack_require__(/*! ./TileSelector */ 10);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tileDragging__ = __webpack_require__(/*! ./tileDragging */ 11);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__playerControls__ = __webpack_require__(/*! ./playerControls */ 12);\n\r\n\r\n\r\n\r\n\r\nfunction init () {\r\n  var canvas = document.createElement('canvas')\r\n  canvas.height = 600\r\n  canvas.width = 600\r\n  var ctx = canvas.getContext('2d')\r\n  document.querySelector('.canvas').appendChild(canvas)\r\n  return { ctx, canvas }\r\n}\r\n\r\n// For each of these steps, re-create the world.\r\nfunction step (direction) {\r\n  // Erases canvas.\r\n  ctx.clearRect(0, 0, canvas.width, canvas.height)\r\n  world.scene.draw(ctx, canvas)\r\n  const canvasLength = canvas.height\r\n  world.monsters.forEach(function (monster) {\r\n    monster.step(world.monsters, canvasLength, world.scene.grid, world.scene.tiles)\r\n    monster.draw(ctx)\r\n  })\r\n  world.players.forEach(function (player) {\r\n    player.move(ctx, direction, canvas, world.scene.grid, world.scene.tiles)\r\n    player.draw(ctx)\r\n  })\r\n}\r\n\r\nvar _init = init()\r\nvar ctx = _init.ctx\r\nvar canvas = _init.canvas\r\nconst world = new __WEBPACK_IMPORTED_MODULE_0__World__[\"a\" /* default */]()\r\n__WEBPACK_IMPORTED_MODULE_1__TileSelector__[\"a\" /* default */]()\r\n__WEBPACK_IMPORTED_MODULE_2__tileDragging__[\"a\" /* default */](canvas, world, ctx)\r\n\r\nwindow.addEventListener('load', function (event) {\r\n  step()\r\n}, false)\r\n\r\n__WEBPACK_IMPORTED_MODULE_3__playerControls__[\"a\" /* default */](step)\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9pbmRleC5qcz85NTUyIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBXb3JsZCBmcm9tICcuL1dvcmxkJ1xyXG5pbXBvcnQgVGlsZVNlbGVjdG9yIGZyb20gJy4vVGlsZVNlbGVjdG9yJ1xyXG5pbXBvcnQgdGlsZURyYWdnaW5nIGZyb20gJy4vdGlsZURyYWdnaW5nJ1xyXG5pbXBvcnQgcGxheWVyQ29udHJvbHMgZnJvbSAnLi9wbGF5ZXJDb250cm9scydcclxuXHJcbmZ1bmN0aW9uIGluaXQgKCkge1xyXG4gIHZhciBjYW52YXMgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdjYW52YXMnKVxyXG4gIGNhbnZhcy5oZWlnaHQgPSA2MDBcclxuICBjYW52YXMud2lkdGggPSA2MDBcclxuICB2YXIgY3R4ID0gY2FudmFzLmdldENvbnRleHQoJzJkJylcclxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuY2FudmFzJykuYXBwZW5kQ2hpbGQoY2FudmFzKVxyXG4gIHJldHVybiB7IGN0eCwgY2FudmFzIH1cclxufVxyXG5cclxuLy8gRm9yIGVhY2ggb2YgdGhlc2Ugc3RlcHMsIHJlLWNyZWF0ZSB0aGUgd29ybGQuXHJcbmZ1bmN0aW9uIHN0ZXAgKGRpcmVjdGlvbikge1xyXG4gIC8vIEVyYXNlcyBjYW52YXMuXHJcbiAgY3R4LmNsZWFyUmVjdCgwLCAwLCBjYW52YXMud2lkdGgsIGNhbnZhcy5oZWlnaHQpXHJcbiAgd29ybGQuc2NlbmUuZHJhdyhjdHgsIGNhbnZhcylcclxuICBjb25zdCBjYW52YXNMZW5ndGggPSBjYW52YXMuaGVpZ2h0XHJcbiAgd29ybGQubW9uc3RlcnMuZm9yRWFjaChmdW5jdGlvbiAobW9uc3Rlcikge1xyXG4gICAgbW9uc3Rlci5zdGVwKHdvcmxkLm1vbnN0ZXJzLCBjYW52YXNMZW5ndGgsIHdvcmxkLnNjZW5lLmdyaWQsIHdvcmxkLnNjZW5lLnRpbGVzKVxyXG4gICAgbW9uc3Rlci5kcmF3KGN0eClcclxuICB9KVxyXG4gIHdvcmxkLnBsYXllcnMuZm9yRWFjaChmdW5jdGlvbiAocGxheWVyKSB7XHJcbiAgICBwbGF5ZXIubW92ZShjdHgsIGRpcmVjdGlvbiwgY2FudmFzLCB3b3JsZC5zY2VuZS5ncmlkLCB3b3JsZC5zY2VuZS50aWxlcylcclxuICAgIHBsYXllci5kcmF3KGN0eClcclxuICB9KVxyXG59XHJcblxyXG52YXIgX2luaXQgPSBpbml0KClcclxudmFyIGN0eCA9IF9pbml0LmN0eFxyXG52YXIgY2FudmFzID0gX2luaXQuY2FudmFzXHJcbmNvbnN0IHdvcmxkID0gbmV3IFdvcmxkKClcclxuVGlsZVNlbGVjdG9yKClcclxudGlsZURyYWdnaW5nKGNhbnZhcywgd29ybGQsIGN0eClcclxuXHJcbndpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdsb2FkJywgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgc3RlcCgpXHJcbn0sIGZhbHNlKVxyXG5cclxucGxheWVyQ29udHJvbHMoc3RlcClcclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvaW5kZXguanNcbi8vIG1vZHVsZSBpZCA9IDJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///2\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Monster;
+const img = document.createElement('img')
+img.src = 'src/sprites/characters-min.png'
+
+function Monster (x, y) {
+  this.x = x
+  this.y = y
+  this.entityNumber = 3
+  this.size = 30
+  this.speed = 30
+  this.category = 'monster'
+  this.sourceX = 8
+  this.sourceY = 114
+  this.source = 'src/sprites/characters-min.png'
+  this.collidable = 'yes'
+  this.collidableTiles = []
+}
+
+Monster.prototype.draw = function draw (ctx) {
+  ctx.drawImage(img, this.sourceX, this.sourceY, this.size, this.size,
+    this.x, this.y, this.size, this.size)
+}
+
+Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
+  const speed = this.speed / 30
+  const y = this.y / 30
+  const x = this.x / 30
+  // Collates all the colliable tiles into this.collidableTiles.
+  if (!tiles) return
+  tiles.forEach(function (Tile) {
+    let tileObj = new Tile()
+    if (tileObj.collidable === 'yes') {
+      this.collidableTiles.push(tileObj.entityNumber)
+    }
+  }, this)
+  // Randomly makes the monster move one step in one of 4 directions.
+  const next = {x: this.x, y: this.y}
+  const nextY = next.y / 30
+  const nextX = next.x / 30
+  switch (Math.floor(Math.random() * 4)) {
+    case 0: // up.
+      // Prevents monster from moving outside the canvas when moving up.
+      if (next.y - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[nextY - speed][x]) >= 0) return
+      next.y -= this.speed
+      break
+    case 1: // down.
+      // Prevents monster from moving outside the canvas when moving down.
+      if (this.y + this.speed * 2 > canvasLength) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[nextY + speed][x]) >= 0) return
+      next.y += this.speed
+      break
+    case 2: // right.
+      // Prevents monster from moving outside the canvas when moving right.
+      if (this.x + this.speed * 2 > canvasLength) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[y][nextX + speed]) >= 0) return
+      next.x += this.speed
+      break
+    case 3: // left.
+      // Prevents monster from moving outside the canvas when moving left.
+      if (this.x - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[y][nextX - speed]) >= 0) return
+      next.x -= this.speed
+      break
+  }
+  // Collision detection between monsters.
+  let canMove = true
+  monsters.forEach(function (monster) {
+    if (monster === this) return
+    if (!canMove) return
+    if (!(monster.x > next.x + this.size ||
+        monster.x + monster.size <= next.x ||
+        monster.y > next.y + this.size ||
+        monster.y + monster.size <= next.y)
+    ) {
+      canMove = false
+    }
+  }, this)
+
+  if (canMove) {
+    this.x = next.x
+    this.y = next.y
+  } else {
+    this.step(monsters)
+  }
+}
+
 
 /***/ }),
-/* 3 */,
-/* 4 */
-/*!**********************!*\
-  !*** ./src/World.js ***!
-  \**********************/
-/*! exports provided: default */
-/*! exports used: default */
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = World;\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__ = __webpack_require__(/*! ./entities/characters/Monster */ 13);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__ = __webpack_require__(/*! ./entities/characters/Player */ 14);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Scene__ = __webpack_require__(/*! ./Scene */ 5);\n// people and monsters\r\n\r\n\r\n\r\n\r\nfunction World () {\r\n  const gridcells = 20\r\n  const monsters = this.monsters = []\r\n  monsters.push(new __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__[\"a\" /* default */](30, 30), new __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__[\"a\" /* default */](60, 60))\r\n  const players = this.players = []\r\n  players.push(new __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__[\"a\" /* default */](240, 240))\r\n  // Set the initial height and width of the grid (or game board) in cells.\r\n  this.scene = new __WEBPACK_IMPORTED_MODULE_2__Scene__[\"a\" /* default */](gridcells, gridcells)\r\n}\r\n\r\nWorld.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {\r\n  if (entityType) {\r\n    this.scene.grid[worldY][worldX] = Number(entityType)\r\n  }\r\n}\r\n\r\n// Returns the x and y coordinates in terms of grid cells.\r\nWorld.prototype.screenToWorld = function screenToWorld ([screenX, screenY], canvas) {\r\n  const tilesWidth = canvas.width / this.scene.width\r\n  const tilesHeight = canvas.height / this.scene.height\r\n  return [Math.floor(screenX / tilesWidth), Math.floor(screenY / tilesHeight)]\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9Xb3JsZC5qcz9jOWIzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIHBlb3BsZSBhbmQgbW9uc3RlcnNcclxuaW1wb3J0IE1vbnN0ZXIgZnJvbSAnLi9lbnRpdGllcy9jaGFyYWN0ZXJzL01vbnN0ZXInXHJcbmltcG9ydCBQbGF5ZXIgZnJvbSAnLi9lbnRpdGllcy9jaGFyYWN0ZXJzL1BsYXllcidcclxuaW1wb3J0IFNjZW5lIGZyb20gJy4vU2NlbmUnXHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBXb3JsZCAoKSB7XHJcbiAgY29uc3QgZ3JpZGNlbGxzID0gMjBcclxuICBjb25zdCBtb25zdGVycyA9IHRoaXMubW9uc3RlcnMgPSBbXVxyXG4gIG1vbnN0ZXJzLnB1c2gobmV3IE1vbnN0ZXIoMzAsIDMwKSwgbmV3IE1vbnN0ZXIoNjAsIDYwKSlcclxuICBjb25zdCBwbGF5ZXJzID0gdGhpcy5wbGF5ZXJzID0gW11cclxuICBwbGF5ZXJzLnB1c2gobmV3IFBsYXllcigyNDAsIDI0MCkpXHJcbiAgLy8gU2V0IHRoZSBpbml0aWFsIGhlaWdodCBhbmQgd2lkdGggb2YgdGhlIGdyaWQgKG9yIGdhbWUgYm9hcmQpIGluIGNlbGxzLlxyXG4gIHRoaXMuc2NlbmUgPSBuZXcgU2NlbmUoZ3JpZGNlbGxzLCBncmlkY2VsbHMpXHJcbn1cclxuXHJcbldvcmxkLnByb3RvdHlwZS5hZGRFbnRpdHkgPSBmdW5jdGlvbiBhZGRFbnRpdHkgKFt3b3JsZFgsIHdvcmxkWV0sIGVudGl0eVR5cGUpIHtcclxuICBpZiAoZW50aXR5VHlwZSkge1xyXG4gICAgdGhpcy5zY2VuZS5ncmlkW3dvcmxkWV1bd29ybGRYXSA9IE51bWJlcihlbnRpdHlUeXBlKVxyXG4gIH1cclxufVxyXG5cclxuLy8gUmV0dXJucyB0aGUgeCBhbmQgeSBjb29yZGluYXRlcyBpbiB0ZXJtcyBvZiBncmlkIGNlbGxzLlxyXG5Xb3JsZC5wcm90b3R5cGUuc2NyZWVuVG9Xb3JsZCA9IGZ1bmN0aW9uIHNjcmVlblRvV29ybGQgKFtzY3JlZW5YLCBzY3JlZW5ZXSwgY2FudmFzKSB7XHJcbiAgY29uc3QgdGlsZXNXaWR0aCA9IGNhbnZhcy53aWR0aCAvIHRoaXMuc2NlbmUud2lkdGhcclxuICBjb25zdCB0aWxlc0hlaWdodCA9IGNhbnZhcy5oZWlnaHQgLyB0aGlzLnNjZW5lLmhlaWdodFxyXG4gIHJldHVybiBbTWF0aC5mbG9vcihzY3JlZW5YIC8gdGlsZXNXaWR0aCksIE1hdGguZmxvb3Ioc2NyZWVuWSAvIHRpbGVzSGVpZ2h0KV1cclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9Xb3JsZC5qc1xuLy8gbW9kdWxlIGlkID0gNFxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///4\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Player;
+const img = document.createElement('img')
+img.src = 'src/sprites/characters-min.png'
+
+function Player (x, y, world) {
+  this.x = x
+  this.y = y
+  this.entityNumber = 2
+  this.size = 30
+  this.speed = 30
+  this.world = world
+  this.category = 'character'
+  this.sourceX = 9
+  this.sourceY = 42
+  this.source = 'src/sprites/characters-min.png'
+  this.collidable = 'yes'
+  this.collidableTiles = []
+}
+
+Player.prototype.draw = function draw (ctx) {
+  ctx.drawImage(img, this.sourceX, this.sourceY, this.size, this.size,
+    this.x, this.y, this.size, this.size)
+}
+
+// Moves the player one step.
+Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
+  const speed = this.speed / 30
+  const y = this.y / 30
+  const x = this.x / 30
+  tiles.forEach(function (Tile) {
+    let tileObj = new Tile()
+    if (tileObj.collidable === 'yes') {
+      this.collidableTiles.push(tileObj.entityNumber)
+    }
+  }, this)
+  switch (direction) {
+    case 'up':
+      // Prevents player from moving outside the canvas when moving up.
+      if (this.y - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[y - speed][x]) >= 0) return
+      this.y -= this.speed
+      break
+    case 'down':
+      // Prevents player from moving outside the canvas when moving down.
+      if (this.y + this.speed * 2 > canvas.height) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[y + speed][x]) >= 0) return
+      this.y += this.speed
+      break
+    case 'right':
+      // Prevents player from moving outside the canvas when moving right.
+      if (this.x + this.speed * 2 > canvas.width) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[y][x + speed]) >= 0) return
+      this.x += this.speed
+      break
+    case 'left':
+      // Prevents player from moving outside the canvas when moving left.
+      if (this.x - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(grid[y][x - speed]) >= 0) return
+      this.x -= this.speed
+      break
+  }
+}
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__World__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TileSelector__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tileDragging__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__playerControls__ = __webpack_require__(11);
+
+
+
+
+
+function init () {
+  var canvas = document.createElement('canvas')
+  canvas.height = 600
+  canvas.width = 600
+  var ctx = canvas.getContext('2d')
+  document.body.appendChild(canvas)
+  return { ctx, canvas }
+}
+
+// For each of these steps, re-create the world.
+function step (direction) {
+  // Erases canvas.
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  world.scene.draw(ctx, canvas)
+  const canvasLength = canvas.height
+  world.monsters.forEach(function (monster) {
+    monster.step(world.monsters, canvasLength, world.scene.grid, world.scene.tiles)
+    monster.draw(ctx)
+  })
+  world.players.forEach(function (player) {
+    player.move(ctx, direction, canvas, world.scene.grid, world.scene.tiles)
+    player.draw(ctx)
+  })
+}
+
+var _init = init()
+var ctx = _init.ctx
+var canvas = _init.canvas
+const world = new __WEBPACK_IMPORTED_MODULE_0__World__["a" /* default */]()
+__WEBPACK_IMPORTED_MODULE_1__TileSelector__["a" /* default */]()
+__WEBPACK_IMPORTED_MODULE_2__tileDragging__["a" /* default */](canvas, world, ctx)
+
+window.addEventListener('load', function (event) {
+  step()
+}, false)
+
+__WEBPACK_IMPORTED_MODULE_3__playerControls__["a" /* default */](step)
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = World;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Scene__ = __webpack_require__(4);
+// people and monsters
+
+
+
+
+function World () {
+  const gridcells = 20
+  const monsters = this.monsters = []
+  monsters.push(new __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__["a" /* default */](30, 30), new __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__["a" /* default */](60, 60))
+  const players = this.players = []
+  players.push(new __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__["a" /* default */](240, 240))
+  // Set the initial height and width of the grid (or game board) in cells.
+  this.scene = new __WEBPACK_IMPORTED_MODULE_2__Scene__["a" /* default */](gridcells, gridcells)
+}
+
+World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
+  if (entityType) {
+    this.scene.grid[worldY][worldX] = Number(entityType)
+  }
+}
+
+// Returns the x and y coordinates in terms of grid cells.
+World.prototype.screenToWorld = function screenToWorld ([screenX, screenY], canvas) {
+  const tilesWidth = canvas.width / this.scene.width
+  const tilesHeight = canvas.height / this.scene.height
+  return [Math.floor(screenX / tilesWidth), Math.floor(screenY / tilesHeight)]
+}
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = Scene;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entities_terrain_Wall__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entities_terrain_Floor__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__entities_terrain_Grass__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__entities_terrain_Tree__ = __webpack_require__(8);
+
+
+
+
+
+
+
+function Scene (height, width) {
+  this.height = height
+  this.width = width
+  this.grid = []
+  this.initialize()
+  this.setBorder()
+  this.setRandomWalls()
+  this.tiles = [__WEBPACK_IMPORTED_MODULE_3__entities_terrain_Floor__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__entities_terrain_Wall__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__entities_terrain_Grass__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__entities_terrain_Tree__["a" /* default */]]
+}
+
+// Allows different tiles to be used in each grid cell.
+Scene.prototype.draw = function (ctx, canvas) {
+  // cellHeight is the height of each tile in px.
+  const cellHeight = canvas.height / this.height
+  const cellWidth = canvas.width / this.width
+  for (let y = 0; y < this.height; y++) {
+    const row = this.grid[y]
+    for (let x = 0; x < this.width; x++) {
+      const value = row[x]
+      const tile = new this.tiles[value]()
+      const img = document.createElement('img')
+      img.src = tile.source
+      ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,
+        x * cellWidth, y * cellHeight, cellWidth, cellHeight)
+    }
+  }
+}
+Scene.prototype.initialize = function initialize () {
+  this.grid = []
+  for (let y = 0; y < this.height; y++) {
+    const row = []
+    for (let x = 0; x < this.width; x++) {
+      row.push(0)
+    }
+    this.grid.push(row)
+  }
+}
+Scene.prototype.setBorder = function setBorder () {
+  for (let y = 0; y < this.height; y++) {
+    const row = this.grid[y]
+    for (let x = 0; x < this.width; x++) {
+      if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {
+        row[x] = 1
+      }
+    }
+  }
+}
+Scene.prototype.setRandomWalls = function setRandomWalls () {
+  for (let y = 1; y < this.height - 1; y++) {
+    const row = this.grid[y]
+    for (let x = 1; x < this.width - 1; x++) {
+      row[x] = Math.random() < 0.1 ? 1 : 0
+    }
+  }
+}
+
 
 /***/ }),
 /* 5 */
-/*!**********************!*\
-  !*** ./src/Scene.js ***!
-  \**********************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Scene;\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__ = __webpack_require__(/*! ./entities/characters/Monster */ 13);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__ = __webpack_require__(/*! ./entities/characters/Player */ 14);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entities_terrain_Wall__ = __webpack_require__(/*! ./entities/terrain/Wall */ 15);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entities_terrain_Floor__ = __webpack_require__(/*! ./entities/terrain/Floor */ 16);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__entities_terrain_Grass__ = __webpack_require__(/*! ./entities/terrain/Grass */ 17);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__entities_terrain_Tree__ = __webpack_require__(/*! ./entities/terrain/Tree */ 18);\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nfunction Scene (height, width) {\r\n  this.height = height\r\n  this.width = width\r\n  this.grid = []\r\n  this.initialize()\r\n  this.setBorder()\r\n  this.setRandomWalls()\r\n  this.tiles = [__WEBPACK_IMPORTED_MODULE_3__entities_terrain_Floor__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_2__entities_terrain_Wall__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_4__entities_terrain_Grass__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_5__entities_terrain_Tree__[\"a\" /* default */]]\r\n}\r\n\r\n// Allows different tiles to be used in each grid cell.\r\nScene.prototype.draw = function (ctx, canvas) {\r\n  // cellHeight is the height of each tile in px.\r\n  const cellHeight = canvas.height / this.height\r\n  const cellWidth = canvas.width / this.width\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = this.grid[y]\r\n    for (let x = 0; x < this.width; x++) {\r\n      const value = row[x]\r\n      const tile = new this.tiles[value]()\r\n      const img = document.createElement('img')\r\n      img.src = tile.source\r\n      ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,\r\n        x * cellWidth, y * cellHeight, cellWidth, cellHeight)\r\n    }\r\n  }\r\n}\r\nScene.prototype.initialize = function initialize () {\r\n  this.grid = []\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = []\r\n    for (let x = 0; x < this.width; x++) {\r\n      row.push(0)\r\n    }\r\n    this.grid.push(row)\r\n  }\r\n}\r\nScene.prototype.setBorder = function setBorder () {\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = this.grid[y]\r\n    for (let x = 0; x < this.width; x++) {\r\n      if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {\r\n        row[x] = 1\r\n      }\r\n    }\r\n  }\r\n}\r\nScene.prototype.setRandomWalls = function setRandomWalls () {\r\n  for (let y = 1; y < this.height - 1; y++) {\r\n    const row = this.grid[y]\r\n    for (let x = 1; x < this.width - 1; x++) {\r\n      row[x] = Math.random() < 0.1 ? 1 : 0\r\n    }\r\n  }\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9TY2VuZS5qcz82YzY2Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBNb25zdGVyIGZyb20gJy4vZW50aXRpZXMvY2hhcmFjdGVycy9Nb25zdGVyJ1xyXG5pbXBvcnQgUGxheWVyIGZyb20gJy4vZW50aXRpZXMvY2hhcmFjdGVycy9QbGF5ZXInXHJcbmltcG9ydCBXYWxsIGZyb20gJy4vZW50aXRpZXMvdGVycmFpbi9XYWxsJ1xyXG5pbXBvcnQgRmxvb3IgZnJvbSAnLi9lbnRpdGllcy90ZXJyYWluL0Zsb29yJ1xyXG5pbXBvcnQgR3Jhc3MgZnJvbSAnLi9lbnRpdGllcy90ZXJyYWluL0dyYXNzJ1xyXG5pbXBvcnQgVHJlZSBmcm9tICcuL2VudGl0aWVzL3RlcnJhaW4vVHJlZSdcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFNjZW5lIChoZWlnaHQsIHdpZHRoKSB7XHJcbiAgdGhpcy5oZWlnaHQgPSBoZWlnaHRcclxuICB0aGlzLndpZHRoID0gd2lkdGhcclxuICB0aGlzLmdyaWQgPSBbXVxyXG4gIHRoaXMuaW5pdGlhbGl6ZSgpXHJcbiAgdGhpcy5zZXRCb3JkZXIoKVxyXG4gIHRoaXMuc2V0UmFuZG9tV2FsbHMoKVxyXG4gIHRoaXMudGlsZXMgPSBbRmxvb3IsIFdhbGwsIFBsYXllciwgTW9uc3RlciwgR3Jhc3MsIFRyZWVdXHJcbn1cclxuXHJcbi8vIEFsbG93cyBkaWZmZXJlbnQgdGlsZXMgdG8gYmUgdXNlZCBpbiBlYWNoIGdyaWQgY2VsbC5cclxuU2NlbmUucHJvdG90eXBlLmRyYXcgPSBmdW5jdGlvbiAoY3R4LCBjYW52YXMpIHtcclxuICAvLyBjZWxsSGVpZ2h0IGlzIHRoZSBoZWlnaHQgb2YgZWFjaCB0aWxlIGluIHB4LlxyXG4gIGNvbnN0IGNlbGxIZWlnaHQgPSBjYW52YXMuaGVpZ2h0IC8gdGhpcy5oZWlnaHRcclxuICBjb25zdCBjZWxsV2lkdGggPSBjYW52YXMud2lkdGggLyB0aGlzLndpZHRoXHJcbiAgZm9yIChsZXQgeSA9IDA7IHkgPCB0aGlzLmhlaWdodDsgeSsrKSB7XHJcbiAgICBjb25zdCByb3cgPSB0aGlzLmdyaWRbeV1cclxuICAgIGZvciAobGV0IHggPSAwOyB4IDwgdGhpcy53aWR0aDsgeCsrKSB7XHJcbiAgICAgIGNvbnN0IHZhbHVlID0gcm93W3hdXHJcbiAgICAgIGNvbnN0IHRpbGUgPSBuZXcgdGhpcy50aWxlc1t2YWx1ZV0oKVxyXG4gICAgICBjb25zdCBpbWcgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdpbWcnKVxyXG4gICAgICBpbWcuc3JjID0gdGlsZS5zb3VyY2VcclxuICAgICAgY3R4LmRyYXdJbWFnZShpbWcsIHRpbGUuc291cmNlWCwgdGlsZS5zb3VyY2VZLCBjZWxsV2lkdGgsIGNlbGxIZWlnaHQsXHJcbiAgICAgICAgeCAqIGNlbGxXaWR0aCwgeSAqIGNlbGxIZWlnaHQsIGNlbGxXaWR0aCwgY2VsbEhlaWdodClcclxuICAgIH1cclxuICB9XHJcbn1cclxuU2NlbmUucHJvdG90eXBlLmluaXRpYWxpemUgPSBmdW5jdGlvbiBpbml0aWFsaXplICgpIHtcclxuICB0aGlzLmdyaWQgPSBbXVxyXG4gIGZvciAobGV0IHkgPSAwOyB5IDwgdGhpcy5oZWlnaHQ7IHkrKykge1xyXG4gICAgY29uc3Qgcm93ID0gW11cclxuICAgIGZvciAobGV0IHggPSAwOyB4IDwgdGhpcy53aWR0aDsgeCsrKSB7XHJcbiAgICAgIHJvdy5wdXNoKDApXHJcbiAgICB9XHJcbiAgICB0aGlzLmdyaWQucHVzaChyb3cpXHJcbiAgfVxyXG59XHJcblNjZW5lLnByb3RvdHlwZS5zZXRCb3JkZXIgPSBmdW5jdGlvbiBzZXRCb3JkZXIgKCkge1xyXG4gIGZvciAobGV0IHkgPSAwOyB5IDwgdGhpcy5oZWlnaHQ7IHkrKykge1xyXG4gICAgY29uc3Qgcm93ID0gdGhpcy5ncmlkW3ldXHJcbiAgICBmb3IgKGxldCB4ID0gMDsgeCA8IHRoaXMud2lkdGg7IHgrKykge1xyXG4gICAgICBpZiAoeCA9PT0gMCB8fCB4ID09PSB0aGlzLndpZHRoIC0gMSB8fCB5ID09PSAwIHx8IHkgPT09IHRoaXMuaGVpZ2h0IC0gMSkge1xyXG4gICAgICAgIHJvd1t4XSA9IDFcclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH1cclxufVxyXG5TY2VuZS5wcm90b3R5cGUuc2V0UmFuZG9tV2FsbHMgPSBmdW5jdGlvbiBzZXRSYW5kb21XYWxscyAoKSB7XHJcbiAgZm9yIChsZXQgeSA9IDE7IHkgPCB0aGlzLmhlaWdodCAtIDE7IHkrKykge1xyXG4gICAgY29uc3Qgcm93ID0gdGhpcy5ncmlkW3ldXHJcbiAgICBmb3IgKGxldCB4ID0gMTsgeCA8IHRoaXMud2lkdGggLSAxOyB4KyspIHtcclxuICAgICAgcm93W3hdID0gTWF0aC5yYW5kb20oKSA8IDAuMSA/IDEgOiAwXHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL1NjZW5lLmpzXG4vLyBtb2R1bGUgaWQgPSA1XG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///5\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Wall;
+function Wall (x, y, entityNumber, ctx) {
+  this.x = x
+  this.y = y
+  this.entityNumber = 1
+  this.size = 30
+  this.source = 'src/sprites/wall.png'
+  this.sourceX = 0
+  this.sourceY = 0
+  this.category = 'terrain'
+  this.collidable = 'yes'
+}
+
 
 /***/ }),
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
-/*!*****************************!*\
-  !*** ./src/TileSelector.js ***!
-  \*****************************/
-/*! exports provided: default */
-/*! exports used: default */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = TileSelector;\nfunction TileSelector () {\r\n  if (!document.querySelector('.tile-list')) return\r\n  const tiles = document.querySelector('.tile-list').children\r\n  const currentTile = document.querySelector('.currently-selected-tile')\r\n  const resetTileButton = document.querySelector('.reset-tile-button')\r\n  const mouseInfo = document.querySelector('.mouse-info')\r\n\r\n  // Resets currently selected tile.\r\n  function removeCurrentlySelectedTile () {\r\n    if (currentTile.childNodes[1]) {\r\n      currentTile.removeChild(currentTile.childNodes[1])\r\n    }\r\n    if (mouseInfo.childNodes[1]) {\r\n      mouseInfo.removeChild(mouseInfo.childNodes[1])\r\n    }\r\n  }\r\n\r\n  // When each of the tiles are clicked, update the tile selected.\r\n  if (tiles.length === 0) return\r\n  for (var i = 0; i < tiles.length; i++) {\r\n    tiles[i].addEventListener('click', function (event) {\r\n      const sprite1 = document.createElement('div')\r\n      sprite1.setAttribute('draggable', 'true')\r\n      const dataEntityNumber = event.target.getAttribute('data-entity-number')\r\n      sprite1.setAttribute('data-entity-number', dataEntityNumber)\r\n      sprite1.className = event.target.className\r\n      const sprite2 = sprite1.cloneNode(true)\r\n      removeCurrentlySelectedTile()\r\n      currentTile.appendChild(sprite1)\r\n      mouseInfo.appendChild(sprite2)\r\n    }, false)\r\n  }\r\n\r\n  // On reset button click, reset the currently selected tile.\r\n  if (resetTileButton) {\r\n    resetTileButton.addEventListener('click', function (event) {\r\n      removeCurrentlySelectedTile()\r\n    }, false)\r\n  }\r\n\r\n  // When the esc key is pressed, clear the currently selected tile.\r\n  window.addEventListener('keydown', function (event) {\r\n    if (event.key === 'Escape') {\r\n      removeCurrentlySelectedTile()\r\n    }\r\n  }, false)\r\n\r\n  // Displays the tile near the mouse cursor when a tile is selected.\r\n  document.addEventListener('mousemove', function mouseInfoPosition (event) {\r\n    console.log(event.pageX, event.pageY)\r\n    if (!currentTile) return\r\n    if (currentTile.children[0]) {\r\n      mouseInfo.style.left = String(event.pageX + 20) + 'px'\r\n      mouseInfo.style.top = String(event.pageY + 20) + 'px'\r\n    }\r\n  }, false)\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTAuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvVGlsZVNlbGVjdG9yLmpzPzJjYjkiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gVGlsZVNlbGVjdG9yICgpIHtcclxuICBpZiAoIWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy50aWxlLWxpc3QnKSkgcmV0dXJuXHJcbiAgY29uc3QgdGlsZXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcudGlsZS1saXN0JykuY2hpbGRyZW5cclxuICBjb25zdCBjdXJyZW50VGlsZSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5jdXJyZW50bHktc2VsZWN0ZWQtdGlsZScpXHJcbiAgY29uc3QgcmVzZXRUaWxlQnV0dG9uID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLnJlc2V0LXRpbGUtYnV0dG9uJylcclxuICBjb25zdCBtb3VzZUluZm8gPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcubW91c2UtaW5mbycpXHJcblxyXG4gIC8vIFJlc2V0cyBjdXJyZW50bHkgc2VsZWN0ZWQgdGlsZS5cclxuICBmdW5jdGlvbiByZW1vdmVDdXJyZW50bHlTZWxlY3RlZFRpbGUgKCkge1xyXG4gICAgaWYgKGN1cnJlbnRUaWxlLmNoaWxkTm9kZXNbMV0pIHtcclxuICAgICAgY3VycmVudFRpbGUucmVtb3ZlQ2hpbGQoY3VycmVudFRpbGUuY2hpbGROb2Rlc1sxXSlcclxuICAgIH1cclxuICAgIGlmIChtb3VzZUluZm8uY2hpbGROb2Rlc1sxXSkge1xyXG4gICAgICBtb3VzZUluZm8ucmVtb3ZlQ2hpbGQobW91c2VJbmZvLmNoaWxkTm9kZXNbMV0pXHJcbiAgICB9XHJcbiAgfVxyXG5cclxuICAvLyBXaGVuIGVhY2ggb2YgdGhlIHRpbGVzIGFyZSBjbGlja2VkLCB1cGRhdGUgdGhlIHRpbGUgc2VsZWN0ZWQuXHJcbiAgaWYgKHRpbGVzLmxlbmd0aCA9PT0gMCkgcmV0dXJuXHJcbiAgZm9yICh2YXIgaSA9IDA7IGkgPCB0aWxlcy5sZW5ndGg7IGkrKykge1xyXG4gICAgdGlsZXNbaV0uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgICAgY29uc3Qgc3ByaXRlMSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpXHJcbiAgICAgIHNwcml0ZTEuc2V0QXR0cmlidXRlKCdkcmFnZ2FibGUnLCAndHJ1ZScpXHJcbiAgICAgIGNvbnN0IGRhdGFFbnRpdHlOdW1iZXIgPSBldmVudC50YXJnZXQuZ2V0QXR0cmlidXRlKCdkYXRhLWVudGl0eS1udW1iZXInKVxyXG4gICAgICBzcHJpdGUxLnNldEF0dHJpYnV0ZSgnZGF0YS1lbnRpdHktbnVtYmVyJywgZGF0YUVudGl0eU51bWJlcilcclxuICAgICAgc3ByaXRlMS5jbGFzc05hbWUgPSBldmVudC50YXJnZXQuY2xhc3NOYW1lXHJcbiAgICAgIGNvbnN0IHNwcml0ZTIgPSBzcHJpdGUxLmNsb25lTm9kZSh0cnVlKVxyXG4gICAgICByZW1vdmVDdXJyZW50bHlTZWxlY3RlZFRpbGUoKVxyXG4gICAgICBjdXJyZW50VGlsZS5hcHBlbmRDaGlsZChzcHJpdGUxKVxyXG4gICAgICBtb3VzZUluZm8uYXBwZW5kQ2hpbGQoc3ByaXRlMilcclxuICAgIH0sIGZhbHNlKVxyXG4gIH1cclxuXHJcbiAgLy8gT24gcmVzZXQgYnV0dG9uIGNsaWNrLCByZXNldCB0aGUgY3VycmVudGx5IHNlbGVjdGVkIHRpbGUuXHJcbiAgaWYgKHJlc2V0VGlsZUJ1dHRvbikge1xyXG4gICAgcmVzZXRUaWxlQnV0dG9uLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICAgIHJlbW92ZUN1cnJlbnRseVNlbGVjdGVkVGlsZSgpXHJcbiAgICB9LCBmYWxzZSlcclxuICB9XHJcblxyXG4gIC8vIFdoZW4gdGhlIGVzYyBrZXkgaXMgcHJlc3NlZCwgY2xlYXIgdGhlIGN1cnJlbnRseSBzZWxlY3RlZCB0aWxlLlxyXG4gIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdrZXlkb3duJywgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICBpZiAoZXZlbnQua2V5ID09PSAnRXNjYXBlJykge1xyXG4gICAgICByZW1vdmVDdXJyZW50bHlTZWxlY3RlZFRpbGUoKVxyXG4gICAgfVxyXG4gIH0sIGZhbHNlKVxyXG5cclxuICAvLyBEaXNwbGF5cyB0aGUgdGlsZSBuZWFyIHRoZSBtb3VzZSBjdXJzb3Igd2hlbiBhIHRpbGUgaXMgc2VsZWN0ZWQuXHJcbiAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignbW91c2Vtb3ZlJywgZnVuY3Rpb24gbW91c2VJbmZvUG9zaXRpb24gKGV2ZW50KSB7XHJcbiAgICBjb25zb2xlLmxvZyhldmVudC5wYWdlWCwgZXZlbnQucGFnZVkpXHJcbiAgICBpZiAoIWN1cnJlbnRUaWxlKSByZXR1cm5cclxuICAgIGlmIChjdXJyZW50VGlsZS5jaGlsZHJlblswXSkge1xyXG4gICAgICBtb3VzZUluZm8uc3R5bGUubGVmdCA9IFN0cmluZyhldmVudC5wYWdlWCArIDIwKSArICdweCdcclxuICAgICAgbW91c2VJbmZvLnN0eWxlLnRvcCA9IFN0cmluZyhldmVudC5wYWdlWSArIDIwKSArICdweCdcclxuICAgIH1cclxuICB9LCBmYWxzZSlcclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9UaWxlU2VsZWN0b3IuanNcbi8vIG1vZHVsZSBpZCA9IDEwXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///10\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Wall;
+function Wall (x, y, entityNumber, ctx) {
+  this.x = x
+  this.y = y
+  this.entityNumber = 0
+  this.size = 30
+  this.source = 'src/sprites/floor.png'
+  this.sourceX = 0
+  this.sourceY = 0
+  this.category = 'terrain'
+  this.collidable = 'no'
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = Grass;
+function Grass (x, y, entityNumber, ctx) {
+  this.x = x
+  this.y = y
+  this.entityNumber = 4
+  this.size = 30
+  this.source = 'src/sprites/grass-attempt-1.png'
+  this.sourceX = 0
+  this.sourceY = 0
+  this.category = 'terrain'
+  this.collidable = 'no'
+}
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = Grass;
+function Grass (x, y, entityNumber, ctx) {
+  this.x = x
+  this.y = y
+  this.entityNumber = 5
+  this.size = 30
+  this.source = 'src/sprites/tree.png'
+  this.sourceX = 0
+  this.sourceY = 0
+  this.category = 'terrain'
+  this.collidable = 'yes'
+}
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = TileSelector;
+function TileSelector () {
+  if (!document.querySelector('.tile-list')) return
+  const tiles = document.querySelector('.tile-list').children
+  const currentTile = document.querySelector('.currently-selected-tile')
+  const resetTileButton = document.querySelector('.reset-tile-button')
+  const mouseInfo = document.querySelector('.mouse-info')
+
+  // Resets currently selected tile.
+  function removeCurrentlySelectedTile () {
+    if (currentTile.childNodes[1]) {
+      currentTile.removeChild(currentTile.childNodes[1])
+    }
+    if (mouseInfo.childNodes[1]) {
+      mouseInfo.removeChild(mouseInfo.childNodes[1])
+    }
+  }
+
+  // When each of the tiles are clicked, update the tile selected.
+  if (tiles.length === 0) return
+  for (var i = 0; i < tiles.length; i++) {
+    tiles[i].addEventListener('click', function (event) {
+      const sprite1 = document.createElement('div')
+      sprite1.setAttribute('draggable', 'true')
+      const dataEntityNumber = event.target.getAttribute('data-entity-number')
+      sprite1.setAttribute('data-entity-number', dataEntityNumber)
+      sprite1.className = event.target.className
+      const sprite2 = sprite1.cloneNode(true)
+      removeCurrentlySelectedTile()
+      currentTile.appendChild(sprite1)
+      mouseInfo.appendChild(sprite2)
+    }, false)
+  }
+
+  // On reset button click, reset the currently selected tile.
+  if (resetTileButton) {
+    resetTileButton.addEventListener('click', function (event) {
+      removeCurrentlySelectedTile()
+    }, false)
+  }
+
+  // When the esc key is pressed, clear the currently selected tile.
+  window.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      removeCurrentlySelectedTile()
+    }
+  }, false)
+
+  // Displays the tile near the mouse cursor when a tile is selected.
+  document.addEventListener('mousemove', function mouseInfoPosition (event) {
+    console.log(event.pageX, event.pageY)
+    if (!currentTile) return
+    if (currentTile.children[0]) {
+      mouseInfo.style.left = String(event.pageX + 20) + 'px'
+      mouseInfo.style.top = String(event.pageY + 20) + 'px'
+    }
+  }, false)
+}
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = tileDragging;
+function tileDragging (canvas, world, ctx) {
+  const currentTile = document.querySelector('.currently-selected-tile')
+  if (!currentTile) return
+  let mouseHeld = false
+  let hoveredOverTiles = []
+  let duplicate = 0
+  function redraw () {
+    world.scene.draw(ctx, canvas)
+    world.monsters.forEach(function (monster) {
+      monster.draw(ctx)
+    })
+    world.players.forEach(function (player) {
+      player.draw(ctx)
+    })
+  }
+  canvas.addEventListener('mousedown', function (event) {
+    mouseHeld = true
+    hoveredOverTiles = []
+    const pos = world.screenToWorld([
+      event.clientX,
+      event.clientY
+    ], canvas)
+    hoveredOverTiles.push(pos)
+  }, false)
+
+  // Canvas is redrawn with the tiles in hoveredOverTiles array.
+  canvas.addEventListener('mouseup', function (event) {
+    if (!currentTile) return
+    mouseHeld = false
+    if (!currentTile.children[0]) return
+    if (!currentTile.children[0].getAttribute('data-entity-number')) return
+    for (var j = 0; j < hoveredOverTiles.length; j++) {
+      world.addEntity(hoveredOverTiles[j], currentTile.children[0].getAttribute('data-entity-number'))
+    }
+    redraw()
+  }, false)
+
+  // Positions of the tiles that were hovered on during the mouse hold will be
+  // added to the hoveredOverTiles array. This is then drawn on canvas.
+  canvas.addEventListener('mousemove', function (event) {
+    if (!currentTile) return
+    if (!currentTile.children[0]) return
+    if (!currentTile.children[0].getAttribute('data-entity-number')) return
+    if (mouseHeld === true) {
+      const pos = world.screenToWorld([
+        event.clientX,
+        event.clientY
+      ], canvas)
+      duplicate = 0
+      for (var i = 0; i < hoveredOverTiles.length; i++) {
+        if ((hoveredOverTiles[i][0] === pos[0]) && (hoveredOverTiles[i][1] === pos[1])) {
+          duplicate += 1
+        }
+      }
+      if (duplicate === 0) {
+        hoveredOverTiles.push(pos)
+      }
+      for (var j = 0; j < hoveredOverTiles.length; j++) {
+        world.addEntity(hoveredOverTiles[j], currentTile.children[0].getAttribute('data-entity-number'))
+      }
+      redraw()
+    }
+  }, false)
+}
+
 
 /***/ }),
 /* 11 */
-/*!*****************************!*\
-  !*** ./src/tileDragging.js ***!
-  \*****************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = tileDragging;\nfunction tileDragging (canvas, world, ctx) {\r\n  const currentTile = document.querySelector('.currently-selected-tile')\r\n  if (!currentTile) return\r\n  let mouseHeld = false\r\n  let hoveredOverTiles = []\r\n  let duplicate = 0\n  function redraw () {\r\n    world.scene.draw(ctx, canvas)\r\n    world.monsters.forEach(function (monster) {\r\n      monster.draw(ctx)\r\n    })\r\n    world.players.forEach(function (player) {\r\n      player.draw(ctx)\r\n    })\r\n  }\n  canvas.addEventListener('mousedown', function (event) {\r\n    mouseHeld = true\r\n    hoveredOverTiles = []\r\n    const pos = world.screenToWorld([\r\n      event.clientX,\r\n      event.clientY\r\n    ], canvas)\r\n    hoveredOverTiles.push(pos)\r\n  }, false)\r\n\r\n  // Canvas is redrawn with the tiles in hoveredOverTiles array.\r\n  canvas.addEventListener('mouseup', function (event) {\r\n    if (!currentTile) return\r\n    mouseHeld = false\r\n    if (!currentTile.children[0]) return\r\n    if (!currentTile.children[0].getAttribute('data-entity-number')) return\r\n    for (var j = 0; j < hoveredOverTiles.length; j++) {\r\n      world.addEntity(hoveredOverTiles[j], currentTile.children[0].getAttribute('data-entity-number'))\r\n    }\r\n    redraw()\r\n  }, false)\r\n\r\n  // Positions of the tiles that were hovered on during the mouse hold will be\r\n  // added to the hoveredOverTiles array. This is then drawn on canvas.\r\n  canvas.addEventListener('mousemove', function (event) {\r\n    if (!currentTile) return\r\n    if (!currentTile.children[0]) return\r\n    if (!currentTile.children[0].getAttribute('data-entity-number')) return\r\n    if (mouseHeld === true) {\r\n      const pos = world.screenToWorld([\r\n        event.clientX,\r\n        event.clientY\r\n      ], canvas)\r\n      duplicate = 0\r\n      for (var i = 0; i < hoveredOverTiles.length; i++) {\r\n        if ((hoveredOverTiles[i][0] === pos[0]) && (hoveredOverTiles[i][1] === pos[1])) {\r\n          duplicate += 1\r\n        }\r\n      }\r\n      if (duplicate === 0) {\r\n        hoveredOverTiles.push(pos)\r\n      }\r\n      for (var j = 0; j < hoveredOverTiles.length; j++) {\r\n        world.addEntity(hoveredOverTiles[j], currentTile.children[0].getAttribute('data-entity-number'))\r\n      }\r\n      redraw()\r\n    }\r\n  }, false)\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTEuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvdGlsZURyYWdnaW5nLmpzPzYyMjAiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gdGlsZURyYWdnaW5nIChjYW52YXMsIHdvcmxkLCBjdHgpIHtcclxuICBjb25zdCBjdXJyZW50VGlsZSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5jdXJyZW50bHktc2VsZWN0ZWQtdGlsZScpXHJcbiAgaWYgKCFjdXJyZW50VGlsZSkgcmV0dXJuXHJcbiAgbGV0IG1vdXNlSGVsZCA9IGZhbHNlXHJcbiAgbGV0IGhvdmVyZWRPdmVyVGlsZXMgPSBbXVxyXG4gIGxldCBkdXBsaWNhdGUgPSAwXG4gIGZ1bmN0aW9uIHJlZHJhdyAoKSB7XHJcbiAgICB3b3JsZC5zY2VuZS5kcmF3KGN0eCwgY2FudmFzKVxyXG4gICAgd29ybGQubW9uc3RlcnMuZm9yRWFjaChmdW5jdGlvbiAobW9uc3Rlcikge1xyXG4gICAgICBtb25zdGVyLmRyYXcoY3R4KVxyXG4gICAgfSlcclxuICAgIHdvcmxkLnBsYXllcnMuZm9yRWFjaChmdW5jdGlvbiAocGxheWVyKSB7XHJcbiAgICAgIHBsYXllci5kcmF3KGN0eClcclxuICAgIH0pXHJcbiAgfVxuICBjYW52YXMuYWRkRXZlbnRMaXN0ZW5lcignbW91c2Vkb3duJywgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICBtb3VzZUhlbGQgPSB0cnVlXHJcbiAgICBob3ZlcmVkT3ZlclRpbGVzID0gW11cclxuICAgIGNvbnN0IHBvcyA9IHdvcmxkLnNjcmVlblRvV29ybGQoW1xyXG4gICAgICBldmVudC5jbGllbnRYLFxyXG4gICAgICBldmVudC5jbGllbnRZXHJcbiAgICBdLCBjYW52YXMpXHJcbiAgICBob3ZlcmVkT3ZlclRpbGVzLnB1c2gocG9zKVxyXG4gIH0sIGZhbHNlKVxyXG5cclxuICAvLyBDYW52YXMgaXMgcmVkcmF3biB3aXRoIHRoZSB0aWxlcyBpbiBob3ZlcmVkT3ZlclRpbGVzIGFycmF5LlxyXG4gIGNhbnZhcy5hZGRFdmVudExpc3RlbmVyKCdtb3VzZXVwJywgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICBpZiAoIWN1cnJlbnRUaWxlKSByZXR1cm5cclxuICAgIG1vdXNlSGVsZCA9IGZhbHNlXHJcbiAgICBpZiAoIWN1cnJlbnRUaWxlLmNoaWxkcmVuWzBdKSByZXR1cm5cclxuICAgIGlmICghY3VycmVudFRpbGUuY2hpbGRyZW5bMF0uZ2V0QXR0cmlidXRlKCdkYXRhLWVudGl0eS1udW1iZXInKSkgcmV0dXJuXHJcbiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGhvdmVyZWRPdmVyVGlsZXMubGVuZ3RoOyBqKyspIHtcclxuICAgICAgd29ybGQuYWRkRW50aXR5KGhvdmVyZWRPdmVyVGlsZXNbal0sIGN1cnJlbnRUaWxlLmNoaWxkcmVuWzBdLmdldEF0dHJpYnV0ZSgnZGF0YS1lbnRpdHktbnVtYmVyJykpXHJcbiAgICB9XHJcbiAgICByZWRyYXcoKVxyXG4gIH0sIGZhbHNlKVxyXG5cclxuICAvLyBQb3NpdGlvbnMgb2YgdGhlIHRpbGVzIHRoYXQgd2VyZSBob3ZlcmVkIG9uIGR1cmluZyB0aGUgbW91c2UgaG9sZCB3aWxsIGJlXHJcbiAgLy8gYWRkZWQgdG8gdGhlIGhvdmVyZWRPdmVyVGlsZXMgYXJyYXkuIFRoaXMgaXMgdGhlbiBkcmF3biBvbiBjYW52YXMuXHJcbiAgY2FudmFzLmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlbW92ZScsIGZ1bmN0aW9uIChldmVudCkge1xyXG4gICAgaWYgKCFjdXJyZW50VGlsZSkgcmV0dXJuXHJcbiAgICBpZiAoIWN1cnJlbnRUaWxlLmNoaWxkcmVuWzBdKSByZXR1cm5cclxuICAgIGlmICghY3VycmVudFRpbGUuY2hpbGRyZW5bMF0uZ2V0QXR0cmlidXRlKCdkYXRhLWVudGl0eS1udW1iZXInKSkgcmV0dXJuXHJcbiAgICBpZiAobW91c2VIZWxkID09PSB0cnVlKSB7XHJcbiAgICAgIGNvbnN0IHBvcyA9IHdvcmxkLnNjcmVlblRvV29ybGQoW1xyXG4gICAgICAgIGV2ZW50LmNsaWVudFgsXHJcbiAgICAgICAgZXZlbnQuY2xpZW50WVxyXG4gICAgICBdLCBjYW52YXMpXHJcbiAgICAgIGR1cGxpY2F0ZSA9IDBcclxuICAgICAgZm9yICh2YXIgaSA9IDA7IGkgPCBob3ZlcmVkT3ZlclRpbGVzLmxlbmd0aDsgaSsrKSB7XHJcbiAgICAgICAgaWYgKChob3ZlcmVkT3ZlclRpbGVzW2ldWzBdID09PSBwb3NbMF0pICYmIChob3ZlcmVkT3ZlclRpbGVzW2ldWzFdID09PSBwb3NbMV0pKSB7XHJcbiAgICAgICAgICBkdXBsaWNhdGUgKz0gMVxyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG4gICAgICBpZiAoZHVwbGljYXRlID09PSAwKSB7XHJcbiAgICAgICAgaG92ZXJlZE92ZXJUaWxlcy5wdXNoKHBvcylcclxuICAgICAgfVxyXG4gICAgICBmb3IgKHZhciBqID0gMDsgaiA8IGhvdmVyZWRPdmVyVGlsZXMubGVuZ3RoOyBqKyspIHtcclxuICAgICAgICB3b3JsZC5hZGRFbnRpdHkoaG92ZXJlZE92ZXJUaWxlc1tqXSwgY3VycmVudFRpbGUuY2hpbGRyZW5bMF0uZ2V0QXR0cmlidXRlKCdkYXRhLWVudGl0eS1udW1iZXInKSlcclxuICAgICAgfVxyXG4gICAgICByZWRyYXcoKVxyXG4gICAgfVxyXG4gIH0sIGZhbHNlKVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL3RpbGVEcmFnZ2luZy5qc1xuLy8gbW9kdWxlIGlkID0gMTFcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///11\n");
+function playerControls (step) {
+  var map = {}
+  function playerControls (event) {
+    map[event.key] = event.type === 'keydown'
+    if (map['ArrowUp']) {
+      step('up')
+    } else if (map['ArrowDown']) {
+      step('down')
+    } else if (map['ArrowLeft']) {
+      step('left')
+    } else if (map['ArrowRight']) {
+      step('right')
+    }
+  }
+  document.addEventListener('keyup', function (event) {
+    playerControls(event)
+  }, false)
+  document.addEventListener('keydown', function (event) {
+    playerControls(event)
+  }, false)
+}
 
-/***/ }),
-/* 12 */
-/*!*******************************!*\
-  !*** ./src/playerControls.js ***!
-  \*******************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* harmony default export */ __webpack_exports__["a"] = (playerControls);
 
-"use strict";
-eval("function playerControls (step) {\r\n  var map = {}\r\n  function playerControls (event) {\r\n    map[event.key] = event.type === 'keydown'\r\n    if (map['ArrowUp']) {\r\n      step('up')\r\n    } else if (map['ArrowDown']) {\r\n      step('down')\r\n    } else if (map['ArrowLeft']) {\r\n      step('left')\r\n    } else if (map['ArrowRight']) {\r\n      step('right')\r\n    }\r\n  }\r\n  document.addEventListener('keyup', function (event) {\r\n    playerControls(event)\r\n  }, false)\r\n  document.addEventListener('keydown', function (event) {\r\n    playerControls(event)\r\n  }, false)\r\n}\r\n\r\n/* harmony default export */ __webpack_exports__[\"a\"] = (playerControls);\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTIuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvcGxheWVyQ29udHJvbHMuanM/NDRjYyJdLCJzb3VyY2VzQ29udGVudCI6WyJmdW5jdGlvbiBwbGF5ZXJDb250cm9scyAoc3RlcCkge1xyXG4gIHZhciBtYXAgPSB7fVxyXG4gIGZ1bmN0aW9uIHBsYXllckNvbnRyb2xzIChldmVudCkge1xyXG4gICAgbWFwW2V2ZW50LmtleV0gPSBldmVudC50eXBlID09PSAna2V5ZG93bidcclxuICAgIGlmIChtYXBbJ0Fycm93VXAnXSkge1xyXG4gICAgICBzdGVwKCd1cCcpXHJcbiAgICB9IGVsc2UgaWYgKG1hcFsnQXJyb3dEb3duJ10pIHtcclxuICAgICAgc3RlcCgnZG93bicpXHJcbiAgICB9IGVsc2UgaWYgKG1hcFsnQXJyb3dMZWZ0J10pIHtcclxuICAgICAgc3RlcCgnbGVmdCcpXHJcbiAgICB9IGVsc2UgaWYgKG1hcFsnQXJyb3dSaWdodCddKSB7XHJcbiAgICAgIHN0ZXAoJ3JpZ2h0JylcclxuICAgIH1cclxuICB9XHJcbiAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcigna2V5dXAnLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgIHBsYXllckNvbnRyb2xzKGV2ZW50KVxyXG4gIH0sIGZhbHNlKVxyXG4gIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2tleWRvd24nLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgIHBsYXllckNvbnRyb2xzKGV2ZW50KVxyXG4gIH0sIGZhbHNlKVxyXG59XHJcblxyXG5leHBvcnQgZGVmYXVsdCBwbGF5ZXJDb250cm9sc1xyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9wbGF5ZXJDb250cm9scy5qc1xuLy8gbW9kdWxlIGlkID0gMTJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///12\n");
-
-/***/ }),
-/* 13 */
-/*!********************************************!*\
-  !*** ./src/entities/characters/Monster.js ***!
-  \********************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Monster;\nconst img = document.createElement('img')\r\nimg.src = 'src/sprites/characters-min.png'\r\n\r\nfunction Monster (x, y) {\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 3\r\n  this.size = 30\r\n  this.speed = 30\r\n  this.category = 'monster'\r\n  this.sourceX = 8\r\n  this.sourceY = 114\r\n  this.source = 'src/sprites/characters-min.png'\r\n  this.collidable = 'yes'\r\n  this.collidableTiles = []\r\n}\r\n\r\nMonster.prototype.draw = function draw (ctx) {\r\n  ctx.drawImage(img, this.sourceX, this.sourceY, this.size, this.size,\r\n    this.x, this.y, this.size, this.size)\r\n}\r\n\r\nMonster.prototype.step = function step (monsters, canvasLength, grid, tiles) {\r\n  const speed = this.speed / 30\r\n  const y = this.y / 30\r\n  const x = this.x / 30\r\n  // Collates all the colliable tiles into this.collidableTiles.\r\n  if (!tiles) return\n  tiles.forEach(function (Tile) {\r\n    let tileObj = new Tile()\r\n    if (tileObj.collidable === 'yes') {\r\n      this.collidableTiles.push(tileObj.entityNumber)\r\n    }\r\n  }, this)\r\n  // Randomly makes the monster move one step in one of 4 directions.\r\n  const next = {x: this.x, y: this.y}\r\n  const nextY = next.y / 30\r\n  const nextX = next.x / 30\r\n  switch (Math.floor(Math.random() * 4)) {\r\n    case 0: // up.\r\n      // Prevents monster from moving outside the canvas when moving up.\r\n      if (next.y - this.speed < 0) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(grid[nextY - speed][x]) >= 0) return\r\n      next.y -= this.speed\r\n      break\r\n    case 1: // down.\r\n      // Prevents monster from moving outside the canvas when moving down.\r\n      if (this.y + this.speed * 2 > canvasLength) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(grid[nextY + speed][x]) >= 0) return\r\n      next.y += this.speed\r\n      break\r\n    case 2: // right.\r\n      // Prevents monster from moving outside the canvas when moving right.\r\n      if (this.x + this.speed * 2 > canvasLength) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(grid[y][nextX + speed]) >= 0) return\r\n      next.x += this.speed\r\n      break\r\n    case 3: // left.\r\n      // Prevents monster from moving outside the canvas when moving left.\r\n      if (this.x - this.speed < 0) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(grid[y][nextX - speed]) >= 0) return\r\n      next.x -= this.speed\r\n      break\r\n  }\r\n  // Collision detection between monsters.\r\n  let canMove = true\r\n  monsters.forEach(function (monster) {\r\n    if (monster === this) return\r\n    if (!canMove) return\r\n    if (!(monster.x > next.x + this.size ||\r\n        monster.x + monster.size <= next.x ||\r\n        monster.y > next.y + this.size ||\r\n        monster.y + monster.size <= next.y)\r\n    ) {\r\n      canMove = false\r\n    }\r\n  }, this)\r\n\r\n  if (canMove) {\r\n    this.x = next.x\r\n    this.y = next.y\r\n  } else {\r\n    this.step(monsters)\r\n  }\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvZW50aXRpZXMvY2hhcmFjdGVycy9Nb25zdGVyLmpzP2QyZGYiXSwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgaW1nID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnaW1nJylcclxuaW1nLnNyYyA9ICdzcmMvc3ByaXRlcy9jaGFyYWN0ZXJzLW1pbi5wbmcnXHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBNb25zdGVyICh4LCB5KSB7XHJcbiAgdGhpcy54ID0geFxyXG4gIHRoaXMueSA9IHlcclxuICB0aGlzLmVudGl0eU51bWJlciA9IDNcclxuICB0aGlzLnNpemUgPSAzMFxyXG4gIHRoaXMuc3BlZWQgPSAzMFxyXG4gIHRoaXMuY2F0ZWdvcnkgPSAnbW9uc3RlcidcclxuICB0aGlzLnNvdXJjZVggPSA4XHJcbiAgdGhpcy5zb3VyY2VZID0gMTE0XHJcbiAgdGhpcy5zb3VyY2UgPSAnc3JjL3Nwcml0ZXMvY2hhcmFjdGVycy1taW4ucG5nJ1xyXG4gIHRoaXMuY29sbGlkYWJsZSA9ICd5ZXMnXHJcbiAgdGhpcy5jb2xsaWRhYmxlVGlsZXMgPSBbXVxyXG59XHJcblxyXG5Nb25zdGVyLnByb3RvdHlwZS5kcmF3ID0gZnVuY3Rpb24gZHJhdyAoY3R4KSB7XHJcbiAgY3R4LmRyYXdJbWFnZShpbWcsIHRoaXMuc291cmNlWCwgdGhpcy5zb3VyY2VZLCB0aGlzLnNpemUsIHRoaXMuc2l6ZSxcclxuICAgIHRoaXMueCwgdGhpcy55LCB0aGlzLnNpemUsIHRoaXMuc2l6ZSlcclxufVxyXG5cclxuTW9uc3Rlci5wcm90b3R5cGUuc3RlcCA9IGZ1bmN0aW9uIHN0ZXAgKG1vbnN0ZXJzLCBjYW52YXNMZW5ndGgsIGdyaWQsIHRpbGVzKSB7XHJcbiAgY29uc3Qgc3BlZWQgPSB0aGlzLnNwZWVkIC8gMzBcclxuICBjb25zdCB5ID0gdGhpcy55IC8gMzBcclxuICBjb25zdCB4ID0gdGhpcy54IC8gMzBcclxuICAvLyBDb2xsYXRlcyBhbGwgdGhlIGNvbGxpYWJsZSB0aWxlcyBpbnRvIHRoaXMuY29sbGlkYWJsZVRpbGVzLlxyXG4gIGlmICghdGlsZXMpIHJldHVyblxuICB0aWxlcy5mb3JFYWNoKGZ1bmN0aW9uIChUaWxlKSB7XHJcbiAgICBsZXQgdGlsZU9iaiA9IG5ldyBUaWxlKClcclxuICAgIGlmICh0aWxlT2JqLmNvbGxpZGFibGUgPT09ICd5ZXMnKSB7XHJcbiAgICAgIHRoaXMuY29sbGlkYWJsZVRpbGVzLnB1c2godGlsZU9iai5lbnRpdHlOdW1iZXIpXHJcbiAgICB9XHJcbiAgfSwgdGhpcylcclxuICAvLyBSYW5kb21seSBtYWtlcyB0aGUgbW9uc3RlciBtb3ZlIG9uZSBzdGVwIGluIG9uZSBvZiA0IGRpcmVjdGlvbnMuXHJcbiAgY29uc3QgbmV4dCA9IHt4OiB0aGlzLngsIHk6IHRoaXMueX1cclxuICBjb25zdCBuZXh0WSA9IG5leHQueSAvIDMwXHJcbiAgY29uc3QgbmV4dFggPSBuZXh0LnggLyAzMFxyXG4gIHN3aXRjaCAoTWF0aC5mbG9vcihNYXRoLnJhbmRvbSgpICogNCkpIHtcclxuICAgIGNhc2UgMDogLy8gdXAuXHJcbiAgICAgIC8vIFByZXZlbnRzIG1vbnN0ZXIgZnJvbSBtb3Zpbmcgb3V0c2lkZSB0aGUgY2FudmFzIHdoZW4gbW92aW5nIHVwLlxyXG4gICAgICBpZiAobmV4dC55IC0gdGhpcy5zcGVlZCA8IDApIHJldHVyblxyXG4gICAgICAvLyBDb2xsaWRhYmxlIHRlcnJhaW4gZGV0ZWN0aW9uLlxyXG4gICAgICBpZiAodGhpcy5jb2xsaWRhYmxlVGlsZXMuaW5kZXhPZihncmlkW25leHRZIC0gc3BlZWRdW3hdKSA+PSAwKSByZXR1cm5cclxuICAgICAgbmV4dC55IC09IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICAgIGNhc2UgMTogLy8gZG93bi5cclxuICAgICAgLy8gUHJldmVudHMgbW9uc3RlciBmcm9tIG1vdmluZyBvdXRzaWRlIHRoZSBjYW52YXMgd2hlbiBtb3ZpbmcgZG93bi5cclxuICAgICAgaWYgKHRoaXMueSArIHRoaXMuc3BlZWQgKiAyID4gY2FudmFzTGVuZ3RoKSByZXR1cm5cclxuICAgICAgLy8gQ29sbGlkYWJsZSB0ZXJyYWluIGRldGVjdGlvbi5cclxuICAgICAgaWYgKHRoaXMuY29sbGlkYWJsZVRpbGVzLmluZGV4T2YoZ3JpZFtuZXh0WSArIHNwZWVkXVt4XSkgPj0gMCkgcmV0dXJuXHJcbiAgICAgIG5leHQueSArPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgICBjYXNlIDI6IC8vIHJpZ2h0LlxyXG4gICAgICAvLyBQcmV2ZW50cyBtb25zdGVyIGZyb20gbW92aW5nIG91dHNpZGUgdGhlIGNhbnZhcyB3aGVuIG1vdmluZyByaWdodC5cclxuICAgICAgaWYgKHRoaXMueCArIHRoaXMuc3BlZWQgKiAyID4gY2FudmFzTGVuZ3RoKSByZXR1cm5cclxuICAgICAgLy8gQ29sbGlkYWJsZSB0ZXJyYWluIGRldGVjdGlvbi5cclxuICAgICAgaWYgKHRoaXMuY29sbGlkYWJsZVRpbGVzLmluZGV4T2YoZ3JpZFt5XVtuZXh0WCArIHNwZWVkXSkgPj0gMCkgcmV0dXJuXHJcbiAgICAgIG5leHQueCArPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgICBjYXNlIDM6IC8vIGxlZnQuXHJcbiAgICAgIC8vIFByZXZlbnRzIG1vbnN0ZXIgZnJvbSBtb3Zpbmcgb3V0c2lkZSB0aGUgY2FudmFzIHdoZW4gbW92aW5nIGxlZnQuXHJcbiAgICAgIGlmICh0aGlzLnggLSB0aGlzLnNwZWVkIDwgMCkgcmV0dXJuXHJcbiAgICAgIC8vIENvbGxpZGFibGUgdGVycmFpbiBkZXRlY3Rpb24uXHJcbiAgICAgIGlmICh0aGlzLmNvbGxpZGFibGVUaWxlcy5pbmRleE9mKGdyaWRbeV1bbmV4dFggLSBzcGVlZF0pID49IDApIHJldHVyblxyXG4gICAgICBuZXh0LnggLT0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gIH1cclxuICAvLyBDb2xsaXNpb24gZGV0ZWN0aW9uIGJldHdlZW4gbW9uc3RlcnMuXHJcbiAgbGV0IGNhbk1vdmUgPSB0cnVlXHJcbiAgbW9uc3RlcnMuZm9yRWFjaChmdW5jdGlvbiAobW9uc3Rlcikge1xyXG4gICAgaWYgKG1vbnN0ZXIgPT09IHRoaXMpIHJldHVyblxyXG4gICAgaWYgKCFjYW5Nb3ZlKSByZXR1cm5cclxuICAgIGlmICghKG1vbnN0ZXIueCA+IG5leHQueCArIHRoaXMuc2l6ZSB8fFxyXG4gICAgICAgIG1vbnN0ZXIueCArIG1vbnN0ZXIuc2l6ZSA8PSBuZXh0LnggfHxcclxuICAgICAgICBtb25zdGVyLnkgPiBuZXh0LnkgKyB0aGlzLnNpemUgfHxcclxuICAgICAgICBtb25zdGVyLnkgKyBtb25zdGVyLnNpemUgPD0gbmV4dC55KVxyXG4gICAgKSB7XHJcbiAgICAgIGNhbk1vdmUgPSBmYWxzZVxyXG4gICAgfVxyXG4gIH0sIHRoaXMpXHJcblxyXG4gIGlmIChjYW5Nb3ZlKSB7XHJcbiAgICB0aGlzLnggPSBuZXh0LnhcclxuICAgIHRoaXMueSA9IG5leHQueVxyXG4gIH0gZWxzZSB7XHJcbiAgICB0aGlzLnN0ZXAobW9uc3RlcnMpXHJcbiAgfVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2VudGl0aWVzL2NoYXJhY3RlcnMvTW9uc3Rlci5qc1xuLy8gbW9kdWxlIGlkID0gMTNcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///13\n");
-
-/***/ }),
-/* 14 */
-/*!*******************************************!*\
-  !*** ./src/entities/characters/Player.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Player;\nconst img = document.createElement('img')\r\nimg.src = 'src/sprites/characters-min.png'\r\n\r\nfunction Player (x, y, world) {\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 2\r\n  this.size = 30\r\n  this.speed = 30\r\n  this.world = world\r\n  this.category = 'character'\r\n  this.sourceX = 9\r\n  this.sourceY = 42\r\n  this.source = 'src/sprites/characters-min.png'\r\n  this.collidable = 'yes'\r\n  this.collidableTiles = []\r\n}\r\n\r\nPlayer.prototype.draw = function draw (ctx) {\r\n  ctx.drawImage(img, this.sourceX, this.sourceY, this.size, this.size,\r\n    this.x, this.y, this.size, this.size)\r\n}\r\n\r\n// Moves the player one step.\r\nPlayer.prototype.move = function move (ctx, direction, canvas, grid, tiles) {\r\n  const speed = this.speed / 30\r\n  const y = this.y / 30\r\n  const x = this.x / 30\r\n  tiles.forEach(function (Tile) {\r\n    let tileObj = new Tile()\r\n    if (tileObj.collidable === 'yes') {\r\n      this.collidableTiles.push(tileObj.entityNumber)\r\n    }\r\n  }, this)\r\n  switch (direction) {\r\n    case 'up':\r\n      // Prevents player from moving outside the canvas when moving up.\r\n      if (this.y - this.speed < 0) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(grid[y - speed][x]) >= 0) return\r\n      this.y -= this.speed\r\n      break\r\n    case 'down':\r\n      // Prevents player from moving outside the canvas when moving down.\r\n      if (this.y + this.speed * 2 > canvas.height) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(grid[y + speed][x]) >= 0) return\r\n      this.y += this.speed\r\n      break\r\n    case 'right':\r\n      // Prevents player from moving outside the canvas when moving right.\r\n      if (this.x + this.speed * 2 > canvas.width) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(grid[y][x + speed]) >= 0) return\r\n      this.x += this.speed\r\n      break\r\n    case 'left':\r\n      // Prevents player from moving outside the canvas when moving left.\r\n      if (this.x - this.speed < 0) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(grid[y][x - speed]) >= 0) return\r\n      this.x -= this.speed\r\n      break\r\n  }\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTQuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvZW50aXRpZXMvY2hhcmFjdGVycy9QbGF5ZXIuanM/OGY0YSJdLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBpbWcgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdpbWcnKVxyXG5pbWcuc3JjID0gJ3NyYy9zcHJpdGVzL2NoYXJhY3RlcnMtbWluLnBuZydcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFBsYXllciAoeCwgeSwgd29ybGQpIHtcclxuICB0aGlzLnggPSB4XHJcbiAgdGhpcy55ID0geVxyXG4gIHRoaXMuZW50aXR5TnVtYmVyID0gMlxyXG4gIHRoaXMuc2l6ZSA9IDMwXHJcbiAgdGhpcy5zcGVlZCA9IDMwXHJcbiAgdGhpcy53b3JsZCA9IHdvcmxkXHJcbiAgdGhpcy5jYXRlZ29yeSA9ICdjaGFyYWN0ZXInXHJcbiAgdGhpcy5zb3VyY2VYID0gOVxyXG4gIHRoaXMuc291cmNlWSA9IDQyXHJcbiAgdGhpcy5zb3VyY2UgPSAnc3JjL3Nwcml0ZXMvY2hhcmFjdGVycy1taW4ucG5nJ1xyXG4gIHRoaXMuY29sbGlkYWJsZSA9ICd5ZXMnXHJcbiAgdGhpcy5jb2xsaWRhYmxlVGlsZXMgPSBbXVxyXG59XHJcblxyXG5QbGF5ZXIucHJvdG90eXBlLmRyYXcgPSBmdW5jdGlvbiBkcmF3IChjdHgpIHtcclxuICBjdHguZHJhd0ltYWdlKGltZywgdGhpcy5zb3VyY2VYLCB0aGlzLnNvdXJjZVksIHRoaXMuc2l6ZSwgdGhpcy5zaXplLFxyXG4gICAgdGhpcy54LCB0aGlzLnksIHRoaXMuc2l6ZSwgdGhpcy5zaXplKVxyXG59XHJcblxyXG4vLyBNb3ZlcyB0aGUgcGxheWVyIG9uZSBzdGVwLlxyXG5QbGF5ZXIucHJvdG90eXBlLm1vdmUgPSBmdW5jdGlvbiBtb3ZlIChjdHgsIGRpcmVjdGlvbiwgY2FudmFzLCBncmlkLCB0aWxlcykge1xyXG4gIGNvbnN0IHNwZWVkID0gdGhpcy5zcGVlZCAvIDMwXHJcbiAgY29uc3QgeSA9IHRoaXMueSAvIDMwXHJcbiAgY29uc3QgeCA9IHRoaXMueCAvIDMwXHJcbiAgdGlsZXMuZm9yRWFjaChmdW5jdGlvbiAoVGlsZSkge1xyXG4gICAgbGV0IHRpbGVPYmogPSBuZXcgVGlsZSgpXHJcbiAgICBpZiAodGlsZU9iai5jb2xsaWRhYmxlID09PSAneWVzJykge1xyXG4gICAgICB0aGlzLmNvbGxpZGFibGVUaWxlcy5wdXNoKHRpbGVPYmouZW50aXR5TnVtYmVyKVxyXG4gICAgfVxyXG4gIH0sIHRoaXMpXHJcbiAgc3dpdGNoIChkaXJlY3Rpb24pIHtcclxuICAgIGNhc2UgJ3VwJzpcclxuICAgICAgLy8gUHJldmVudHMgcGxheWVyIGZyb20gbW92aW5nIG91dHNpZGUgdGhlIGNhbnZhcyB3aGVuIG1vdmluZyB1cC5cclxuICAgICAgaWYgKHRoaXMueSAtIHRoaXMuc3BlZWQgPCAwKSByZXR1cm5cclxuICAgICAgLy8gQ29sbGlkYWJsZSB0ZXJyYWluIGRldGVjdGlvbi5cclxuICAgICAgaWYgKHRoaXMuY29sbGlkYWJsZVRpbGVzLmluZGV4T2YoZ3JpZFt5IC0gc3BlZWRdW3hdKSA+PSAwKSByZXR1cm5cclxuICAgICAgdGhpcy55IC09IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICAgIGNhc2UgJ2Rvd24nOlxyXG4gICAgICAvLyBQcmV2ZW50cyBwbGF5ZXIgZnJvbSBtb3Zpbmcgb3V0c2lkZSB0aGUgY2FudmFzIHdoZW4gbW92aW5nIGRvd24uXHJcbiAgICAgIGlmICh0aGlzLnkgKyB0aGlzLnNwZWVkICogMiA+IGNhbnZhcy5oZWlnaHQpIHJldHVyblxyXG4gICAgICAvLyBDb2xsaWRhYmxlIHRlcnJhaW4gZGV0ZWN0aW9uLlxyXG4gICAgICBpZiAodGhpcy5jb2xsaWRhYmxlVGlsZXMuaW5kZXhPZihncmlkW3kgKyBzcGVlZF1beF0pID49IDApIHJldHVyblxyXG4gICAgICB0aGlzLnkgKz0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gICAgY2FzZSAncmlnaHQnOlxyXG4gICAgICAvLyBQcmV2ZW50cyBwbGF5ZXIgZnJvbSBtb3Zpbmcgb3V0c2lkZSB0aGUgY2FudmFzIHdoZW4gbW92aW5nIHJpZ2h0LlxyXG4gICAgICBpZiAodGhpcy54ICsgdGhpcy5zcGVlZCAqIDIgPiBjYW52YXMud2lkdGgpIHJldHVyblxyXG4gICAgICAvLyBDb2xsaWRhYmxlIHRlcnJhaW4gZGV0ZWN0aW9uLlxyXG4gICAgICBpZiAodGhpcy5jb2xsaWRhYmxlVGlsZXMuaW5kZXhPZihncmlkW3ldW3ggKyBzcGVlZF0pID49IDApIHJldHVyblxyXG4gICAgICB0aGlzLnggKz0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gICAgY2FzZSAnbGVmdCc6XHJcbiAgICAgIC8vIFByZXZlbnRzIHBsYXllciBmcm9tIG1vdmluZyBvdXRzaWRlIHRoZSBjYW52YXMgd2hlbiBtb3ZpbmcgbGVmdC5cclxuICAgICAgaWYgKHRoaXMueCAtIHRoaXMuc3BlZWQgPCAwKSByZXR1cm5cclxuICAgICAgLy8gQ29sbGlkYWJsZSB0ZXJyYWluIGRldGVjdGlvbi5cclxuICAgICAgaWYgKHRoaXMuY29sbGlkYWJsZVRpbGVzLmluZGV4T2YoZ3JpZFt5XVt4IC0gc3BlZWRdKSA+PSAwKSByZXR1cm5cclxuICAgICAgdGhpcy54IC09IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICB9XHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvZW50aXRpZXMvY2hhcmFjdGVycy9QbGF5ZXIuanNcbi8vIG1vZHVsZSBpZCA9IDE0XG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///14\n");
-
-/***/ }),
-/* 15 */
-/*!**************************************!*\
-  !*** ./src/entities/terrain/Wall.js ***!
-  \**************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Wall;\nfunction Wall (x, y, entityNumber, ctx) {\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 1\r\n  this.size = 30\r\n  this.source = 'src/sprites/wall.png'\r\n  this.sourceX = 0\r\n  this.sourceY = 0\r\n  this.category = 'terrain'\r\n  this.collidable = 'yes'\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTUuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvZW50aXRpZXMvdGVycmFpbi9XYWxsLmpzPzljOTkiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gV2FsbCAoeCwgeSwgZW50aXR5TnVtYmVyLCBjdHgpIHtcclxuICB0aGlzLnggPSB4XHJcbiAgdGhpcy55ID0geVxyXG4gIHRoaXMuZW50aXR5TnVtYmVyID0gMVxyXG4gIHRoaXMuc2l6ZSA9IDMwXHJcbiAgdGhpcy5zb3VyY2UgPSAnc3JjL3Nwcml0ZXMvd2FsbC5wbmcnXHJcbiAgdGhpcy5zb3VyY2VYID0gMFxyXG4gIHRoaXMuc291cmNlWSA9IDBcclxuICB0aGlzLmNhdGVnb3J5ID0gJ3RlcnJhaW4nXHJcbiAgdGhpcy5jb2xsaWRhYmxlID0gJ3llcydcclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9lbnRpdGllcy90ZXJyYWluL1dhbGwuanNcbi8vIG1vZHVsZSBpZCA9IDE1XG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///15\n");
-
-/***/ }),
-/* 16 */
-/*!***************************************!*\
-  !*** ./src/entities/terrain/Floor.js ***!
-  \***************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Wall;\nfunction Wall (x, y, entityNumber, ctx) {\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 0\r\n  this.size = 30\r\n  this.source = 'src/sprites/floor.png'\r\n  this.sourceX = 0\r\n  this.sourceY = 0\r\n  this.category = 'terrain'\r\n  this.collidable = 'no'\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTYuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvZW50aXRpZXMvdGVycmFpbi9GbG9vci5qcz9mN2EzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFdhbGwgKHgsIHksIGVudGl0eU51bWJlciwgY3R4KSB7XHJcbiAgdGhpcy54ID0geFxyXG4gIHRoaXMueSA9IHlcclxuICB0aGlzLmVudGl0eU51bWJlciA9IDBcclxuICB0aGlzLnNpemUgPSAzMFxyXG4gIHRoaXMuc291cmNlID0gJ3NyYy9zcHJpdGVzL2Zsb29yLnBuZydcclxuICB0aGlzLnNvdXJjZVggPSAwXHJcbiAgdGhpcy5zb3VyY2VZID0gMFxyXG4gIHRoaXMuY2F0ZWdvcnkgPSAndGVycmFpbidcclxuICB0aGlzLmNvbGxpZGFibGUgPSAnbm8nXHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvZW50aXRpZXMvdGVycmFpbi9GbG9vci5qc1xuLy8gbW9kdWxlIGlkID0gMTZcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///16\n");
-
-/***/ }),
-/* 17 */
-/*!***************************************!*\
-  !*** ./src/entities/terrain/Grass.js ***!
-  \***************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Grass;\nfunction Grass (x, y, entityNumber, ctx) {\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 4\r\n  this.size = 30\r\n  this.source = 'src/sprites/grass-attempt-1.png'\r\n  this.sourceX = 0\r\n  this.sourceY = 0\r\n  this.category = 'terrain'\r\n  this.collidable = 'no'\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTcuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvZW50aXRpZXMvdGVycmFpbi9HcmFzcy5qcz9mZDQ1Il0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIEdyYXNzICh4LCB5LCBlbnRpdHlOdW1iZXIsIGN0eCkge1xyXG4gIHRoaXMueCA9IHhcclxuICB0aGlzLnkgPSB5XHJcbiAgdGhpcy5lbnRpdHlOdW1iZXIgPSA0XHJcbiAgdGhpcy5zaXplID0gMzBcclxuICB0aGlzLnNvdXJjZSA9ICdzcmMvc3ByaXRlcy9ncmFzcy1hdHRlbXB0LTEucG5nJ1xyXG4gIHRoaXMuc291cmNlWCA9IDBcclxuICB0aGlzLnNvdXJjZVkgPSAwXHJcbiAgdGhpcy5jYXRlZ29yeSA9ICd0ZXJyYWluJ1xyXG4gIHRoaXMuY29sbGlkYWJsZSA9ICdubydcclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9lbnRpdGllcy90ZXJyYWluL0dyYXNzLmpzXG4vLyBtb2R1bGUgaWQgPSAxN1xuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///17\n");
-
-/***/ }),
-/* 18 */
-/*!**************************************!*\
-  !*** ./src/entities/terrain/Tree.js ***!
-  \**************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Grass;\nfunction Grass (x, y, entityNumber, ctx) {\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 5\r\n  this.size = 30\r\n  this.source = 'src/sprites/tree.png'\r\n  this.sourceX = 0\r\n  this.sourceY = 0\r\n  this.category = 'terrain'\r\n  this.collidable = 'yes'\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTguanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvZW50aXRpZXMvdGVycmFpbi9UcmVlLmpzPzM3ODYiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gR3Jhc3MgKHgsIHksIGVudGl0eU51bWJlciwgY3R4KSB7XHJcbiAgdGhpcy54ID0geFxyXG4gIHRoaXMueSA9IHlcclxuICB0aGlzLmVudGl0eU51bWJlciA9IDVcclxuICB0aGlzLnNpemUgPSAzMFxyXG4gIHRoaXMuc291cmNlID0gJ3NyYy9zcHJpdGVzL3RyZWUucG5nJ1xyXG4gIHRoaXMuc291cmNlWCA9IDBcclxuICB0aGlzLnNvdXJjZVkgPSAwXHJcbiAgdGhpcy5jYXRlZ29yeSA9ICd0ZXJyYWluJ1xyXG4gIHRoaXMuY29sbGlkYWJsZSA9ICd5ZXMnXHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvZW50aXRpZXMvdGVycmFpbi9UcmVlLmpzXG4vLyBtb2R1bGUgaWQgPSAxOFxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///18\n");
 
 /***/ })
 /******/ ]);
