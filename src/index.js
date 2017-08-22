@@ -2,8 +2,6 @@ import World from './World'
 import TileSelector from './TileSelector'
 import tileDragging from './tileDragging'
 import playerControls from './playerControls'
-import resize from './resize'
-import menu from './menu'
 
 function init () {
   var canvas = document.createElement('canvas')
@@ -41,6 +39,4 @@ window.addEventListener('load', function (event) {
   step()
 }, false)
 
-resize()
-menu()
 playerControls(step)
