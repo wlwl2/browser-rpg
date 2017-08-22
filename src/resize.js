@@ -1,4 +1,5 @@
 export default function resize () {
+  console.log(document.getBound)
   var height = document.body.getBoundingClientRect().height
   var width = document.body.getBoundingClientRect().width
 
