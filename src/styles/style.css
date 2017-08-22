@@ -66,6 +66,9 @@ canvas {
   font-size: 14px;
   font-weight: normal; }
 
+@media screen and (max-width: 767px) {
+  .menu {
+    display: none; } }
 img.spritesheet {
   display: none; }
 
