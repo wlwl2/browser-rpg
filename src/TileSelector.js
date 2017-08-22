@@ -1,4 +1,4 @@
-export default function TileSelector () {
+export default function TileSelector (canvas) {
   if (!document.querySelector('.tile-list')) return
   const tiles = document.querySelector('.tile-list').children
   const currentTile = document.querySelector('.currently-selected-tile')
@@ -9,6 +9,9 @@ export default function TileSelector () {
   function removeCurrentlySelectedTile () {
     if (currentTile.childNodes[1]) {
       currentTile.removeChild(currentTile.childNodes[1])
+    }
+    if (mouseInfo.childNodes[0]) {
+      mouseInfo.removeChild(mouseInfo.childNodes[0])
     }
     if (mouseInfo.childNodes[1]) {
       mouseInfo.removeChild(mouseInfo.childNodes[1])
@@ -46,12 +49,18 @@ export default function TileSelector () {
   }, false)
 
   // Displays the tile near the mouse cursor when a tile is selected.
-  document.addEventListener('mousemove', function mouseInfoPosition (event) {
-    console.log(event.pageX, event.pageY)
+  canvas.addEventListener('mousemove', function mouseInfoPosition (event) {
     if (!currentTile) return
-    if (currentTile.children[0]) {
-      mouseInfo.style.left = String(event.pageX + 20) + 'px'
-      mouseInfo.style.top = String(event.pageY + 20) + 'px'
+    if (event.pageY > window.innerHeight - 60) {
+      if (currentTile.children[0]) {
+        mouseInfo.style.left = String(event.pageX - 40) + 'px'
+        mouseInfo.style.top = String(event.pageY - 40) + 'px'
+      }
+    } else {
+      if (currentTile.children[0]) {
+        mouseInfo.style.left = String(event.pageX + 20) + 'px'
+        mouseInfo.style.top = String(event.pageY + 20) + 'px'
+      }
     }
   }, false)
 }

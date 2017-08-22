@@ -2,6 +2,7 @@ import World from './World'
 import TileSelector from './TileSelector'
 import tileDragging from './tileDragging'
 import playerControls from './playerControls'
+// import touchEvents from './touchEvents'
 
 function init () {
   var canvas = document.createElement('canvas')
@@ -32,11 +33,12 @@ var _init = init()
 var ctx = _init.ctx
 var canvas = _init.canvas
 const world = new World()
-TileSelector()
+TileSelector(canvas)
 tileDragging(canvas, world, ctx)
 
 window.addEventListener('load', function (event) {
   step()
 }, false)
 
+// touchEvents()
 playerControls(step)
