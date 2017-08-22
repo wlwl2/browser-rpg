@@ -6,6 +6,9 @@ body {
   background-color: #e6e6e6;
   position: relative; }
 
+canvas[data-cursor="pointer"] {
+  cursor: pointer; }
+
 .canvas {
   position: absolute;
   left: 0;

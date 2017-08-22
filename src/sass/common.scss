@@ -6,3 +6,7 @@ body {
   background-color: rgb(230, 230, 230);
   position: relative;
 }
+
+canvas[data-cursor="pointer"] {
+  cursor: pointer;
+}
