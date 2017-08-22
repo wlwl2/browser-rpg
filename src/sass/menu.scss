@@ -44,6 +44,12 @@
   font-weight: normal;
 }
 
+.notifications {
+  position: relative;
+  z-index: 2;
+  background-color: white;
+}
+
 @media screen and (max-width: 767px) {
   .menu {
     display: none;

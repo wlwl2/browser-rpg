@@ -26,7 +26,11 @@ canvas {
 @media screen and (max-width: 767px) {
   canvas {
     height: 100vw;
-    width: 100vw; } }
+    width: 100vw; }
+
+  canvas[data-horizontal="yes"] {
+    height: 100vh;
+    width: 100vh; } }
 .menu[data-hidden="yes"] {
   display: none; }
 
@@ -65,6 +69,11 @@ canvas {
 .reset-tile-button {
   font-size: 14px;
   font-weight: normal; }
+
+.notifications {
+  position: relative;
+  z-index: 2;
+  background-color: white; }
 
 @media screen and (max-width: 767px) {
   .menu {
