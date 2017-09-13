@@ -26,7 +26,7 @@ export default function tileDragging (canvas, world, ctx) {
       event.clientX - marginLeft,
       event.clientY
     ], canvas)
-    console.log(pos)
+    // console.log(pos)
     hoveredOverTiles.push(pos)
   }, false)
 
