@@ -13,13 +13,20 @@ export default function tileDragging (canvas, world, ctx) {
       player.draw(ctx)
     })
   }
+
+  const canvasLeft = document.querySelector('canvas').getBoundingClientRect().left
+  const bodyLeft = document.body.getBoundingClientRect().left
+  const marginLeft = canvasLeft - bodyLeft
+
   canvas.addEventListener('mousedown', function (event) {
     mouseHeld = true
     hoveredOverTiles = []
+
     const pos = world.screenToWorld([
-      event.clientX,
+      event.clientX - marginLeft,
       event.clientY
     ], canvas)
+    console.log(pos)
     hoveredOverTiles.push(pos)
   }, false)
 
@@ -43,7 +50,7 @@ export default function tileDragging (canvas, world, ctx) {
     if (!currentTile.children[0].getAttribute('data-entity-number')) return
     if (mouseHeld === true) {
       const pos = world.screenToWorld([
-        event.clientX,
+        event.clientX - marginLeft,
         event.clientY
       ], canvas)
       duplicate = 0
