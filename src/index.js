@@ -1,5 +1,5 @@
 import World from './World'
-import TileSelector from './TileSelector'
+import tileSelector from './tileSelector'
 import tileDragging from './tileDragging'
 import playerControls from './playerControls'
 import menu from './menu'
@@ -34,7 +34,7 @@ var _init = init()
 var ctx = _init.ctx
 var canvas = _init.canvas
 const world = new World()
-TileSelector(canvas)
+tileSelector(canvas)
 tileDragging(canvas, world, ctx)
 
 window.addEventListener('load', function (event) {

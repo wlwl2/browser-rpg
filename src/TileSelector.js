@@ -1,4 +1,4 @@
-export default function TileSelector (canvas) {
+export default function tileSelector (canvas) {
   if (!document.querySelector('.tile-list')) return
   const tiles = document.querySelector('.tile-list').children
   const currentTile = document.querySelector('.currently-selected-tile')

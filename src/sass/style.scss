@@ -1,5 +1,7 @@
 @import 'common';
 @import 'canvas';
-@import 'menu';
-@import 'tiles';
 @import 'mouse-info';
+
+@import 'menu/main';
+@import 'menu/tiles';
+@import 'menu/tile-selector';
