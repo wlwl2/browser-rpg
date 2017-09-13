@@ -9,6 +9,12 @@ body {
 canvas[data-cursor="pointer"] {
   cursor: pointer; }
 
+.game {
+  width: 100vh;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative; }
+
 .canvas {
   position: absolute;
   left: 0;
@@ -26,10 +32,25 @@ canvas {
   display: block;
   margin: 0 auto; }
 
-@media screen and (max-width: 767px) {
-  canvas {
-    height: 100vw;
-    width: 100vw; } }
+.overlay[data-hidden="no"] {
+  display: block; }
+
+.overlay[data-hidden="yes"] {
+  display: none; }
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute; }
+
+.overlay__color {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  opacity: 0.3;
+  background-color: #000; }
+
 .menu[data-hidden="no"] {
   display: block; }
 
@@ -38,18 +59,29 @@ canvas {
 
 .menu {
   position: absolute;
-  height: 100%;
+  text-align: center;
   width: 100%;
-  text-align: center; }
+  height: 100%; }
 
 .menu__container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 3;
+  display: table; }
+
+.menu__vertical-middle {
+  display: table-cell;
+  vertical-align: middle; }
+
+.menu__horizontal-center {
   display: inline-block; }
 
 .tile-selector {
   display: block;
   position: relative;
   margin: 0 auto;
-  z-index: 2;
+  z-index: 4;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -131,7 +163,7 @@ img.treeimg {
 
 .mouse-info div {
   position: relative;
-  z-index: 3;
+  z-index: 5;
   border: 1px solid blue; }
 
 /*# sourceMappingURL=style.css.map */

@@ -10,3 +10,10 @@ body {
 canvas[data-cursor="pointer"] {
   cursor: pointer;
 }
+
+.game {
+  width: 100vh;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+}
