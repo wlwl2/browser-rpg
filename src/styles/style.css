@@ -33,7 +33,9 @@ canvas {
   margin: 0 auto; }
 
 .mouse-info {
-  position: absolute; }
+  position: absolute;
+  left: 0;
+  top: 0; }
 
 .mouse-info div {
   position: relative;
@@ -90,30 +92,6 @@ canvas {
   z-index: 4;
   background-color: white;
   padding: 20px; }
-
-.tile-selector {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center; }
-
-.tile-list div {
-  cursor: pointer;
-  margin: 10px; }
-
-.tile-list div:hover {
-  opacity: .5; }
-
-.currently-selected-tile {
-  font-size: 14px;
-  font-weight: normal;
-  text-align: left;
-  min-width: 30px;
-  min-height: 30px;
-  border: 1px solid black; }
-
-.reset-tile-button {
-  font-size: 14px;
-  font-weight: normal; }
 
 img.spritesheet {
   display: none; }
