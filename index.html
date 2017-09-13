@@ -10,26 +10,28 @@
   </head>
   <body>
     <div class="game">
-      <div class="menu">
-        <section class="tile-selector">
-          <div>Tile selector</div>
-          <div class="tile-list">
-            <div class="floor" draggable="true" data-entity-number="0"></div>
-            <div class="wall" draggable="true" data-entity-number="1"></div>
-            <div class="player" draggable="true" data-entity-number="2"></div>
-            <div class="monster" draggable="true" data-entity-number="3"></div>
-            <div class="grass" draggable="true" data-entity-number="4"></div>
-            <div class="tree" draggable="true" data-entity-number="5"></div>
-          </div>
-          <div class="currently-selected-tile">
-            Currently selected tile:
-          </div>
-          <button class="reset-tile-button">Reset currently selected tile</button>
-        </section>
-        <section class="notifications">
+      <div class="menu" data-hidden="no">
+        <div class="menu__container">
+          <section class="tile-selector">
+            <div>Tile selector</div>
+            <div class="tile-list">
+              <div class="floor" draggable="true" data-entity-number="0"></div>
+              <div class="wall" draggable="true" data-entity-number="1"></div>
+              <div class="player" draggable="true" data-entity-number="2"></div>
+              <div class="monster" draggable="true" data-entity-number="3"></div>
+              <div class="grass" draggable="true" data-entity-number="4"></div>
+              <div class="tree" draggable="true" data-entity-number="5"></div>
+            </div>
+            <div class="currently-selected-tile">
+              Currently selected tile:
+            </div>
+            <button class="reset-tile-button">Reset currently selected tile</button>
+          </section>
+          <section class="notifications">
           No notifications
           <a href="https://github.com/wlwl2/browser-rpg">Back to Repository</a>
         </section>
+        </div>
       </div>
 
       <div class="mouse-info"></div>

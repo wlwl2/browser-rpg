@@ -48,11 +48,11 @@ export default function TileSelector (canvas) {
   }
 
   // When the esc key is pressed, clear the currently selected tile.
-  window.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      removeCurrentlySelectedTile(canvas)
-    }
-  }, false)
+  // window.addEventListener('keydown', function (event) {
+  //   if (event.key === 'Escape') {
+  //     removeCurrentlySelectedTile(canvas)
+  //   }
+  // }, false)
 
   // Displays the tile near the mouse cursor when a tile is selected.
   canvas.addEventListener('mousemove', function mouseInfoPosition (event) {
