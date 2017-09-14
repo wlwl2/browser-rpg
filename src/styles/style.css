@@ -42,10 +42,16 @@ canvas {
   z-index: 5;
   border: 1px solid blue; }
 
-.overlay[data-hidden="no"] {
+div[data-hidden="no"] {
   display: block; }
 
-.overlay[data-hidden="yes"] {
+div[data-hidden="yes"] {
+  display: none; }
+
+section[data-hidden="no"] {
+  display: block; }
+
+section[data-hidden="yes"] {
   display: none; }
 
 .overlay {
@@ -60,12 +66,6 @@ canvas {
   z-index: 2;
   opacity: 0.3;
   background-color: #000; }
-
-.menu[data-hidden="no"] {
-  display: block; }
-
-.menu[data-hidden="yes"] {
-  display: none; }
 
 .menu {
   position: absolute;
@@ -92,6 +92,11 @@ canvas {
   z-index: 4;
   background-color: white;
   padding: 20px; }
+
+.menu ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none; }
 
 img.spritesheet {
   display: none; }

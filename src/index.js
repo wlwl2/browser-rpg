@@ -30,9 +30,7 @@ function step (direction) {
   })
 }
 
-var _init = init()
-var ctx = _init.ctx
-var canvas = _init.canvas
+const { ctx, canvas } = init()
 const world = new World()
 tileSelector(canvas)
 tileDragging(canvas, world, ctx)
