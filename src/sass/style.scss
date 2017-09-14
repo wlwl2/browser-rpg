@@ -1,7 +1,16 @@
+@import 'styleguide';
 @import 'common';
 @import 'canvas';
 @import 'mouse-info';
 
-@import 'menu/main';
-@import 'menu/game-editor/tiles';
+@import 'menu/main-menu';
+@import 'menu/start-menu';
+@import 'menu/continue';
+@import 'menu/help-controls';
+@import 'menu/about';
+
+@import 'menu/game-menu';
+
+@import 'menu/game-editor/main-editor';
 @import 'menu/game-editor/tile-selector';
+@import 'menu/game-editor/tiles';
