@@ -30,6 +30,10 @@ export default function mainMenu () {
         overlay.setAttribute('data-hidden', 'yes')
         mouseInfo.setAttribute('style', 'display: block;')
       }
+      if (selectedMenuItem.textContent === 'Help/Controls') {
+        const selectedMenuItem = document.querySelector('.start-menu__menu li.selected')
+        
+      }
     }
   }, false)
 
