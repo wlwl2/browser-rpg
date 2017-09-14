@@ -60,7 +60,7 @@ section[data-hidden="no"] {
 section[data-hidden="yes"] {
   display: none; }
 
-.start-selected {
+.start-selected, .game-selected {
   background-color: black;
   color: white; }
 

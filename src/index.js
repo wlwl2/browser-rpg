@@ -3,6 +3,7 @@ import tileSelector from './tileSelector'
 import tileDragging from './tileDragging'
 import playerControls from './playerControls'
 import mainMenu from './menu/mainMenu'
+import gameMenu from './menu/gameMenu'
 // import touchEvents from './touchEvents'
 
 function init () {
@@ -40,5 +41,6 @@ window.addEventListener('load', function (event) {
 }, false)
 
 mainMenu()
+gameMenu()
 // touchEvents()
 playerControls(step)
