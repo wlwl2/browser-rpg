@@ -7,10 +7,14 @@
 }
 
 .start-menu__menu {
-
+  font-size: 20px;
   li {
     margin: 10px;
     padding: 10px;
     cursor: pointer;
   }
+}
+
+.start-menu__controls {
+  font-size: 16px;
 }

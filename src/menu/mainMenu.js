@@ -3,8 +3,6 @@ export default function mainMenu () {
   const overlay = document.querySelector('.overlay')
   const mouseInfo = document.querySelector('.mouse-info')
 
-  const startMenuItems = document.querySelectorAll('.start-menu__menu li')
-
   // Arrow key events.
   window.addEventListener('keydown', function (event) {
     // console.log(event.key)
@@ -25,14 +23,21 @@ export default function mainMenu () {
 
     if (event.key === 'Enter') {
       const selectedMenuItem = document.querySelector('.start-menu__menu li.selected')
+      const startMenu = document.querySelector('.start-menu')
+      const helpControlsMenu = document.querySelector('.help-controls')
       if (selectedMenuItem.textContent === 'Continue') {
         menu.setAttribute('data-hidden', 'yes')
         overlay.setAttribute('data-hidden', 'yes')
         mouseInfo.setAttribute('style', 'display: block;')
       }
       if (selectedMenuItem.textContent === 'Help/Controls') {
-        const selectedMenuItem = document.querySelector('.start-menu__menu li.selected')
-        
+        if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
+          helpControlsMenu.setAttribute('data-hidden', 'yes')
+          startMenu.setAttribute('data-hidden', 'no')
+        } else {
+          startMenu.setAttribute('data-hidden', 'yes')
+          helpControlsMenu.setAttribute('data-hidden', 'no')
+        }
       }
     }
   }, false)
