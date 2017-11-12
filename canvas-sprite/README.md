@@ -1,12 +1,3 @@
-# simple-web-template
+# canvas-sprite
 
-A simple template that can be used to create websites.
-
-___
-###Consists of 3 important files:
-
-* **index.html**
-
-* **style.css**
-
-* **script.js**
+A testing ground for using sprites on HTML canvas.
