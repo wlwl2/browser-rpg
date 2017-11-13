@@ -15,6 +15,10 @@ A role-playing game in the browser.
 * Entity AI
 * Controller support
 
+## Important Notes
+Remember to migrate from client-side storage to server-side storage so that
+users cannot just change player data locally.
+
 ## Version History:
 
 **Version 0.2.0 29 Apr 2017**

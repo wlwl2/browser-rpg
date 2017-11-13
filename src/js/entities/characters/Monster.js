@@ -10,6 +10,11 @@ export default function Monster (x, y) {
   this.category = 'monster'
   this.collidable = 'yes'
   this.collidableTiles = []
+  this.exp = 0
+  this.health = 5
+  this.attackPower = 1
+  this.defense = 0
+  this.expReward = 5
 }
 
 Monster.prototype.draw = function draw (ctx) {
