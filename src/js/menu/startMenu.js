@@ -7,13 +7,12 @@ export default function startMenu () {
   const gameMenu = document.querySelector('.game-menu')
   const gameEditor = document.querySelector('.tile-selector')
   const about = document.querySelector('.about')
-  const backToStart = document.querySelectorAll('.back-to-start')
-
-  backToStart.forEach(function (button, index) {
-    button.addEventListener('click', function (event) {
-      
-    }, false)
-  })
+  // const backToStart = document.querySelectorAll('.back-to-start')
+  // backToStart.forEach(function (button, index) {
+  //   button.addEventListener('click', function (event) {
+  //
+  //   }, false)
+  // })
 
   function hideAllSections () {
     const sections = document.querySelectorAll('.menu__section-container section')
