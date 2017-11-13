@@ -6,6 +6,14 @@ export default function startMenu () {
   const helpControlsMenu = document.querySelector('.help-controls')
   const gameMenu = document.querySelector('.game-menu')
   const gameEditor = document.querySelector('.tile-selector')
+  const about = document.querySelector('.about')
+  const backToStart = document.querySelectorAll('.back-to-start')
+
+  backToStart.forEach(function (button, index) {
+    button.addEventListener('click', function (event) {
+      
+    }, false)
+  })
 
   function hideAllSections () {
     const sections = document.querySelectorAll('.menu__section-container section')
@@ -37,6 +45,15 @@ export default function startMenu () {
       } else {
         startMenu.setAttribute('data-hidden', 'yes')
         gameEditor.setAttribute('data-hidden', 'no')
+      }
+    }
+    if (selectedItem === 'About') {
+      if (about.getAttribute('data-hidden') === 'no') {
+        about.setAttribute('data-hidden', 'yes')
+        startMenu.setAttribute('data-hidden', 'no')
+      } else {
+        startMenu.setAttribute('data-hidden', 'yes')
+        about.setAttribute('data-hidden', 'no')
       }
     }
   }

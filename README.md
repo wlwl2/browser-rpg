@@ -16,9 +16,12 @@ A role-playing game in the browser.
 * Controller support
 
 ## Version History:
+
 **Version 0.2.0 29 Apr 2017**
-Scene initialization
-Border initialization
+
+* Scene initialization
+* Border initialization
 
 **Version 0.1.0 8 Apr 2017**
-Started Development
+
+* Started Development
