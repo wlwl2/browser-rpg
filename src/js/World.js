@@ -1,9 +1,9 @@
-// people and monsters
 import Monster from './entities/characters/Monster'
 import Player from './entities/characters/Player'
 import Scene from './Scene'
 import canvasDimensions from './canvasDimensions'
 
+// Contains players and monsters.
 export default function World () {
   const gridcells = 20
   const monsters = this.monsters = []
@@ -22,9 +22,8 @@ World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
 
 // Returns the x and y coordinates in terms of grid cells.
 World.prototype.screenToWorld = function screenToWorld ([screenX, screenY]) {
-  const {canvasWidth, canvasHeight} = canvasDimensions()
+  const {canvasWidth, canvasHeight} = canvasDimensions() // dimensions in pixels
   const tilesWidth = canvasWidth / this.scene.width
   const tilesHeight = canvasHeight / this.scene.height
-  console.log(this.scene.width, this.scene.height)
   return [Math.floor(screenX / tilesWidth), Math.floor(screenY / tilesHeight)]
 }
