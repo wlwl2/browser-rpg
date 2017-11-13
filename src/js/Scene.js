@@ -25,8 +25,7 @@ Scene.prototype.draw = function (ctx, canvas) {
     for (let x = 0; x < this.width; x++) {
       const value = row[x]
       const tile = new this.tiles[value]()
-      const img = document.createElement('img')
-      img.src = tile.source
+      const img = tile.img
       ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,
         x * cellWidth, y * cellHeight, cellWidth, cellHeight)
     }

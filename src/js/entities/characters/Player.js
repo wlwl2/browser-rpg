@@ -1,7 +1,7 @@
-const img = document.createElement('img')
-img.src = 'src/sprites/characters-min.png'
-
 export default function Player (x, y, world) {
+  this.img = document.getElementById('spritesheet')
+  this.sourceX = 9
+  this.sourceY = 42
   this.x = x
   this.y = y
   this.entityNumber = 2
@@ -9,15 +9,12 @@ export default function Player (x, y, world) {
   this.speed = 30
   this.world = world
   this.category = 'character'
-  this.sourceX = 9
-  this.sourceY = 42
-  this.source = 'src/sprites/characters-min.png'
   this.collidable = 'yes'
   this.collidableTiles = []
 }
 
 Player.prototype.draw = function draw (ctx) {
-  ctx.drawImage(img, this.sourceX, this.sourceY, this.size, this.size,
+  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size,
     this.x, this.y, this.size, this.size)
 }
 

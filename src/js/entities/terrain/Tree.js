@@ -3,7 +3,7 @@ export default function Grass (x, y, entityNumber, ctx) {
   this.y = y
   this.entityNumber = 5
   this.size = 30
-  this.source = 'src/sprites/tree.png'
+  this.img = document.getElementById('tree')
   this.sourceX = 0
   this.sourceY = 0
   this.category = 'terrain'

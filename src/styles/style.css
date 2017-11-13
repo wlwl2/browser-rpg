@@ -149,19 +149,7 @@ section[data-hidden="yes"] {
   font-size: 14px;
   font-weight: normal; }
 
-img.spritesheet {
-  display: none; }
-
-img.wallimg {
-  display: none; }
-
-img.floorimg {
-  display: none; }
-
-img.grassimg {
-  display: none; }
-
-img.treeimg {
+.image {
   display: none; }
 
 .floor {

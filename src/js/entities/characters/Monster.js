@@ -1,22 +1,19 @@
-const img = document.createElement('img')
-img.src = 'src/sprites/characters-min.png'
-
 export default function Monster (x, y) {
+  this.img = document.getElementById('spritesheet')
+  this.sourceX = 8
+  this.sourceY = 114
   this.x = x
   this.y = y
   this.entityNumber = 3
   this.size = 30
   this.speed = 30
   this.category = 'monster'
-  this.sourceX = 8
-  this.sourceY = 114
-  this.source = 'src/sprites/characters-min.png'
   this.collidable = 'yes'
   this.collidableTiles = []
 }
 
 Monster.prototype.draw = function draw (ctx) {
-  ctx.drawImage(img, this.sourceX, this.sourceY, this.size, this.size,
+  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size,
     this.x, this.y, this.size, this.size)
 }
 
@@ -32,6 +29,7 @@ Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
       this.collidableTiles.push(tileObj.entityNumber)
     }
   }, this)
+
   // Randomly makes the monster move one step in one of 4 directions.
   const next = {x: this.x, y: this.y}
   const nextY = next.y / 30
@@ -79,10 +77,10 @@ Monster.prototype.step = function step (monsters, canvasLength, grid, tiles) {
       canMove = false
     }
   }, this)
-
   if (canMove) {
     this.x = next.x
     this.y = next.y
+    console.log(grid, this.x, this.y)
   } else {
     this.step(monsters)
   }
