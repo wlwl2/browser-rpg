@@ -1,6 +1,6 @@
 # Browser-RPG
 
-A role-playing game in the browser.
+A 2D role-playing game engine.
 
 ## Development
 * run `npm run dev` to start javascript development.

@@ -1,7 +1,7 @@
 {
   "name": "browser-rpg",
   "version": "0.2.0",
-  "description": "A role-playing game in the browser.",
+  "description": "A 2D role-playing game engine.",
   "main": "build.js",
   "scripts": {
     "start": "http-server",
