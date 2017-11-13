@@ -1,4 +1,4 @@
-export default function mainMenu () {
+export default function startMenu () {
   const menu = document.querySelector('.menu')
   const overlay = document.querySelector('.overlay')
   const mouseInfo = document.querySelector('.mouse-info')
@@ -64,6 +64,50 @@ export default function mainMenu () {
       }
     }
   }, false)
+
+  const startMenuItems = document.querySelectorAll('.start-menu__menu li')
+
+  function clearStartMenuItems () {
+    startMenuItems.forEach(function (item, index) {
+      item.className = ''
+      console.log('deleted')
+    })
+  }
+
+  startMenuItems.forEach(function (item, index) {
+    item.addEventListener('click', function (event) {
+      if (startMenu.getAttribute('data-hidden', 'no')) {
+        clearStartMenuItems()
+        event.target.className = 'start-selected'
+      }
+
+      const selectedMenuItem = event.target.textContent
+      if (selectedMenuItem === 'Continue') {
+        menu.setAttribute('data-hidden', 'yes')
+        overlay.setAttribute('data-hidden', 'yes')
+        mouseInfo.setAttribute('style', 'display: block;')
+        window.localStorage.setItem('inGame', 'yes')
+      }
+      if (selectedMenuItem === 'Help/Controls') {
+        if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
+          helpControlsMenu.setAttribute('data-hidden', 'yes')
+          startMenu.setAttribute('data-hidden', 'no')
+        } else {
+          startMenu.setAttribute('data-hidden', 'yes')
+          helpControlsMenu.setAttribute('data-hidden', 'no')
+        }
+      }
+      if (selectedMenuItem === 'Game Editor') {
+        if (gameEditor.getAttribute('data-hidden') === 'no') {
+          gameEditor.setAttribute('data-hidden', 'yes')
+          startMenu.setAttribute('data-hidden', 'no')
+        } else {
+          startMenu.setAttribute('data-hidden', 'yes')
+          gameEditor.setAttribute('data-hidden', 'no')
+        }
+      }
+    }, false)
+  })
 
   // Escape key events.
   window.addEventListener('keydown', function (event) {

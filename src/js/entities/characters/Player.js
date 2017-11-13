@@ -19,11 +19,11 @@ Player.prototype.draw = function draw (ctx) {
 }
 
 // Moves the player one step.
-Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
+Player.prototype.move = function move (ctx, direction, canvas, world) {
   const speed = this.speed / 30
   const y = this.y / 30
   const x = this.x / 30
-  tiles.forEach(function (Tile) {
+  world.scene.tiles.forEach(function (Tile) {
     let tileObj = new Tile()
     if (tileObj.collidable === 'yes') {
       this.collidableTiles.push(tileObj.entityNumber)
@@ -34,28 +34,28 @@ Player.prototype.move = function move (ctx, direction, canvas, grid, tiles) {
       // Prevents player from moving outside the canvas when moving up.
       if (this.y - this.speed < 0) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[y - speed][x]) >= 0) return
+      if (this.collidableTiles.indexOf(world.scene.grid[y - speed][x]) >= 0) return
       this.y -= this.speed
       break
     case 'down':
       // Prevents player from moving outside the canvas when moving down.
       if (this.y + this.speed * 2 > canvas.height) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[y + speed][x]) >= 0) return
+      if (this.collidableTiles.indexOf(world.scene.grid[y + speed][x]) >= 0) return
       this.y += this.speed
       break
     case 'right':
       // Prevents player from moving outside the canvas when moving right.
       if (this.x + this.speed * 2 > canvas.width) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[y][x + speed]) >= 0) return
+      if (this.collidableTiles.indexOf(world.scene.grid[y][x + speed]) >= 0) return
       this.x += this.speed
       break
     case 'left':
       // Prevents player from moving outside the canvas when moving left.
       if (this.x - this.speed < 0) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(grid[y][x - speed]) >= 0) return
+      if (this.collidableTiles.indexOf(world.scene.grid[y][x - speed]) >= 0) return
       this.x -= this.speed
       break
   }

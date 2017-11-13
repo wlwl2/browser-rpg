@@ -2,7 +2,7 @@ import World from './World'
 import tileSelector from './tileSelector'
 import tileDragging from './tileDragging'
 import playerControls from './playerControls'
-import mainMenu from './menu/mainMenu'
+import startMenu from './menu/startMenu'
 import gameMenu from './menu/gameMenu'
 // import touchEvents from './touchEvents'
 
@@ -25,7 +25,7 @@ function step (direction) {
     monster.draw(ctx)
   })
   world.players.forEach(function (player) {
-    player.move(ctx, direction, canvas, world.scene.grid, world.scene.tiles)
+    player.move(ctx, direction, canvas, world)
     player.draw(ctx)
   })
 }
@@ -39,7 +39,7 @@ window.addEventListener('load', function (event) {
   step()
 }, false)
 
-mainMenu()
+startMenu()
 gameMenu()
 // touchEvents()
 playerControls(step)
