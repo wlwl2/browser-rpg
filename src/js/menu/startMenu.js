@@ -14,6 +14,33 @@ export default function startMenu () {
     }
   }
 
+  function menuInteraction (selectedItem) {
+    if (selectedItem === 'Continue') {
+      menu.setAttribute('data-hidden', 'yes')
+      overlay.setAttribute('data-hidden', 'yes')
+      mouseInfo.setAttribute('style', 'display: block;')
+      window.localStorage.setItem('inGame', 'yes')
+    }
+    if (selectedItem === 'Help/Controls') {
+      if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
+        helpControlsMenu.setAttribute('data-hidden', 'yes')
+        startMenu.setAttribute('data-hidden', 'no')
+      } else {
+        startMenu.setAttribute('data-hidden', 'yes')
+        helpControlsMenu.setAttribute('data-hidden', 'no')
+      }
+    }
+    if (selectedItem === 'Game Editor') {
+      if (gameEditor.getAttribute('data-hidden') === 'no') {
+        gameEditor.setAttribute('data-hidden', 'yes')
+        startMenu.setAttribute('data-hidden', 'no')
+      } else {
+        startMenu.setAttribute('data-hidden', 'yes')
+        gameEditor.setAttribute('data-hidden', 'no')
+      }
+    }
+  }
+
   // Arrow key events.
   window.addEventListener('keydown', function (event) {
     // console.log(event.key)
@@ -37,31 +64,8 @@ export default function startMenu () {
     }
 
     if (event.key === 'Enter') {
-      const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected')
-      if (selectedMenuItem.textContent === 'Continue') {
-        menu.setAttribute('data-hidden', 'yes')
-        overlay.setAttribute('data-hidden', 'yes')
-        mouseInfo.setAttribute('style', 'display: block;')
-        window.localStorage.setItem('inGame', 'yes')
-      }
-      if (selectedMenuItem.textContent === 'Help/Controls') {
-        if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
-          helpControlsMenu.setAttribute('data-hidden', 'yes')
-          startMenu.setAttribute('data-hidden', 'no')
-        } else {
-          startMenu.setAttribute('data-hidden', 'yes')
-          helpControlsMenu.setAttribute('data-hidden', 'no')
-        }
-      }
-      if (selectedMenuItem.textContent === 'Game Editor') {
-        if (gameEditor.getAttribute('data-hidden') === 'no') {
-          gameEditor.setAttribute('data-hidden', 'yes')
-          startMenu.setAttribute('data-hidden', 'no')
-        } else {
-          startMenu.setAttribute('data-hidden', 'yes')
-          gameEditor.setAttribute('data-hidden', 'no')
-        }
-      }
+      const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected').textContent
+      menuInteraction(selectedMenuItem)
     }
   }, false)
 
@@ -79,32 +83,7 @@ export default function startMenu () {
       if (startMenu.getAttribute('data-hidden', 'no')) {
         clearStartMenuItems()
         event.target.className = 'start-selected'
-      }
-
-      const selectedMenuItem = event.target.textContent
-      if (selectedMenuItem === 'Continue') {
-        menu.setAttribute('data-hidden', 'yes')
-        overlay.setAttribute('data-hidden', 'yes')
-        mouseInfo.setAttribute('style', 'display: block;')
-        window.localStorage.setItem('inGame', 'yes')
-      }
-      if (selectedMenuItem === 'Help/Controls') {
-        if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
-          helpControlsMenu.setAttribute('data-hidden', 'yes')
-          startMenu.setAttribute('data-hidden', 'no')
-        } else {
-          startMenu.setAttribute('data-hidden', 'yes')
-          helpControlsMenu.setAttribute('data-hidden', 'no')
-        }
-      }
-      if (selectedMenuItem === 'Game Editor') {
-        if (gameEditor.getAttribute('data-hidden') === 'no') {
-          gameEditor.setAttribute('data-hidden', 'yes')
-          startMenu.setAttribute('data-hidden', 'no')
-        } else {
-          startMenu.setAttribute('data-hidden', 'yes')
-          gameEditor.setAttribute('data-hidden', 'no')
-        }
+        menuInteraction(event.target.textContent)
       }
     }, false)
   })
@@ -112,7 +91,7 @@ export default function startMenu () {
   // Escape key events.
   window.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
-      // If not game do this.
+      // If not in game do this.
       if (window.localStorage.getItem('inGame') === 'no' || !window.localStorage.getItem('inGame')) {
         // If the menu is shown, then hide the menu.
         if (menu.getAttribute('data-hidden') === 'no') {
