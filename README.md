@@ -3,8 +3,7 @@
 A 2D role-playing game engine.
 
 ## Development
-* run `npm run dev` to start javascript development.
-* run `grunt` to start scss/styles development.
+* run `npm start` to start javascript development on Windows 10.
 
 ## Todo
 * World Map

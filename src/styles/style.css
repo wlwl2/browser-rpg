@@ -167,13 +167,13 @@ section[data-hidden="yes"] {
 .grass {
   height: 30px;
   width: 30px;
-  background-image: url("../sprites/grass-attempt-1.png");
+  background-image: url("../sprites/grass-attempt-2.png");
   background-position: 0px 0px; }
 
 .tree {
   height: 30px;
   width: 30px;
-  background-image: url("../sprites/tree.png");
+  background-image: url("../sprites/tree-attempt-2.png");
   background-position: 0px 0px; }
 
 .player {

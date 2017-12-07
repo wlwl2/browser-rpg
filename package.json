@@ -4,9 +4,10 @@
   "description": "A 2D role-playing game engine.",
   "main": "build.js",
   "scripts": {
-    "start": "http-server",
-    "dev-win": "concurrently --kill-others \"start index.html\" \"grunt\" \"webpack -w\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "start index.html && npm run dev-win",
+    "dev-win": "concurrently --kill-others  \"webpack -w\" \"grunt\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -w"
   },
   "dependencies": {
     "http-server": "^0.10.0"

@@ -65,183 +65,832 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!***********************************************!*\
-  !*** ./src/js/entities/characters/Monster.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Monster;\nfunction Monster (x, y) {\r\n  this.img = document.getElementById('spritesheet')\r\n  this.sourceX = 8\r\n  this.sourceY = 114\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 3\r\n  this.size = 30\r\n  this.speed = 30\r\n  this.category = 'monster'\r\n  this.collidable = 'yes'\r\n  this.collidableTiles = []\r\n  this.exp = 0\r\n  this.health = 5\r\n  this.attackPower = 1\r\n  this.defense = 0\r\n  this.expReward = 5\r\n}\r\n\r\nMonster.prototype.draw = function draw (ctx) {\r\n  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size,\r\n    this.x, this.y, this.size, this.size)\r\n}\r\n\r\nMonster.prototype.step = function step (canvasLength, world) {\r\n  const speed = this.speed / 30\r\n  const y = this.y / 30\r\n  const x = this.x / 30\r\n  // Collates all the colliable tiles into this.collidableTiles.\r\n  if (!world) return\r\n  world.scene.tiles.forEach(function (Tile) {\r\n    let tileObj = new Tile()\r\n    if (tileObj.collidable === 'yes') {\r\n      this.collidableTiles.push(tileObj.entityNumber)\r\n    }\r\n  }, this)\r\n\r\n  // Randomly makes the monster move one step in one of 4 directions.\r\n  const next = {x: this.x, y: this.y}\r\n  const nextY = next.y / 30\r\n  const nextX = next.x / 30\r\n  switch (Math.floor(Math.random() * 4)) {\r\n    case 0: // up.\r\n      // Prevents monster from moving outside the canvas when moving up.\r\n      if (next.y - this.speed < 0) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(world.scene.grid[nextY - speed][x]) >= 0) return\r\n      next.y -= this.speed\r\n      break\r\n    case 1: // down.\r\n      // Prevents monster from moving outside the canvas when moving down.\r\n      if (this.y + this.speed * 2 > canvasLength) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(world.scene.grid[nextY + speed][x]) >= 0) return\r\n      next.y += this.speed\r\n      break\r\n    case 2: // right.\r\n      // Prevents monster from moving outside the canvas when moving right.\r\n      if (this.x + this.speed * 2 > canvasLength) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(world.scene.grid[y][nextX + speed]) >= 0) return\r\n      next.x += this.speed\r\n      break\r\n    case 3: // left.\r\n      // Prevents monster from moving outside the canvas when moving left.\r\n      if (this.x - this.speed < 0) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(world.scene.grid[y][nextX - speed]) >= 0) return\r\n      next.x -= this.speed\r\n      break\r\n  }\r\n  // Collision detection between monsters.\r\n  let canMove = true\r\n  world.monsters.forEach(function (monster) {\r\n    if (monster === this) return\r\n    if (!canMove) return\r\n    if (!(monster.x > next.x + this.size ||\r\n        monster.x + monster.size <= next.x ||\r\n        monster.y > next.y + this.size ||\r\n        monster.y + monster.size <= next.y)\r\n    ) {\r\n      canMove = false\r\n    }\r\n  }, this)\r\n  if (canMove) {\r\n    this.x = next.x\r\n    this.y = next.y\r\n  } else {\r\n    this.step(world.monsters)\r\n  }\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9lbnRpdGllcy9jaGFyYWN0ZXJzL01vbnN0ZXIuanM/NmFhZiJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBNb25zdGVyICh4LCB5KSB7XHJcbiAgdGhpcy5pbWcgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnc3ByaXRlc2hlZXQnKVxyXG4gIHRoaXMuc291cmNlWCA9IDhcclxuICB0aGlzLnNvdXJjZVkgPSAxMTRcclxuICB0aGlzLnggPSB4XHJcbiAgdGhpcy55ID0geVxyXG4gIHRoaXMuZW50aXR5TnVtYmVyID0gM1xyXG4gIHRoaXMuc2l6ZSA9IDMwXHJcbiAgdGhpcy5zcGVlZCA9IDMwXHJcbiAgdGhpcy5jYXRlZ29yeSA9ICdtb25zdGVyJ1xyXG4gIHRoaXMuY29sbGlkYWJsZSA9ICd5ZXMnXHJcbiAgdGhpcy5jb2xsaWRhYmxlVGlsZXMgPSBbXVxyXG4gIHRoaXMuZXhwID0gMFxyXG4gIHRoaXMuaGVhbHRoID0gNVxyXG4gIHRoaXMuYXR0YWNrUG93ZXIgPSAxXHJcbiAgdGhpcy5kZWZlbnNlID0gMFxyXG4gIHRoaXMuZXhwUmV3YXJkID0gNVxyXG59XHJcblxyXG5Nb25zdGVyLnByb3RvdHlwZS5kcmF3ID0gZnVuY3Rpb24gZHJhdyAoY3R4KSB7XHJcbiAgY3R4LmRyYXdJbWFnZSh0aGlzLmltZywgdGhpcy5zb3VyY2VYLCB0aGlzLnNvdXJjZVksIHRoaXMuc2l6ZSwgdGhpcy5zaXplLFxyXG4gICAgdGhpcy54LCB0aGlzLnksIHRoaXMuc2l6ZSwgdGhpcy5zaXplKVxyXG59XHJcblxyXG5Nb25zdGVyLnByb3RvdHlwZS5zdGVwID0gZnVuY3Rpb24gc3RlcCAoY2FudmFzTGVuZ3RoLCB3b3JsZCkge1xyXG4gIGNvbnN0IHNwZWVkID0gdGhpcy5zcGVlZCAvIDMwXHJcbiAgY29uc3QgeSA9IHRoaXMueSAvIDMwXHJcbiAgY29uc3QgeCA9IHRoaXMueCAvIDMwXHJcbiAgLy8gQ29sbGF0ZXMgYWxsIHRoZSBjb2xsaWFibGUgdGlsZXMgaW50byB0aGlzLmNvbGxpZGFibGVUaWxlcy5cclxuICBpZiAoIXdvcmxkKSByZXR1cm5cclxuICB3b3JsZC5zY2VuZS50aWxlcy5mb3JFYWNoKGZ1bmN0aW9uIChUaWxlKSB7XHJcbiAgICBsZXQgdGlsZU9iaiA9IG5ldyBUaWxlKClcclxuICAgIGlmICh0aWxlT2JqLmNvbGxpZGFibGUgPT09ICd5ZXMnKSB7XHJcbiAgICAgIHRoaXMuY29sbGlkYWJsZVRpbGVzLnB1c2godGlsZU9iai5lbnRpdHlOdW1iZXIpXHJcbiAgICB9XHJcbiAgfSwgdGhpcylcclxuXHJcbiAgLy8gUmFuZG9tbHkgbWFrZXMgdGhlIG1vbnN0ZXIgbW92ZSBvbmUgc3RlcCBpbiBvbmUgb2YgNCBkaXJlY3Rpb25zLlxyXG4gIGNvbnN0IG5leHQgPSB7eDogdGhpcy54LCB5OiB0aGlzLnl9XHJcbiAgY29uc3QgbmV4dFkgPSBuZXh0LnkgLyAzMFxyXG4gIGNvbnN0IG5leHRYID0gbmV4dC54IC8gMzBcclxuICBzd2l0Y2ggKE1hdGguZmxvb3IoTWF0aC5yYW5kb20oKSAqIDQpKSB7XHJcbiAgICBjYXNlIDA6IC8vIHVwLlxyXG4gICAgICAvLyBQcmV2ZW50cyBtb25zdGVyIGZyb20gbW92aW5nIG91dHNpZGUgdGhlIGNhbnZhcyB3aGVuIG1vdmluZyB1cC5cclxuICAgICAgaWYgKG5leHQueSAtIHRoaXMuc3BlZWQgPCAwKSByZXR1cm5cclxuICAgICAgLy8gQ29sbGlkYWJsZSB0ZXJyYWluIGRldGVjdGlvbi5cclxuICAgICAgaWYgKHRoaXMuY29sbGlkYWJsZVRpbGVzLmluZGV4T2Yod29ybGQuc2NlbmUuZ3JpZFtuZXh0WSAtIHNwZWVkXVt4XSkgPj0gMCkgcmV0dXJuXHJcbiAgICAgIG5leHQueSAtPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgICBjYXNlIDE6IC8vIGRvd24uXHJcbiAgICAgIC8vIFByZXZlbnRzIG1vbnN0ZXIgZnJvbSBtb3Zpbmcgb3V0c2lkZSB0aGUgY2FudmFzIHdoZW4gbW92aW5nIGRvd24uXHJcbiAgICAgIGlmICh0aGlzLnkgKyB0aGlzLnNwZWVkICogMiA+IGNhbnZhc0xlbmd0aCkgcmV0dXJuXHJcbiAgICAgIC8vIENvbGxpZGFibGUgdGVycmFpbiBkZXRlY3Rpb24uXHJcbiAgICAgIGlmICh0aGlzLmNvbGxpZGFibGVUaWxlcy5pbmRleE9mKHdvcmxkLnNjZW5lLmdyaWRbbmV4dFkgKyBzcGVlZF1beF0pID49IDApIHJldHVyblxyXG4gICAgICBuZXh0LnkgKz0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gICAgY2FzZSAyOiAvLyByaWdodC5cclxuICAgICAgLy8gUHJldmVudHMgbW9uc3RlciBmcm9tIG1vdmluZyBvdXRzaWRlIHRoZSBjYW52YXMgd2hlbiBtb3ZpbmcgcmlnaHQuXHJcbiAgICAgIGlmICh0aGlzLnggKyB0aGlzLnNwZWVkICogMiA+IGNhbnZhc0xlbmd0aCkgcmV0dXJuXHJcbiAgICAgIC8vIENvbGxpZGFibGUgdGVycmFpbiBkZXRlY3Rpb24uXHJcbiAgICAgIGlmICh0aGlzLmNvbGxpZGFibGVUaWxlcy5pbmRleE9mKHdvcmxkLnNjZW5lLmdyaWRbeV1bbmV4dFggKyBzcGVlZF0pID49IDApIHJldHVyblxyXG4gICAgICBuZXh0LnggKz0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gICAgY2FzZSAzOiAvLyBsZWZ0LlxyXG4gICAgICAvLyBQcmV2ZW50cyBtb25zdGVyIGZyb20gbW92aW5nIG91dHNpZGUgdGhlIGNhbnZhcyB3aGVuIG1vdmluZyBsZWZ0LlxyXG4gICAgICBpZiAodGhpcy54IC0gdGhpcy5zcGVlZCA8IDApIHJldHVyblxyXG4gICAgICAvLyBDb2xsaWRhYmxlIHRlcnJhaW4gZGV0ZWN0aW9uLlxyXG4gICAgICBpZiAodGhpcy5jb2xsaWRhYmxlVGlsZXMuaW5kZXhPZih3b3JsZC5zY2VuZS5ncmlkW3ldW25leHRYIC0gc3BlZWRdKSA+PSAwKSByZXR1cm5cclxuICAgICAgbmV4dC54IC09IHRoaXMuc3BlZWRcclxuICAgICAgYnJlYWtcclxuICB9XHJcbiAgLy8gQ29sbGlzaW9uIGRldGVjdGlvbiBiZXR3ZWVuIG1vbnN0ZXJzLlxyXG4gIGxldCBjYW5Nb3ZlID0gdHJ1ZVxyXG4gIHdvcmxkLm1vbnN0ZXJzLmZvckVhY2goZnVuY3Rpb24gKG1vbnN0ZXIpIHtcclxuICAgIGlmIChtb25zdGVyID09PSB0aGlzKSByZXR1cm5cclxuICAgIGlmICghY2FuTW92ZSkgcmV0dXJuXHJcbiAgICBpZiAoIShtb25zdGVyLnggPiBuZXh0LnggKyB0aGlzLnNpemUgfHxcclxuICAgICAgICBtb25zdGVyLnggKyBtb25zdGVyLnNpemUgPD0gbmV4dC54IHx8XHJcbiAgICAgICAgbW9uc3Rlci55ID4gbmV4dC55ICsgdGhpcy5zaXplIHx8XHJcbiAgICAgICAgbW9uc3Rlci55ICsgbW9uc3Rlci5zaXplIDw9IG5leHQueSlcclxuICAgICkge1xyXG4gICAgICBjYW5Nb3ZlID0gZmFsc2VcclxuICAgIH1cclxuICB9LCB0aGlzKVxyXG4gIGlmIChjYW5Nb3ZlKSB7XHJcbiAgICB0aGlzLnggPSBuZXh0LnhcclxuICAgIHRoaXMueSA9IG5leHQueVxyXG4gIH0gZWxzZSB7XHJcbiAgICB0aGlzLnN0ZXAod29ybGQubW9uc3RlcnMpXHJcbiAgfVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2pzL2VudGl0aWVzL2NoYXJhY3RlcnMvTW9uc3Rlci5qc1xuLy8gbW9kdWxlIGlkID0gMFxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///0\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Monster;
+function Monster (x, y) {
+  this.img = document.getElementById('spritesheet')
+  this.sourceX = 8
+  this.sourceY = 114
+  this.x = x
+  this.y = y
+  this.entityNumber = 3
+  this.size = 30
+  this.speed = 30
+  this.category = 'monster'
+  this.collidable = 'yes'
+  this.collidableTiles = []
+  this.exp = 0
+  this.health = 5
+  this.attackPower = 1
+  this.defense = 0
+  this.expReward = 5
+}
+
+Monster.prototype.draw = function draw (ctx) {
+  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size,
+    this.x, this.y, this.size, this.size)
+}
+
+Monster.prototype.step = function step (canvasLength, world) {
+  const speed = this.speed / 30
+  const y = this.y / 30
+  const x = this.x / 30
+  // Collates all the colliable tiles into this.collidableTiles.
+  if (!world) return
+  world.scene.tiles.forEach(function (Tile) {
+    let tileObj = new Tile()
+    if (tileObj.collidable === 'yes') {
+      this.collidableTiles.push(tileObj.entityNumber)
+    }
+  }, this)
+
+  // Randomly makes the monster move one step in one of 4 directions.
+  const next = {x: this.x, y: this.y}
+  const nextY = next.y / 30
+  const nextX = next.x / 30
+  switch (Math.floor(Math.random() * 4)) {
+    case 0: // up.
+      // Prevents monster from moving outside the canvas when moving up.
+      if (next.y - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(world.scene.grid[nextY - speed][x]) >= 0) return
+      next.y -= this.speed
+      break
+    case 1: // down.
+      // Prevents monster from moving outside the canvas when moving down.
+      if (this.y + this.speed * 2 > canvasLength) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(world.scene.grid[nextY + speed][x]) >= 0) return
+      next.y += this.speed
+      break
+    case 2: // right.
+      // Prevents monster from moving outside the canvas when moving right.
+      if (this.x + this.speed * 2 > canvasLength) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(world.scene.grid[y][nextX + speed]) >= 0) return
+      next.x += this.speed
+      break
+    case 3: // left.
+      // Prevents monster from moving outside the canvas when moving left.
+      if (this.x - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(world.scene.grid[y][nextX - speed]) >= 0) return
+      next.x -= this.speed
+      break
+  }
+  // Collision detection between monsters.
+  let canMove = true
+  world.monsters.forEach(function (monster) {
+    if (monster === this) return
+    if (!canMove) return
+    if (!(monster.x > next.x + this.size ||
+        monster.x + monster.size <= next.x ||
+        monster.y > next.y + this.size ||
+        monster.y + monster.size <= next.y)
+    ) {
+      canMove = false
+    }
+  }, this)
+  if (canMove) {
+    this.x = next.x
+    this.y = next.y
+  } else {
+    this.step(world.monsters)
+  }
+}
+
 
 /***/ }),
 /* 1 */
-/*!**********************************************!*\
-  !*** ./src/js/entities/characters/Player.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Player;\nfunction Player (x, y) {\r\n  this.img = document.getElementById('spritesheet')\r\n  this.sourceX = 9\r\n  this.sourceY = 42\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 2\r\n  this.size = 30\r\n  this.speed = 30\r\n  this.category = 'character'\r\n  this.collidable = 'yes'\r\n  this.collidableTiles = []\r\n  this.exp = 0\r\n  this.health = 10\r\n  this.attackPower = 3\r\n  this.defense = 0\r\n}\r\n\r\nPlayer.prototype.draw = function draw (ctx) {\r\n  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size,\r\n    this.x, this.y, this.size, this.size)\r\n}\r\n\r\n// Moves the player one step.\r\nPlayer.prototype.move = function move (ctx, direction, canvas, world) {\r\n  const speed = this.speed / 30\r\n  const y = this.y / 30\r\n  const x = this.x / 30\r\n  world.scene.tiles.forEach(function (Tile) {\r\n    let tileObj = new Tile()\r\n    if (tileObj.collidable === 'yes') {\r\n      this.collidableTiles.push(tileObj.entityNumber)\r\n    }\r\n  }, this)\r\n  switch (direction) {\r\n    case 'up':\r\n      // Prevents player from moving outside the canvas when moving up.\r\n      if (this.y - this.speed < 0) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(world.scene.grid[y - speed][x]) >= 0) return\r\n      this.y -= this.speed\r\n      break\r\n    case 'down':\r\n      // Prevents player from moving outside the canvas when moving down.\r\n      if (this.y + this.speed * 2 > canvas.height) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(world.scene.grid[y + speed][x]) >= 0) return\r\n      this.y += this.speed\r\n      break\r\n    case 'right':\r\n      // Prevents player from moving outside the canvas when moving right.\r\n      if (this.x + this.speed * 2 > canvas.width) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(world.scene.grid[y][x + speed]) >= 0) return\r\n      this.x += this.speed\r\n      break\r\n    case 'left':\r\n      // Prevents player from moving outside the canvas when moving left.\r\n      if (this.x - this.speed < 0) return\r\n      // Collidable terrain detection.\r\n      if (this.collidableTiles.indexOf(world.scene.grid[y][x - speed]) >= 0) return\r\n      this.x -= this.speed\r\n      break\r\n  }\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9lbnRpdGllcy9jaGFyYWN0ZXJzL1BsYXllci5qcz9mY2VkIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFBsYXllciAoeCwgeSkge1xyXG4gIHRoaXMuaW1nID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Nwcml0ZXNoZWV0JylcclxuICB0aGlzLnNvdXJjZVggPSA5XHJcbiAgdGhpcy5zb3VyY2VZID0gNDJcclxuICB0aGlzLnggPSB4XHJcbiAgdGhpcy55ID0geVxyXG4gIHRoaXMuZW50aXR5TnVtYmVyID0gMlxyXG4gIHRoaXMuc2l6ZSA9IDMwXHJcbiAgdGhpcy5zcGVlZCA9IDMwXHJcbiAgdGhpcy5jYXRlZ29yeSA9ICdjaGFyYWN0ZXInXHJcbiAgdGhpcy5jb2xsaWRhYmxlID0gJ3llcydcclxuICB0aGlzLmNvbGxpZGFibGVUaWxlcyA9IFtdXHJcbiAgdGhpcy5leHAgPSAwXHJcbiAgdGhpcy5oZWFsdGggPSAxMFxyXG4gIHRoaXMuYXR0YWNrUG93ZXIgPSAzXHJcbiAgdGhpcy5kZWZlbnNlID0gMFxyXG59XHJcblxyXG5QbGF5ZXIucHJvdG90eXBlLmRyYXcgPSBmdW5jdGlvbiBkcmF3IChjdHgpIHtcclxuICBjdHguZHJhd0ltYWdlKHRoaXMuaW1nLCB0aGlzLnNvdXJjZVgsIHRoaXMuc291cmNlWSwgdGhpcy5zaXplLCB0aGlzLnNpemUsXHJcbiAgICB0aGlzLngsIHRoaXMueSwgdGhpcy5zaXplLCB0aGlzLnNpemUpXHJcbn1cclxuXHJcbi8vIE1vdmVzIHRoZSBwbGF5ZXIgb25lIHN0ZXAuXHJcblBsYXllci5wcm90b3R5cGUubW92ZSA9IGZ1bmN0aW9uIG1vdmUgKGN0eCwgZGlyZWN0aW9uLCBjYW52YXMsIHdvcmxkKSB7XHJcbiAgY29uc3Qgc3BlZWQgPSB0aGlzLnNwZWVkIC8gMzBcclxuICBjb25zdCB5ID0gdGhpcy55IC8gMzBcclxuICBjb25zdCB4ID0gdGhpcy54IC8gMzBcclxuICB3b3JsZC5zY2VuZS50aWxlcy5mb3JFYWNoKGZ1bmN0aW9uIChUaWxlKSB7XHJcbiAgICBsZXQgdGlsZU9iaiA9IG5ldyBUaWxlKClcclxuICAgIGlmICh0aWxlT2JqLmNvbGxpZGFibGUgPT09ICd5ZXMnKSB7XHJcbiAgICAgIHRoaXMuY29sbGlkYWJsZVRpbGVzLnB1c2godGlsZU9iai5lbnRpdHlOdW1iZXIpXHJcbiAgICB9XHJcbiAgfSwgdGhpcylcclxuICBzd2l0Y2ggKGRpcmVjdGlvbikge1xyXG4gICAgY2FzZSAndXAnOlxyXG4gICAgICAvLyBQcmV2ZW50cyBwbGF5ZXIgZnJvbSBtb3Zpbmcgb3V0c2lkZSB0aGUgY2FudmFzIHdoZW4gbW92aW5nIHVwLlxyXG4gICAgICBpZiAodGhpcy55IC0gdGhpcy5zcGVlZCA8IDApIHJldHVyblxyXG4gICAgICAvLyBDb2xsaWRhYmxlIHRlcnJhaW4gZGV0ZWN0aW9uLlxyXG4gICAgICBpZiAodGhpcy5jb2xsaWRhYmxlVGlsZXMuaW5kZXhPZih3b3JsZC5zY2VuZS5ncmlkW3kgLSBzcGVlZF1beF0pID49IDApIHJldHVyblxyXG4gICAgICB0aGlzLnkgLT0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gICAgY2FzZSAnZG93bic6XHJcbiAgICAgIC8vIFByZXZlbnRzIHBsYXllciBmcm9tIG1vdmluZyBvdXRzaWRlIHRoZSBjYW52YXMgd2hlbiBtb3ZpbmcgZG93bi5cclxuICAgICAgaWYgKHRoaXMueSArIHRoaXMuc3BlZWQgKiAyID4gY2FudmFzLmhlaWdodCkgcmV0dXJuXHJcbiAgICAgIC8vIENvbGxpZGFibGUgdGVycmFpbiBkZXRlY3Rpb24uXHJcbiAgICAgIGlmICh0aGlzLmNvbGxpZGFibGVUaWxlcy5pbmRleE9mKHdvcmxkLnNjZW5lLmdyaWRbeSArIHNwZWVkXVt4XSkgPj0gMCkgcmV0dXJuXHJcbiAgICAgIHRoaXMueSArPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgICBjYXNlICdyaWdodCc6XHJcbiAgICAgIC8vIFByZXZlbnRzIHBsYXllciBmcm9tIG1vdmluZyBvdXRzaWRlIHRoZSBjYW52YXMgd2hlbiBtb3ZpbmcgcmlnaHQuXHJcbiAgICAgIGlmICh0aGlzLnggKyB0aGlzLnNwZWVkICogMiA+IGNhbnZhcy53aWR0aCkgcmV0dXJuXHJcbiAgICAgIC8vIENvbGxpZGFibGUgdGVycmFpbiBkZXRlY3Rpb24uXHJcbiAgICAgIGlmICh0aGlzLmNvbGxpZGFibGVUaWxlcy5pbmRleE9mKHdvcmxkLnNjZW5lLmdyaWRbeV1beCArIHNwZWVkXSkgPj0gMCkgcmV0dXJuXHJcbiAgICAgIHRoaXMueCArPSB0aGlzLnNwZWVkXHJcbiAgICAgIGJyZWFrXHJcbiAgICBjYXNlICdsZWZ0JzpcclxuICAgICAgLy8gUHJldmVudHMgcGxheWVyIGZyb20gbW92aW5nIG91dHNpZGUgdGhlIGNhbnZhcyB3aGVuIG1vdmluZyBsZWZ0LlxyXG4gICAgICBpZiAodGhpcy54IC0gdGhpcy5zcGVlZCA8IDApIHJldHVyblxyXG4gICAgICAvLyBDb2xsaWRhYmxlIHRlcnJhaW4gZGV0ZWN0aW9uLlxyXG4gICAgICBpZiAodGhpcy5jb2xsaWRhYmxlVGlsZXMuaW5kZXhPZih3b3JsZC5zY2VuZS5ncmlkW3ldW3ggLSBzcGVlZF0pID49IDApIHJldHVyblxyXG4gICAgICB0aGlzLnggLT0gdGhpcy5zcGVlZFxyXG4gICAgICBicmVha1xyXG4gIH1cclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9qcy9lbnRpdGllcy9jaGFyYWN0ZXJzL1BsYXllci5qc1xuLy8gbW9kdWxlIGlkID0gMVxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///1\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Player;
+function Player (x, y) {
+  this.img = document.getElementById('spritesheet')
+  this.sourceX = 9
+  this.sourceY = 42
+  this.x = x
+  this.y = y
+  this.entityNumber = 2
+  this.size = 30
+  this.speed = 30
+  this.category = 'character'
+  this.collidable = 'yes'
+  this.collidableTiles = []
+  this.exp = 0
+  this.health = 10
+  this.attackPower = 3
+  this.defense = 0
+}
+
+Player.prototype.draw = function draw (ctx) {
+  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size,
+    this.x, this.y, this.size, this.size)
+}
+
+// Moves the player one step.
+Player.prototype.move = function move (ctx, direction, canvas, world) {
+  const speed = this.speed / 30
+  const y = this.y / 30
+  const x = this.x / 30
+  world.scene.tiles.forEach(function (Tile) {
+    let tileObj = new Tile()
+    if (tileObj.collidable === 'yes') {
+      this.collidableTiles.push(tileObj.entityNumber)
+    }
+  }, this)
+  switch (direction) {
+    case 'up':
+      // Prevents player from moving outside the canvas when moving up.
+      if (this.y - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(world.scene.grid[y - speed][x]) >= 0) return
+      this.y -= this.speed
+      break
+    case 'down':
+      // Prevents player from moving outside the canvas when moving down.
+      if (this.y + this.speed * 2 > canvas.height) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(world.scene.grid[y + speed][x]) >= 0) return
+      this.y += this.speed
+      break
+    case 'right':
+      // Prevents player from moving outside the canvas when moving right.
+      if (this.x + this.speed * 2 > canvas.width) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(world.scene.grid[y][x + speed]) >= 0) return
+      this.x += this.speed
+      break
+    case 'left':
+      // Prevents player from moving outside the canvas when moving left.
+      if (this.x - this.speed < 0) return
+      // Collidable terrain detection.
+      if (this.collidableTiles.indexOf(world.scene.grid[y][x - speed]) >= 0) return
+      this.x -= this.speed
+      break
+  }
+}
+
 
 /***/ }),
 /* 2 */
-/*!*************************!*\
-  !*** ./src/js/index.js ***!
-  \*************************/
-/*! no exports provided */
-/*! all exports used */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("Object.defineProperty(__webpack_exports__, \"__esModule\", { value: true });\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__World__ = __webpack_require__(/*! ./World */ 3);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tileSelector__ = __webpack_require__(/*! ./tileSelector */ 10);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tileDragging__ = __webpack_require__(/*! ./tileDragging */ 11);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__playerControls__ = __webpack_require__(/*! ./playerControls */ 12);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__menu_startMenu__ = __webpack_require__(/*! ./menu/startMenu */ 13);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__menu_gameMenu__ = __webpack_require__(/*! ./menu/gameMenu */ 14);\n\r\n\r\n\r\n\r\n\r\n\r\n// import touchEvents from './touchEvents'\r\n\r\nfunction init () {\r\n  var canvas = document.createElement('canvas')\r\n  canvas.height = 600\r\n  canvas.width = 600\r\n  var ctx = canvas.getContext('2d')\r\n  document.querySelector('.game').appendChild(canvas)\r\n  return { ctx, canvas }\r\n}\r\n\r\n// For each of these steps, re-create the world.\r\nfunction step (direction) {\r\n  // Erases canvas.\r\n  ctx.clearRect(0, 0, canvas.width, canvas.height)\r\n  world.scene.draw(ctx, canvas)\r\n  world.monsters.forEach(function (monster) {\r\n    monster.step(canvas.height, world)\r\n    monster.draw(ctx)\r\n  })\r\n  world.players.forEach(function (player) {\r\n    player.move(ctx, direction, canvas, world)\r\n    player.draw(ctx)\r\n  })\r\n}\r\n\r\nconst { ctx, canvas } = init()\r\nconst world = new __WEBPACK_IMPORTED_MODULE_0__World__[\"a\" /* default */]()\r\nObject(__WEBPACK_IMPORTED_MODULE_1__tileSelector__[\"a\" /* default */])(canvas)\r\nObject(__WEBPACK_IMPORTED_MODULE_2__tileDragging__[\"a\" /* default */])(canvas, world, ctx)\r\n\r\nwindow.addEventListener('load', function (event) {\r\n  step()\r\n}, false)\r\n\r\nObject(__WEBPACK_IMPORTED_MODULE_4__menu_startMenu__[\"a\" /* default */])()\r\nObject(__WEBPACK_IMPORTED_MODULE_5__menu_gameMenu__[\"a\" /* default */])()\r\n// touchEvents()\r\nObject(__WEBPACK_IMPORTED_MODULE_3__playerControls__[\"a\" /* default */])(step)\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9pbmRleC5qcz9iYzY2Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBXb3JsZCBmcm9tICcuL1dvcmxkJ1xyXG5pbXBvcnQgdGlsZVNlbGVjdG9yIGZyb20gJy4vdGlsZVNlbGVjdG9yJ1xyXG5pbXBvcnQgdGlsZURyYWdnaW5nIGZyb20gJy4vdGlsZURyYWdnaW5nJ1xyXG5pbXBvcnQgcGxheWVyQ29udHJvbHMgZnJvbSAnLi9wbGF5ZXJDb250cm9scydcclxuaW1wb3J0IHN0YXJ0TWVudSBmcm9tICcuL21lbnUvc3RhcnRNZW51J1xyXG5pbXBvcnQgZ2FtZU1lbnUgZnJvbSAnLi9tZW51L2dhbWVNZW51J1xyXG4vLyBpbXBvcnQgdG91Y2hFdmVudHMgZnJvbSAnLi90b3VjaEV2ZW50cydcclxuXHJcbmZ1bmN0aW9uIGluaXQgKCkge1xyXG4gIHZhciBjYW52YXMgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdjYW52YXMnKVxyXG4gIGNhbnZhcy5oZWlnaHQgPSA2MDBcclxuICBjYW52YXMud2lkdGggPSA2MDBcclxuICB2YXIgY3R4ID0gY2FudmFzLmdldENvbnRleHQoJzJkJylcclxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuZ2FtZScpLmFwcGVuZENoaWxkKGNhbnZhcylcclxuICByZXR1cm4geyBjdHgsIGNhbnZhcyB9XHJcbn1cclxuXHJcbi8vIEZvciBlYWNoIG9mIHRoZXNlIHN0ZXBzLCByZS1jcmVhdGUgdGhlIHdvcmxkLlxyXG5mdW5jdGlvbiBzdGVwIChkaXJlY3Rpb24pIHtcclxuICAvLyBFcmFzZXMgY2FudmFzLlxyXG4gIGN0eC5jbGVhclJlY3QoMCwgMCwgY2FudmFzLndpZHRoLCBjYW52YXMuaGVpZ2h0KVxyXG4gIHdvcmxkLnNjZW5lLmRyYXcoY3R4LCBjYW52YXMpXHJcbiAgd29ybGQubW9uc3RlcnMuZm9yRWFjaChmdW5jdGlvbiAobW9uc3Rlcikge1xyXG4gICAgbW9uc3Rlci5zdGVwKGNhbnZhcy5oZWlnaHQsIHdvcmxkKVxyXG4gICAgbW9uc3Rlci5kcmF3KGN0eClcclxuICB9KVxyXG4gIHdvcmxkLnBsYXllcnMuZm9yRWFjaChmdW5jdGlvbiAocGxheWVyKSB7XHJcbiAgICBwbGF5ZXIubW92ZShjdHgsIGRpcmVjdGlvbiwgY2FudmFzLCB3b3JsZClcclxuICAgIHBsYXllci5kcmF3KGN0eClcclxuICB9KVxyXG59XHJcblxyXG5jb25zdCB7IGN0eCwgY2FudmFzIH0gPSBpbml0KClcclxuY29uc3Qgd29ybGQgPSBuZXcgV29ybGQoKVxyXG50aWxlU2VsZWN0b3IoY2FudmFzKVxyXG50aWxlRHJhZ2dpbmcoY2FudmFzLCB3b3JsZCwgY3R4KVxyXG5cclxud2luZG93LmFkZEV2ZW50TGlzdGVuZXIoJ2xvYWQnLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICBzdGVwKClcclxufSwgZmFsc2UpXHJcblxyXG5zdGFydE1lbnUoKVxyXG5nYW1lTWVudSgpXHJcbi8vIHRvdWNoRXZlbnRzKClcclxucGxheWVyQ29udHJvbHMoc3RlcClcclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvanMvaW5kZXguanNcbi8vIG1vZHVsZSBpZCA9IDJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///2\n");
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__World__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tileSelector__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tileDragging__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__playerControls__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__menu_startMenu__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__menu_gameMenu__ = __webpack_require__(14);
+
+
+
+
+
+
+// import touchEvents from './touchEvents'
+
+function init () {
+  var canvas = document.createElement('canvas')
+  canvas.height = 600
+  canvas.width = 600
+  var ctx = canvas.getContext('2d')
+  document.querySelector('.game').appendChild(canvas)
+  return { ctx, canvas }
+}
+
+// For each of these steps, re-create the world.
+function step (direction) {
+  // Erases canvas.
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  world.scene.draw(ctx, canvas)
+  world.monsters.forEach(function (monster) {
+    monster.step(canvas.height, world)
+    monster.draw(ctx)
+  })
+  world.players.forEach(function (player) {
+    player.move(ctx, direction, canvas, world)
+    player.draw(ctx)
+  })
+}
+
+const { ctx, canvas } = init()
+const world = new __WEBPACK_IMPORTED_MODULE_0__World__["a" /* default */]()
+Object(__WEBPACK_IMPORTED_MODULE_1__tileSelector__["a" /* default */])(canvas)
+Object(__WEBPACK_IMPORTED_MODULE_2__tileDragging__["a" /* default */])(canvas, world, ctx)
+
+window.addEventListener('load', function (event) {
+  step()
+}, false)
+
+Object(__WEBPACK_IMPORTED_MODULE_4__menu_startMenu__["a" /* default */])()
+Object(__WEBPACK_IMPORTED_MODULE_5__menu_gameMenu__["a" /* default */])()
+// touchEvents()
+Object(__WEBPACK_IMPORTED_MODULE_3__playerControls__["a" /* default */])(step)
+
 
 /***/ }),
 /* 3 */
-/*!*************************!*\
-  !*** ./src/js/World.js ***!
-  \*************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = World;\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__ = __webpack_require__(/*! ./entities/characters/Monster */ 0);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__ = __webpack_require__(/*! ./entities/characters/Player */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Scene__ = __webpack_require__(/*! ./Scene */ 4);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__canvasDimensions__ = __webpack_require__(/*! ./canvasDimensions */ 9);\n\r\n\r\n\r\n\r\n\r\n// Contains players and monsters.\r\nfunction World () {\r\n  const gridcells = 20\r\n  const monsters = this.monsters = []\r\n  monsters.push(new __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__[\"a\" /* default */](30, 30), new __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__[\"a\" /* default */](60, 60))\r\n  const players = this.players = []\r\n  players.push(new __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__[\"a\" /* default */](240, 240))\r\n  // Set the initial height and width of the grid (or game board) in cells.\r\n  this.scene = new __WEBPACK_IMPORTED_MODULE_2__Scene__[\"a\" /* default */](gridcells, gridcells)\r\n}\r\n\r\nWorld.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {\r\n  if (entityType) {\r\n    this.scene.grid[worldY][worldX] = Number(entityType)\r\n  }\r\n}\r\n\r\n// Returns the x and y coordinates in terms of grid cells.\r\nWorld.prototype.screenToWorld = function screenToWorld ([screenX, screenY]) {\r\n  const {canvasWidth, canvasHeight} = Object(__WEBPACK_IMPORTED_MODULE_3__canvasDimensions__[\"a\" /* default */])() // dimensions in pixels\r\n  const tilesWidth = canvasWidth / this.scene.width\r\n  const tilesHeight = canvasHeight / this.scene.height\r\n  return [Math.floor(screenX / tilesWidth), Math.floor(screenY / tilesHeight)]\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9Xb3JsZC5qcz8zYmUxIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBNb25zdGVyIGZyb20gJy4vZW50aXRpZXMvY2hhcmFjdGVycy9Nb25zdGVyJ1xyXG5pbXBvcnQgUGxheWVyIGZyb20gJy4vZW50aXRpZXMvY2hhcmFjdGVycy9QbGF5ZXInXHJcbmltcG9ydCBTY2VuZSBmcm9tICcuL1NjZW5lJ1xyXG5pbXBvcnQgY2FudmFzRGltZW5zaW9ucyBmcm9tICcuL2NhbnZhc0RpbWVuc2lvbnMnXHJcblxyXG4vLyBDb250YWlucyBwbGF5ZXJzIGFuZCBtb25zdGVycy5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gV29ybGQgKCkge1xyXG4gIGNvbnN0IGdyaWRjZWxscyA9IDIwXHJcbiAgY29uc3QgbW9uc3RlcnMgPSB0aGlzLm1vbnN0ZXJzID0gW11cclxuICBtb25zdGVycy5wdXNoKG5ldyBNb25zdGVyKDMwLCAzMCksIG5ldyBNb25zdGVyKDYwLCA2MCkpXHJcbiAgY29uc3QgcGxheWVycyA9IHRoaXMucGxheWVycyA9IFtdXHJcbiAgcGxheWVycy5wdXNoKG5ldyBQbGF5ZXIoMjQwLCAyNDApKVxyXG4gIC8vIFNldCB0aGUgaW5pdGlhbCBoZWlnaHQgYW5kIHdpZHRoIG9mIHRoZSBncmlkIChvciBnYW1lIGJvYXJkKSBpbiBjZWxscy5cclxuICB0aGlzLnNjZW5lID0gbmV3IFNjZW5lKGdyaWRjZWxscywgZ3JpZGNlbGxzKVxyXG59XHJcblxyXG5Xb3JsZC5wcm90b3R5cGUuYWRkRW50aXR5ID0gZnVuY3Rpb24gYWRkRW50aXR5IChbd29ybGRYLCB3b3JsZFldLCBlbnRpdHlUeXBlKSB7XHJcbiAgaWYgKGVudGl0eVR5cGUpIHtcclxuICAgIHRoaXMuc2NlbmUuZ3JpZFt3b3JsZFldW3dvcmxkWF0gPSBOdW1iZXIoZW50aXR5VHlwZSlcclxuICB9XHJcbn1cclxuXHJcbi8vIFJldHVybnMgdGhlIHggYW5kIHkgY29vcmRpbmF0ZXMgaW4gdGVybXMgb2YgZ3JpZCBjZWxscy5cclxuV29ybGQucHJvdG90eXBlLnNjcmVlblRvV29ybGQgPSBmdW5jdGlvbiBzY3JlZW5Ub1dvcmxkIChbc2NyZWVuWCwgc2NyZWVuWV0pIHtcclxuICBjb25zdCB7Y2FudmFzV2lkdGgsIGNhbnZhc0hlaWdodH0gPSBjYW52YXNEaW1lbnNpb25zKCkgLy8gZGltZW5zaW9ucyBpbiBwaXhlbHNcclxuICBjb25zdCB0aWxlc1dpZHRoID0gY2FudmFzV2lkdGggLyB0aGlzLnNjZW5lLndpZHRoXHJcbiAgY29uc3QgdGlsZXNIZWlnaHQgPSBjYW52YXNIZWlnaHQgLyB0aGlzLnNjZW5lLmhlaWdodFxyXG4gIHJldHVybiBbTWF0aC5mbG9vcihzY3JlZW5YIC8gdGlsZXNXaWR0aCksIE1hdGguZmxvb3Ioc2NyZWVuWSAvIHRpbGVzSGVpZ2h0KV1cclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9qcy9Xb3JsZC5qc1xuLy8gbW9kdWxlIGlkID0gM1xuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///3\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = World;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Scene__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__canvasDimensions__ = __webpack_require__(9);
+
+
+
+
+
+// Contains players and monsters.
+function World () {
+  const gridcells = 20
+  const monsters = this.monsters = []
+  monsters.push(new __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__["a" /* default */](30, 30), new __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__["a" /* default */](60, 60))
+  const players = this.players = []
+  players.push(new __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__["a" /* default */](240, 240))
+  // Set the initial height and width of the grid (or game board) in cells.
+  this.scene = new __WEBPACK_IMPORTED_MODULE_2__Scene__["a" /* default */](gridcells, gridcells)
+}
+
+World.prototype.addEntity = function addEntity ([worldX, worldY], entityType) {
+  if (entityType) {
+    this.scene.grid[worldY][worldX] = Number(entityType)
+  }
+}
+
+// Returns the x and y coordinates in terms of grid cells.
+World.prototype.screenToWorld = function screenToWorld ([screenX, screenY]) {
+  const {canvasWidth, canvasHeight} = Object(__WEBPACK_IMPORTED_MODULE_3__canvasDimensions__["a" /* default */])() // dimensions in pixels
+  const tilesWidth = canvasWidth / this.scene.width
+  const tilesHeight = canvasHeight / this.scene.height
+  return [Math.floor(screenX / tilesWidth), Math.floor(screenY / tilesHeight)]
+}
+
 
 /***/ }),
 /* 4 */
-/*!*************************!*\
-  !*** ./src/js/Scene.js ***!
-  \*************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Scene;\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__ = __webpack_require__(/*! ./entities/characters/Monster */ 0);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__ = __webpack_require__(/*! ./entities/characters/Player */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entities_terrain_Wall__ = __webpack_require__(/*! ./entities/terrain/Wall */ 5);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entities_terrain_Floor__ = __webpack_require__(/*! ./entities/terrain/Floor */ 6);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__entities_terrain_Grass__ = __webpack_require__(/*! ./entities/terrain/Grass */ 7);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__entities_terrain_Tree__ = __webpack_require__(/*! ./entities/terrain/Tree */ 8);\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nfunction Scene (height, width) {\r\n  this.height = height\r\n  this.width = width\r\n  this.grid = []\r\n  this.initialize()\r\n  this.setBorder()\r\n  this.setRandomWalls()\r\n  this.tiles = [__WEBPACK_IMPORTED_MODULE_3__entities_terrain_Floor__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_2__entities_terrain_Wall__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_4__entities_terrain_Grass__[\"a\" /* default */], __WEBPACK_IMPORTED_MODULE_5__entities_terrain_Tree__[\"a\" /* default */]]\r\n}\r\n\r\n// Allows different tiles to be used in each grid cell.\r\nScene.prototype.draw = function (ctx, canvas) {\r\n  // cellHeight is the height of each tile in px.\r\n  const cellHeight = canvas.height / this.height\r\n  const cellWidth = canvas.width / this.width\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = this.grid[y]\r\n    for (let x = 0; x < this.width; x++) {\r\n      const value = row[x]\r\n      const tile = new this.tiles[value]()\r\n      const img = tile.img\r\n      ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,\r\n        x * cellWidth, y * cellHeight, cellWidth, cellHeight)\r\n    }\r\n  }\r\n}\r\nScene.prototype.initialize = function initialize () {\r\n  this.grid = []\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = []\r\n    for (let x = 0; x < this.width; x++) {\r\n      row.push(0)\r\n    }\r\n    this.grid.push(row)\r\n  }\r\n}\r\nScene.prototype.setBorder = function setBorder () {\r\n  for (let y = 0; y < this.height; y++) {\r\n    const row = this.grid[y]\r\n    for (let x = 0; x < this.width; x++) {\r\n      if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {\r\n        row[x] = 1\r\n      }\r\n    }\r\n  }\r\n}\r\nScene.prototype.setRandomWalls = function setRandomWalls () {\r\n  for (let y = 1; y < this.height - 1; y++) {\r\n    const row = this.grid[y]\r\n    for (let x = 1; x < this.width - 1; x++) {\r\n      row[x] = Math.random() < 0.1 ? 1 : 0\r\n    }\r\n  }\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9TY2VuZS5qcz9jZGNkIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBNb25zdGVyIGZyb20gJy4vZW50aXRpZXMvY2hhcmFjdGVycy9Nb25zdGVyJ1xyXG5pbXBvcnQgUGxheWVyIGZyb20gJy4vZW50aXRpZXMvY2hhcmFjdGVycy9QbGF5ZXInXHJcbmltcG9ydCBXYWxsIGZyb20gJy4vZW50aXRpZXMvdGVycmFpbi9XYWxsJ1xyXG5pbXBvcnQgRmxvb3IgZnJvbSAnLi9lbnRpdGllcy90ZXJyYWluL0Zsb29yJ1xyXG5pbXBvcnQgR3Jhc3MgZnJvbSAnLi9lbnRpdGllcy90ZXJyYWluL0dyYXNzJ1xyXG5pbXBvcnQgVHJlZSBmcm9tICcuL2VudGl0aWVzL3RlcnJhaW4vVHJlZSdcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFNjZW5lIChoZWlnaHQsIHdpZHRoKSB7XHJcbiAgdGhpcy5oZWlnaHQgPSBoZWlnaHRcclxuICB0aGlzLndpZHRoID0gd2lkdGhcclxuICB0aGlzLmdyaWQgPSBbXVxyXG4gIHRoaXMuaW5pdGlhbGl6ZSgpXHJcbiAgdGhpcy5zZXRCb3JkZXIoKVxyXG4gIHRoaXMuc2V0UmFuZG9tV2FsbHMoKVxyXG4gIHRoaXMudGlsZXMgPSBbRmxvb3IsIFdhbGwsIFBsYXllciwgTW9uc3RlciwgR3Jhc3MsIFRyZWVdXHJcbn1cclxuXHJcbi8vIEFsbG93cyBkaWZmZXJlbnQgdGlsZXMgdG8gYmUgdXNlZCBpbiBlYWNoIGdyaWQgY2VsbC5cclxuU2NlbmUucHJvdG90eXBlLmRyYXcgPSBmdW5jdGlvbiAoY3R4LCBjYW52YXMpIHtcclxuICAvLyBjZWxsSGVpZ2h0IGlzIHRoZSBoZWlnaHQgb2YgZWFjaCB0aWxlIGluIHB4LlxyXG4gIGNvbnN0IGNlbGxIZWlnaHQgPSBjYW52YXMuaGVpZ2h0IC8gdGhpcy5oZWlnaHRcclxuICBjb25zdCBjZWxsV2lkdGggPSBjYW52YXMud2lkdGggLyB0aGlzLndpZHRoXHJcbiAgZm9yIChsZXQgeSA9IDA7IHkgPCB0aGlzLmhlaWdodDsgeSsrKSB7XHJcbiAgICBjb25zdCByb3cgPSB0aGlzLmdyaWRbeV1cclxuICAgIGZvciAobGV0IHggPSAwOyB4IDwgdGhpcy53aWR0aDsgeCsrKSB7XHJcbiAgICAgIGNvbnN0IHZhbHVlID0gcm93W3hdXHJcbiAgICAgIGNvbnN0IHRpbGUgPSBuZXcgdGhpcy50aWxlc1t2YWx1ZV0oKVxyXG4gICAgICBjb25zdCBpbWcgPSB0aWxlLmltZ1xyXG4gICAgICBjdHguZHJhd0ltYWdlKGltZywgdGlsZS5zb3VyY2VYLCB0aWxlLnNvdXJjZVksIGNlbGxXaWR0aCwgY2VsbEhlaWdodCxcclxuICAgICAgICB4ICogY2VsbFdpZHRoLCB5ICogY2VsbEhlaWdodCwgY2VsbFdpZHRoLCBjZWxsSGVpZ2h0KVxyXG4gICAgfVxyXG4gIH1cclxufVxyXG5TY2VuZS5wcm90b3R5cGUuaW5pdGlhbGl6ZSA9IGZ1bmN0aW9uIGluaXRpYWxpemUgKCkge1xyXG4gIHRoaXMuZ3JpZCA9IFtdXHJcbiAgZm9yIChsZXQgeSA9IDA7IHkgPCB0aGlzLmhlaWdodDsgeSsrKSB7XHJcbiAgICBjb25zdCByb3cgPSBbXVxyXG4gICAgZm9yIChsZXQgeCA9IDA7IHggPCB0aGlzLndpZHRoOyB4KyspIHtcclxuICAgICAgcm93LnB1c2goMClcclxuICAgIH1cclxuICAgIHRoaXMuZ3JpZC5wdXNoKHJvdylcclxuICB9XHJcbn1cclxuU2NlbmUucHJvdG90eXBlLnNldEJvcmRlciA9IGZ1bmN0aW9uIHNldEJvcmRlciAoKSB7XHJcbiAgZm9yIChsZXQgeSA9IDA7IHkgPCB0aGlzLmhlaWdodDsgeSsrKSB7XHJcbiAgICBjb25zdCByb3cgPSB0aGlzLmdyaWRbeV1cclxuICAgIGZvciAobGV0IHggPSAwOyB4IDwgdGhpcy53aWR0aDsgeCsrKSB7XHJcbiAgICAgIGlmICh4ID09PSAwIHx8IHggPT09IHRoaXMud2lkdGggLSAxIHx8IHkgPT09IDAgfHwgeSA9PT0gdGhpcy5oZWlnaHQgLSAxKSB7XHJcbiAgICAgICAgcm93W3hdID0gMVxyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblNjZW5lLnByb3RvdHlwZS5zZXRSYW5kb21XYWxscyA9IGZ1bmN0aW9uIHNldFJhbmRvbVdhbGxzICgpIHtcclxuICBmb3IgKGxldCB5ID0gMTsgeSA8IHRoaXMuaGVpZ2h0IC0gMTsgeSsrKSB7XHJcbiAgICBjb25zdCByb3cgPSB0aGlzLmdyaWRbeV1cclxuICAgIGZvciAobGV0IHggPSAxOyB4IDwgdGhpcy53aWR0aCAtIDE7IHgrKykge1xyXG4gICAgICByb3dbeF0gPSBNYXRoLnJhbmRvbSgpIDwgMC4xID8gMSA6IDBcclxuICAgIH1cclxuICB9XHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvanMvU2NlbmUuanNcbi8vIG1vZHVsZSBpZCA9IDRcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///4\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Scene;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entities_terrain_Wall__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entities_terrain_Floor__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__entities_terrain_Grass__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__entities_terrain_Tree__ = __webpack_require__(8);
+
+
+
+
+
+
+
+function Scene (height, width) {
+  this.height = height
+  this.width = width
+  this.grid = []
+  this.initialize()
+  this.setBorder()
+  this.setRandomWalls()
+  this.tiles = [__WEBPACK_IMPORTED_MODULE_3__entities_terrain_Floor__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__entities_terrain_Wall__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__entities_characters_Player__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0__entities_characters_Monster__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__entities_terrain_Grass__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__entities_terrain_Tree__["a" /* default */]]
+}
+
+// Allows different tiles to be used in each grid cell.
+Scene.prototype.draw = function (ctx, canvas) {
+  // cellHeight is the height of each tile in px.
+  const cellHeight = canvas.height / this.height
+  const cellWidth = canvas.width / this.width
+  for (let y = 0; y < this.height; y++) {
+    const row = this.grid[y]
+    for (let x = 0; x < this.width; x++) {
+      const value = row[x]
+      const tile = new this.tiles[value]()
+      const img = tile.img
+      ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,
+        x * cellWidth, y * cellHeight, cellWidth, cellHeight)
+    }
+  }
+}
+Scene.prototype.initialize = function initialize () {
+  this.grid = []
+  for (let y = 0; y < this.height; y++) {
+    const row = []
+    for (let x = 0; x < this.width; x++) {
+      row.push(0)
+    }
+    this.grid.push(row)
+  }
+}
+Scene.prototype.setBorder = function setBorder () {
+  for (let y = 0; y < this.height; y++) {
+    const row = this.grid[y]
+    for (let x = 0; x < this.width; x++) {
+      if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {
+        row[x] = 1
+      }
+    }
+  }
+}
+Scene.prototype.setRandomWalls = function setRandomWalls () {
+  for (let y = 1; y < this.height - 1; y++) {
+    const row = this.grid[y]
+    for (let x = 1; x < this.width - 1; x++) {
+      row[x] = Math.random() < 0.1 ? 1 : 0
+    }
+  }
+}
+
 
 /***/ }),
 /* 5 */
-/*!*****************************************!*\
-  !*** ./src/js/entities/terrain/Wall.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Wall;\nfunction Wall (x, y, entityNumber, ctx) {\r\n  this.img = document.getElementById('wall')\r\n  this.sourceX = 0\r\n  this.sourceY = 0\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 1\r\n  this.size = 30\r\n  this.category = 'terrain'\r\n  this.collidable = 'yes'\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9lbnRpdGllcy90ZXJyYWluL1dhbGwuanM/NDFkOSJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBXYWxsICh4LCB5LCBlbnRpdHlOdW1iZXIsIGN0eCkge1xyXG4gIHRoaXMuaW1nID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3dhbGwnKVxyXG4gIHRoaXMuc291cmNlWCA9IDBcclxuICB0aGlzLnNvdXJjZVkgPSAwXHJcbiAgdGhpcy54ID0geFxyXG4gIHRoaXMueSA9IHlcclxuICB0aGlzLmVudGl0eU51bWJlciA9IDFcclxuICB0aGlzLnNpemUgPSAzMFxyXG4gIHRoaXMuY2F0ZWdvcnkgPSAndGVycmFpbidcclxuICB0aGlzLmNvbGxpZGFibGUgPSAneWVzJ1xyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2pzL2VudGl0aWVzL3RlcnJhaW4vV2FsbC5qc1xuLy8gbW9kdWxlIGlkID0gNVxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///5\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Wall;
+function Wall (x, y, entityNumber, ctx) {
+  this.img = document.getElementById('wall')
+  this.sourceX = 0
+  this.sourceY = 0
+  this.x = x
+  this.y = y
+  this.entityNumber = 1
+  this.size = 30
+  this.category = 'terrain'
+  this.collidable = 'yes'
+}
+
 
 /***/ }),
 /* 6 */
-/*!******************************************!*\
-  !*** ./src/js/entities/terrain/Floor.js ***!
-  \******************************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Wall;\nfunction Wall (x, y, entityNumber, ctx) {\r\n  this.img = document.getElementById('floor')\r\n  this.sourceX = 0\r\n  this.sourceY = 0\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 0\r\n  this.size = 30\r\n  this.category = 'terrain'\r\n  this.collidable = 'no'\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9lbnRpdGllcy90ZXJyYWluL0Zsb29yLmpzPzMyNWMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gV2FsbCAoeCwgeSwgZW50aXR5TnVtYmVyLCBjdHgpIHtcclxuICB0aGlzLmltZyA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdmbG9vcicpXHJcbiAgdGhpcy5zb3VyY2VYID0gMFxyXG4gIHRoaXMuc291cmNlWSA9IDBcclxuICB0aGlzLnggPSB4XHJcbiAgdGhpcy55ID0geVxyXG4gIHRoaXMuZW50aXR5TnVtYmVyID0gMFxyXG4gIHRoaXMuc2l6ZSA9IDMwXHJcbiAgdGhpcy5jYXRlZ29yeSA9ICd0ZXJyYWluJ1xyXG4gIHRoaXMuY29sbGlkYWJsZSA9ICdubydcclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9qcy9lbnRpdGllcy90ZXJyYWluL0Zsb29yLmpzXG4vLyBtb2R1bGUgaWQgPSA2XG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///6\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Wall;
+function Wall (x, y, entityNumber, ctx) {
+  this.img = document.getElementById('floor')
+  this.sourceX = 0
+  this.sourceY = 0
+  this.x = x
+  this.y = y
+  this.entityNumber = 0
+  this.size = 30
+  this.category = 'terrain'
+  this.collidable = 'no'
+}
+
 
 /***/ }),
 /* 7 */
-/*!******************************************!*\
-  !*** ./src/js/entities/terrain/Grass.js ***!
-  \******************************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Grass;\nfunction Grass (x, y, entityNumber, ctx) {\r\n  this.img = document.getElementById('grass')\r\n  this.sourceX = 0\r\n  this.sourceY = 0\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 4\r\n  this.size = 30\r\n  this.category = 'terrain'\r\n  this.collidable = 'no'\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9lbnRpdGllcy90ZXJyYWluL0dyYXNzLmpzPzI5M2YiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gR3Jhc3MgKHgsIHksIGVudGl0eU51bWJlciwgY3R4KSB7XHJcbiAgdGhpcy5pbWcgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnZ3Jhc3MnKVxyXG4gIHRoaXMuc291cmNlWCA9IDBcclxuICB0aGlzLnNvdXJjZVkgPSAwXHJcbiAgdGhpcy54ID0geFxyXG4gIHRoaXMueSA9IHlcclxuICB0aGlzLmVudGl0eU51bWJlciA9IDRcclxuICB0aGlzLnNpemUgPSAzMFxyXG4gIHRoaXMuY2F0ZWdvcnkgPSAndGVycmFpbidcclxuICB0aGlzLmNvbGxpZGFibGUgPSAnbm8nXHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvanMvZW50aXRpZXMvdGVycmFpbi9HcmFzcy5qc1xuLy8gbW9kdWxlIGlkID0gN1xuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///7\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Grass;
+function Grass (x, y, entityNumber, ctx) {
+  this.img = document.getElementById('grass')
+  this.sourceX = 0
+  this.sourceY = 0
+  this.x = x
+  this.y = y
+  this.entityNumber = 4
+  this.size = 30
+  this.category = 'terrain'
+  this.collidable = 'no'
+}
+
 
 /***/ }),
 /* 8 */
-/*!*****************************************!*\
-  !*** ./src/js/entities/terrain/Tree.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = Grass;\nfunction Grass (x, y, entityNumber, ctx) {\r\n  this.img = document.getElementById('tree')\r\n  this.sourceX = 0\r\n  this.sourceY = 0\r\n  this.x = x\r\n  this.y = y\r\n  this.entityNumber = 5\r\n  this.size = 30\r\n  this.category = 'terrain'\r\n  this.collidable = 'yes'\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiOC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9lbnRpdGllcy90ZXJyYWluL1RyZWUuanM/YzRmZiJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBHcmFzcyAoeCwgeSwgZW50aXR5TnVtYmVyLCBjdHgpIHtcclxuICB0aGlzLmltZyA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0cmVlJylcclxuICB0aGlzLnNvdXJjZVggPSAwXHJcbiAgdGhpcy5zb3VyY2VZID0gMFxyXG4gIHRoaXMueCA9IHhcclxuICB0aGlzLnkgPSB5XHJcbiAgdGhpcy5lbnRpdHlOdW1iZXIgPSA1XHJcbiAgdGhpcy5zaXplID0gMzBcclxuICB0aGlzLmNhdGVnb3J5ID0gJ3RlcnJhaW4nXHJcbiAgdGhpcy5jb2xsaWRhYmxlID0gJ3llcydcclxufVxyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9qcy9lbnRpdGllcy90ZXJyYWluL1RyZWUuanNcbi8vIG1vZHVsZSBpZCA9IDhcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///8\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = Grass;
+function Grass (x, y, entityNumber, ctx) {
+  this.img = document.getElementById('tree')
+  this.sourceX = 0
+  this.sourceY = 0
+  this.x = x
+  this.y = y
+  this.entityNumber = 5
+  this.size = 30
+  this.category = 'terrain'
+  this.collidable = 'yes'
+}
+
 
 /***/ }),
 /* 9 */
-/*!************************************!*\
-  !*** ./src/js/canvasDimensions.js ***!
-  \************************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = canvasDimensions;\nfunction canvasDimensions () {\r\n  const canvasLeft = document.querySelector('canvas').getBoundingClientRect().left\r\n  const canvasRight = document.querySelector('canvas').getBoundingClientRect().right\r\n  const canvasTop = document.querySelector('canvas').getBoundingClientRect().top\r\n  const canvasBottom = document.querySelector('canvas').getBoundingClientRect().bottom\r\n  const canvasWidth = canvasRight - canvasLeft\r\n  const canvasHeight = canvasBottom - canvasTop\r\n  return {canvasWidth, canvasHeight}\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiOS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9jYW52YXNEaW1lbnNpb25zLmpzPzg1NGIiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gY2FudmFzRGltZW5zaW9ucyAoKSB7XHJcbiAgY29uc3QgY2FudmFzTGVmdCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ2NhbnZhcycpLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpLmxlZnRcclxuICBjb25zdCBjYW52YXNSaWdodCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ2NhbnZhcycpLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpLnJpZ2h0XHJcbiAgY29uc3QgY2FudmFzVG9wID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignY2FudmFzJykuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCkudG9wXHJcbiAgY29uc3QgY2FudmFzQm90dG9tID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignY2FudmFzJykuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCkuYm90dG9tXHJcbiAgY29uc3QgY2FudmFzV2lkdGggPSBjYW52YXNSaWdodCAtIGNhbnZhc0xlZnRcclxuICBjb25zdCBjYW52YXNIZWlnaHQgPSBjYW52YXNCb3R0b20gLSBjYW52YXNUb3BcclxuICByZXR1cm4ge2NhbnZhc1dpZHRoLCBjYW52YXNIZWlnaHR9XHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvanMvY2FudmFzRGltZW5zaW9ucy5qc1xuLy8gbW9kdWxlIGlkID0gOVxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///9\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = canvasDimensions;
+function canvasDimensions () {
+  const canvasLeft = document.querySelector('canvas').getBoundingClientRect().left
+  const canvasRight = document.querySelector('canvas').getBoundingClientRect().right
+  const canvasTop = document.querySelector('canvas').getBoundingClientRect().top
+  const canvasBottom = document.querySelector('canvas').getBoundingClientRect().bottom
+  const canvasWidth = canvasRight - canvasLeft
+  const canvasHeight = canvasBottom - canvasTop
+  return {canvasWidth, canvasHeight}
+}
+
 
 /***/ }),
 /* 10 */
-/*!********************************!*\
-  !*** ./src/js/tileSelector.js ***!
-  \********************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = tileSelector;\nfunction tileSelector (canvas) {\r\n  if (!document.querySelector('.tile-list')) return\r\n  const tiles = document.querySelector('.tile-list').children\r\n  const currentTile = document.querySelector('.currently-selected-tile')\r\n  const resetTileButton = document.querySelector('.reset-tile-button')\r\n  const mouseInfo = document.querySelector('.mouse-info')\r\n\r\n  // Resets currently selected tile.\r\n  function removeCurrentlySelectedTile (canvas) {\r\n    if (currentTile.childNodes[1]) {\r\n      currentTile.removeChild(currentTile.childNodes[1])\r\n    }\r\n    if (mouseInfo.childNodes[0]) {\r\n      mouseInfo.removeChild(mouseInfo.childNodes[0])\r\n    }\r\n    if (mouseInfo.childNodes[1]) {\r\n      mouseInfo.removeChild(mouseInfo.childNodes[1])\r\n    }\r\n    if (canvas.getAttribute('data-cursor')) {\r\n      canvas.removeAttribute('data-cursor')\r\n    }\r\n  }\r\n  // When each of the tiles are clicked, update the tile selected.\r\n  function tileSelect (canvas) {\r\n    if (tiles.length === 0) return\r\n    for (var i = 0; i < tiles.length; i++) {\r\n      tiles[i].addEventListener('click', function (event) {\r\n        const sprite1 = document.createElement('div')\r\n        sprite1.setAttribute('draggable', 'true')\r\n        const dataEntityNumber = event.target.getAttribute('data-entity-number')\r\n        sprite1.setAttribute('data-entity-number', dataEntityNumber)\r\n        sprite1.className = event.target.className\r\n        const sprite2 = sprite1.cloneNode(true)\r\n        removeCurrentlySelectedTile(canvas)\r\n        currentTile.appendChild(sprite1)\r\n        mouseInfo.appendChild(sprite2)\r\n        canvas.setAttribute('data-cursor', 'pointer')\r\n      }, false)\r\n    }\r\n  }\r\n  tileSelect(canvas)\r\n\r\n  // On reset button click, reset the currently selected tile.\r\n  if (resetTileButton) {\r\n    resetTileButton.addEventListener('click', function (event) {\r\n      removeCurrentlySelectedTile(canvas)\r\n    }, false)\r\n  }\r\n\r\n  // Displays the tile near the mouse cursor when a tile is selected.\r\n  canvas.addEventListener('mousemove', function mouseInfoPosition (event) {\r\n    if (!currentTile) return\r\n    if (event.pageY > window.innerHeight - 60) {\r\n      if (currentTile.children[0]) {\r\n        mouseInfo.style.left = String(event.pageX - 40) + 'px'\r\n        mouseInfo.style.top = String(event.pageY - 40) + 'px'\r\n      }\r\n    } else {\r\n      if (currentTile.children[0]) {\r\n        mouseInfo.style.left = String(event.pageX + 20) + 'px'\r\n        mouseInfo.style.top = String(event.pageY + 20) + 'px'\r\n      }\r\n    }\r\n  }, false)\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTAuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvdGlsZVNlbGVjdG9yLmpzPzI5MjkiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gdGlsZVNlbGVjdG9yIChjYW52YXMpIHtcclxuICBpZiAoIWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy50aWxlLWxpc3QnKSkgcmV0dXJuXHJcbiAgY29uc3QgdGlsZXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcudGlsZS1saXN0JykuY2hpbGRyZW5cclxuICBjb25zdCBjdXJyZW50VGlsZSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5jdXJyZW50bHktc2VsZWN0ZWQtdGlsZScpXHJcbiAgY29uc3QgcmVzZXRUaWxlQnV0dG9uID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLnJlc2V0LXRpbGUtYnV0dG9uJylcclxuICBjb25zdCBtb3VzZUluZm8gPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcubW91c2UtaW5mbycpXHJcblxyXG4gIC8vIFJlc2V0cyBjdXJyZW50bHkgc2VsZWN0ZWQgdGlsZS5cclxuICBmdW5jdGlvbiByZW1vdmVDdXJyZW50bHlTZWxlY3RlZFRpbGUgKGNhbnZhcykge1xyXG4gICAgaWYgKGN1cnJlbnRUaWxlLmNoaWxkTm9kZXNbMV0pIHtcclxuICAgICAgY3VycmVudFRpbGUucmVtb3ZlQ2hpbGQoY3VycmVudFRpbGUuY2hpbGROb2Rlc1sxXSlcclxuICAgIH1cclxuICAgIGlmIChtb3VzZUluZm8uY2hpbGROb2Rlc1swXSkge1xyXG4gICAgICBtb3VzZUluZm8ucmVtb3ZlQ2hpbGQobW91c2VJbmZvLmNoaWxkTm9kZXNbMF0pXHJcbiAgICB9XHJcbiAgICBpZiAobW91c2VJbmZvLmNoaWxkTm9kZXNbMV0pIHtcclxuICAgICAgbW91c2VJbmZvLnJlbW92ZUNoaWxkKG1vdXNlSW5mby5jaGlsZE5vZGVzWzFdKVxyXG4gICAgfVxyXG4gICAgaWYgKGNhbnZhcy5nZXRBdHRyaWJ1dGUoJ2RhdGEtY3Vyc29yJykpIHtcclxuICAgICAgY2FudmFzLnJlbW92ZUF0dHJpYnV0ZSgnZGF0YS1jdXJzb3InKVxyXG4gICAgfVxyXG4gIH1cclxuICAvLyBXaGVuIGVhY2ggb2YgdGhlIHRpbGVzIGFyZSBjbGlja2VkLCB1cGRhdGUgdGhlIHRpbGUgc2VsZWN0ZWQuXHJcbiAgZnVuY3Rpb24gdGlsZVNlbGVjdCAoY2FudmFzKSB7XHJcbiAgICBpZiAodGlsZXMubGVuZ3RoID09PSAwKSByZXR1cm5cclxuICAgIGZvciAodmFyIGkgPSAwOyBpIDwgdGlsZXMubGVuZ3RoOyBpKyspIHtcclxuICAgICAgdGlsZXNbaV0uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgICAgICBjb25zdCBzcHJpdGUxID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2JylcclxuICAgICAgICBzcHJpdGUxLnNldEF0dHJpYnV0ZSgnZHJhZ2dhYmxlJywgJ3RydWUnKVxyXG4gICAgICAgIGNvbnN0IGRhdGFFbnRpdHlOdW1iZXIgPSBldmVudC50YXJnZXQuZ2V0QXR0cmlidXRlKCdkYXRhLWVudGl0eS1udW1iZXInKVxyXG4gICAgICAgIHNwcml0ZTEuc2V0QXR0cmlidXRlKCdkYXRhLWVudGl0eS1udW1iZXInLCBkYXRhRW50aXR5TnVtYmVyKVxyXG4gICAgICAgIHNwcml0ZTEuY2xhc3NOYW1lID0gZXZlbnQudGFyZ2V0LmNsYXNzTmFtZVxyXG4gICAgICAgIGNvbnN0IHNwcml0ZTIgPSBzcHJpdGUxLmNsb25lTm9kZSh0cnVlKVxyXG4gICAgICAgIHJlbW92ZUN1cnJlbnRseVNlbGVjdGVkVGlsZShjYW52YXMpXHJcbiAgICAgICAgY3VycmVudFRpbGUuYXBwZW5kQ2hpbGQoc3ByaXRlMSlcclxuICAgICAgICBtb3VzZUluZm8uYXBwZW5kQ2hpbGQoc3ByaXRlMilcclxuICAgICAgICBjYW52YXMuc2V0QXR0cmlidXRlKCdkYXRhLWN1cnNvcicsICdwb2ludGVyJylcclxuICAgICAgfSwgZmFsc2UpXHJcbiAgICB9XHJcbiAgfVxyXG4gIHRpbGVTZWxlY3QoY2FudmFzKVxyXG5cclxuICAvLyBPbiByZXNldCBidXR0b24gY2xpY2ssIHJlc2V0IHRoZSBjdXJyZW50bHkgc2VsZWN0ZWQgdGlsZS5cclxuICBpZiAocmVzZXRUaWxlQnV0dG9uKSB7XHJcbiAgICByZXNldFRpbGVCdXR0b24uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgICAgcmVtb3ZlQ3VycmVudGx5U2VsZWN0ZWRUaWxlKGNhbnZhcylcclxuICAgIH0sIGZhbHNlKVxyXG4gIH1cclxuXHJcbiAgLy8gRGlzcGxheXMgdGhlIHRpbGUgbmVhciB0aGUgbW91c2UgY3Vyc29yIHdoZW4gYSB0aWxlIGlzIHNlbGVjdGVkLlxyXG4gIGNhbnZhcy5hZGRFdmVudExpc3RlbmVyKCdtb3VzZW1vdmUnLCBmdW5jdGlvbiBtb3VzZUluZm9Qb3NpdGlvbiAoZXZlbnQpIHtcclxuICAgIGlmICghY3VycmVudFRpbGUpIHJldHVyblxyXG4gICAgaWYgKGV2ZW50LnBhZ2VZID4gd2luZG93LmlubmVySGVpZ2h0IC0gNjApIHtcclxuICAgICAgaWYgKGN1cnJlbnRUaWxlLmNoaWxkcmVuWzBdKSB7XHJcbiAgICAgICAgbW91c2VJbmZvLnN0eWxlLmxlZnQgPSBTdHJpbmcoZXZlbnQucGFnZVggLSA0MCkgKyAncHgnXHJcbiAgICAgICAgbW91c2VJbmZvLnN0eWxlLnRvcCA9IFN0cmluZyhldmVudC5wYWdlWSAtIDQwKSArICdweCdcclxuICAgICAgfVxyXG4gICAgfSBlbHNlIHtcclxuICAgICAgaWYgKGN1cnJlbnRUaWxlLmNoaWxkcmVuWzBdKSB7XHJcbiAgICAgICAgbW91c2VJbmZvLnN0eWxlLmxlZnQgPSBTdHJpbmcoZXZlbnQucGFnZVggKyAyMCkgKyAncHgnXHJcbiAgICAgICAgbW91c2VJbmZvLnN0eWxlLnRvcCA9IFN0cmluZyhldmVudC5wYWdlWSArIDIwKSArICdweCdcclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH0sIGZhbHNlKVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2pzL3RpbGVTZWxlY3Rvci5qc1xuLy8gbW9kdWxlIGlkID0gMTBcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///10\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = tileSelector;
+function tileSelector (canvas) {
+  if (!document.querySelector('.tile-list')) return
+  const tiles = document.querySelector('.tile-list').children
+  const currentTile = document.querySelector('.currently-selected-tile')
+  const resetTileButton = document.querySelector('.reset-tile-button')
+  const mouseInfo = document.querySelector('.mouse-info')
+
+  // Resets currently selected tile.
+  function removeCurrentlySelectedTile (canvas) {
+    if (currentTile.childNodes[1]) {
+      currentTile.removeChild(currentTile.childNodes[1])
+    }
+    if (mouseInfo.childNodes[0]) {
+      mouseInfo.removeChild(mouseInfo.childNodes[0])
+    }
+    if (mouseInfo.childNodes[1]) {
+      mouseInfo.removeChild(mouseInfo.childNodes[1])
+    }
+    if (canvas.getAttribute('data-cursor')) {
+      canvas.removeAttribute('data-cursor')
+    }
+  }
+  // When each of the tiles are clicked, update the tile selected.
+  function tileSelect (canvas) {
+    if (tiles.length === 0) return
+    for (var i = 0; i < tiles.length; i++) {
+      tiles[i].addEventListener('click', function (event) {
+        const sprite1 = document.createElement('div')
+        sprite1.setAttribute('draggable', 'true')
+        const dataEntityNumber = event.target.getAttribute('data-entity-number')
+        sprite1.setAttribute('data-entity-number', dataEntityNumber)
+        sprite1.className = event.target.className
+        const sprite2 = sprite1.cloneNode(true)
+        removeCurrentlySelectedTile(canvas)
+        currentTile.appendChild(sprite1)
+        mouseInfo.appendChild(sprite2)
+        canvas.setAttribute('data-cursor', 'pointer')
+      }, false)
+    }
+  }
+  tileSelect(canvas)
+
+  // On reset button click, reset the currently selected tile.
+  if (resetTileButton) {
+    resetTileButton.addEventListener('click', function (event) {
+      removeCurrentlySelectedTile(canvas)
+    }, false)
+  }
+
+  // Displays the tile near the mouse cursor when a tile is selected.
+  canvas.addEventListener('mousemove', function mouseInfoPosition (event) {
+    if (!currentTile) return
+    if (event.pageY > window.innerHeight - 60) {
+      if (currentTile.children[0]) {
+        mouseInfo.style.left = String(event.pageX - 40) + 'px'
+        mouseInfo.style.top = String(event.pageY - 40) + 'px'
+      }
+    } else {
+      if (currentTile.children[0]) {
+        mouseInfo.style.left = String(event.pageX + 20) + 'px'
+        mouseInfo.style.top = String(event.pageY + 20) + 'px'
+      }
+    }
+  }, false)
+}
+
 
 /***/ }),
 /* 11 */
-/*!********************************!*\
-  !*** ./src/js/tileDragging.js ***!
-  \********************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = tileDragging;\nfunction tileDragging (canvas, world, ctx) {\r\n  const currentTile = document.querySelector('.currently-selected-tile')\r\n  if (!currentTile) return\r\n  let mouseHeld = false\r\n  let hoveredOverTiles = []\r\n  let duplicate = 0\r\n  function redraw () {\r\n    world.scene.draw(ctx, canvas)\r\n    world.monsters.forEach(function (monster) {\r\n      monster.draw(ctx)\r\n    })\r\n    world.players.forEach(function (player) {\r\n      player.draw(ctx)\r\n    })\r\n  }\r\n\r\n  const canvasLeft = document.querySelector('canvas').getBoundingClientRect().left\r\n  const bodyLeft = document.body.getBoundingClientRect().left\r\n  const marginLeft = canvasLeft - bodyLeft\r\n\r\n  canvas.addEventListener('mousedown', function (event) {\r\n    mouseHeld = true\r\n    hoveredOverTiles = []\r\n    const pos = world.screenToWorld([event.clientX - marginLeft, event.clientY])\r\n    hoveredOverTiles.push(pos)\r\n  }, false)\r\n\r\n  // Canvas is redrawn with the tiles in hoveredOverTiles array.\r\n  canvas.addEventListener('mouseup', function (event) {\r\n    if (!currentTile) return\r\n    mouseHeld = false\r\n    if (!currentTile.children[0]) return\r\n    if (!currentTile.children[0].getAttribute('data-entity-number')) return\r\n    for (var j = 0; j < hoveredOverTiles.length; j++) {\r\n      world.addEntity(hoveredOverTiles[j], currentTile.children[0].getAttribute('data-entity-number'))\r\n    }\r\n    redraw()\r\n  }, false)\r\n\r\n  // Positions of the tiles that were hovered on during the mouse hold will be\r\n  // added to the hoveredOverTiles array. This is then drawn on canvas.\r\n  canvas.addEventListener('mousemove', function (event) {\r\n    if (!currentTile) return\r\n    if (!currentTile.children[0]) return\r\n    if (!currentTile.children[0].getAttribute('data-entity-number')) return\r\n    if (mouseHeld === true) {\r\n      const pos = world.screenToWorld([event.clientX - marginLeft, event.clientY])\r\n      duplicate = 0\r\n      for (var i = 0; i < hoveredOverTiles.length; i++) {\r\n        if ((hoveredOverTiles[i][0] === pos[0]) && (hoveredOverTiles[i][1] === pos[1])) {\r\n          duplicate += 1\r\n        }\r\n      }\r\n      if (duplicate === 0) {\r\n        hoveredOverTiles.push(pos)\r\n      }\r\n      for (var j = 0; j < hoveredOverTiles.length; j++) {\r\n        world.addEntity(hoveredOverTiles[j], currentTile.children[0].getAttribute('data-entity-number'))\r\n      }\r\n      redraw()\r\n    }\r\n  }, false)\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTEuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvdGlsZURyYWdnaW5nLmpzPzI0NDIiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gdGlsZURyYWdnaW5nIChjYW52YXMsIHdvcmxkLCBjdHgpIHtcclxuICBjb25zdCBjdXJyZW50VGlsZSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5jdXJyZW50bHktc2VsZWN0ZWQtdGlsZScpXHJcbiAgaWYgKCFjdXJyZW50VGlsZSkgcmV0dXJuXHJcbiAgbGV0IG1vdXNlSGVsZCA9IGZhbHNlXHJcbiAgbGV0IGhvdmVyZWRPdmVyVGlsZXMgPSBbXVxyXG4gIGxldCBkdXBsaWNhdGUgPSAwXHJcbiAgZnVuY3Rpb24gcmVkcmF3ICgpIHtcclxuICAgIHdvcmxkLnNjZW5lLmRyYXcoY3R4LCBjYW52YXMpXHJcbiAgICB3b3JsZC5tb25zdGVycy5mb3JFYWNoKGZ1bmN0aW9uIChtb25zdGVyKSB7XHJcbiAgICAgIG1vbnN0ZXIuZHJhdyhjdHgpXHJcbiAgICB9KVxyXG4gICAgd29ybGQucGxheWVycy5mb3JFYWNoKGZ1bmN0aW9uIChwbGF5ZXIpIHtcclxuICAgICAgcGxheWVyLmRyYXcoY3R4KVxyXG4gICAgfSlcclxuICB9XHJcblxyXG4gIGNvbnN0IGNhbnZhc0xlZnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCdjYW52YXMnKS5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKS5sZWZ0XHJcbiAgY29uc3QgYm9keUxlZnQgPSBkb2N1bWVudC5ib2R5LmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpLmxlZnRcclxuICBjb25zdCBtYXJnaW5MZWZ0ID0gY2FudmFzTGVmdCAtIGJvZHlMZWZ0XHJcblxyXG4gIGNhbnZhcy5hZGRFdmVudExpc3RlbmVyKCdtb3VzZWRvd24nLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgIG1vdXNlSGVsZCA9IHRydWVcclxuICAgIGhvdmVyZWRPdmVyVGlsZXMgPSBbXVxyXG4gICAgY29uc3QgcG9zID0gd29ybGQuc2NyZWVuVG9Xb3JsZChbZXZlbnQuY2xpZW50WCAtIG1hcmdpbkxlZnQsIGV2ZW50LmNsaWVudFldKVxyXG4gICAgaG92ZXJlZE92ZXJUaWxlcy5wdXNoKHBvcylcclxuICB9LCBmYWxzZSlcclxuXHJcbiAgLy8gQ2FudmFzIGlzIHJlZHJhd24gd2l0aCB0aGUgdGlsZXMgaW4gaG92ZXJlZE92ZXJUaWxlcyBhcnJheS5cclxuICBjYW52YXMuYWRkRXZlbnRMaXN0ZW5lcignbW91c2V1cCcsIGZ1bmN0aW9uIChldmVudCkge1xyXG4gICAgaWYgKCFjdXJyZW50VGlsZSkgcmV0dXJuXHJcbiAgICBtb3VzZUhlbGQgPSBmYWxzZVxyXG4gICAgaWYgKCFjdXJyZW50VGlsZS5jaGlsZHJlblswXSkgcmV0dXJuXHJcbiAgICBpZiAoIWN1cnJlbnRUaWxlLmNoaWxkcmVuWzBdLmdldEF0dHJpYnV0ZSgnZGF0YS1lbnRpdHktbnVtYmVyJykpIHJldHVyblxyXG4gICAgZm9yICh2YXIgaiA9IDA7IGogPCBob3ZlcmVkT3ZlclRpbGVzLmxlbmd0aDsgaisrKSB7XHJcbiAgICAgIHdvcmxkLmFkZEVudGl0eShob3ZlcmVkT3ZlclRpbGVzW2pdLCBjdXJyZW50VGlsZS5jaGlsZHJlblswXS5nZXRBdHRyaWJ1dGUoJ2RhdGEtZW50aXR5LW51bWJlcicpKVxyXG4gICAgfVxyXG4gICAgcmVkcmF3KClcclxuICB9LCBmYWxzZSlcclxuXHJcbiAgLy8gUG9zaXRpb25zIG9mIHRoZSB0aWxlcyB0aGF0IHdlcmUgaG92ZXJlZCBvbiBkdXJpbmcgdGhlIG1vdXNlIGhvbGQgd2lsbCBiZVxyXG4gIC8vIGFkZGVkIHRvIHRoZSBob3ZlcmVkT3ZlclRpbGVzIGFycmF5LiBUaGlzIGlzIHRoZW4gZHJhd24gb24gY2FudmFzLlxyXG4gIGNhbnZhcy5hZGRFdmVudExpc3RlbmVyKCdtb3VzZW1vdmUnLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgIGlmICghY3VycmVudFRpbGUpIHJldHVyblxyXG4gICAgaWYgKCFjdXJyZW50VGlsZS5jaGlsZHJlblswXSkgcmV0dXJuXHJcbiAgICBpZiAoIWN1cnJlbnRUaWxlLmNoaWxkcmVuWzBdLmdldEF0dHJpYnV0ZSgnZGF0YS1lbnRpdHktbnVtYmVyJykpIHJldHVyblxyXG4gICAgaWYgKG1vdXNlSGVsZCA9PT0gdHJ1ZSkge1xyXG4gICAgICBjb25zdCBwb3MgPSB3b3JsZC5zY3JlZW5Ub1dvcmxkKFtldmVudC5jbGllbnRYIC0gbWFyZ2luTGVmdCwgZXZlbnQuY2xpZW50WV0pXHJcbiAgICAgIGR1cGxpY2F0ZSA9IDBcclxuICAgICAgZm9yICh2YXIgaSA9IDA7IGkgPCBob3ZlcmVkT3ZlclRpbGVzLmxlbmd0aDsgaSsrKSB7XHJcbiAgICAgICAgaWYgKChob3ZlcmVkT3ZlclRpbGVzW2ldWzBdID09PSBwb3NbMF0pICYmIChob3ZlcmVkT3ZlclRpbGVzW2ldWzFdID09PSBwb3NbMV0pKSB7XHJcbiAgICAgICAgICBkdXBsaWNhdGUgKz0gMVxyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG4gICAgICBpZiAoZHVwbGljYXRlID09PSAwKSB7XHJcbiAgICAgICAgaG92ZXJlZE92ZXJUaWxlcy5wdXNoKHBvcylcclxuICAgICAgfVxyXG4gICAgICBmb3IgKHZhciBqID0gMDsgaiA8IGhvdmVyZWRPdmVyVGlsZXMubGVuZ3RoOyBqKyspIHtcclxuICAgICAgICB3b3JsZC5hZGRFbnRpdHkoaG92ZXJlZE92ZXJUaWxlc1tqXSwgY3VycmVudFRpbGUuY2hpbGRyZW5bMF0uZ2V0QXR0cmlidXRlKCdkYXRhLWVudGl0eS1udW1iZXInKSlcclxuICAgICAgfVxyXG4gICAgICByZWRyYXcoKVxyXG4gICAgfVxyXG4gIH0sIGZhbHNlKVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2pzL3RpbGVEcmFnZ2luZy5qc1xuLy8gbW9kdWxlIGlkID0gMTFcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///11\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = tileDragging;
+function tileDragging (canvas, world, ctx) {
+  const currentTile = document.querySelector('.currently-selected-tile')
+  if (!currentTile) return
+  let mouseHeld = false
+  let hoveredOverTiles = []
+  let duplicate = 0
+  function redraw () {
+    world.scene.draw(ctx, canvas)
+    world.monsters.forEach(function (monster) {
+      monster.draw(ctx)
+    })
+    world.players.forEach(function (player) {
+      player.draw(ctx)
+    })
+  }
+
+  const canvasLeft = document.querySelector('canvas').getBoundingClientRect().left
+  const bodyLeft = document.body.getBoundingClientRect().left
+  const marginLeft = canvasLeft - bodyLeft
+
+  canvas.addEventListener('mousedown', function (event) {
+    mouseHeld = true
+    hoveredOverTiles = []
+    const pos = world.screenToWorld([event.clientX - marginLeft, event.clientY])
+    hoveredOverTiles.push(pos)
+  }, false)
+
+  // Canvas is redrawn with the tiles in hoveredOverTiles array.
+  canvas.addEventListener('mouseup', function (event) {
+    if (!currentTile) return
+    mouseHeld = false
+    if (!currentTile.children[0]) return
+    if (!currentTile.children[0].getAttribute('data-entity-number')) return
+    for (var j = 0; j < hoveredOverTiles.length; j++) {
+      world.addEntity(hoveredOverTiles[j], currentTile.children[0].getAttribute('data-entity-number'))
+    }
+    redraw()
+  }, false)
+
+  // Positions of the tiles that were hovered on during the mouse hold will be
+  // added to the hoveredOverTiles array. This is then drawn on canvas.
+  canvas.addEventListener('mousemove', function (event) {
+    if (!currentTile) return
+    if (!currentTile.children[0]) return
+    if (!currentTile.children[0].getAttribute('data-entity-number')) return
+    if (mouseHeld === true) {
+      const pos = world.screenToWorld([event.clientX - marginLeft, event.clientY])
+      duplicate = 0
+      for (var i = 0; i < hoveredOverTiles.length; i++) {
+        if ((hoveredOverTiles[i][0] === pos[0]) && (hoveredOverTiles[i][1] === pos[1])) {
+          duplicate += 1
+        }
+      }
+      if (duplicate === 0) {
+        hoveredOverTiles.push(pos)
+      }
+      for (var j = 0; j < hoveredOverTiles.length; j++) {
+        world.addEntity(hoveredOverTiles[j], currentTile.children[0].getAttribute('data-entity-number'))
+      }
+      redraw()
+    }
+  }, false)
+}
+
 
 /***/ }),
 /* 12 */
-/*!**********************************!*\
-  !*** ./src/js/playerControls.js ***!
-  \**********************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("function playerControls (step) {\r\n  var map = {}\r\n  function playerControls (event) {\r\n    map[event.key] = event.type === 'keydown'\r\n    if (map['ArrowUp']) {\r\n      step('up')\r\n    } else if (map['ArrowDown']) {\r\n      step('down')\r\n    } else if (map['ArrowLeft']) {\r\n      step('left')\r\n    } else if (map['ArrowRight']) {\r\n      step('right')\r\n    }\r\n  }\r\n  document.addEventListener('keyup', function (event) {\r\n    playerControls(event)\r\n  }, false)\r\n  document.addEventListener('keydown', function (event) {\r\n    playerControls(event)\r\n  }, false)\r\n}\r\n\r\n/* harmony default export */ __webpack_exports__[\"a\"] = (playerControls);\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTIuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvcGxheWVyQ29udHJvbHMuanM/ZjE3OCJdLCJzb3VyY2VzQ29udGVudCI6WyJmdW5jdGlvbiBwbGF5ZXJDb250cm9scyAoc3RlcCkge1xyXG4gIHZhciBtYXAgPSB7fVxyXG4gIGZ1bmN0aW9uIHBsYXllckNvbnRyb2xzIChldmVudCkge1xyXG4gICAgbWFwW2V2ZW50LmtleV0gPSBldmVudC50eXBlID09PSAna2V5ZG93bidcclxuICAgIGlmIChtYXBbJ0Fycm93VXAnXSkge1xyXG4gICAgICBzdGVwKCd1cCcpXHJcbiAgICB9IGVsc2UgaWYgKG1hcFsnQXJyb3dEb3duJ10pIHtcclxuICAgICAgc3RlcCgnZG93bicpXHJcbiAgICB9IGVsc2UgaWYgKG1hcFsnQXJyb3dMZWZ0J10pIHtcclxuICAgICAgc3RlcCgnbGVmdCcpXHJcbiAgICB9IGVsc2UgaWYgKG1hcFsnQXJyb3dSaWdodCddKSB7XHJcbiAgICAgIHN0ZXAoJ3JpZ2h0JylcclxuICAgIH1cclxuICB9XHJcbiAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcigna2V5dXAnLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgIHBsYXllckNvbnRyb2xzKGV2ZW50KVxyXG4gIH0sIGZhbHNlKVxyXG4gIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2tleWRvd24nLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgIHBsYXllckNvbnRyb2xzKGV2ZW50KVxyXG4gIH0sIGZhbHNlKVxyXG59XHJcblxyXG5leHBvcnQgZGVmYXVsdCBwbGF5ZXJDb250cm9sc1xyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9qcy9wbGF5ZXJDb250cm9scy5qc1xuLy8gbW9kdWxlIGlkID0gMTJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///12\n");
+function playerControls (step) {
+  var map = {}
+  function playerControls (event) {
+    map[event.key] = event.type === 'keydown'
+    if (map['ArrowUp']) {
+      step('up')
+    } else if (map['ArrowDown']) {
+      step('down')
+    } else if (map['ArrowLeft']) {
+      step('left')
+    } else if (map['ArrowRight']) {
+      step('right')
+    }
+  }
+  document.addEventListener('keyup', function (event) {
+    playerControls(event)
+  }, false)
+  document.addEventListener('keydown', function (event) {
+    playerControls(event)
+  }, false)
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (playerControls);
+
 
 /***/ }),
 /* 13 */
-/*!**********************************!*\
-  !*** ./src/js/menu/startMenu.js ***!
-  \**********************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = startMenu;\nfunction startMenu () {\r\n  const menu = document.querySelector('.menu')\r\n  const overlay = document.querySelector('.overlay')\r\n  const mouseInfo = document.querySelector('.mouse-info')\r\n  const startMenu = document.querySelector('.start-menu')\r\n  const helpControlsMenu = document.querySelector('.help-controls')\r\n  const gameMenu = document.querySelector('.game-menu')\r\n  const gameEditor = document.querySelector('.tile-selector')\r\n  const about = document.querySelector('.about')\r\n  // const backToStart = document.querySelectorAll('.back-to-start')\r\n  // backToStart.forEach(function (button, index) {\r\n  //   button.addEventListener('click', function (event) {\r\n  //\r\n  //   }, false)\r\n  // })\r\n\r\n  function hideAllSections () {\r\n    const sections = document.querySelectorAll('.menu__section-container section')\r\n    for (var i = 0; i < sections.length; i++) {\r\n      sections[i].setAttribute('data-hidden', 'yes')\r\n    }\r\n  }\r\n\r\n  function menuInteraction (selectedItem) {\r\n    if (selectedItem === 'Continue') {\r\n      menu.setAttribute('data-hidden', 'yes')\r\n      overlay.setAttribute('data-hidden', 'yes')\r\n      mouseInfo.setAttribute('style', 'display: block;')\r\n      window.localStorage.setItem('inGame', 'yes')\r\n    }\r\n    if (selectedItem === 'Help/Controls') {\r\n      if (helpControlsMenu.getAttribute('data-hidden') === 'no') {\r\n        helpControlsMenu.setAttribute('data-hidden', 'yes')\r\n        startMenu.setAttribute('data-hidden', 'no')\r\n      } else {\r\n        startMenu.setAttribute('data-hidden', 'yes')\r\n        helpControlsMenu.setAttribute('data-hidden', 'no')\r\n      }\r\n    }\r\n    if (selectedItem === 'Game Editor') {\r\n      if (gameEditor.getAttribute('data-hidden') === 'no') {\r\n        gameEditor.setAttribute('data-hidden', 'yes')\r\n        startMenu.setAttribute('data-hidden', 'no')\r\n      } else {\r\n        startMenu.setAttribute('data-hidden', 'yes')\r\n        gameEditor.setAttribute('data-hidden', 'no')\r\n      }\r\n    }\r\n    if (selectedItem === 'About') {\r\n      if (about.getAttribute('data-hidden') === 'no') {\r\n        about.setAttribute('data-hidden', 'yes')\r\n        startMenu.setAttribute('data-hidden', 'no')\r\n      } else {\r\n        startMenu.setAttribute('data-hidden', 'yes')\r\n        about.setAttribute('data-hidden', 'no')\r\n      }\r\n    }\r\n  }\r\n\r\n  // Arrow key events.\r\n  window.addEventListener('keydown', function (event) {\r\n    // console.log(event.key)\r\n    if (startMenu.getAttribute('data-hidden', 'no')) {\r\n      if (event.key === 'ArrowDown') {\r\n        // Select start menu item below current one.\r\n        const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected')\r\n        if (selectedMenuItem.nextElementSibling) {\r\n          selectedMenuItem.className = ''\r\n          selectedMenuItem.nextElementSibling.className = 'start-selected'\r\n        }\r\n      }\r\n      if (event.key === 'ArrowUp') {\r\n        // Select start menu item above current one.\r\n        const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected')\r\n        if (selectedMenuItem.previousElementSibling) {\r\n          selectedMenuItem.className = ''\r\n          selectedMenuItem.previousElementSibling.className = 'start-selected'\r\n        }\r\n      }\r\n    }\r\n\r\n    if (event.key === 'Enter') {\n      const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected').textContent\r\n      menuInteraction(selectedMenuItem)\r\n    }\r\n  }, false)\r\n\r\n  const startMenuItems = document.querySelectorAll('.start-menu__menu li')\r\n\r\n  function clearStartMenuItems () {\r\n    startMenuItems.forEach(function (item, index) {\r\n      item.className = ''\r\n      console.log('deleted')\r\n    })\r\n  }\r\n\r\n  startMenuItems.forEach(function (item, index) {\r\n    item.addEventListener('click', function (event) {\r\n      if (startMenu.getAttribute('data-hidden', 'no')) {\r\n        clearStartMenuItems()\r\n        event.target.className = 'start-selected'\r\n        menuInteraction(event.target.textContent)\r\n      }\r\n    }, false)\r\n  })\r\n\r\n  // Escape key events.\r\n  window.addEventListener('keydown', function (event) {\r\n    if (event.key === 'Escape') {\r\n      // If not in game do this.\r\n      if (window.localStorage.getItem('inGame') === 'no' || !window.localStorage.getItem('inGame')) {\r\n        // If the menu is shown, then hide the menu.\r\n        if (menu.getAttribute('data-hidden') === 'no') {\r\n          menu.setAttribute('data-hidden', 'yes')\r\n          overlay.setAttribute('data-hidden', 'yes')\r\n          mouseInfo.setAttribute('style', 'display: block;')\r\n        } else { // If the menu is hidden, show the menu.\r\n          menu.setAttribute('data-hidden', 'no')\r\n          overlay.setAttribute('data-hidden', 'no')\r\n          mouseInfo.setAttribute('style', 'display: none;')\r\n          hideAllSections()\r\n          startMenu.setAttribute('data-hidden', 'no')\r\n        }\r\n      }\r\n      // If in game do this.\r\n      if (window.localStorage.getItem('inGame') === 'yes') {\r\n        // If the menu is shown, then hide the menu.\r\n        if (menu.getAttribute('data-hidden') === 'no') {\r\n          menu.setAttribute('data-hidden', 'yes')\r\n          overlay.setAttribute('data-hidden', 'yes')\r\n          mouseInfo.setAttribute('style', 'display: block;')\r\n        } else { // If the menu is hidden, show the menu.\r\n          menu.setAttribute('data-hidden', 'no')\r\n          overlay.setAttribute('data-hidden', 'no')\r\n          mouseInfo.setAttribute('style', 'display: none;')\r\n          hideAllSections()\r\n          gameMenu.setAttribute('data-hidden', 'no')\r\n        }\r\n      }\r\n    }\r\n  }, false)\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvbWVudS9zdGFydE1lbnUuanM/OGE5YiJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBzdGFydE1lbnUgKCkge1xyXG4gIGNvbnN0IG1lbnUgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcubWVudScpXHJcbiAgY29uc3Qgb3ZlcmxheSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5vdmVybGF5JylcclxuICBjb25zdCBtb3VzZUluZm8gPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcubW91c2UtaW5mbycpXHJcbiAgY29uc3Qgc3RhcnRNZW51ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLnN0YXJ0LW1lbnUnKVxyXG4gIGNvbnN0IGhlbHBDb250cm9sc01lbnUgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuaGVscC1jb250cm9scycpXHJcbiAgY29uc3QgZ2FtZU1lbnUgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuZ2FtZS1tZW51JylcclxuICBjb25zdCBnYW1lRWRpdG9yID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLnRpbGUtc2VsZWN0b3InKVxyXG4gIGNvbnN0IGFib3V0ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLmFib3V0JylcclxuICAvLyBjb25zdCBiYWNrVG9TdGFydCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5iYWNrLXRvLXN0YXJ0JylcclxuICAvLyBiYWNrVG9TdGFydC5mb3JFYWNoKGZ1bmN0aW9uIChidXR0b24sIGluZGV4KSB7XHJcbiAgLy8gICBidXR0b24uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAvL1xyXG4gIC8vICAgfSwgZmFsc2UpXHJcbiAgLy8gfSlcclxuXHJcbiAgZnVuY3Rpb24gaGlkZUFsbFNlY3Rpb25zICgpIHtcclxuICAgIGNvbnN0IHNlY3Rpb25zID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLm1lbnVfX3NlY3Rpb24tY29udGFpbmVyIHNlY3Rpb24nKVxyXG4gICAgZm9yICh2YXIgaSA9IDA7IGkgPCBzZWN0aW9ucy5sZW5ndGg7IGkrKykge1xyXG4gICAgICBzZWN0aW9uc1tpXS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICB9XHJcbiAgfVxyXG5cclxuICBmdW5jdGlvbiBtZW51SW50ZXJhY3Rpb24gKHNlbGVjdGVkSXRlbSkge1xyXG4gICAgaWYgKHNlbGVjdGVkSXRlbSA9PT0gJ0NvbnRpbnVlJykge1xyXG4gICAgICBtZW51LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAneWVzJylcclxuICAgICAgb3ZlcmxheS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICAgIG1vdXNlSW5mby5zZXRBdHRyaWJ1dGUoJ3N0eWxlJywgJ2Rpc3BsYXk6IGJsb2NrOycpXHJcbiAgICAgIHdpbmRvdy5sb2NhbFN0b3JhZ2Uuc2V0SXRlbSgnaW5HYW1lJywgJ3llcycpXHJcbiAgICB9XHJcbiAgICBpZiAoc2VsZWN0ZWRJdGVtID09PSAnSGVscC9Db250cm9scycpIHtcclxuICAgICAgaWYgKGhlbHBDb250cm9sc01lbnUuZ2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicpID09PSAnbm8nKSB7XHJcbiAgICAgICAgaGVscENvbnRyb2xzTWVudS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICAgICAgc3RhcnRNZW51LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAnbm8nKVxyXG4gICAgICB9IGVsc2Uge1xyXG4gICAgICAgIHN0YXJ0TWVudS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICAgICAgaGVscENvbnRyb2xzTWVudS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ25vJylcclxuICAgICAgfVxyXG4gICAgfVxyXG4gICAgaWYgKHNlbGVjdGVkSXRlbSA9PT0gJ0dhbWUgRWRpdG9yJykge1xyXG4gICAgICBpZiAoZ2FtZUVkaXRvci5nZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJykgPT09ICdubycpIHtcclxuICAgICAgICBnYW1lRWRpdG9yLnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAneWVzJylcclxuICAgICAgICBzdGFydE1lbnUuc2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICdubycpXHJcbiAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgc3RhcnRNZW51LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAneWVzJylcclxuICAgICAgICBnYW1lRWRpdG9yLnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAnbm8nKVxyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgICBpZiAoc2VsZWN0ZWRJdGVtID09PSAnQWJvdXQnKSB7XHJcbiAgICAgIGlmIChhYm91dC5nZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJykgPT09ICdubycpIHtcclxuICAgICAgICBhYm91dC5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICAgICAgc3RhcnRNZW51LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAnbm8nKVxyXG4gICAgICB9IGVsc2Uge1xyXG4gICAgICAgIHN0YXJ0TWVudS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICAgICAgYWJvdXQuc2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICdubycpXHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcblxyXG4gIC8vIEFycm93IGtleSBldmVudHMuXHJcbiAgd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoJ2tleWRvd24nLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgIC8vIGNvbnNvbGUubG9nKGV2ZW50LmtleSlcclxuICAgIGlmIChzdGFydE1lbnUuZ2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICdubycpKSB7XHJcbiAgICAgIGlmIChldmVudC5rZXkgPT09ICdBcnJvd0Rvd24nKSB7XHJcbiAgICAgICAgLy8gU2VsZWN0IHN0YXJ0IG1lbnUgaXRlbSBiZWxvdyBjdXJyZW50IG9uZS5cclxuICAgICAgICBjb25zdCBzZWxlY3RlZE1lbnVJdGVtID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLnN0YXJ0LW1lbnVfX21lbnUgbGkuc3RhcnQtc2VsZWN0ZWQnKVxyXG4gICAgICAgIGlmIChzZWxlY3RlZE1lbnVJdGVtLm5leHRFbGVtZW50U2libGluZykge1xyXG4gICAgICAgICAgc2VsZWN0ZWRNZW51SXRlbS5jbGFzc05hbWUgPSAnJ1xyXG4gICAgICAgICAgc2VsZWN0ZWRNZW51SXRlbS5uZXh0RWxlbWVudFNpYmxpbmcuY2xhc3NOYW1lID0gJ3N0YXJ0LXNlbGVjdGVkJ1xyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG4gICAgICBpZiAoZXZlbnQua2V5ID09PSAnQXJyb3dVcCcpIHtcclxuICAgICAgICAvLyBTZWxlY3Qgc3RhcnQgbWVudSBpdGVtIGFib3ZlIGN1cnJlbnQgb25lLlxyXG4gICAgICAgIGNvbnN0IHNlbGVjdGVkTWVudUl0ZW0gPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc3RhcnQtbWVudV9fbWVudSBsaS5zdGFydC1zZWxlY3RlZCcpXHJcbiAgICAgICAgaWYgKHNlbGVjdGVkTWVudUl0ZW0ucHJldmlvdXNFbGVtZW50U2libGluZykge1xyXG4gICAgICAgICAgc2VsZWN0ZWRNZW51SXRlbS5jbGFzc05hbWUgPSAnJ1xyXG4gICAgICAgICAgc2VsZWN0ZWRNZW51SXRlbS5wcmV2aW91c0VsZW1lbnRTaWJsaW5nLmNsYXNzTmFtZSA9ICdzdGFydC1zZWxlY3RlZCdcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICBpZiAoZXZlbnQua2V5ID09PSAnRW50ZXInKSB7XG4gICAgICBjb25zdCBzZWxlY3RlZE1lbnVJdGVtID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLnN0YXJ0LW1lbnVfX21lbnUgbGkuc3RhcnQtc2VsZWN0ZWQnKS50ZXh0Q29udGVudFxyXG4gICAgICBtZW51SW50ZXJhY3Rpb24oc2VsZWN0ZWRNZW51SXRlbSlcclxuICAgIH1cclxuICB9LCBmYWxzZSlcclxuXHJcbiAgY29uc3Qgc3RhcnRNZW51SXRlbXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcuc3RhcnQtbWVudV9fbWVudSBsaScpXHJcblxyXG4gIGZ1bmN0aW9uIGNsZWFyU3RhcnRNZW51SXRlbXMgKCkge1xyXG4gICAgc3RhcnRNZW51SXRlbXMuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSwgaW5kZXgpIHtcclxuICAgICAgaXRlbS5jbGFzc05hbWUgPSAnJ1xyXG4gICAgICBjb25zb2xlLmxvZygnZGVsZXRlZCcpXHJcbiAgICB9KVxyXG4gIH1cclxuXHJcbiAgc3RhcnRNZW51SXRlbXMuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSwgaW5kZXgpIHtcclxuICAgIGl0ZW0uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgICAgaWYgKHN0YXJ0TWVudS5nZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ25vJykpIHtcclxuICAgICAgICBjbGVhclN0YXJ0TWVudUl0ZW1zKClcclxuICAgICAgICBldmVudC50YXJnZXQuY2xhc3NOYW1lID0gJ3N0YXJ0LXNlbGVjdGVkJ1xyXG4gICAgICAgIG1lbnVJbnRlcmFjdGlvbihldmVudC50YXJnZXQudGV4dENvbnRlbnQpXHJcbiAgICAgIH1cclxuICAgIH0sIGZhbHNlKVxyXG4gIH0pXHJcblxyXG4gIC8vIEVzY2FwZSBrZXkgZXZlbnRzLlxyXG4gIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdrZXlkb3duJywgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICBpZiAoZXZlbnQua2V5ID09PSAnRXNjYXBlJykge1xyXG4gICAgICAvLyBJZiBub3QgaW4gZ2FtZSBkbyB0aGlzLlxyXG4gICAgICBpZiAod2luZG93LmxvY2FsU3RvcmFnZS5nZXRJdGVtKCdpbkdhbWUnKSA9PT0gJ25vJyB8fCAhd2luZG93LmxvY2FsU3RvcmFnZS5nZXRJdGVtKCdpbkdhbWUnKSkge1xyXG4gICAgICAgIC8vIElmIHRoZSBtZW51IGlzIHNob3duLCB0aGVuIGhpZGUgdGhlIG1lbnUuXHJcbiAgICAgICAgaWYgKG1lbnUuZ2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicpID09PSAnbm8nKSB7XHJcbiAgICAgICAgICBtZW51LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAneWVzJylcclxuICAgICAgICAgIG92ZXJsYXkuc2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICd5ZXMnKVxyXG4gICAgICAgICAgbW91c2VJbmZvLnNldEF0dHJpYnV0ZSgnc3R5bGUnLCAnZGlzcGxheTogYmxvY2s7JylcclxuICAgICAgICB9IGVsc2UgeyAvLyBJZiB0aGUgbWVudSBpcyBoaWRkZW4sIHNob3cgdGhlIG1lbnUuXHJcbiAgICAgICAgICBtZW51LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAnbm8nKVxyXG4gICAgICAgICAgb3ZlcmxheS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ25vJylcclxuICAgICAgICAgIG1vdXNlSW5mby5zZXRBdHRyaWJ1dGUoJ3N0eWxlJywgJ2Rpc3BsYXk6IG5vbmU7JylcclxuICAgICAgICAgIGhpZGVBbGxTZWN0aW9ucygpXHJcbiAgICAgICAgICBzdGFydE1lbnUuc2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICdubycpXHJcbiAgICAgICAgfVxyXG4gICAgICB9XHJcbiAgICAgIC8vIElmIGluIGdhbWUgZG8gdGhpcy5cclxuICAgICAgaWYgKHdpbmRvdy5sb2NhbFN0b3JhZ2UuZ2V0SXRlbSgnaW5HYW1lJykgPT09ICd5ZXMnKSB7XHJcbiAgICAgICAgLy8gSWYgdGhlIG1lbnUgaXMgc2hvd24sIHRoZW4gaGlkZSB0aGUgbWVudS5cclxuICAgICAgICBpZiAobWVudS5nZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJykgPT09ICdubycpIHtcclxuICAgICAgICAgIG1lbnUuc2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICd5ZXMnKVxyXG4gICAgICAgICAgb3ZlcmxheS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICAgICAgICBtb3VzZUluZm8uc2V0QXR0cmlidXRlKCdzdHlsZScsICdkaXNwbGF5OiBibG9jazsnKVxyXG4gICAgICAgIH0gZWxzZSB7IC8vIElmIHRoZSBtZW51IGlzIGhpZGRlbiwgc2hvdyB0aGUgbWVudS5cclxuICAgICAgICAgIG1lbnUuc2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICdubycpXHJcbiAgICAgICAgICBvdmVybGF5LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAnbm8nKVxyXG4gICAgICAgICAgbW91c2VJbmZvLnNldEF0dHJpYnV0ZSgnc3R5bGUnLCAnZGlzcGxheTogbm9uZTsnKVxyXG4gICAgICAgICAgaGlkZUFsbFNlY3Rpb25zKClcclxuICAgICAgICAgIGdhbWVNZW51LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAnbm8nKVxyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH0sIGZhbHNlKVxyXG59XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2pzL21lbnUvc3RhcnRNZW51LmpzXG4vLyBtb2R1bGUgaWQgPSAxM1xuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///13\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = startMenu;
+function startMenu () {
+  const menu = document.querySelector('.menu')
+  const overlay = document.querySelector('.overlay')
+  const mouseInfo = document.querySelector('.mouse-info')
+  const startMenu = document.querySelector('.start-menu')
+  const helpControlsMenu = document.querySelector('.help-controls')
+  const gameMenu = document.querySelector('.game-menu')
+  const gameEditor = document.querySelector('.tile-selector')
+  const about = document.querySelector('.about')
+  // const backToStart = document.querySelectorAll('.back-to-start')
+  // backToStart.forEach(function (button, index) {
+  //   button.addEventListener('click', function (event) {
+  //
+  //   }, false)
+  // })
+
+  function hideAllSections () {
+    const sections = document.querySelectorAll('.menu__section-container section')
+    for (var i = 0; i < sections.length; i++) {
+      sections[i].setAttribute('data-hidden', 'yes')
+    }
+  }
+
+  function menuInteraction (selectedItem) {
+    if (selectedItem === 'Continue') {
+      menu.setAttribute('data-hidden', 'yes')
+      overlay.setAttribute('data-hidden', 'yes')
+      mouseInfo.setAttribute('style', 'display: block;')
+      window.localStorage.setItem('inGame', 'yes')
+    }
+    if (selectedItem === 'Help/Controls') {
+      if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
+        helpControlsMenu.setAttribute('data-hidden', 'yes')
+        startMenu.setAttribute('data-hidden', 'no')
+      } else {
+        startMenu.setAttribute('data-hidden', 'yes')
+        helpControlsMenu.setAttribute('data-hidden', 'no')
+      }
+    }
+    if (selectedItem === 'Game Editor') {
+      if (gameEditor.getAttribute('data-hidden') === 'no') {
+        gameEditor.setAttribute('data-hidden', 'yes')
+        startMenu.setAttribute('data-hidden', 'no')
+      } else {
+        startMenu.setAttribute('data-hidden', 'yes')
+        gameEditor.setAttribute('data-hidden', 'no')
+      }
+    }
+    if (selectedItem === 'About') {
+      if (about.getAttribute('data-hidden') === 'no') {
+        about.setAttribute('data-hidden', 'yes')
+        startMenu.setAttribute('data-hidden', 'no')
+      } else {
+        startMenu.setAttribute('data-hidden', 'yes')
+        about.setAttribute('data-hidden', 'no')
+      }
+    }
+  }
+
+  // Arrow key events.
+  window.addEventListener('keydown', function (event) {
+    // console.log(event.key)
+    if (startMenu.getAttribute('data-hidden', 'no')) {
+      if (event.key === 'ArrowDown') {
+        // Select start menu item below current one.
+        const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected')
+        if (selectedMenuItem.nextElementSibling) {
+          selectedMenuItem.className = ''
+          selectedMenuItem.nextElementSibling.className = 'start-selected'
+        }
+      }
+      if (event.key === 'ArrowUp') {
+        // Select start menu item above current one.
+        const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected')
+        if (selectedMenuItem.previousElementSibling) {
+          selectedMenuItem.className = ''
+          selectedMenuItem.previousElementSibling.className = 'start-selected'
+        }
+      }
+    }
+
+    if (event.key === 'Enter') {
+      const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected').textContent
+      menuInteraction(selectedMenuItem)
+    }
+  }, false)
+
+  const startMenuItems = document.querySelectorAll('.start-menu__menu li')
+
+  function clearStartMenuItems () {
+    startMenuItems.forEach(function (item, index) {
+      item.className = ''
+      console.log('deleted')
+    })
+  }
+
+  startMenuItems.forEach(function (item, index) {
+    item.addEventListener('click', function (event) {
+      if (startMenu.getAttribute('data-hidden', 'no')) {
+        clearStartMenuItems()
+        event.target.className = 'start-selected'
+        menuInteraction(event.target.textContent)
+      }
+    }, false)
+  })
+
+  // Escape key events.
+  window.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      // If not in game do this.
+      if (window.localStorage.getItem('inGame') === 'no' || !window.localStorage.getItem('inGame')) {
+        // If the menu is shown, then hide the menu.
+        if (menu.getAttribute('data-hidden') === 'no') {
+          menu.setAttribute('data-hidden', 'yes')
+          overlay.setAttribute('data-hidden', 'yes')
+          mouseInfo.setAttribute('style', 'display: block;')
+        } else { // If the menu is hidden, show the menu.
+          menu.setAttribute('data-hidden', 'no')
+          overlay.setAttribute('data-hidden', 'no')
+          mouseInfo.setAttribute('style', 'display: none;')
+          hideAllSections()
+          startMenu.setAttribute('data-hidden', 'no')
+        }
+      }
+      // If in game do this.
+      if (window.localStorage.getItem('inGame') === 'yes') {
+        // If the menu is shown, then hide the menu.
+        if (menu.getAttribute('data-hidden') === 'no') {
+          menu.setAttribute('data-hidden', 'yes')
+          overlay.setAttribute('data-hidden', 'yes')
+          mouseInfo.setAttribute('style', 'display: block;')
+        } else { // If the menu is hidden, show the menu.
+          menu.setAttribute('data-hidden', 'no')
+          overlay.setAttribute('data-hidden', 'no')
+          mouseInfo.setAttribute('style', 'display: none;')
+          hideAllSections()
+          gameMenu.setAttribute('data-hidden', 'no')
+        }
+      }
+    }
+  }, false)
+}
+
 
 /***/ }),
 /* 14 */
-/*!*********************************!*\
-  !*** ./src/js/menu/gameMenu.js ***!
-  \*********************************/
-/*! exports provided: default */
-/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony export (immutable) */ __webpack_exports__[\"a\"] = gameMenu;\nfunction gameMenu () {\r\n  const menu = document.querySelector('.menu')\r\n  const overlay = document.querySelector('.overlay')\r\n  const mouseInfo = document.querySelector('.mouse-info')\r\n  const startMenu = document.querySelector('.start-menu')\r\n  const gameMenu = document.querySelector('.game-menu')\r\n\r\n  if (window.localStorage.getItem('inGame') === 'yes') {\r\n    menu.setAttribute('data-hidden', 'yes')\r\n    overlay.setAttribute('data-hidden', 'yes')\r\n    mouseInfo.setAttribute('style', 'display: block;')\r\n  }\r\n\r\n  function hideAllSections () {\r\n    const sections = document.querySelectorAll('.menu__section-container section')\r\n    for (var i = 0; i < sections.length; i++) {\r\n      sections[i].setAttribute('data-hidden', 'yes')\r\n    }\r\n  }\r\n\r\n  // Arrow key events.\r\n  window.addEventListener('keydown', function (event) {\r\n    // console.log(event.key)\r\n    if (gameMenu.getAttribute('data-hidden') === 'no') {\r\n      if (event.key === 'ArrowDown') {\r\n        // Select game menu item below current one.\r\n        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')\r\n        if (selectedGameItem.nextElementSibling) {\r\n          selectedGameItem.className = ''\r\n          selectedGameItem.nextElementSibling.className = 'game-selected'\r\n        }\r\n      }\r\n      if (event.key === 'ArrowUp') {\r\n        // Select game menu item above current one.\r\n        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')\r\n        if (selectedGameItem.previousElementSibling) {\r\n          selectedGameItem.className = ''\r\n          selectedGameItem.previousElementSibling.className = 'game-selected'\r\n        }\r\n      }\r\n    }\r\n\r\n    if (event.key === 'Enter') {\r\n      if (gameMenu.getAttribute('data-hidden') === 'no') {\r\n        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')\r\n        if (selectedGameItem.textContent === 'Exit Game') {\r\n          window.localStorage.setItem('inGame', 'no')\r\n          menu.setAttribute('data-hidden', 'no')\r\n          overlay.setAttribute('data-hidden', 'no')\r\n          mouseInfo.setAttribute('style', 'display: none;')\r\n          hideAllSections()\r\n          startMenu.setAttribute('data-hidden', 'no')\r\n        }\r\n      }\r\n    }\r\n  }, false)\r\n}\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTQuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvbWVudS9nYW1lTWVudS5qcz9iMWUzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIGdhbWVNZW51ICgpIHtcclxuICBjb25zdCBtZW51ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLm1lbnUnKVxyXG4gIGNvbnN0IG92ZXJsYXkgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcub3ZlcmxheScpXHJcbiAgY29uc3QgbW91c2VJbmZvID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLm1vdXNlLWluZm8nKVxyXG4gIGNvbnN0IHN0YXJ0TWVudSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5zdGFydC1tZW51JylcclxuICBjb25zdCBnYW1lTWVudSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5nYW1lLW1lbnUnKVxyXG5cclxuICBpZiAod2luZG93LmxvY2FsU3RvcmFnZS5nZXRJdGVtKCdpbkdhbWUnKSA9PT0gJ3llcycpIHtcclxuICAgIG1lbnUuc2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICd5ZXMnKVxyXG4gICAgb3ZlcmxheS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICBtb3VzZUluZm8uc2V0QXR0cmlidXRlKCdzdHlsZScsICdkaXNwbGF5OiBibG9jazsnKVxyXG4gIH1cclxuXHJcbiAgZnVuY3Rpb24gaGlkZUFsbFNlY3Rpb25zICgpIHtcclxuICAgIGNvbnN0IHNlY3Rpb25zID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLm1lbnVfX3NlY3Rpb24tY29udGFpbmVyIHNlY3Rpb24nKVxyXG4gICAgZm9yICh2YXIgaSA9IDA7IGkgPCBzZWN0aW9ucy5sZW5ndGg7IGkrKykge1xyXG4gICAgICBzZWN0aW9uc1tpXS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ3llcycpXHJcbiAgICB9XHJcbiAgfVxyXG5cclxuICAvLyBBcnJvdyBrZXkgZXZlbnRzLlxyXG4gIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdrZXlkb3duJywgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICAvLyBjb25zb2xlLmxvZyhldmVudC5rZXkpXHJcbiAgICBpZiAoZ2FtZU1lbnUuZ2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicpID09PSAnbm8nKSB7XHJcbiAgICAgIGlmIChldmVudC5rZXkgPT09ICdBcnJvd0Rvd24nKSB7XHJcbiAgICAgICAgLy8gU2VsZWN0IGdhbWUgbWVudSBpdGVtIGJlbG93IGN1cnJlbnQgb25lLlxyXG4gICAgICAgIGNvbnN0IHNlbGVjdGVkR2FtZUl0ZW0gPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuZ2FtZS1tZW51X19tZW51IGxpLmdhbWUtc2VsZWN0ZWQnKVxyXG4gICAgICAgIGlmIChzZWxlY3RlZEdhbWVJdGVtLm5leHRFbGVtZW50U2libGluZykge1xyXG4gICAgICAgICAgc2VsZWN0ZWRHYW1lSXRlbS5jbGFzc05hbWUgPSAnJ1xyXG4gICAgICAgICAgc2VsZWN0ZWRHYW1lSXRlbS5uZXh0RWxlbWVudFNpYmxpbmcuY2xhc3NOYW1lID0gJ2dhbWUtc2VsZWN0ZWQnXHJcbiAgICAgICAgfVxyXG4gICAgICB9XHJcbiAgICAgIGlmIChldmVudC5rZXkgPT09ICdBcnJvd1VwJykge1xyXG4gICAgICAgIC8vIFNlbGVjdCBnYW1lIG1lbnUgaXRlbSBhYm92ZSBjdXJyZW50IG9uZS5cclxuICAgICAgICBjb25zdCBzZWxlY3RlZEdhbWVJdGVtID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLmdhbWUtbWVudV9fbWVudSBsaS5nYW1lLXNlbGVjdGVkJylcclxuICAgICAgICBpZiAoc2VsZWN0ZWRHYW1lSXRlbS5wcmV2aW91c0VsZW1lbnRTaWJsaW5nKSB7XHJcbiAgICAgICAgICBzZWxlY3RlZEdhbWVJdGVtLmNsYXNzTmFtZSA9ICcnXHJcbiAgICAgICAgICBzZWxlY3RlZEdhbWVJdGVtLnByZXZpb3VzRWxlbWVudFNpYmxpbmcuY2xhc3NOYW1lID0gJ2dhbWUtc2VsZWN0ZWQnXHJcbiAgICAgICAgfVxyXG4gICAgICB9XHJcbiAgICB9XHJcblxyXG4gICAgaWYgKGV2ZW50LmtleSA9PT0gJ0VudGVyJykge1xyXG4gICAgICBpZiAoZ2FtZU1lbnUuZ2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicpID09PSAnbm8nKSB7XHJcbiAgICAgICAgY29uc3Qgc2VsZWN0ZWRHYW1lSXRlbSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5nYW1lLW1lbnVfX21lbnUgbGkuZ2FtZS1zZWxlY3RlZCcpXHJcbiAgICAgICAgaWYgKHNlbGVjdGVkR2FtZUl0ZW0udGV4dENvbnRlbnQgPT09ICdFeGl0IEdhbWUnKSB7XHJcbiAgICAgICAgICB3aW5kb3cubG9jYWxTdG9yYWdlLnNldEl0ZW0oJ2luR2FtZScsICdubycpXHJcbiAgICAgICAgICBtZW51LnNldEF0dHJpYnV0ZSgnZGF0YS1oaWRkZW4nLCAnbm8nKVxyXG4gICAgICAgICAgb3ZlcmxheS5zZXRBdHRyaWJ1dGUoJ2RhdGEtaGlkZGVuJywgJ25vJylcclxuICAgICAgICAgIG1vdXNlSW5mby5zZXRBdHRyaWJ1dGUoJ3N0eWxlJywgJ2Rpc3BsYXk6IG5vbmU7JylcclxuICAgICAgICAgIGhpZGVBbGxTZWN0aW9ucygpXHJcbiAgICAgICAgICBzdGFydE1lbnUuc2V0QXR0cmlidXRlKCdkYXRhLWhpZGRlbicsICdubycpXHJcbiAgICAgICAgfVxyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfSwgZmFsc2UpXHJcbn1cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvanMvbWVudS9nYW1lTWVudS5qc1xuLy8gbW9kdWxlIGlkID0gMTRcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///14\n");
+/* harmony export (immutable) */ __webpack_exports__["a"] = gameMenu;
+function gameMenu () {
+  const menu = document.querySelector('.menu')
+  const overlay = document.querySelector('.overlay')
+  const mouseInfo = document.querySelector('.mouse-info')
+  const startMenu = document.querySelector('.start-menu')
+  const gameMenu = document.querySelector('.game-menu')
+
+  if (window.localStorage.getItem('inGame') === 'yes') {
+    menu.setAttribute('data-hidden', 'yes')
+    overlay.setAttribute('data-hidden', 'yes')
+    mouseInfo.setAttribute('style', 'display: block;')
+  }
+
+  function hideAllSections () {
+    const sections = document.querySelectorAll('.menu__section-container section')
+    for (var i = 0; i < sections.length; i++) {
+      sections[i].setAttribute('data-hidden', 'yes')
+    }
+  }
+
+  // Arrow key events.
+  window.addEventListener('keydown', function (event) {
+    // console.log(event.key)
+    if (gameMenu.getAttribute('data-hidden') === 'no') {
+      if (event.key === 'ArrowDown') {
+        // Select game menu item below current one.
+        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')
+        if (selectedGameItem.nextElementSibling) {
+          selectedGameItem.className = ''
+          selectedGameItem.nextElementSibling.className = 'game-selected'
+        }
+      }
+      if (event.key === 'ArrowUp') {
+        // Select game menu item above current one.
+        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')
+        if (selectedGameItem.previousElementSibling) {
+          selectedGameItem.className = ''
+          selectedGameItem.previousElementSibling.className = 'game-selected'
+        }
+      }
+    }
+
+    if (event.key === 'Enter') {
+      if (gameMenu.getAttribute('data-hidden') === 'no') {
+        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')
+        if (selectedGameItem.textContent === 'Exit Game') {
+          window.localStorage.setItem('inGame', 'no')
+          menu.setAttribute('data-hidden', 'no')
+          overlay.setAttribute('data-hidden', 'no')
+          mouseInfo.setAttribute('style', 'display: none;')
+          hideAllSections()
+          startMenu.setAttribute('data-hidden', 'no')
+        }
+      }
+    }
+  }, false)
+}
+
 
 /***/ })
 /******/ ]);
