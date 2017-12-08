@@ -1,19 +1,21 @@
-export default function Player (x, y) {
-  this.img = document.getElementById('spritesheet')
-  this.sourceX = 9
-  this.sourceY = 42
-  this.x = x
-  this.y = y
-  this.entityNumber = 2
-  this.size = 30
-  this.speed = 30
-  this.category = 'character'
-  this.collidable = 'yes'
-  this.collidableTiles = []
-  this.exp = 0
-  this.health = 10
-  this.attackPower = 3
-  this.defense = 0
+export default class Player {
+  constructor (x, y) {
+    this.img = document.getElementById('spritesheet')
+    this.sourceX = 9
+    this.sourceY = 42
+    this.x = x
+    this.y = y
+    this.entityNumber = 2
+    this.size = 30
+    this.speed = 30
+    this.category = 'character'
+    this.collidable = 'yes'
+    this.collidableTiles = []
+    this.exp = 0
+    this.health = 10
+    this.attackPower = 3
+    this.defense = 0
+  }
 }
 
 Player.prototype.draw = function draw (ctx) {

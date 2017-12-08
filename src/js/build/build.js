@@ -68,25 +68,28 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Monster;
-function Monster (x, y) {
-  this.img = document.getElementById('spritesheet')
-  this.sourceX = 8
-  this.sourceY = 114
-  this.x = x
-  this.y = y
-  this.entityNumber = 3
-  this.size = 30
-  this.speed = 30
-  this.category = 'monster'
-  this.collidable = 'yes'
-  this.collidableTiles = []
-  this.exp = 0
-  this.health = 5
-  this.attackPower = 1
-  this.defense = 0
-  this.expReward = 5
+class Monster {
+  constructor (x, y) {
+    this.img = document.getElementById('spritesheet')
+    this.sourceX = 8
+    this.sourceY = 114
+    this.x = x
+    this.y = y
+    this.entityNumber = 3
+    this.size = 30
+    this.speed = 30
+    this.category = 'monster'
+    this.collidable = 'yes'
+    this.collidableTiles = []
+    this.exp = 0
+    this.health = 5
+    this.attackPower = 1
+    this.defense = 0
+    this.expReward = 5
+  }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = Monster;
+
 
 Monster.prototype.draw = function draw (ctx) {
   ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size,
@@ -167,24 +170,27 @@ Monster.prototype.step = function step (canvasLength, world) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Player;
-function Player (x, y) {
-  this.img = document.getElementById('spritesheet')
-  this.sourceX = 9
-  this.sourceY = 42
-  this.x = x
-  this.y = y
-  this.entityNumber = 2
-  this.size = 30
-  this.speed = 30
-  this.category = 'character'
-  this.collidable = 'yes'
-  this.collidableTiles = []
-  this.exp = 0
-  this.health = 10
-  this.attackPower = 3
-  this.defense = 0
+class Player {
+  constructor (x, y) {
+    this.img = document.getElementById('spritesheet')
+    this.sourceX = 9
+    this.sourceY = 42
+    this.x = x
+    this.y = y
+    this.entityNumber = 2
+    this.size = 30
+    this.speed = 30
+    this.category = 'character'
+    this.collidable = 'yes'
+    this.collidableTiles = []
+    this.exp = 0
+    this.health = 10
+    this.attackPower = 3
+    this.defense = 0
+  }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = Player;
+
 
 Player.prototype.draw = function draw (ctx) {
   ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size,
@@ -415,18 +421,21 @@ Scene.prototype.setRandomWalls = function setRandomWalls () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Wall;
-function Wall (x, y, entityNumber, ctx) {
-  this.img = document.getElementById('wall')
-  this.sourceX = 0
-  this.sourceY = 0
-  this.x = x
-  this.y = y
-  this.entityNumber = 1
-  this.size = 30
-  this.category = 'terrain'
-  this.collidable = 'yes'
+class Wall {
+  constructor (x, y, entityNumber, ctx) {
+    this.img = document.getElementById('wall')
+    this.sourceX = 0
+    this.sourceY = 0
+    this.x = x
+    this.y = y
+    this.entityNumber = 1
+    this.size = 30
+    this.category = 'terrain'
+    this.collidable = 'yes'
+  }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = Wall;
+
 
 
 /***/ }),
@@ -434,18 +443,21 @@ function Wall (x, y, entityNumber, ctx) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Wall;
-function Wall (x, y, entityNumber, ctx) {
-  this.img = document.getElementById('floor')
-  this.sourceX = 0
-  this.sourceY = 0
-  this.x = x
-  this.y = y
-  this.entityNumber = 0
-  this.size = 30
-  this.category = 'terrain'
-  this.collidable = 'no'
+class Floor {
+  constructor (x, y, entityNumber, ctx) {
+    this.img = document.getElementById('floor')
+    this.sourceX = 0
+    this.sourceY = 0
+    this.x = x
+    this.y = y
+    this.entityNumber = 0
+    this.size = 30
+    this.category = 'terrain'
+    this.collidable = 'no'
+  }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = Floor;
+
 
 
 /***/ }),
@@ -453,18 +465,21 @@ function Wall (x, y, entityNumber, ctx) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Grass;
-function Grass (x, y, entityNumber, ctx) {
-  this.img = document.getElementById('grass')
-  this.sourceX = 0
-  this.sourceY = 0
-  this.x = x
-  this.y = y
-  this.entityNumber = 4
-  this.size = 30
-  this.category = 'terrain'
-  this.collidable = 'no'
+class Grass {
+  constructor (x, y, entityNumber, ctx) {
+    this.img = document.getElementById('grass')
+    this.sourceX = 0
+    this.sourceY = 0
+    this.x = x
+    this.y = y
+    this.entityNumber = 4
+    this.size = 30
+    this.category = 'terrain'
+    this.collidable = 'no'
+  }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = Grass;
+
 
 
 /***/ }),
@@ -472,18 +487,21 @@ function Grass (x, y, entityNumber, ctx) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = Grass;
-function Grass (x, y, entityNumber, ctx) {
-  this.img = document.getElementById('tree')
-  this.sourceX = 0
-  this.sourceY = 0
-  this.x = x
-  this.y = y
-  this.entityNumber = 5
-  this.size = 30
-  this.category = 'terrain'
-  this.collidable = 'yes'
+class Grass {
+  constructor (x, y, entityNumber, ctx) {
+    this.img = document.getElementById('tree')
+    this.sourceX = 0
+    this.sourceY = 0
+    this.x = x
+    this.y = y
+    this.entityNumber = 5
+    this.size = 30
+    this.category = 'terrain'
+    this.collidable = 'yes'
+  }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = Grass;
+
 
 
 /***/ }),

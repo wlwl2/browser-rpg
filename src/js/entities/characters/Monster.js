@@ -1,20 +1,22 @@
-export default function Monster (x, y) {
-  this.img = document.getElementById('spritesheet')
-  this.sourceX = 8
-  this.sourceY = 114
-  this.x = x
-  this.y = y
-  this.entityNumber = 3
-  this.size = 30
-  this.speed = 30
-  this.category = 'monster'
-  this.collidable = 'yes'
-  this.collidableTiles = []
-  this.exp = 0
-  this.health = 5
-  this.attackPower = 1
-  this.defense = 0
-  this.expReward = 5
+export default class Monster {
+  constructor (x, y) {
+    this.img = document.getElementById('spritesheet')
+    this.sourceX = 8
+    this.sourceY = 114
+    this.x = x
+    this.y = y
+    this.entityNumber = 3
+    this.size = 30
+    this.speed = 30
+    this.category = 'monster'
+    this.collidable = 'yes'
+    this.collidableTiles = []
+    this.exp = 0
+    this.health = 5
+    this.attackPower = 1
+    this.defense = 0
+    this.expReward = 5
+  }
 }
 
 Monster.prototype.draw = function draw (ctx) {
