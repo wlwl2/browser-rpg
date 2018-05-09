@@ -7,9 +7,9 @@ import canvasDimensions from './canvasDimensions'
 export default function World () {
   const gridcells = 20
   const monsters = this.monsters = []
-  monsters.push(new Monster(30, 30), new Monster(60, 60))
+  monsters.push(new Monster(32, 32), new Monster(64, 64))
   const players = this.players = []
-  players.push(new Player(240, 240))
+  players.push(new Player(256, 256))
   // Set the initial height and width of the grid (or game board) in cells.
   this.scene = new Scene(gridcells, gridcells)
 }

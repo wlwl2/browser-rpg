@@ -25,5 +25,5 @@ function Sprite (img, width, height, positions) {
 //   }
 // }
 
-var monster = new Sprite(img, 30, 30, [[8, 114]])
+var monster = new Sprite(img, 32, 32, [[8, 114]])
 monster.draw(140, 200, 0)

@@ -26,7 +26,7 @@ Scene.prototype.draw = function (ctx, canvas) {
       const value = row[x]
       const tile = new this.tiles[value]()
       const img = tile.img
-      ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight,
+      ctx.drawImage(img, tile.sourceX, tile.sourceY, tile.srcWidth, tile.srcHeight,
         x * cellWidth, y * cellHeight, cellWidth, cellHeight)
     }
   }
@@ -46,7 +46,7 @@ Scene.prototype.setBorder = function setBorder () {
     const row = this.grid[y]
     for (let x = 0; x < this.width; x++) {
       if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {
-        row[x] = 1
+        row[x] = 0
       }
     }
   }
@@ -55,7 +55,7 @@ Scene.prototype.setRandomWalls = function setRandomWalls () {
   for (let y = 1; y < this.height - 1; y++) {
     const row = this.grid[y]
     for (let x = 1; x < this.width - 1; x++) {
-      row[x] = Math.random() < 0.1 ? 1 : 0
+      row[x] = Math.random() < 0.1 ? 5 : 0
     }
   }
 }

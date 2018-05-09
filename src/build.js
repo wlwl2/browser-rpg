@@ -79,18 +79,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Monster = function Monster(x, y) {
   _classCallCheck(this, Monster);
 
-  this.img = document.getElementById('log');
+  this.img = document.getElementById('logImg');
   this.srcX = 4;
   this.srcY = 7;
-  this.srcWidth = 30;
-  this.srcHeight = 30;
+  this.srcWidth = 32;
+  this.srcHeight = 32;
   this.destX = x;
   this.destY = y;
   this.entityNumber = 3;
-  this.destWidth = 30;
-  this.destHeight = 30;
-  this.size = 30;
-  this.speed = 30;
+  this.destWidth = 32;
+  this.destHeight = 32;
+  this.size = 32;
+  this.speed = 32;
   this.category = 'monster';
   this.collidable = 'yes';
   this.collidableTiles = [];
@@ -110,9 +110,9 @@ Monster.prototype.draw = function draw(ctx) {
 };
 
 Monster.prototype.step = function step(canvasLength, world) {
-  var speed = this.speed / 30;
-  var y = this.destY / 30;
-  var x = this.destX / 30;
+  var speed = this.speed / 32;
+  var y = this.destY / 32;
+  var x = this.destX / 32;
   // Collates all the colliable tiles into this.collidableTiles.
   if (!world) return;
   world.scene.tiles.forEach(function (Tile) {
@@ -124,8 +124,8 @@ Monster.prototype.step = function step(canvasLength, world) {
 
   // Randomly makes the monster move one step in one of 4 directions.
   var next = { x: this.destX, y: this.destY };
-  var nextY = next.y / 30;
-  var nextX = next.x / 30;
+  var nextY = next.y / 32;
+  var nextX = next.x / 32;
   switch (Math.floor(Math.random() * 4)) {
     case 0:
       // up.
@@ -193,7 +193,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Player = function Player(x, y) {
   _classCallCheck(this, Player);
 
-  this.img = document.getElementById('spritesheet');
+  this.img = document.getElementById('characterImg');
   this.sourceX = 1;
   this.sourceY = 6;
   this.destinationX = x;
@@ -201,7 +201,7 @@ var Player = function Player(x, y) {
   this.entityNumber = 2;
   this.sizeX = 15;
   this.sizeY = 22;
-  this.speed = 5;
+  this.speed = 4;
   this.category = 'character';
   this.collidable = 'yes';
   this.collidableTiles = [];
@@ -209,8 +209,12 @@ var Player = function Player(x, y) {
   this.health = 10;
   this.attackPower = 3;
   this.defense = 0;
+  this.spriteCounter = 0;
   this.updateSprite = function (sourceX, sourceY, sizeX, sizeY) {
-    console.log(this);
+    this.sourceX = sourceX;
+    this.sourceY = sourceY;
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
   }.bind(this);
 };
 
@@ -239,27 +243,18 @@ Player.prototype.move = function move(ctx, direction, canvas, world) {
       // Collidable terrain detection.
       // if (this.collidableTiles.indexOf(world.scene.grid[y - speed][x]) >= 0) return
 
-      if (this.sourceX === 1) {
-        this.sourceX = 17;
-        this.sourceY = 7;
-        this.sizeX = 15;
-        this.sizeY = 21;
-        this.updateSprite();
-      } else if (this.sourceX === 17) {
-        this.sourceX = 33;
-        this.sourceY = 6;
-        this.sizeX = 15;
-        this.sizeY = 22;
-      } else if (this.sourceX === 33) {
-        this.sourceX = 49;
-        this.sourceY = 7;
-        this.sizeX = 15;
-        this.sizeY = 21;
-      } else if (this.sourceX === 49) {
-        this.sourceX = 1;
-        this.sourceY = 6;
-        this.sizeX = 15;
-        this.sizeY = 22;
+      if (this.spriteCounter === 0) {
+        this.updateSprite(16, 70, 15, 22);
+        this.spriteCounter = 1;
+      } else if (this.spriteCounter === 1) {
+        this.updateSprite(32, 69, 15, 23);
+        this.spriteCounter = 2;
+      } else if (this.spriteCounter === 2) {
+        this.updateSprite(48, 70, 15, 22);
+        this.spriteCounter = 3;
+      } else if (this.spriteCounter === 3) {
+        this.updateSprite(0, 69, 15, 23);
+        this.spriteCounter = 0;
       }
 
       this.destinationY -= this.speed;
@@ -269,26 +264,19 @@ Player.prototype.move = function move(ctx, direction, canvas, world) {
       if (this.destinationY + this.speed * 2 > canvas.height) return;
       // Collidable terrain detection.
       // if (this.collidableTiles.indexOf(world.scene.grid[y + speed][x]) >= 0) return
-      if (this.sourceX === 1) {
-        this.sourceX = 17;
-        this.sourceY = 7;
-        this.sizeX = 15;
-        this.sizeY = 21;
-      } else if (this.sourceX === 17) {
-        this.sourceX = 33;
-        this.sourceY = 6;
-        this.sizeX = 15;
-        this.sizeY = 22;
-      } else if (this.sourceX === 33) {
-        this.sourceX = 49;
-        this.sourceY = 7;
-        this.sizeX = 15;
-        this.sizeY = 21;
-      } else if (this.sourceX === 49) {
-        this.sourceX = 1;
-        this.sourceY = 6;
-        this.sizeX = 15;
-        this.sizeY = 22;
+
+      if (this.spriteCounter === 0) {
+        this.updateSprite(17, 7, 15, 21);
+        this.spriteCounter = 1;
+      } else if (this.spriteCounter === 1) {
+        this.updateSprite(33, 6, 15, 22);
+        this.spriteCounter = 2;
+      } else if (this.spriteCounter === 2) {
+        this.updateSprite(49, 7, 15, 21);
+        this.spriteCounter = 3;
+      } else if (this.spriteCounter === 3) {
+        this.updateSprite(1, 6, 15, 22);
+        this.spriteCounter = 0;
       }
 
       this.destinationY += this.speed;
@@ -298,6 +286,21 @@ Player.prototype.move = function move(ctx, direction, canvas, world) {
       if (this.destinationX + this.speed * 2 > canvas.width) return;
       // Collidable terrain detection.
       // if (this.collidableTiles.indexOf(world.scene.grid[y][x + speed]) >= 0) return
+
+      if (this.spriteCounter === 0) {
+        this.updateSprite(18, 39, 13, 21);
+        this.spriteCounter = 1;
+      } else if (this.spriteCounter === 1) {
+        this.updateSprite(34, 38, 13, 22);
+        this.spriteCounter = 2;
+      } else if (this.spriteCounter === 2) {
+        this.updateSprite(50, 39, 13, 21);
+        this.spriteCounter = 3;
+      } else if (this.spriteCounter === 3) {
+        this.updateSprite(2, 38, 13, 22);
+        this.spriteCounter = 0;
+      }
+
       this.destinationX += this.speed;
       break;
     case 'left':
@@ -305,6 +308,21 @@ Player.prototype.move = function move(ctx, direction, canvas, world) {
       if (this.destinationX - this.speed < 0) return;
       // Collidable terrain detection.
       // if (this.collidableTiles.indexOf(world.scene.grid[y][x - speed]) >= 0) return
+
+      if (this.spriteCounter === 0) {
+        this.updateSprite(17, 103, 13, 21);
+        this.spriteCounter = 1;
+      } else if (this.spriteCounter === 1) {
+        this.updateSprite(33, 102, 13, 22);
+        this.spriteCounter = 2;
+      } else if (this.spriteCounter === 2) {
+        this.updateSprite(49, 103, 13, 21);
+        this.spriteCounter = 3;
+      } else if (this.spriteCounter === 3) {
+        this.updateSprite(1, 102, 13, 22);
+        this.spriteCounter = 0;
+      }
+
       this.destinationX -= this.speed;
       break;
   }
@@ -423,9 +441,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function World() {
   var gridcells = 20;
   var monsters = this.monsters = [];
-  monsters.push(new _Monster2.default(30, 30), new _Monster2.default(60, 60));
+  monsters.push(new _Monster2.default(32, 32), new _Monster2.default(64, 64));
   var players = this.players = [];
-  players.push(new _Player2.default(240, 240));
+  players.push(new _Player2.default(256, 256));
   // Set the initial height and width of the grid (or game board) in cells.
   this.scene = new _Scene2.default(gridcells, gridcells);
 }
@@ -515,7 +533,7 @@ Scene.prototype.draw = function (ctx, canvas) {
       var value = row[x];
       var tile = new this.tiles[value]();
       var img = tile.img;
-      ctx.drawImage(img, tile.sourceX, tile.sourceY, cellWidth, cellHeight, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+      ctx.drawImage(img, tile.sourceX, tile.sourceY, tile.srcWidth, tile.srcHeight, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
     }
   }
 };
@@ -534,7 +552,7 @@ Scene.prototype.setBorder = function setBorder() {
     var row = this.grid[y];
     for (var x = 0; x < this.width; x++) {
       if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {
-        row[x] = 1;
+        row[x] = 0;
       }
     }
   }
@@ -543,7 +561,7 @@ Scene.prototype.setRandomWalls = function setRandomWalls() {
   for (var y = 1; y < this.height - 1; y++) {
     var row = this.grid[y];
     for (var x = 1; x < this.width - 1; x++) {
-      row[x] = Math.random() < 0.1 ? 1 : 0;
+      row[x] = Math.random() < 0.1 ? 5 : 0;
     }
   }
 };
@@ -564,13 +582,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Wall = function Wall(x, y, entityNumber, ctx) {
   _classCallCheck(this, Wall);
 
-  this.img = document.getElementById('wall');
-  this.sourceX = 0;
-  this.sourceY = 0;
+  this.img = document.getElementById('overworldImg');
+  this.sourceX = 352;
+  this.sourceY = 1;
   this.x = x;
   this.y = y;
   this.entityNumber = 1;
-  this.size = 30;
+  this.srcWidth = 48;
+  this.srcHeight = 48;
+  this.size = 32;
   this.category = 'terrain';
   this.collidable = 'yes';
 };
@@ -593,13 +613,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Floor = function Floor(x, y, entityNumber, ctx) {
   _classCallCheck(this, Floor);
 
-  this.img = document.getElementById('floor');
-  this.sourceX = 0;
-  this.sourceY = 0;
+  this.img = document.getElementById('overworldImg');
+  this.sourceX = 272;
+  this.sourceY = 464;
   this.x = x;
   this.y = y;
   this.entityNumber = 0;
-  this.size = 30;
+  this.srcWidth = 32;
+  this.srcHeight = 32;
+  this.size = 32;
   this.category = 'terrain';
   this.collidable = 'no';
 };
@@ -622,13 +644,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Grass = function Grass(x, y, entityNumber, ctx) {
   _classCallCheck(this, Grass);
 
-  this.img = document.getElementById('grass');
-  this.sourceX = 0;
-  this.sourceY = 0;
+  this.img = document.getElementById('overworldImg');
+  this.sourceX = 272;
+  this.sourceY = 464;
   this.x = x;
   this.y = y;
   this.entityNumber = 4;
-  this.size = 30;
+  this.srcWidth = 32;
+  this.srcHeight = 32;
+  this.size = 32;
   this.category = 'terrain';
   this.collidable = 'no';
 };
@@ -651,13 +675,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Grass = function Grass(x, y, entityNumber, ctx) {
   _classCallCheck(this, Grass);
 
-  this.img = document.getElementById('tree');
+  this.img = document.getElementById('tree4');
   this.sourceX = 0;
   this.sourceY = 0;
   this.x = x;
   this.y = y;
   this.entityNumber = 5;
-  this.size = 30;
+  this.srcWidth = 32;
+  this.srcHeight = 32;
+  this.size = 32;
   this.category = 'terrain';
   this.collidable = 'yes';
 };

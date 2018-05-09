@@ -1,17 +1,17 @@
 export default class Monster {
   constructor (x, y) {
-    this.img = document.getElementById('log')
+    this.img = document.getElementById('logImg')
     this.srcX = 4
     this.srcY = 7
-    this.srcWidth = 30
-    this.srcHeight = 30
+    this.srcWidth = 32
+    this.srcHeight = 32
     this.destX = x
     this.destY = y
     this.entityNumber = 3
-    this.destWidth = 30
-    this.destHeight = 30
-    this.size = 30
-    this.speed = 30
+    this.destWidth = 32
+    this.destHeight = 32
+    this.size = 32
+    this.speed = 32
     this.category = 'monster'
     this.collidable = 'yes'
     this.collidableTiles = []
@@ -31,9 +31,9 @@ Monster.prototype.draw = function draw (ctx) {
 }
 
 Monster.prototype.step = function step (canvasLength, world) {
-  const speed = this.speed / 30
-  const y = this.destY / 30
-  const x = this.destX / 30
+  const speed = this.speed / 32
+  const y = this.destY / 32
+  const x = this.destX / 32
   // Collates all the colliable tiles into this.collidableTiles.
   if (!world) return
   world.scene.tiles.forEach(function (Tile) {
@@ -45,8 +45,8 @@ Monster.prototype.step = function step (canvasLength, world) {
 
   // Randomly makes the monster move one step in one of 4 directions.
   const next = {x: this.destX, y: this.destY}
-  const nextY = next.y / 30
-  const nextX = next.x / 30
+  const nextY = next.y / 32
+  const nextX = next.x / 32
   switch (Math.floor(Math.random() * 4)) {
     case 0: // up.
       // Prevents monster from moving outside the canvas when moving up.
