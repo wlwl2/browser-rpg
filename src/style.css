@@ -28,7 +28,8 @@ canvas[data-cursor="pointer"] {
   right: 0;
   padding: 10px;
   color: #44201c;
-  font-size: 24px; }
+  font-size: 24px;
+  text-align: right; }
 
 .canvas {
   position: absolute;

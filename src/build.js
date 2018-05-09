@@ -872,35 +872,35 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _mainMenuScript = __webpack_require__(48);
+	var _mainMenuScript = __webpack_require__(39);
 
 	var _mainMenuScript2 = _interopRequireDefault(_mainMenuScript);
 
-	var _startMenuScript = __webpack_require__(46);
+	var _startMenuScript = __webpack_require__(40);
 
 	var _startMenuScript2 = _interopRequireDefault(_startMenuScript);
 
-	var _gameMenuScript = __webpack_require__(47);
+	var _gameMenuScript = __webpack_require__(41);
 
 	var _gameMenuScript2 = _interopRequireDefault(_gameMenuScript);
 
-	var _StartMenu = __webpack_require__(41);
+	var _StartMenu = __webpack_require__(42);
 
 	var _StartMenu2 = _interopRequireDefault(_StartMenu);
 
-	var _GameMenu = __webpack_require__(42);
+	var _GameMenu = __webpack_require__(43);
 
 	var _GameMenu2 = _interopRequireDefault(_GameMenu);
 
-	var _HelpControls = __webpack_require__(43);
+	var _HelpControls = __webpack_require__(44);
 
 	var _HelpControls2 = _interopRequireDefault(_HelpControls);
 
-	var _TileSelector = __webpack_require__(44);
+	var _TileSelector = __webpack_require__(45);
 
 	var _TileSelector2 = _interopRequireDefault(_TileSelector);
 
-	var _About = __webpack_require__(45);
+	var _About = __webpack_require__(46);
 
 	var _About2 = _interopRequireDefault(_About);
 
@@ -20440,269 +20440,44 @@
 	module.exports = camelize;
 
 /***/ }),
-/* 39 */,
-/* 40 */,
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 39 */
+/***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.default = mainMenuScript;
+	function mainMenuScript() {
+	  var menuContainer = document.querySelector('.menu__section-container');
+	  var overlay = document.querySelector('.overlay');
 
-	var _react = __webpack_require__(14);
+	  // Set the initial state of Start Menu.
+	  window.localStorage.setItem('menuSelectedItem', 'startmenu1');
 
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var StartMenu = function StartMenu(props) {
-	  return _react2.default.createElement(
-	    "section",
-	    { className: "start-menu", "data-hidden": "no" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "start-menu__title" },
-	      "Browser RPG"
-	    ),
-	    _react2.default.createElement(
-	      "ul",
-	      { className: "start-menu__menu" },
-	      _react2.default.createElement(
-	        "li",
-	        { id: "startmenu1", tabIndex: "0" },
-	        "New Game"
-	      ),
-	      _react2.default.createElement(
-	        "li",
-	        { id: "startmenu2", tabIndex: "0" },
-	        "Continue"
-	      ),
-	      _react2.default.createElement(
-	        "li",
-	        { id: "startmenu3", tabIndex: "0" },
-	        "Help/Controls"
-	      ),
-	      _react2.default.createElement(
-	        "li",
-	        { id: "startmenu4", tabIndex: "0" },
-	        "Game Editor"
-	      ),
-	      _react2.default.createElement(
-	        "li",
-	        { id: "startmenu5", tabIndex: "0" },
-	        "About"
-	      )
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "start-menu__controls" },
-	      _react2.default.createElement(
-	        "p",
-	        null,
-	        "Use arrow keys to navigate the menu."
-	      ),
-	      _react2.default.createElement(
-	        "p",
-	        null,
-	        "Press Enter to select a menu item."
-	      ),
-	      _react2.default.createElement(
-	        "p",
-	        null,
-	        "Press Escape to cancel or close the menu."
-	      )
-	    )
-	  );
-	};
-
-	exports.default = StartMenu;
+	  window.addEventListener('keydown', function (event) {
+	    if (event.key === 'Escape') {
+	      if (menuContainer.getAttribute('data-shown') === 'yes') {
+	        // Hide Main Menu.
+	        menuContainer.setAttribute('data-shown', 'no');
+	        overlay.setAttribute('data-shown', 'no');
+	      } else {
+	        // Show Main Menu.
+	        menuContainer.setAttribute('data-shown', 'yes');
+	        overlay.setAttribute('data-shown', 'yes');
+	        if (window.localStorage.getItem('menuSelectedItem')) {
+	          var menuSelectedItem = window.localStorage.getItem('menuSelectedItem');
+	          document.getElementById(menuSelectedItem).focus();
+	        }
+	        window.localStorage.setItem('menuSelectedItem', 'startmenu1');
+	      }
+	    }
+	  }, false);
+	}
 
 /***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(14);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var GameMenu = function GameMenu(props) {
-	  return _react2.default.createElement(
-	    "section",
-	    { className: "game-menu", "data-hidden": "yes" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "game-menu__title" },
-	      "Game Menu"
-	    ),
-	    _react2.default.createElement(
-	      "ul",
-	      { className: "game-menu__menu" },
-	      _react2.default.createElement(
-	        "li",
-	        { tabIndex: "0" },
-	        "Status"
-	      ),
-	      _react2.default.createElement(
-	        "li",
-	        { tabIndex: "0" },
-	        "Inventory"
-	      ),
-	      _react2.default.createElement(
-	        "li",
-	        { tabIndex: "0" },
-	        "Exit Game"
-	      )
-	    )
-	  );
-	};
-
-	exports.default = GameMenu;
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(14);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var HelpControls = function HelpControls(props) {
-	  return _react2.default.createElement(
-	    "section",
-	    { className: "help-controls", "data-hidden": "yes" },
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      "To open/close the menu, press the escape key."
-	    ),
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      "Use the arrow keys to move your character."
-	    ),
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      "Press Enter to select a menu item."
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "back-to-start" },
-	      "Back to Start Menu"
-	    )
-	  );
-	};
-
-	exports.default = HelpControls;
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(14);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TileSelector = function TileSelector(props) {
-	  return _react2.default.createElement(
-	    "section",
-	    { className: "tile-selector", "data-hidden": "yes" },
-	    _react2.default.createElement(
-	      "div",
-	      null,
-	      "Tile selector"
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "tile-list" },
-	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "0" }),
-	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "1" }),
-	      _react2.default.createElement("div", { className: "monster", draggable: "true", "data-entity-number": "3" }),
-	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "4" }),
-	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "5" })
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "currently-selected-tile" },
-	      "Currently selected tile:"
-	    ),
-	    _react2.default.createElement(
-	      "button",
-	      { className: "reset-tile-button" },
-	      "Reset currently selected tile"
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "back-to-start" },
-	      "Back to Start Menu"
-	    )
-	  );
-	}; // TileSelector
-	exports.default = TileSelector;
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(14);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var About = function About(props) {
-	  return _react2.default.createElement(
-	    "section",
-	    { className: "about", "data-hidden": "yes" },
-	    _react2.default.createElement(
-	      "a",
-	      { href: "https://github.com/wlwl2/browser-rpg" },
-	      "Github Link"
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "back-to-start" },
-	      "Back to Start Menu"
-	    )
-	  );
-	};
-
-	exports.default = About;
-
-/***/ }),
-/* 46 */
+/* 40 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -20799,7 +20574,7 @@
 	}
 
 /***/ }),
-/* 47 */
+/* 41 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -20844,41 +20619,264 @@
 	}
 
 /***/ }),
-/* 48 */
-/***/ (function(module, exports) {
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = mainMenuScript;
-	function mainMenuScript() {
-	  var menuContainer = document.querySelector('.menu__section-container');
-	  var overlay = document.querySelector('.overlay');
 
-	  // Set the initial state of Start Menu.
-	  window.localStorage.setItem('menuSelectedItem', 'startmenu1');
+	var _react = __webpack_require__(14);
 
-	  window.addEventListener('keydown', function (event) {
-	    if (event.key === 'Escape') {
-	      if (menuContainer.getAttribute('data-shown') === 'yes') {
-	        // Hide Main Menu.
-	        menuContainer.setAttribute('data-shown', 'no');
-	        overlay.setAttribute('data-shown', 'no');
-	      } else {
-	        // Show Main Menu.
-	        menuContainer.setAttribute('data-shown', 'yes');
-	        overlay.setAttribute('data-shown', 'yes');
-	        if (window.localStorage.getItem('menuSelectedItem')) {
-	          var menuSelectedItem = window.localStorage.getItem('menuSelectedItem');
-	          document.getElementById(menuSelectedItem).focus();
-	        }
-	        window.localStorage.setItem('menuSelectedItem', 'startmenu1');
-	      }
-	    }
-	  }, false);
-	}
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var StartMenu = function StartMenu(props) {
+	  return _react2.default.createElement(
+	    "section",
+	    { className: "start-menu", "data-hidden": "no" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "start-menu__title" },
+	      "Browser RPG"
+	    ),
+	    _react2.default.createElement(
+	      "ul",
+	      { className: "start-menu__menu" },
+	      _react2.default.createElement(
+	        "li",
+	        { id: "startmenu1", tabIndex: "0" },
+	        "New Game"
+	      ),
+	      _react2.default.createElement(
+	        "li",
+	        { id: "startmenu2", tabIndex: "0" },
+	        "Continue"
+	      ),
+	      _react2.default.createElement(
+	        "li",
+	        { id: "startmenu3", tabIndex: "0" },
+	        "Help/Controls"
+	      ),
+	      _react2.default.createElement(
+	        "li",
+	        { id: "startmenu4", tabIndex: "0" },
+	        "Game Editor"
+	      ),
+	      _react2.default.createElement(
+	        "li",
+	        { id: "startmenu5", tabIndex: "0" },
+	        "About"
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "start-menu__controls" },
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        "Use arrow keys to navigate the menu."
+	      ),
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        "Press Enter to select a menu item."
+	      ),
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        "Press Escape to cancel or close the menu."
+	      )
+	    )
+	  );
+	};
+
+	exports.default = StartMenu;
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(14);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var GameMenu = function GameMenu(props) {
+	  return _react2.default.createElement(
+	    "section",
+	    { className: "game-menu", "data-hidden": "yes" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "game-menu__title" },
+	      "Game Menu"
+	    ),
+	    _react2.default.createElement(
+	      "ul",
+	      { className: "game-menu__menu" },
+	      _react2.default.createElement(
+	        "li",
+	        { tabIndex: "0" },
+	        "Status"
+	      ),
+	      _react2.default.createElement(
+	        "li",
+	        { tabIndex: "0" },
+	        "Inventory"
+	      ),
+	      _react2.default.createElement(
+	        "li",
+	        { tabIndex: "0" },
+	        "Exit Game"
+	      )
+	    )
+	  );
+	};
+
+	exports.default = GameMenu;
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(14);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var HelpControls = function HelpControls(props) {
+	  return _react2.default.createElement(
+	    "section",
+	    { className: "help-controls", "data-hidden": "yes" },
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "To open/close the menu, press the escape key."
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "Use the arrow keys to move your character."
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "Press Enter to select a menu item."
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "back-to-start" },
+	      "Back to Start Menu"
+	    )
+	  );
+	};
+
+	exports.default = HelpControls;
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(14);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TileSelector = function TileSelector(props) {
+	  return _react2.default.createElement(
+	    "section",
+	    { className: "tile-selector", "data-hidden": "yes" },
+	    _react2.default.createElement(
+	      "div",
+	      null,
+	      "Tile selector"
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "tile-list" },
+	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "0" }),
+	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "1" }),
+	      _react2.default.createElement("div", { className: "monster", draggable: "true", "data-entity-number": "3" }),
+	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "4" }),
+	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "5" })
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "currently-selected-tile" },
+	      "Currently selected tile:"
+	    ),
+	    _react2.default.createElement(
+	      "button",
+	      { className: "reset-tile-button" },
+	      "Reset currently selected tile"
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "back-to-start" },
+	      "Back to Start Menu"
+	    )
+	  );
+	}; // TileSelector
+	exports.default = TileSelector;
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(14);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var About = function About(props) {
+	  return _react2.default.createElement(
+	    "section",
+	    { className: "about", "data-hidden": "yes" },
+	    _react2.default.createElement(
+	      "a",
+	      { href: "https://github.com/wlwl2/browser-rpg" },
+	      "Github Link"
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "back-to-start" },
+	      "Back to Start Menu"
+	    )
+	  );
+	};
+
+	exports.default = About;
 
 /***/ })
 /******/ ]);
