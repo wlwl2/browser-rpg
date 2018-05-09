@@ -60,87 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _World = __webpack_require__(3);
-
-var _World2 = _interopRequireDefault(_World);
-
-var _tileSelector = __webpack_require__(10);
-
-var _tileSelector2 = _interopRequireDefault(_tileSelector);
-
-var _tileDragging = __webpack_require__(11);
-
-var _tileDragging2 = _interopRequireDefault(_tileDragging);
-
-var _playerControls = __webpack_require__(12);
-
-var _playerControls2 = _interopRequireDefault(_playerControls);
-
-var _startMenu = __webpack_require__(13);
-
-var _startMenu2 = _interopRequireDefault(_startMenu);
-
-var _gameMenu = __webpack_require__(14);
-
-var _gameMenu2 = _interopRequireDefault(_gameMenu);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import touchEvents from './touchEvents'
-
-function init() {
-  var canvas = document.createElement('canvas');
-  canvas.height = 600;
-  canvas.width = 600;
-  var ctx = canvas.getContext('2d');
-  document.querySelector('.game').appendChild(canvas);
-  return { ctx: ctx, canvas: canvas };
-}
-
-// For each of these steps, re-create the world.
-function step(direction) {
-  // Erases canvas.
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  world.scene.draw(ctx, canvas);
-  world.monsters.forEach(function (monster) {
-    monster.step(canvas.height, world);
-    monster.draw(ctx);
-  });
-  world.players.forEach(function (player) {
-    player.move(ctx, direction, canvas, world);
-    player.draw(ctx);
-  });
-}
-
-var _init = init(),
-    ctx = _init.ctx,
-    canvas = _init.canvas;
-
-var world = new _World2.default();
-(0, _tileSelector2.default)(canvas);
-(0, _tileDragging2.default)(canvas, world, ctx);
-
-window.addEventListener('load', function (event) {
-  step();
-}, false);
-
-(0, _startMenu2.default)();
-(0, _gameMenu2.default)();
-// touchEvents()
-(0, _playerControls2.default)(step);
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -249,7 +173,7 @@ Monster.prototype.step = function step(canvasLength, world) {
 };
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -332,6 +256,82 @@ Player.prototype.move = function move(ctx, direction, canvas, world) {
 };
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _World = __webpack_require__(3);
+
+var _World2 = _interopRequireDefault(_World);
+
+var _tileSelector = __webpack_require__(10);
+
+var _tileSelector2 = _interopRequireDefault(_tileSelector);
+
+var _tileDragging = __webpack_require__(11);
+
+var _tileDragging2 = _interopRequireDefault(_tileDragging);
+
+var _playerControls = __webpack_require__(12);
+
+var _playerControls2 = _interopRequireDefault(_playerControls);
+
+var _StartMenu = __webpack_require__(13);
+
+var _StartMenu2 = _interopRequireDefault(_StartMenu);
+
+var _GameMenu = __webpack_require__(14);
+
+var _GameMenu2 = _interopRequireDefault(_GameMenu);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import touchEvents from './touchEvents'
+
+function init() {
+  var canvas = document.createElement('canvas');
+  canvas.height = 600;
+  canvas.width = 600;
+  var ctx = canvas.getContext('2d');
+  document.querySelector('.game').appendChild(canvas);
+  return { ctx: ctx, canvas: canvas };
+}
+
+// For each of these steps, re-create the world.
+function step(direction) {
+  // Erases canvas.
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  world.scene.draw(ctx, canvas);
+  world.monsters.forEach(function (monster) {
+    monster.step(canvas.height, world);
+    monster.draw(ctx);
+  });
+  world.players.forEach(function (player) {
+    player.move(ctx, direction, canvas, world);
+    player.draw(ctx);
+  });
+}
+
+var _init = init(),
+    ctx = _init.ctx,
+    canvas = _init.canvas;
+
+var world = new _World2.default();
+(0, _tileSelector2.default)(canvas);
+(0, _tileDragging2.default)(canvas, world, ctx);
+
+window.addEventListener('load', function (event) {
+  step();
+}, false);
+
+(0, _StartMenu2.default)();
+(0, _GameMenu2.default)();
+// touchEvents()
+(0, _playerControls2.default)(step);
+
+/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -346,11 +346,11 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 exports.default = World;
 
-var _Monster = __webpack_require__(1);
+var _Monster = __webpack_require__(0);
 
 var _Monster2 = _interopRequireDefault(_Monster);
 
-var _Player = __webpack_require__(2);
+var _Player = __webpack_require__(1);
 
 var _Player2 = _interopRequireDefault(_Player);
 
@@ -413,11 +413,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Scene;
 
-var _Monster = __webpack_require__(1);
+var _Monster = __webpack_require__(0);
 
 var _Monster2 = _interopRequireDefault(_Monster);
 
-var _Player = __webpack_require__(2);
+var _Player = __webpack_require__(1);
 
 var _Player2 = _interopRequireDefault(_Player);
 

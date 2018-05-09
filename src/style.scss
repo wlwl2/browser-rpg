@@ -2,15 +2,13 @@
 @import 'shared';
 @import 'components/Game/canvas';
 
-@import 'components/MouseInfo/mouse-info';
+@import 'components/MouseInfo/MouseInfo';
 
-@import 'components/Menu/main-menu';
-@import 'components/Menu/start-menu';
-@import 'components/Menu/game-menu';
-@import 'components/Menu/continue';
-@import 'components/Menu/help-controls';
-@import 'components/Menu/about';
+@import 'components/Menu/MainMenu';
+@import 'components/Menu/MainMenu/StartMenu/StartMenu';
+@import 'components/Menu/MainMenu/GameMenu/GameMenu';
+@import 'components/Menu/MainMenu/HelpControls/HelpControls';
+@import 'components/Menu/MainMenu/About/About';
 
-@import 'components/Menu/game-editor/main-editor';
-@import 'components/Menu/game-editor/tile-selector';
-@import 'components/Menu/game-editor/tiles';
+@import 'components/Menu/MainMenu/TileSelector/TileSelector';
+@import 'components/Menu/MainMenu/TileSelector/Tiles';
