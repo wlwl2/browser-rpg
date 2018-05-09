@@ -14,16 +14,8 @@ var spriteWidth = 736,
   canvasPosX = 0,
   canvasPosY = 0
 
-ctx.drawImage(img,
-    pixelsLeft, // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-    pixelsTop, // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-    spriteWidth, // The width of the sub-rectangle of the source image to draw into the destination context. If not specified, the entire rectangle from the coordinates specified by sx and sy to the bottom-right corner of the image is used.
-    spriteHeight, // The height of the sub-rectangle of the source image to draw into the destination context.
-    canvasPosX, // The X coordinate in the destination canvas at which to place the top-left corner of the source image.
-    canvasPosY, // The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
-    spriteWidth, // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
-    spriteHeight // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
-)
+ctx.drawImage(img, pixelsLeft, pixelsTop, spriteWidth, spriteHeight, canvasPosX,
+    canvasPosY, spriteWidth, spriteHeight)
 
 // Note: ctx.fillRect(x, y, width, height)
 
