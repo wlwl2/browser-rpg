@@ -1,12 +1,10 @@
 export default function gameMenu () {
-  const menu = document.querySelector('.menu')
   const overlay = document.querySelector('.overlay')
   const mouseInfo = document.querySelector('.mouse-info')
   const startMenu = document.querySelector('.start-menu')
   const gameMenu = document.querySelector('.game-menu')
 
   if (window.localStorage.getItem('inGame') === 'yes') {
-    menu.setAttribute('data-hidden', 'yes')
     overlay.setAttribute('data-hidden', 'yes')
     mouseInfo.setAttribute('style', 'display: block;')
   }

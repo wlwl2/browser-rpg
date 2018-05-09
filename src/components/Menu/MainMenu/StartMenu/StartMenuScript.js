@@ -1,6 +1,4 @@
 export default function startMenu () {
-  const menu = document.querySelector('.menu')
-
   const mouseInfo = document.querySelector('.mouse-info')
   const startMenu = document.querySelector('.start-menu')
   const helpControlsMenu = document.querySelector('.help-controls')
@@ -17,7 +15,6 @@ export default function startMenu () {
 
   function menuInteraction (selectedItem) {
     if (selectedItem === 'Continue') {
-      menu.setAttribute('data-hidden', 'yes')
       overlay.setAttribute('data-hidden', 'yes')
       mouseInfo.setAttribute('style', 'display: block;')
       window.localStorage.setItem('inGame', 'yes')

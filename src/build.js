@@ -20487,8 +20487,6 @@
 	});
 	exports.default = startMenu;
 	function startMenu() {
-	  var menu = document.querySelector('.menu');
-
 	  var mouseInfo = document.querySelector('.mouse-info');
 	  var startMenu = document.querySelector('.start-menu');
 	  var helpControlsMenu = document.querySelector('.help-controls');
@@ -20505,7 +20503,6 @@
 
 	  function menuInteraction(selectedItem) {
 	    if (selectedItem === 'Continue') {
-	      menu.setAttribute('data-hidden', 'yes');
 	      overlay.setAttribute('data-hidden', 'yes');
 	      mouseInfo.setAttribute('style', 'display: block;');
 	      window.localStorage.setItem('inGame', 'yes');
@@ -20584,14 +20581,12 @@
 	});
 	exports.default = gameMenu;
 	function gameMenu() {
-	  var menu = document.querySelector('.menu');
 	  var overlay = document.querySelector('.overlay');
 	  var mouseInfo = document.querySelector('.mouse-info');
 	  var startMenu = document.querySelector('.start-menu');
 	  var gameMenu = document.querySelector('.game-menu');
 
 	  if (window.localStorage.getItem('inGame') === 'yes') {
-	    menu.setAttribute('data-hidden', 'yes');
 	    overlay.setAttribute('data-hidden', 'yes');
 	    mouseInfo.setAttribute('style', 'display: block;');
 	  }
