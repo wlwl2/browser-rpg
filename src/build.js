@@ -79,12 +79,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Monster = function Monster(x, y) {
   _classCallCheck(this, Monster);
 
-  this.img = document.getElementById('spritesheet');
-  this.sourceX = 8;
-  this.sourceY = 114;
-  this.x = x;
-  this.y = y;
+  this.img = document.getElementById('log');
+  this.srcX = 4;
+  this.srcY = 7;
+  this.srcWidth = 30;
+  this.srcHeight = 30;
+  this.destX = x;
+  this.destY = y;
   this.entityNumber = 3;
+  this.destWidth = 30;
+  this.destHeight = 30;
   this.size = 30;
   this.speed = 30;
   this.category = 'monster';
@@ -101,13 +105,14 @@ exports.default = Monster;
 
 
 Monster.prototype.draw = function draw(ctx) {
-  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size, this.x, this.y, this.size, this.size);
+  ctx.drawImage(this.img, this.srcX, this.srcY, this.srcWidth, this.srcHeight, this.destX, this.destY, this.destWidth, this.destHeight);
+  ctx.drawImage(this.img, this.srcX, this.srcY, this.srcWidth, this.srcHeight, this.destX, this.destY, this.destWidth, this.destHeight);
 };
 
 Monster.prototype.step = function step(canvasLength, world) {
   var speed = this.speed / 30;
-  var y = this.y / 30;
-  var x = this.x / 30;
+  var y = this.destY / 30;
+  var x = this.destX / 30;
   // Collates all the colliable tiles into this.collidableTiles.
   if (!world) return;
   world.scene.tiles.forEach(function (Tile) {
@@ -118,7 +123,7 @@ Monster.prototype.step = function step(canvasLength, world) {
   }, this);
 
   // Randomly makes the monster move one step in one of 4 directions.
-  var next = { x: this.x, y: this.y };
+  var next = { x: this.destX, y: this.destY };
   var nextY = next.y / 30;
   var nextX = next.x / 30;
   switch (Math.floor(Math.random() * 4)) {
@@ -133,7 +138,7 @@ Monster.prototype.step = function step(canvasLength, world) {
     case 1:
       // down.
       // Prevents monster from moving outside the canvas when moving down.
-      if (this.y + this.speed * 2 > canvasLength) return;
+      if (this.destY + this.speed * 2 > canvasLength) return;
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(world.scene.grid[nextY + speed][x]) >= 0) return;
       next.y += this.speed;
@@ -141,7 +146,7 @@ Monster.prototype.step = function step(canvasLength, world) {
     case 2:
       // right.
       // Prevents monster from moving outside the canvas when moving right.
-      if (this.x + this.speed * 2 > canvasLength) return;
+      if (this.destX + this.speed * 2 > canvasLength) return;
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(world.scene.grid[y][nextX + speed]) >= 0) return;
       next.x += this.speed;
@@ -149,7 +154,7 @@ Monster.prototype.step = function step(canvasLength, world) {
     case 3:
       // left.
       // Prevents monster from moving outside the canvas when moving left.
-      if (this.x - this.speed < 0) return;
+      if (this.destX - this.speed < 0) return;
       // Collidable terrain detection.
       if (this.collidableTiles.indexOf(world.scene.grid[y][nextX - speed]) >= 0) return;
       next.x -= this.speed;
@@ -160,13 +165,13 @@ Monster.prototype.step = function step(canvasLength, world) {
   world.monsters.forEach(function (monster) {
     if (monster === this) return;
     if (!canMove) return;
-    if (!(monster.x > next.x + this.size || monster.x + monster.size <= next.x || monster.y > next.y + this.size || monster.y + monster.size <= next.y)) {
+    if (!(monster.destX > next.x + this.size || monster.destX + monster.size <= next.x || monster.destY > next.y + this.size || monster.destY + monster.size <= next.y)) {
       canMove = false;
     }
   }, this);
   if (canMove) {
-    this.x = next.x;
-    this.y = next.y;
+    this.destX = next.x;
+    this.destY = next.y;
   } else {
     this.step(world.monsters);
   }
@@ -189,13 +194,14 @@ var Player = function Player(x, y) {
   _classCallCheck(this, Player);
 
   this.img = document.getElementById('spritesheet');
-  this.sourceX = 9;
-  this.sourceY = 42;
-  this.x = x;
-  this.y = y;
+  this.sourceX = 1;
+  this.sourceY = 6;
+  this.destinationX = x;
+  this.destinationY = y;
   this.entityNumber = 2;
-  this.size = 30;
-  this.speed = 30;
+  this.sizeX = 15;
+  this.sizeY = 22;
+  this.speed = 5;
   this.category = 'character';
   this.collidable = 'yes';
   this.collidableTiles = [];
@@ -203,20 +209,23 @@ var Player = function Player(x, y) {
   this.health = 10;
   this.attackPower = 3;
   this.defense = 0;
+  this.updateSprite = function (sourceX, sourceY, sizeX, sizeY) {
+    console.log(this);
+  }.bind(this);
 };
 
 exports.default = Player;
 
 
 Player.prototype.draw = function draw(ctx) {
-  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.size, this.size, this.x, this.y, this.size, this.size);
+  ctx.drawImage(this.img, this.sourceX, this.sourceY, this.sizeX, this.sizeY, this.destinationX, this.destinationY, this.sizeX, this.sizeY);
 };
 
 // Moves the player one step.
 Player.prototype.move = function move(ctx, direction, canvas, world) {
-  var speed = this.speed / 30;
-  var y = this.y / 30;
-  var x = this.x / 30;
+  var speed = this.speed;
+  var y = this.destinationY;
+  var x = this.destinationX;
   world.scene.tiles.forEach(function (Tile) {
     var tileObj = new Tile();
     if (tileObj.collidable === 'yes') {
@@ -226,31 +235,77 @@ Player.prototype.move = function move(ctx, direction, canvas, world) {
   switch (direction) {
     case 'up':
       // Prevents player from moving outside the canvas when moving up.
-      if (this.y - this.speed < 0) return;
+      if (this.destinationY - this.speed < 0) return;
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(world.scene.grid[y - speed][x]) >= 0) return;
-      this.y -= this.speed;
+      // if (this.collidableTiles.indexOf(world.scene.grid[y - speed][x]) >= 0) return
+
+      if (this.sourceX === 1) {
+        this.sourceX = 17;
+        this.sourceY = 7;
+        this.sizeX = 15;
+        this.sizeY = 21;
+        this.updateSprite();
+      } else if (this.sourceX === 17) {
+        this.sourceX = 33;
+        this.sourceY = 6;
+        this.sizeX = 15;
+        this.sizeY = 22;
+      } else if (this.sourceX === 33) {
+        this.sourceX = 49;
+        this.sourceY = 7;
+        this.sizeX = 15;
+        this.sizeY = 21;
+      } else if (this.sourceX === 49) {
+        this.sourceX = 1;
+        this.sourceY = 6;
+        this.sizeX = 15;
+        this.sizeY = 22;
+      }
+
+      this.destinationY -= this.speed;
       break;
     case 'down':
       // Prevents player from moving outside the canvas when moving down.
-      if (this.y + this.speed * 2 > canvas.height) return;
+      if (this.destinationY + this.speed * 2 > canvas.height) return;
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(world.scene.grid[y + speed][x]) >= 0) return;
-      this.y += this.speed;
+      // if (this.collidableTiles.indexOf(world.scene.grid[y + speed][x]) >= 0) return
+      if (this.sourceX === 1) {
+        this.sourceX = 17;
+        this.sourceY = 7;
+        this.sizeX = 15;
+        this.sizeY = 21;
+      } else if (this.sourceX === 17) {
+        this.sourceX = 33;
+        this.sourceY = 6;
+        this.sizeX = 15;
+        this.sizeY = 22;
+      } else if (this.sourceX === 33) {
+        this.sourceX = 49;
+        this.sourceY = 7;
+        this.sizeX = 15;
+        this.sizeY = 21;
+      } else if (this.sourceX === 49) {
+        this.sourceX = 1;
+        this.sourceY = 6;
+        this.sizeX = 15;
+        this.sizeY = 22;
+      }
+
+      this.destinationY += this.speed;
       break;
     case 'right':
       // Prevents player from moving outside the canvas when moving right.
-      if (this.x + this.speed * 2 > canvas.width) return;
+      if (this.destinationX + this.speed * 2 > canvas.width) return;
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(world.scene.grid[y][x + speed]) >= 0) return;
-      this.x += this.speed;
+      // if (this.collidableTiles.indexOf(world.scene.grid[y][x + speed]) >= 0) return
+      this.destinationX += this.speed;
       break;
     case 'left':
       // Prevents player from moving outside the canvas when moving left.
-      if (this.x - this.speed < 0) return;
+      if (this.destinationX - this.speed < 0) return;
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(world.scene.grid[y][x - speed]) >= 0) return;
-      this.x -= this.speed;
+      // if (this.collidableTiles.indexOf(world.scene.grid[y][x - speed]) >= 0) return
+      this.destinationX -= this.speed;
       break;
   }
 };

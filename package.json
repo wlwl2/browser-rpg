@@ -4,10 +4,9 @@
   "description": "A 2D role-playing game engine.",
   "main": "src/build.js",
   "scripts": {
-    "start": "start index.html && npm run dev-win",
-    "dev-win": "concurrently --kill-others  \"webpack -w\" \"grunt\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack -w"
+    "start": "npm run dev",
+    "dev": "concurrently --kill-others  \"webpack -w\" \"grunt\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "http-server": "^0.10.0",
@@ -23,6 +22,7 @@
     "grunt": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-open": "^0.2.3",
     "standard": "^10.0.2",
     "webpack": "^3.8.1"
   },
