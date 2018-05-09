@@ -1,9 +1,9 @@
-import World from './World'
-import tileSelector from './tileSelector'
-import tileDragging from './tileDragging'
-import playerControls from './playerControls'
-import startMenu from './menu/startMenu'
-import gameMenu from './menu/gameMenu'
+import World from './components/Game/World'
+import tileSelector from './components/Game/tileSelector'
+import tileDragging from './components/Game/tileDragging'
+import playerControls from './components/Game/playerControls'
+import startMenu from './components/Menu/startMenu'
+import gameMenu from './components/Menu/gameMenu'
 // import touchEvents from './touchEvents'
 
 function init () {

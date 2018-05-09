@@ -7,9 +7,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'src/scss',
+          cwd: 'src',
           src: ['style.scss'],
-          dest: 'src/styles',
+          dest: 'src/',
           ext: '.css',
           extDot: 'last'
         }]
@@ -17,7 +17,7 @@ module.exports = function (grunt) {
     },
     watch: {
       sass: {
-        files: ['src/scss/**/*.scss'],
+        files: ['src/**/*.scss'],
         tasks: ['sass']
       }
     }

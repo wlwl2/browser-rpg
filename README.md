@@ -3,7 +3,7 @@
 A 2D role-playing game engine.
 
 ## Development
-* run `npm start` to start javascript development on Windows 10.
+* run `npm start` on Windows 10.
 
 ## Todo
 * World Map
@@ -14,11 +14,11 @@ A 2D role-playing game engine.
 * Entity AI
 * Controller support
 
-## Important Notes
-Remember to migrate from client-side storage to server-side storage so that
-users cannot just change player data locally.
-
 ## Version History:
+
+**Version 0.3.0 09 May 2017**
+
+* Migration to React.js
 
 **Version 0.2.0 29 Apr 2017**
 

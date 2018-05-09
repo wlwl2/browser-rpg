@@ -1,8 +1,8 @@
 {
   "name": "browser-rpg",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A 2D role-playing game engine.",
-  "main": "build.js",
+  "main": "src/build.js",
   "scripts": {
     "start": "start index.html && npm run dev-win",
     "dev-win": "concurrently --kill-others  \"webpack -w\" \"grunt\"",
@@ -10,10 +10,15 @@
     "dev": "webpack -w"
   },
   "dependencies": {
-    "http-server": "^0.10.0"
+    "http-server": "^0.10.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
     "concurrently": "^3.5.1",
     "grunt": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",

@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Silkscreen';
-  src: url("../fonts/Silkscreen.eot");
-  src: url("../fonts/Silkscreen.eot?#iefix") format("embedded-opentype"), url("../fonts/Silkscreen.woff2") format("woff2"), url("../fonts/Silkscreen.woff") format("woff"), url("../fonts/Silkscreen.ttf") format("truetype"), url("../fonts/Silkscreen.svg#Silkscreen") format("svg");
+  src: url("fonts/Silkscreen.eot");
+  src: url("fonts/Silkscreen.eot?#iefix") format("embedded-opentype"), url("fonts/Silkscreen.woff2") format("woff2"), url("fonts/Silkscreen.woff") format("woff"), url("fonts/Silkscreen.ttf") format("truetype"), url("fonts/Silkscreen.svg#Silkscreen") format("svg");
   font-weight: normal;
   font-style: normal; }
 html,
@@ -155,37 +155,37 @@ section[data-hidden="yes"] {
 .floor {
   height: 30px;
   width: 30px;
-  background-image: url("../sprites/floor.png");
+  background-image: url("images/sprites/floor.png");
   background-position: 0px 0px; }
 
 .wall {
   height: 30px;
   width: 30px;
-  background-image: url("../sprites/wall.png");
+  background-image: url("images/sprites/wall.png");
   background-position: 0px 0px; }
 
 .grass {
   height: 30px;
   width: 30px;
-  background-image: url("../sprites/grass-attempt-2.png");
+  background-image: url("images/sprites/grass-attempt-2.png");
   background-position: 0px 0px; }
 
 .tree {
   height: 30px;
   width: 30px;
-  background-image: url("../sprites/tree-attempt-2.png");
+  background-image: url("images/sprites/tree-attempt-2.png");
   background-position: 0px 0px; }
 
 .player {
   width: 15px;
   height: 22px;
-  background-image: url("../sprites/characters-min.png");
+  background-image: url("images/sprites/characters-min.png");
   background-position: -9px -42px; }
 
 .monster {
   width: 16px;
   height: 14px;
-  background-image: url("../sprites/characters-min.png");
+  background-image: url("images/sprites/characters-min.png");
   background-position: -8px -114px; }
 
 /*# sourceMappingURL=style.css.map */
