@@ -10,80 +10,10 @@
   </head>
   <body>
     <div class="game">
-      <div class="menu" data-hidden="no">
-        <div class="menu__container">
-          <div class="menu__vertical-middle">
-            <div class="menu__horizontal-center">
-
-              <div class="menu__section-container">
-
-                <section class="start-menu" data-hidden="no">
-                  <div class="start-menu__title">
-                    Browser RPG
-                  </div>
-                  <ul class="start-menu__menu">
-                    <li class="start-selected">New Game</li>
-                    <li>Continue</li>
-                    <li>Help/Controls</li>
-                    <li>Game Editor</li>
-                    <li>About</li>
-                  </ul>
-                  <div class="start-menu__controls">
-                    <p>Use arrow keys to navigate the menu.</p>
-                    <p>Press Enter to select a menu item.</p>
-                    <p>Press Escape to cancel or close the menu.</p>
-                  </div>
-                </section>
-
-                <section class="game-menu" data-hidden="yes">
-                  <div class="game-menu__title">
-                    Menu
-                  </div>
-                  <ul class="game-menu__menu">
-                    <li>Status</li>
-                    <li>Inventory</li>
-                    <li class="game-selected">Exit Game</li>
-                  </ul>
-                </section>
-
-                <section class="continue" data-hidden="yes"></section>
-
-                <section class="help-controls" data-hidden="yes">
-                  <p>To open/close the menu, press the escape key.</p>
-                  <p>Use the arrow keys to move your character.</p>
-                  <p>Press Enter to select a menu item.</p>
-                  <div class="back-to-start">Back to Start Menu</div>
-                </section>
-
-                <section class="tile-selector" data-hidden="yes">
-                  <div>Tile selector</div>
-                  <div class="tile-list">
-                    <!-- <div class="player" draggable="true" data-entity-number="2"></div> -->
-                    <div class="floor" draggable="true" data-entity-number="0"></div>
-                    <div class="wall" draggable="true" data-entity-number="1"></div>
-                    <div class="monster" draggable="true" data-entity-number="3"></div>
-                    <div class="grass" draggable="true" data-entity-number="4"></div>
-                    <div class="tree" draggable="true" data-entity-number="5"></div>
-                  </div>
-                  <div class="currently-selected-tile">
-                    Currently selected tile:
-                  </div>
-                  <button class="reset-tile-button">Reset currently selected tile</button>
-                  <div class="back-to-start">Back to Start Menu</div>
-                </section>
-
-                <section class="about" data-hidden="yes">
-                  <a href="https://github.com/wlwl2/browser-rpg">Github Link</a>
-                  <div class="back-to-start">Back to Start Menu</div>
-                </section>
-
-              </div>
-              
-            </div>
-          </div>
-        </div>
+      <div class="menu" data-hidden="no"></div>
+      <div class="overlay" data-hidden="no">
+        <div class="overlay__color"></div>
       </div>
-      <div class="overlay" data-hidden="no"><div class="overlay__color"></div></div>
     </div>
     <div class="mouse-info"></div>
 

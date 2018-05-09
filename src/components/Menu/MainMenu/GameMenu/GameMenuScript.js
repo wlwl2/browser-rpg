@@ -21,35 +21,20 @@ export default function gameMenu () {
   // Arrow key events.
   window.addEventListener('keydown', function (event) {
     // console.log(event.key)
+    if (!gameMenu) return
     if (gameMenu.getAttribute('data-hidden') === 'no') {
       if (event.key === 'ArrowDown') {
         // Select game menu item below current one.
-        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')
-        if (selectedGameItem.nextElementSibling) {
-          selectedGameItem.className = ''
-          selectedGameItem.nextElementSibling.className = 'game-selected'
-        }
       }
       if (event.key === 'ArrowUp') {
         // Select game menu item above current one.
-        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')
-        if (selectedGameItem.previousElementSibling) {
-          selectedGameItem.className = ''
-          selectedGameItem.previousElementSibling.className = 'game-selected'
-        }
       }
     }
 
     if (event.key === 'Enter') {
       if (gameMenu.getAttribute('data-hidden') === 'no') {
-        const selectedGameItem = document.querySelector('.game-menu__menu li.game-selected')
         if (selectedGameItem.textContent === 'Exit Game') {
           window.localStorage.setItem('inGame', 'no')
-          menu.setAttribute('data-hidden', 'no')
-          overlay.setAttribute('data-hidden', 'no')
-          mouseInfo.setAttribute('style', 'display: none;')
-          hideAllSections()
-          startMenu.setAttribute('data-hidden', 'no')
         }
       }
     }

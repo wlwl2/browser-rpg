@@ -6,8 +6,15 @@ module.exports = {
     path: path.join(__dirname, './src/')
   },
   module: {
-    rules: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
-    ]
+    loaders: [{
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        presets: ['react', 'es2015', 'stage-1']
+      }
+    }]
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   }
 }

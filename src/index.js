@@ -2,9 +2,9 @@ import World from './components/Game/World'
 import tileSelector from './components/Game/tileSelector'
 import tileDragging from './components/Game/tileDragging'
 import playerControls from './components/Game/playerControls'
-import startMenu from './components/Menu/MainMenu/StartMenu/StartMenuScript'
-import gameMenu from './components/Menu/MainMenu/GameMenu/GameMenuScript'
+
 // import touchEvents from './touchEvents'
+import MainMenu from './components/Menu/MainMenu/MainMenu'
 
 function init () {
   var canvas = document.createElement('canvas')
@@ -39,7 +39,5 @@ window.addEventListener('load', function (event) {
   step()
 }, false)
 
-startMenu()
-gameMenu()
 // touchEvents()
 playerControls(step)

@@ -7,12 +7,6 @@ export default function startMenu () {
   const gameMenu = document.querySelector('.game-menu')
   const gameEditor = document.querySelector('.tile-selector')
   const about = document.querySelector('.about')
-  // const backToStart = document.querySelectorAll('.back-to-start')
-  // backToStart.forEach(function (button, index) {
-  //   button.addEventListener('click', function (event) {
-  //
-  //   }, false)
-  // })
 
   function hideAllSections () {
     const sections = document.querySelectorAll('.menu__section-container section')
@@ -59,23 +53,13 @@ export default function startMenu () {
 
   // Arrow key events.
   window.addEventListener('keydown', function (event) {
-    // console.log(event.key)
+    if (!startMenu) return
     if (startMenu.getAttribute('data-hidden', 'no')) {
       if (event.key === 'ArrowDown') {
         // Select start menu item below current one.
-        const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected')
-        if (selectedMenuItem.nextElementSibling) {
-          selectedMenuItem.className = ''
-          selectedMenuItem.nextElementSibling.className = 'start-selected'
-        }
       }
       if (event.key === 'ArrowUp') {
         // Select start menu item above current one.
-        const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected')
-        if (selectedMenuItem.previousElementSibling) {
-          selectedMenuItem.className = ''
-          selectedMenuItem.previousElementSibling.className = 'start-selected'
-        }
       }
     }
 
@@ -134,6 +118,7 @@ export default function startMenu () {
           overlay.setAttribute('data-hidden', 'no')
           mouseInfo.setAttribute('style', 'display: none;')
           hideAllSections()
+          if (!gameMenu) return
           gameMenu.setAttribute('data-hidden', 'no')
         }
       }
