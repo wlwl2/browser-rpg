@@ -62,7 +62,7 @@
 
 	var _playerControls2 = _interopRequireDefault(_playerControls);
 
-	var _MainMenu = __webpack_require__(15);
+	var _MainMenu = __webpack_require__(13);
 
 	var _MainMenu2 = _interopRequireDefault(_MainMenu);
 
@@ -858,220 +858,31 @@
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = startMenu;
-	function startMenu() {
-	  var menu = document.querySelector('.menu');
-	  var overlay = document.querySelector('.overlay');
-	  var mouseInfo = document.querySelector('.mouse-info');
-	  var startMenu = document.querySelector('.start-menu');
-	  var helpControlsMenu = document.querySelector('.help-controls');
-	  var gameMenu = document.querySelector('.game-menu');
-	  var gameEditor = document.querySelector('.tile-selector');
-	  var about = document.querySelector('.about');
-
-	  function hideAllSections() {
-	    var sections = document.querySelectorAll('.menu__section-container section');
-	    for (var i = 0; i < sections.length; i++) {
-	      sections[i].setAttribute('data-hidden', 'yes');
-	    }
-	  }
-
-	  function menuInteraction(selectedItem) {
-	    if (selectedItem === 'Continue') {
-	      menu.setAttribute('data-hidden', 'yes');
-	      overlay.setAttribute('data-hidden', 'yes');
-	      mouseInfo.setAttribute('style', 'display: block;');
-	      window.localStorage.setItem('inGame', 'yes');
-	    }
-	    if (selectedItem === 'Help/Controls') {
-	      if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
-	        helpControlsMenu.setAttribute('data-hidden', 'yes');
-	        startMenu.setAttribute('data-hidden', 'no');
-	      } else {
-	        startMenu.setAttribute('data-hidden', 'yes');
-	        helpControlsMenu.setAttribute('data-hidden', 'no');
-	      }
-	    }
-	    if (selectedItem === 'Game Editor') {
-	      if (gameEditor.getAttribute('data-hidden') === 'no') {
-	        gameEditor.setAttribute('data-hidden', 'yes');
-	        startMenu.setAttribute('data-hidden', 'no');
-	      } else {
-	        startMenu.setAttribute('data-hidden', 'yes');
-	        gameEditor.setAttribute('data-hidden', 'no');
-	      }
-	    }
-	    if (selectedItem === 'About') {
-	      if (about.getAttribute('data-hidden') === 'no') {
-	        about.setAttribute('data-hidden', 'yes');
-	        startMenu.setAttribute('data-hidden', 'no');
-	      } else {
-	        startMenu.setAttribute('data-hidden', 'yes');
-	        about.setAttribute('data-hidden', 'no');
-	      }
-	    }
-	  }
-
-	  // Arrow key events.
-	  window.addEventListener('keydown', function (event) {
-	    if (!startMenu) return;
-	    if (startMenu.getAttribute('data-hidden', 'no')) {
-	      if (event.key === 'ArrowDown') {
-	        // Select start menu item below current one.
-	      }
-	      if (event.key === 'ArrowUp') {
-	        // Select start menu item above current one.
-	      }
-	    }
-
-	    if (event.key === 'Enter') {
-	      var selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected').textContent;
-	      menuInteraction(selectedMenuItem);
-	    }
-	  }, false);
-
-	  var startMenuItems = document.querySelectorAll('.start-menu__menu li');
-
-	  function clearStartMenuItems() {
-	    startMenuItems.forEach(function (item, index) {
-	      item.className = '';
-	      console.log('deleted');
-	    });
-	  }
-
-	  startMenuItems.forEach(function (item, index) {
-	    item.addEventListener('click', function (event) {
-	      if (startMenu.getAttribute('data-hidden', 'no')) {
-	        clearStartMenuItems();
-	        event.target.className = 'start-selected';
-	        menuInteraction(event.target.textContent);
-	      }
-	    }, false);
-	  });
-
-	  // Escape key events.
-	  window.addEventListener('keydown', function (event) {
-	    if (event.key === 'Escape') {
-	      // If not in game do this.
-	      if (window.localStorage.getItem('inGame') === 'no' || !window.localStorage.getItem('inGame')) {
-	        // If the menu is shown, then hide the menu.
-	        if (menu.getAttribute('data-hidden') === 'no') {
-	          menu.setAttribute('data-hidden', 'yes');
-	          overlay.setAttribute('data-hidden', 'yes');
-	          mouseInfo.setAttribute('style', 'display: block;');
-	        } else {
-	          // If the menu is hidden, show the menu.
-	          menu.setAttribute('data-hidden', 'no');
-	          overlay.setAttribute('data-hidden', 'no');
-	          mouseInfo.setAttribute('style', 'display: none;');
-	          hideAllSections();
-	          startMenu.setAttribute('data-hidden', 'no');
-	        }
-	      }
-	      // If in game do this.
-	      if (window.localStorage.getItem('inGame') === 'yes') {
-	        // If the menu is shown, then hide the menu.
-	        if (menu.getAttribute('data-hidden') === 'no') {
-	          menu.setAttribute('data-hidden', 'yes');
-	          overlay.setAttribute('data-hidden', 'yes');
-	          mouseInfo.setAttribute('style', 'display: block;');
-	        } else {
-	          // If the menu is hidden, show the menu.
-	          menu.setAttribute('data-hidden', 'no');
-	          overlay.setAttribute('data-hidden', 'no');
-	          mouseInfo.setAttribute('style', 'display: none;');
-	          hideAllSections();
-	          if (!gameMenu) return;
-	          gameMenu.setAttribute('data-hidden', 'no');
-	        }
-	      }
-	    }
-	  }, false);
-	}
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = gameMenu;
-	function gameMenu() {
-	  var menu = document.querySelector('.menu');
-	  var overlay = document.querySelector('.overlay');
-	  var mouseInfo = document.querySelector('.mouse-info');
-	  var startMenu = document.querySelector('.start-menu');
-	  var gameMenu = document.querySelector('.game-menu');
-
-	  if (window.localStorage.getItem('inGame') === 'yes') {
-	    menu.setAttribute('data-hidden', 'yes');
-	    overlay.setAttribute('data-hidden', 'yes');
-	    mouseInfo.setAttribute('style', 'display: block;');
-	  }
-
-	  function hideAllSections() {
-	    var sections = document.querySelectorAll('.menu__section-container section');
-	    for (var i = 0; i < sections.length; i++) {
-	      sections[i].setAttribute('data-hidden', 'yes');
-	    }
-	  }
-
-	  // Arrow key events.
-	  window.addEventListener('keydown', function (event) {
-	    // console.log(event.key)
-	    if (!gameMenu) return;
-	    if (gameMenu.getAttribute('data-hidden') === 'no') {
-	      if (event.key === 'ArrowDown') {
-	        // Select game menu item below current one.
-	      }
-	      if (event.key === 'ArrowUp') {
-	        // Select game menu item above current one.
-	      }
-	    }
-
-	    if (event.key === 'Enter') {
-	      if (gameMenu.getAttribute('data-hidden') === 'no') {
-	        if (selectedGameItem.textContent === 'Exit Game') {
-	          window.localStorage.setItem('inGame', 'no');
-	        }
-	      }
-	    }
-	  }, false);
-	}
-
-/***/ }),
-/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(14);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(27);
+	var _reactDom = __webpack_require__(25);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _StartMenuScript = __webpack_require__(13);
+	var _mainMenuScript = __webpack_require__(48);
 
-	var _StartMenuScript2 = _interopRequireDefault(_StartMenuScript);
+	var _mainMenuScript2 = _interopRequireDefault(_mainMenuScript);
 
-	var _GameMenuScript = __webpack_require__(14);
+	var _startMenuScript = __webpack_require__(46);
 
-	var _GameMenuScript2 = _interopRequireDefault(_GameMenuScript);
+	var _startMenuScript2 = _interopRequireDefault(_startMenuScript);
+
+	var _gameMenuScript = __webpack_require__(47);
+
+	var _gameMenuScript2 = _interopRequireDefault(_gameMenuScript);
 
 	var _StartMenu = __webpack_require__(41);
 
@@ -1139,8 +950,9 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      (0, _StartMenuScript2.default)();
-	      (0, _GameMenuScript2.default)();
+	      (0, _mainMenuScript2.default)();
+	      (0, _startMenuScript2.default)();
+	      (0, _gameMenuScript2.default)();
 	    }
 	  }]);
 
@@ -1153,21 +965,21 @@
 	_reactDom2.default.render(_react2.default.createElement(MainMenu, null), document.querySelector('.menu'));
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	if (process.env.NODE_ENV === 'production') {
-	  module.exports = __webpack_require__(18);
+	  module.exports = __webpack_require__(16);
 	} else {
-	  module.exports = __webpack_require__(23);
+	  module.exports = __webpack_require__(21);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ (function(module, exports) {
 
 	// shim for using process in browser
@@ -1357,7 +1169,7 @@
 
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @license React v16.3.2
@@ -1369,7 +1181,7 @@
 	 * LICENSE file in the root directory of this source tree.
 	 */
 
-	'use strict';var m=__webpack_require__(19),n=__webpack_require__(20),p=__webpack_require__(21),q=__webpack_require__(22),r="function"===typeof Symbol&&Symbol["for"],t=r?Symbol["for"]("react.element"):60103,u=r?Symbol["for"]("react.portal"):60106,v=r?Symbol["for"]("react.fragment"):60107,w=r?Symbol["for"]("react.strict_mode"):60108,x=r?Symbol["for"]("react.provider"):60109,y=r?Symbol["for"]("react.context"):60110,z=r?Symbol["for"]("react.async_mode"):60111,A=r?Symbol["for"]("react.forward_ref"):
+	'use strict';var m=__webpack_require__(17),n=__webpack_require__(18),p=__webpack_require__(19),q=__webpack_require__(20),r="function"===typeof Symbol&&Symbol["for"],t=r?Symbol["for"]("react.element"):60103,u=r?Symbol["for"]("react.portal"):60106,v=r?Symbol["for"]("react.fragment"):60107,w=r?Symbol["for"]("react.strict_mode"):60108,x=r?Symbol["for"]("react.provider"):60109,y=r?Symbol["for"]("react.context"):60110,z=r?Symbol["for"]("react.async_mode"):60111,A=r?Symbol["for"]("react.forward_ref"):
 	60112,B="function"===typeof Symbol&&Symbol.iterator;function C(a){for(var b=arguments.length-1,e="http://reactjs.org/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);n(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",e)}var D={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};
 	function E(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||D}E.prototype.isReactComponent={};E.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?C("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};E.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};function F(){}F.prototype=E.prototype;function G(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||D}var H=G.prototype=new F;
 	H.constructor=G;m(H,E.prototype);H.isPureReactComponent=!0;var I={current:null},J=Object.prototype.hasOwnProperty,K={key:!0,ref:!0,__self:!0,__source:!0};
@@ -1385,7 +1197,7 @@
 
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, exports) {
 
 	/*
@@ -1481,7 +1293,7 @@
 
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1537,10 +1349,10 @@
 	}
 
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1560,10 +1372,10 @@
 	}
 
 	module.exports = emptyObject;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1604,7 +1416,7 @@
 	module.exports = emptyFunction;
 
 /***/ }),
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.3.2
@@ -1624,12 +1436,12 @@
 	  (function() {
 	'use strict';
 
-	var _assign = __webpack_require__(19);
-	var invariant = __webpack_require__(20);
-	var emptyObject = __webpack_require__(21);
-	var warning = __webpack_require__(24);
-	var emptyFunction = __webpack_require__(22);
-	var checkPropTypes = __webpack_require__(25);
+	var _assign = __webpack_require__(17);
+	var invariant = __webpack_require__(18);
+	var emptyObject = __webpack_require__(19);
+	var warning = __webpack_require__(22);
+	var emptyFunction = __webpack_require__(20);
+	var checkPropTypes = __webpack_require__(23);
 
 	// TODO: this is special because it gets imported during build.
 
@@ -3022,10 +2834,10 @@
 	  })();
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3038,7 +2850,7 @@
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(22);
+	var emptyFunction = __webpack_require__(20);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -3090,10 +2902,10 @@
 	}
 
 	module.exports = warning;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3106,9 +2918,9 @@
 	'use strict';
 
 	if (process.env.NODE_ENV !== 'production') {
-	  var invariant = __webpack_require__(20);
-	  var warning = __webpack_require__(24);
-	  var ReactPropTypesSecret = __webpack_require__(26);
+	  var invariant = __webpack_require__(18);
+	  var warning = __webpack_require__(22);
+	  var ReactPropTypesSecret = __webpack_require__(24);
 	  var loggedTypeFailures = {};
 	}
 
@@ -3156,10 +2968,10 @@
 
 	module.exports = checkPropTypes;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 26 */
+/* 24 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3177,7 +2989,7 @@
 
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -3214,15 +3026,15 @@
 	  // DCE check should happen before ReactDOM bundle executes so that
 	  // DevTools can report bad minification during injection.
 	  checkDCE();
-	  module.exports = __webpack_require__(28);
+	  module.exports = __webpack_require__(26);
 	} else {
-	  module.exports = __webpack_require__(36);
+	  module.exports = __webpack_require__(34);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @license React v16.3.2
@@ -3237,7 +3049,7 @@
 	/*
 	 Modernizr 3.0.0pre (Custom Build) | MIT
 	*/
-	'use strict';var ba=__webpack_require__(20),ea=__webpack_require__(16),m=__webpack_require__(29),A=__webpack_require__(30),C=__webpack_require__(22),fa=__webpack_require__(31),ha=__webpack_require__(32),ja=__webpack_require__(33),ka=__webpack_require__(21);
+	'use strict';var ba=__webpack_require__(18),ea=__webpack_require__(14),m=__webpack_require__(27),A=__webpack_require__(28),C=__webpack_require__(20),fa=__webpack_require__(29),ha=__webpack_require__(30),ja=__webpack_require__(31),ka=__webpack_require__(19);
 	function D(a){for(var b=arguments.length-1,c="http://reactjs.org/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);ba(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}ea?void 0:D("227");
 	function ma(a,b,c,d,e,f,h,g,k){this._hasCaughtError=!1;this._caughtError=null;var v=Array.prototype.slice.call(arguments,3);try{b.apply(c,v)}catch(l){this._caughtError=l,this._hasCaughtError=!0}}
 	var E={_caughtError:null,_hasCaughtError:!1,_rethrowError:null,_hasRethrowError:!1,invokeGuardedCallback:function(a,b,c,d,e,f,h,g,k){ma.apply(E,arguments)},invokeGuardedCallbackAndCatchFirstError:function(a,b,c,d,e,f,h,g,k){E.invokeGuardedCallback.apply(this,arguments);if(E.hasCaughtError()){var v=E.clearCaughtError();E._hasRethrowError||(E._hasRethrowError=!0,E._rethrowError=v)}},rethrowCaughtError:function(){return na.apply(E,arguments)},hasCaughtError:function(){return E._hasCaughtError},clearCaughtError:function(){if(E._hasCaughtError){var a=
@@ -3474,7 +3286,7 @@
 
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3512,7 +3324,7 @@
 	module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	/*
@@ -3608,7 +3420,7 @@
 
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3649,7 +3461,7 @@
 	module.exports = getActiveElement;
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3719,7 +3531,7 @@
 	module.exports = shallowEqual;
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3733,7 +3545,7 @@
 	 * 
 	 */
 
-	var isTextNode = __webpack_require__(34);
+	var isTextNode = __webpack_require__(32);
 
 	/*eslint-disable no-bitwise */
 
@@ -3761,7 +3573,7 @@
 	module.exports = containsNode;
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3775,7 +3587,7 @@
 	 * @typechecks
 	 */
 
-	var isNode = __webpack_require__(35);
+	var isNode = __webpack_require__(33);
 
 	/**
 	 * @param {*} object The object to check.
@@ -3788,7 +3600,7 @@
 	module.exports = isTextNode;
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3815,7 +3627,7 @@
 	module.exports = isNode;
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.3.2
@@ -3835,19 +3647,19 @@
 	  (function() {
 	'use strict';
 
-	var invariant = __webpack_require__(20);
-	var React = __webpack_require__(16);
-	var warning = __webpack_require__(24);
-	var ExecutionEnvironment = __webpack_require__(29);
-	var _assign = __webpack_require__(30);
-	var emptyFunction = __webpack_require__(22);
-	var checkPropTypes = __webpack_require__(25);
-	var getActiveElement = __webpack_require__(31);
-	var shallowEqual = __webpack_require__(32);
-	var containsNode = __webpack_require__(33);
-	var emptyObject = __webpack_require__(21);
-	var hyphenateStyleName = __webpack_require__(37);
-	var camelizeStyleName = __webpack_require__(39);
+	var invariant = __webpack_require__(18);
+	var React = __webpack_require__(14);
+	var warning = __webpack_require__(22);
+	var ExecutionEnvironment = __webpack_require__(27);
+	var _assign = __webpack_require__(28);
+	var emptyFunction = __webpack_require__(20);
+	var checkPropTypes = __webpack_require__(23);
+	var getActiveElement = __webpack_require__(29);
+	var shallowEqual = __webpack_require__(30);
+	var containsNode = __webpack_require__(31);
+	var emptyObject = __webpack_require__(19);
+	var hyphenateStyleName = __webpack_require__(35);
+	var camelizeStyleName = __webpack_require__(37);
 
 	// Relying on the `invariant()` implementation lets us
 	// have preserve the format and params in the www builds.
@@ -20473,10 +20285,10 @@
 	  })();
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -20490,7 +20302,7 @@
 
 	'use strict';
 
-	var hyphenate = __webpack_require__(38);
+	var hyphenate = __webpack_require__(36);
 
 	var msPattern = /^ms-/;
 
@@ -20517,7 +20329,7 @@
 	module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -20552,7 +20364,7 @@
 	module.exports = hyphenate;
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -20566,7 +20378,7 @@
 
 	'use strict';
 
-	var camelize = __webpack_require__(40);
+	var camelize = __webpack_require__(38);
 
 	var msPattern = /^-ms-/;
 
@@ -20594,7 +20406,7 @@
 	module.exports = camelizeStyleName;
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -20628,6 +20440,8 @@
 	module.exports = camelize;
 
 /***/ }),
+/* 39 */,
+/* 40 */,
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20637,7 +20451,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(14);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20657,27 +20471,27 @@
 	      { className: "start-menu__menu" },
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0" },
+	        { id: "startmenu1", tabIndex: "0" },
 	        "New Game"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0" },
+	        { id: "startmenu2", tabIndex: "0" },
 	        "Continue"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0" },
+	        { id: "startmenu3", tabIndex: "0" },
 	        "Help/Controls"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0" },
+	        { id: "startmenu4", tabIndex: "0" },
 	        "Game Editor"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0" },
+	        { id: "startmenu5", tabIndex: "0" },
 	        "About"
 	      )
 	    ),
@@ -20715,7 +20529,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(14);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20728,7 +20542,7 @@
 	    _react2.default.createElement(
 	      "div",
 	      { className: "game-menu__title" },
-	      "Menu"
+	      "Game Menu"
 	    ),
 	    _react2.default.createElement(
 	      "ul",
@@ -20764,7 +20578,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(14);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20809,7 +20623,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(14);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20862,7 +20676,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(14);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20886,6 +20700,185 @@
 	};
 
 	exports.default = About;
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = startMenu;
+	function startMenu() {
+	  var menu = document.querySelector('.menu');
+
+	  var mouseInfo = document.querySelector('.mouse-info');
+	  var startMenu = document.querySelector('.start-menu');
+	  var helpControlsMenu = document.querySelector('.help-controls');
+	  var gameMenu = document.querySelector('.game-menu');
+	  var gameEditor = document.querySelector('.tile-selector');
+	  var about = document.querySelector('.about');
+
+	  function hideAllSections() {
+	    var sections = document.querySelectorAll('.menu__section-container section');
+	    for (var i = 0; i < sections.length; i++) {
+	      sections[i].setAttribute('data-hidden', 'yes');
+	    }
+	  }
+
+	  function menuInteraction(selectedItem) {
+	    if (selectedItem === 'Continue') {
+	      menu.setAttribute('data-hidden', 'yes');
+	      overlay.setAttribute('data-hidden', 'yes');
+	      mouseInfo.setAttribute('style', 'display: block;');
+	      window.localStorage.setItem('inGame', 'yes');
+	    }
+	    if (selectedItem === 'Help/Controls') {
+	      if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
+	        helpControlsMenu.setAttribute('data-hidden', 'yes');
+	        startMenu.setAttribute('data-hidden', 'no');
+	      } else {
+	        startMenu.setAttribute('data-hidden', 'yes');
+	        helpControlsMenu.setAttribute('data-hidden', 'no');
+	      }
+	    }
+	    if (selectedItem === 'Game Editor') {
+	      if (gameEditor.getAttribute('data-hidden') === 'no') {
+	        gameEditor.setAttribute('data-hidden', 'yes');
+	        startMenu.setAttribute('data-hidden', 'no');
+	      } else {
+	        startMenu.setAttribute('data-hidden', 'yes');
+	        gameEditor.setAttribute('data-hidden', 'no');
+	      }
+	    }
+	    if (selectedItem === 'About') {
+	      if (about.getAttribute('data-hidden') === 'no') {
+	        about.setAttribute('data-hidden', 'yes');
+	        startMenu.setAttribute('data-hidden', 'no');
+	      } else {
+	        startMenu.setAttribute('data-hidden', 'yes');
+	        about.setAttribute('data-hidden', 'no');
+	      }
+	    }
+	  }
+
+	  // Arrow key events.
+	  window.addEventListener('keydown', function (event) {
+	    if (!startMenu) return;
+	    if (startMenu.getAttribute('data-hidden', 'no')) {
+	      if (event.key === 'ArrowDown') {
+	        // Select start menu item below current one.
+	      }
+	      if (event.key === 'ArrowUp') {
+	        // Select start menu item above current one.
+	      }
+	    }
+
+	    if (event.key === 'Enter') {}
+	  }, false);
+
+	  var startMenuItems = document.querySelectorAll('.start-menu__menu li');
+
+	  function clearStartMenuItems() {
+	    startMenuItems.forEach(function (item, index) {
+	      item.className = '';
+	      console.log('deleted');
+	    });
+	  }
+
+	  startMenuItems.forEach(function (item, index) {
+	    item.addEventListener('click', function (event) {
+	      if (startMenu.getAttribute('data-hidden', 'no')) {
+	        clearStartMenuItems();
+	        event.target.className = 'start-selected';
+	      }
+	    }, false);
+	  });
+	}
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = gameMenu;
+	function gameMenu() {
+	  var menu = document.querySelector('.menu');
+	  var overlay = document.querySelector('.overlay');
+	  var mouseInfo = document.querySelector('.mouse-info');
+	  var startMenu = document.querySelector('.start-menu');
+	  var gameMenu = document.querySelector('.game-menu');
+
+	  if (window.localStorage.getItem('inGame') === 'yes') {
+	    menu.setAttribute('data-hidden', 'yes');
+	    overlay.setAttribute('data-hidden', 'yes');
+	    mouseInfo.setAttribute('style', 'display: block;');
+	  }
+
+	  function hideAllSections() {
+	    var sections = document.querySelectorAll('.menu__section-container section');
+	    for (var i = 0; i < sections.length; i++) {
+	      sections[i].setAttribute('data-hidden', 'yes');
+	    }
+	  }
+
+	  // Arrow key events.
+	  window.addEventListener('keydown', function (event) {
+	    // console.log(event.key)
+	    if (!gameMenu) return;
+	    if (gameMenu.getAttribute('data-hidden') === 'no') {
+	      if (event.key === 'ArrowDown') {
+	        // Select game menu item below current one.
+	      }
+	      if (event.key === 'ArrowUp') {
+	        // Select game menu item above current one.
+	      }
+	    }
+	  }, false);
+	}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = mainMenuScript;
+	function mainMenuScript() {
+	  var menuContainer = document.querySelector('.menu__section-container');
+	  var overlay = document.querySelector('.overlay');
+
+	  // Set the initial state of Start Menu.
+	  window.localStorage.setItem('menuSelectedItem', 'startmenu1');
+
+	  window.addEventListener('keydown', function (event) {
+	    if (event.key === 'Escape') {
+	      if (menuContainer.getAttribute('data-shown') === 'yes') {
+	        // Hide Main Menu.
+	        menuContainer.setAttribute('data-shown', 'no');
+	        overlay.setAttribute('data-shown', 'no');
+	      } else {
+	        // Show Main Menu.
+	        menuContainer.setAttribute('data-shown', 'yes');
+	        overlay.setAttribute('data-shown', 'yes');
+	        if (window.localStorage.getItem('menuSelectedItem')) {
+	          var menuSelectedItem = window.localStorage.getItem('menuSelectedItem');
+	          document.getElementById(menuSelectedItem).focus();
+	        }
+	        window.localStorage.setItem('menuSelectedItem', 'startmenu1');
+	      }
+	    }
+	  }, false);
+	}
 
 /***/ })
 /******/ ]);

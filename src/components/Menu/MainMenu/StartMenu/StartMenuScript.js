@@ -1,6 +1,6 @@
 export default function startMenu () {
   const menu = document.querySelector('.menu')
-  const overlay = document.querySelector('.overlay')
+
   const mouseInfo = document.querySelector('.mouse-info')
   const startMenu = document.querySelector('.start-menu')
   const helpControlsMenu = document.querySelector('.help-controls')
@@ -64,8 +64,7 @@ export default function startMenu () {
     }
 
     if (event.key === 'Enter') {
-      const selectedMenuItem = document.querySelector('.start-menu__menu li.start-selected').textContent
-      menuInteraction(selectedMenuItem)
+
     }
   }, false)
 
@@ -83,45 +82,7 @@ export default function startMenu () {
       if (startMenu.getAttribute('data-hidden', 'no')) {
         clearStartMenuItems()
         event.target.className = 'start-selected'
-        menuInteraction(event.target.textContent)
       }
     }, false)
   })
-
-  // Escape key events.
-  window.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      // If not in game do this.
-      if (window.localStorage.getItem('inGame') === 'no' || !window.localStorage.getItem('inGame')) {
-        // If the menu is shown, then hide the menu.
-        if (menu.getAttribute('data-hidden') === 'no') {
-          menu.setAttribute('data-hidden', 'yes')
-          overlay.setAttribute('data-hidden', 'yes')
-          mouseInfo.setAttribute('style', 'display: block;')
-        } else { // If the menu is hidden, show the menu.
-          menu.setAttribute('data-hidden', 'no')
-          overlay.setAttribute('data-hidden', 'no')
-          mouseInfo.setAttribute('style', 'display: none;')
-          hideAllSections()
-          startMenu.setAttribute('data-hidden', 'no')
-        }
-      }
-      // If in game do this.
-      if (window.localStorage.getItem('inGame') === 'yes') {
-        // If the menu is shown, then hide the menu.
-        if (menu.getAttribute('data-hidden') === 'no') {
-          menu.setAttribute('data-hidden', 'yes')
-          overlay.setAttribute('data-hidden', 'yes')
-          mouseInfo.setAttribute('style', 'display: block;')
-        } else { // If the menu is hidden, show the menu.
-          menu.setAttribute('data-hidden', 'no')
-          overlay.setAttribute('data-hidden', 'no')
-          mouseInfo.setAttribute('style', 'display: none;')
-          hideAllSections()
-          if (!gameMenu) return
-          gameMenu.setAttribute('data-hidden', 'no')
-        }
-      }
-    }
-  }, false)
 }

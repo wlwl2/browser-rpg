@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
-import StartMenuScript from './StartMenu/StartMenuScript'
-import GameMenuScript from './GameMenu/GameMenuScript'
+import mainMenuScript from './mainMenuScript'
+import startMenuScript from './StartMenu/startMenuScript'
+import gameMenuScript from './GameMenu/gameMenuScript'
 
 import StartMenu from './StartMenu/StartMenu'
 import GameMenu from './GameMenu/GameMenu'
@@ -31,8 +32,9 @@ class MainMenu extends Component {
   }
 
   componentDidMount () {
-    StartMenuScript()
-    GameMenuScript()
+    mainMenuScript()
+    startMenuScript()
+    gameMenuScript()
   }
 }
 

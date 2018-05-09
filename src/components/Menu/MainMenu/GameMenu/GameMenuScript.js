@@ -30,13 +30,5 @@ export default function gameMenu () {
         // Select game menu item above current one.
       }
     }
-
-    if (event.key === 'Enter') {
-      if (gameMenu.getAttribute('data-hidden') === 'no') {
-        if (selectedGameItem.textContent === 'Exit Game') {
-          window.localStorage.setItem('inGame', 'no')
-        }
-      }
-    }
   }, false)
 }

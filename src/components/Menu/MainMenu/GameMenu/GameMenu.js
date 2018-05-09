@@ -4,7 +4,7 @@ const GameMenu = (props) => {
   return (
     <section className="game-menu" data-hidden="yes">
       <div className="game-menu__title">
-        Menu
+        Game Menu
       </div>
       <ul className="game-menu__menu">
         <li tabIndex='0'>Status</li>
