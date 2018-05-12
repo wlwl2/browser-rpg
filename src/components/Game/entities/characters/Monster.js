@@ -11,7 +11,7 @@ export default class Monster {
     this.destWidth = 32
     this.destHeight = 32
     this.size = 32
-    this.speed = 32
+    this.speed = 4
     this.category = 'monster'
     this.collidable = 'yes'
     this.collidableTiles = []
@@ -30,10 +30,10 @@ Monster.prototype.draw = function draw (ctx) {
     this.destX, this.destY, this.destWidth, this.destHeight)
 }
 
-Monster.prototype.step = function step (canvasLength, world) {
-  const speed = this.speed / 32
-  const y = this.destY / 32
-  const x = this.destX / 32
+Monster.prototype.step = function step (canvasLength, world, freeze) {
+  const speed = this.speed / 4
+  const y = this.destY / 4
+  const x = this.destX / 4
   // Collates all the colliable tiles into this.collidableTiles.
   if (!world) return
   world.scene.tiles.forEach(function (Tile) {
@@ -45,35 +45,35 @@ Monster.prototype.step = function step (canvasLength, world) {
 
   // Randomly makes the monster move one step in one of 4 directions.
   const next = {x: this.destX, y: this.destY}
-  const nextY = next.y / 32
-  const nextX = next.x / 32
+  const nextY = next.y / 4
+  const nextX = next.x / 4
   switch (Math.floor(Math.random() * 4)) {
     case 0: // up.
       // Prevents monster from moving outside the canvas when moving up.
       if (next.y - this.speed < 0) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(world.scene.grid[nextY - speed][x]) >= 0) return
+      // if (this.collidableTiles.indexOf(world.scene.grid[nextY - speed][x]) >= 0) return
       next.y -= this.speed
       break
     case 1: // down.
       // Prevents monster from moving outside the canvas when moving down.
       if (this.destY + this.speed * 2 > canvasLength) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(world.scene.grid[nextY + speed][x]) >= 0) return
+      // if (this.collidableTiles.indexOf(world.scene.grid[nextY + speed][x]) >= 0) return
       next.y += this.speed
       break
     case 2: // right.
       // Prevents monster from moving outside the canvas when moving right.
       if (this.destX + this.speed * 2 > canvasLength) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(world.scene.grid[y][nextX + speed]) >= 0) return
+      // if (this.collidableTiles.indexOf(world.scene.grid[y][nextX + speed]) >= 0) return
       next.x += this.speed
       break
     case 3: // left.
       // Prevents monster from moving outside the canvas when moving left.
       if (this.destX - this.speed < 0) return
       // Collidable terrain detection.
-      if (this.collidableTiles.indexOf(world.scene.grid[y][nextX - speed]) >= 0) return
+      // if (this.collidableTiles.indexOf(world.scene.grid[y][nextX - speed]) >= 0) return
       next.x -= this.speed
       break
   }
@@ -90,6 +90,10 @@ Monster.prototype.step = function step (canvasLength, world) {
       canMove = false
     }
   }, this)
+  if (freeze) {
+    this.step(world.monsters)
+    return
+  }
   if (canMove) {
     this.destX = next.x
     this.destY = next.y

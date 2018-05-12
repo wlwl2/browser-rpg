@@ -85,14 +85,21 @@
 	  // Erases canvas.
 	  ctx.clearRect(0, 0, canvas.width, canvas.height);
 	  world.scene.draw(ctx, canvas);
-	  world.monsters.forEach(function (monster) {
-	    monster.step(canvas.height, world);
-	    monster.draw(ctx);
-	  });
 	  world.players.forEach(function (player) {
 	    player.move(ctx, direction, canvas, world);
 	    player.draw(ctx);
 	  });
+	  if (direction) {
+	    world.monsters.forEach(function (monster) {
+	      monster.step(canvas.height, world, 'freeze');
+	      monster.draw(ctx);
+	    });
+	  } else {
+	    world.monsters.forEach(function (monster) {
+	      monster.step(canvas.height, world);
+	      monster.draw(ctx);
+	    });
+	  }
 	}
 
 	var _init = init(),
@@ -104,7 +111,8 @@
 	(0, _tileDragging2.default)(canvas, world, ctx);
 
 	window.addEventListener('load', function (event) {
-	  step();
+	  window.setInterval(step, 500);
+	  // step()
 	}, false);
 
 	// touchEvents()
@@ -205,7 +213,7 @@
 	  this.destWidth = 32;
 	  this.destHeight = 32;
 	  this.size = 32;
-	  this.speed = 32;
+	  this.speed = 4;
 	  this.category = 'monster';
 	  this.collidable = 'yes';
 	  this.collidableTiles = [];
@@ -224,10 +232,10 @@
 	  ctx.drawImage(this.img, this.srcX, this.srcY, this.srcWidth, this.srcHeight, this.destX, this.destY, this.destWidth, this.destHeight);
 	};
 
-	Monster.prototype.step = function step(canvasLength, world) {
-	  var speed = this.speed / 32;
-	  var y = this.destY / 32;
-	  var x = this.destX / 32;
+	Monster.prototype.step = function step(canvasLength, world, freeze) {
+	  var speed = this.speed / 4;
+	  var y = this.destY / 4;
+	  var x = this.destX / 4;
 	  // Collates all the colliable tiles into this.collidableTiles.
 	  if (!world) return;
 	  world.scene.tiles.forEach(function (Tile) {
@@ -239,15 +247,15 @@
 
 	  // Randomly makes the monster move one step in one of 4 directions.
 	  var next = { x: this.destX, y: this.destY };
-	  var nextY = next.y / 32;
-	  var nextX = next.x / 32;
+	  var nextY = next.y / 4;
+	  var nextX = next.x / 4;
 	  switch (Math.floor(Math.random() * 4)) {
 	    case 0:
 	      // up.
 	      // Prevents monster from moving outside the canvas when moving up.
 	      if (next.y - this.speed < 0) return;
 	      // Collidable terrain detection.
-	      if (this.collidableTiles.indexOf(world.scene.grid[nextY - speed][x]) >= 0) return;
+	      // if (this.collidableTiles.indexOf(world.scene.grid[nextY - speed][x]) >= 0) return
 	      next.y -= this.speed;
 	      break;
 	    case 1:
@@ -255,7 +263,7 @@
 	      // Prevents monster from moving outside the canvas when moving down.
 	      if (this.destY + this.speed * 2 > canvasLength) return;
 	      // Collidable terrain detection.
-	      if (this.collidableTiles.indexOf(world.scene.grid[nextY + speed][x]) >= 0) return;
+	      // if (this.collidableTiles.indexOf(world.scene.grid[nextY + speed][x]) >= 0) return
 	      next.y += this.speed;
 	      break;
 	    case 2:
@@ -263,7 +271,7 @@
 	      // Prevents monster from moving outside the canvas when moving right.
 	      if (this.destX + this.speed * 2 > canvasLength) return;
 	      // Collidable terrain detection.
-	      if (this.collidableTiles.indexOf(world.scene.grid[y][nextX + speed]) >= 0) return;
+	      // if (this.collidableTiles.indexOf(world.scene.grid[y][nextX + speed]) >= 0) return
 	      next.x += this.speed;
 	      break;
 	    case 3:
@@ -271,7 +279,7 @@
 	      // Prevents monster from moving outside the canvas when moving left.
 	      if (this.destX - this.speed < 0) return;
 	      // Collidable terrain detection.
-	      if (this.collidableTiles.indexOf(world.scene.grid[y][nextX - speed]) >= 0) return;
+	      // if (this.collidableTiles.indexOf(world.scene.grid[y][nextX - speed]) >= 0) return
 	      next.x -= this.speed;
 	      break;
 	  }
@@ -284,6 +292,10 @@
 	      canMove = false;
 	    }
 	  }, this);
+	  if (freeze) {
+	    this.step(world.monsters);
+	    return;
+	  }
 	  if (canMove) {
 	    this.destX = next.x;
 	    this.destY = next.y;
@@ -845,6 +857,16 @@
 	    } else if (map['ArrowRight']) {
 	      step('right');
 	    }
+
+	    // if (map['ArrowUp']) {
+	    //   step('up')
+	    // } else if (map['ArrowDown']) {
+	    //   step('down')
+	    // } else if (map['ArrowLeft']) {
+	    //   step('left')
+	    // } else if (map['ArrowRight']) {
+	    //   step('right')
+	    // }
 	  }
 	  document.addEventListener('keyup', function (event) {
 	    playerControls(event);

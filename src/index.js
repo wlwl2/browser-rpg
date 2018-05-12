@@ -20,14 +20,21 @@ function step (direction) {
   // Erases canvas.
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   world.scene.draw(ctx, canvas)
-  world.monsters.forEach(function (monster) {
-    monster.step(canvas.height, world)
-    monster.draw(ctx)
-  })
   world.players.forEach(function (player) {
     player.move(ctx, direction, canvas, world)
     player.draw(ctx)
   })
+  if (direction) {
+    world.monsters.forEach(function (monster) {
+      monster.step(canvas.height, world, 'freeze')
+      monster.draw(ctx)
+    })
+  } else {
+    world.monsters.forEach(function (monster) {
+      monster.step(canvas.height, world)
+      monster.draw(ctx)
+    })
+  }
 }
 
 const { ctx, canvas } = init()
@@ -36,7 +43,8 @@ tileSelector(canvas)
 tileDragging(canvas, world, ctx)
 
 window.addEventListener('load', function (event) {
-  step()
+  window.setInterval(step, 500)
+  // step()
 }, false)
 
 // touchEvents()
