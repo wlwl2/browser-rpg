@@ -222,6 +222,13 @@
 	  this.attackPower = 1;
 	  this.defense = 0;
 	  this.expReward = 5;
+	  this.spriteCounter = 0;
+	  this.updateSprite = function (sourceX, sourceY, sizeX, sizeY) {
+	    this.sourceX = sourceX;
+	    this.sourceY = sourceY;
+	    this.sizeX = sizeX;
+	    this.sizeY = sizeY;
+	  }.bind(this);
 	};
 
 	exports.default = Monster;
@@ -229,13 +236,12 @@
 
 	Monster.prototype.draw = function draw(ctx) {
 	  ctx.drawImage(this.img, this.srcX, this.srcY, this.srcWidth, this.srcHeight, this.destX, this.destY, this.destWidth, this.destHeight);
-	  ctx.drawImage(this.img, this.srcX, this.srcY, this.srcWidth, this.srcHeight, this.destX, this.destY, this.destWidth, this.destHeight);
 	};
 
 	Monster.prototype.step = function step(canvasLength, world, freeze) {
-	  var speed = this.speed / 4;
-	  var y = this.destY / 4;
-	  var x = this.destX / 4;
+	  var speed = this.speed / this.speed;
+	  var y = this.destY / this.speed;
+	  var x = this.destX / this.speed;
 	  // Collates all the colliable tiles into this.collidableTiles.
 	  if (!world) return;
 	  world.scene.tiles.forEach(function (Tile) {
@@ -247,8 +253,8 @@
 
 	  // Randomly makes the monster move one step in one of 4 directions.
 	  var next = { x: this.destX, y: this.destY };
-	  var nextY = next.y / 4;
-	  var nextX = next.x / 4;
+	  var nextY = next.y / this.speed;
+	  var nextX = next.x / this.speed;
 	  switch (Math.floor(Math.random() * 4)) {
 	    case 0:
 	      // up.
@@ -257,6 +263,19 @@
 	      // Collidable terrain detection.
 	      // if (this.collidableTiles.indexOf(world.scene.grid[nextY - speed][x]) >= 0) return
 	      next.y -= this.speed;
+	      // if (this.spriteCounter === 0) {
+	      //   this.updateSprite(16, 70, 15, 22)
+	      //   this.spriteCounter = 1
+	      // } else if (this.spriteCounter === 1) {
+	      //   this.updateSprite(32, 69, 15, 23)
+	      //   this.spriteCounter = 2
+	      // } else if (this.spriteCounter === 2) {
+	      //   this.updateSprite(48, 70, 15, 22)
+	      //   this.spriteCounter = 3
+	      // } else if (this.spriteCounter === 3) {
+	      //   this.updateSprite(0, 69, 15, 23)
+	      //   this.spriteCounter = 0
+	      // }
 	      break;
 	    case 1:
 	      // down.
