@@ -76,3 +76,9 @@ canvas {
     width: 100vw;
   }
 }
+
+@media screen and (max-width: 1023px) {
+  .instructions {
+    font-size: 16px;
+  }
+}
