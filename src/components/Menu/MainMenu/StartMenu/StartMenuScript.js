@@ -60,7 +60,7 @@ export default function startMenu () {
 
     if (event.key === 'Enter') {
       // data-menuid
-      console.log(event.target)
+      // console.log(event.target)
     }
   }, false)
 }
