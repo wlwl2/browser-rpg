@@ -6,6 +6,18 @@ div[data-hidden="yes"] {
   display: none;
 }
 
+.menu__section-container {
+  display: none;
+  position: relative;
+  z-index: 4;
+  background-color: white;
+  padding: 20px;
+}
+
+.menu__section-container[data-shown="yes"] {
+  display: block;
+}
+
 section[data-hidden="no"] {
   display: block;
 }
@@ -68,18 +80,6 @@ section[data-hidden="yes"] {
 
 .menu__horizontal-center {
   display: inline-block;
-}
-
-.menu__section-container {
-  display: none;
-  position: relative;
-  z-index: 4;
-  background-color: white;
-  padding: 20px;
-}
-
-.menu__section-container[data-shown="yes"] {
-  display: block;
 }
 
 .menu ul {

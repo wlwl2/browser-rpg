@@ -3,7 +3,12 @@ import React from 'react'
 
 const TileSelector = (props) => {
   return (
-    <section className="tile-selector" data-hidden="yes">
+    <section
+      className="tile-selector"
+      data-hidden="yes"
+      data-menuid="editormenu"
+      data-startmenuid="4"
+    >
       <div>Tile selector</div>
       <div className="tile-list">
         <div className="tree3" draggable="true" data-entity-number="0"></div>

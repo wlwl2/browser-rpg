@@ -70,8 +70,8 @@
 
 	function init() {
 	  var canvas = document.createElement('canvas');
-	  canvas.height = 600;
-	  canvas.width = 600;
+	  canvas.height = 320;
+	  canvas.width = 320;
 	  var ctx = canvas.getContext('2d');
 	  document.querySelector('.game').appendChild(canvas);
 	  return { ctx: ctx, canvas: canvas };
@@ -152,11 +152,11 @@
 
 	// Contains players and monsters.
 	function World() {
-	  var gridcells = 20;
+	  var gridcells = 10;
 	  var monsters = this.monsters = [];
 	  monsters.push(new _Monster2.default(32, 32), new _Monster2.default(64, 64));
 	  var players = this.players = [];
-	  players.push(new _Player2.default(256, 256));
+	  players.push(new _Player2.default(128, 128));
 	  // Set the initial height and width of the grid (or game board) in cells.
 	  this.scene = new _Scene2.default(gridcells, gridcells);
 	}
@@ -20493,9 +20493,13 @@
 	function mainMenuScript() {
 	  var menuContainer = document.querySelector('.menu__section-container');
 	  var overlay = document.querySelector('.overlay');
+	  var startMenu = document.querySelector('.start-menu__menu');
 
 	  // Set the initial state of Start Menu.
-	  window.localStorage.setItem('menuSelectedItem', 'startmenu1');
+	  window.localStorage.setItem('menuState', JSON.stringify({
+	    menuSelected: 'startmenu',
+	    menuItemSelected: '1'
+	  }));
 
 	  window.addEventListener('keydown', function (event) {
 	    if (event.key === 'Escape') {
@@ -20507,11 +20511,18 @@
 	        // Show Main Menu.
 	        menuContainer.setAttribute('data-shown', 'yes');
 	        overlay.setAttribute('data-shown', 'yes');
+
+	        // select item from history
 	        if (window.localStorage.getItem('menuSelectedItem')) {
-	          var menuSelectedItem = window.localStorage.getItem('menuSelectedItem');
-	          document.getElementById(menuSelectedItem).focus();
+	          var menuSelectedItem = JSON.parse(window.localStorage.getItem('menuState')).menuItemSelected;
+	          var menuItems = startMenu.children;
+	          for (var i = 0; i < menuItems.length; i++) {
+	            if (menuSelectedItem === menuItems[i].getAttribute('data-startmenuid')) {
+	              menuItems[i].focus();
+	              menuItems[i].setAttribute('data-selected', 'yes');
+	            }
+	          }
 	        }
-	        window.localStorage.setItem('menuSelectedItem', 'startmenu1');
 	      }
 	    }
 	  }, false);
@@ -20542,47 +20553,16 @@
 	    }
 	  }
 
-	  function menuInteraction(selectedItem) {
-	    if (selectedItem === 'Continue') {
-	      overlay.setAttribute('data-hidden', 'yes');
-	      mouseInfo.setAttribute('style', 'display: block;');
-	      window.localStorage.setItem('inGame', 'yes');
-	    }
-	    if (selectedItem === 'Help/Controls') {
-	      if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
-	        helpControlsMenu.setAttribute('data-hidden', 'yes');
-	        startMenu.setAttribute('data-hidden', 'no');
-	      } else {
-	        startMenu.setAttribute('data-hidden', 'yes');
-	        helpControlsMenu.setAttribute('data-hidden', 'no');
-	      }
-	    }
-	    if (selectedItem === 'Game Editor') {
-	      if (gameEditor.getAttribute('data-hidden') === 'no') {
-	        gameEditor.setAttribute('data-hidden', 'yes');
-	        startMenu.setAttribute('data-hidden', 'no');
-	      } else {
-	        startMenu.setAttribute('data-hidden', 'yes');
-	        gameEditor.setAttribute('data-hidden', 'no');
-	      }
-	    }
-	    if (selectedItem === 'About') {
-	      if (about.getAttribute('data-hidden') === 'no') {
-	        about.setAttribute('data-hidden', 'yes');
-	        startMenu.setAttribute('data-hidden', 'no');
-	      } else {
-	        startMenu.setAttribute('data-hidden', 'yes');
-	        about.setAttribute('data-hidden', 'no');
-	      }
-	    }
-	  }
-
 	  // Arrow key events.
 	  window.addEventListener('keydown', function (event) {
 	    if (!startMenu) return;
+	    // if start menu is not selected, return
+	    if (JSON.parse(window.localStorage.getItem('menuState')).menuSelected !== 'startmenu') return;
 	    if (startMenu.getAttribute('data-hidden', 'no')) {
 	      if (event.key === 'ArrowDown') {
 	        // Select start menu item below current one.
+	        console.log('down');
+	        var selectedMenuItem = JSON.parse(window.localStorage.getItem('menuState')).menuItemSelected;
 	      }
 	      if (event.key === 'ArrowUp') {
 	        // Select start menu item above current one.
@@ -20597,7 +20577,6 @@
 	  function clearStartMenuItems() {
 	    startMenuItems.forEach(function (item, index) {
 	      item.className = '';
-	      console.log('deleted');
 	    });
 	  }
 
@@ -20673,7 +20652,11 @@
 	var StartMenu = function StartMenu(props) {
 	  return _react2.default.createElement(
 	    "section",
-	    { className: "start-menu", "data-hidden": "no" },
+	    {
+	      className: "start-menu",
+	      "data-hidden": "no",
+	      "data-menuid": "startmenu"
+	    },
 	    _react2.default.createElement(
 	      "div",
 	      { className: "start-menu__title" },
@@ -20684,27 +20667,27 @@
 	      { className: "start-menu__menu" },
 	      _react2.default.createElement(
 	        "li",
-	        { id: "startmenu1", tabIndex: "0" },
+	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "1" },
 	        "New Game"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { id: "startmenu2", tabIndex: "0" },
+	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "2" },
 	        "Continue"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { id: "startmenu3", tabIndex: "0" },
+	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "3" },
 	        "Help/Controls"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { id: "startmenu4", tabIndex: "0" },
+	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "4" },
 	        "Game Editor"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { id: "startmenu5", tabIndex: "0" },
+	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "5" },
 	        "About"
 	      )
 	    ),
@@ -20751,7 +20734,11 @@
 	var GameMenu = function GameMenu(props) {
 	  return _react2.default.createElement(
 	    "section",
-	    { className: "game-menu", "data-hidden": "yes" },
+	    {
+	      className: "game-menu",
+	      "data-hidden": "yes",
+	      "data-menuid": "gamemenu"
+	    },
 	    _react2.default.createElement(
 	      "div",
 	      { className: "game-menu__title" },
@@ -20800,7 +20787,12 @@
 	var HelpControls = function HelpControls(props) {
 	  return _react2.default.createElement(
 	    "section",
-	    { className: "help-controls", "data-hidden": "yes" },
+	    {
+	      className: "help-controls",
+	      "data-hidden": "yes",
+	      "data-menuid": "helpmenu",
+	      "data-startmenuid": "3"
+	    },
 	    _react2.default.createElement(
 	      "p",
 	      null,
@@ -20845,7 +20837,12 @@
 	var TileSelector = function TileSelector(props) {
 	  return _react2.default.createElement(
 	    "section",
-	    { className: "tile-selector", "data-hidden": "yes" },
+	    {
+	      className: "tile-selector",
+	      "data-hidden": "yes",
+	      "data-menuid": "editormenu",
+	      "data-startmenuid": "4"
+	    },
 	    _react2.default.createElement(
 	      "div",
 	      null,
@@ -20898,11 +20895,21 @@
 	var About = function About(props) {
 	  return _react2.default.createElement(
 	    "section",
-	    { className: "about", "data-hidden": "yes" },
+	    {
+	      className: "about",
+	      "data-hidden": "yes",
+	      "data-menuid": "aboutmenu",
+	      "data-startmenuid": "5"
+	    },
 	    _react2.default.createElement(
 	      "a",
 	      { href: "https://github.com/wlwl2/browser-rpg" },
-	      "Github Link"
+	      "Source"
+	    ),
+	    _react2.default.createElement(
+	      "a",
+	      { href: "https://wlwl2.com" },
+	      "wlwl2"
 	    ),
 	    _react2.default.createElement(
 	      "div",

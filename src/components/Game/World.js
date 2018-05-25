@@ -5,11 +5,11 @@ import canvasDimensions from './canvasDimensions'
 
 // Contains players and monsters.
 export default function World () {
-  const gridcells = 20
+  const gridcells = 10
   const monsters = this.monsters = []
   monsters.push(new Monster(32, 32), new Monster(64, 64))
   const players = this.players = []
-  players.push(new Player(256, 256))
+  players.push(new Player(128, 128))
   // Set the initial height and width of the grid (or game board) in cells.
   this.scene = new Scene(gridcells, gridcells)
 }

@@ -15,6 +15,11 @@
   }
 }
 
+.start-menu__menu li[data-selected="yes"] {
+  background-color: black;
+  color: white;
+}
+
 .start-menu__controls {
   font-size: 16px;
 }

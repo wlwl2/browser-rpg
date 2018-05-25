@@ -2,7 +2,11 @@ import React from 'react'
 
 const GameMenu = (props) => {
   return (
-    <section className="game-menu" data-hidden="yes">
+    <section
+      className="game-menu"
+      data-hidden="yes"
+      data-menuid="gamemenu"
+    >
       <div className="game-menu__title">
         Game Menu
       </div>

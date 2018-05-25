@@ -8,8 +8,8 @@ import MainMenu from './components/Menu/MainMenu/MainMenu'
 
 function init () {
   var canvas = document.createElement('canvas')
-  canvas.height = 600
-  canvas.width = 600
+  canvas.height = 320
+  canvas.width = 320
   var ctx = canvas.getContext('2d')
   document.querySelector('.game').appendChild(canvas)
   return { ctx, canvas }

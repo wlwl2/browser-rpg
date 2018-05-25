@@ -13,47 +13,17 @@ export default function startMenu () {
     }
   }
 
-  function menuInteraction (selectedItem) {
-    if (selectedItem === 'Continue') {
-      overlay.setAttribute('data-hidden', 'yes')
-      mouseInfo.setAttribute('style', 'display: block;')
-      window.localStorage.setItem('inGame', 'yes')
-    }
-    if (selectedItem === 'Help/Controls') {
-      if (helpControlsMenu.getAttribute('data-hidden') === 'no') {
-        helpControlsMenu.setAttribute('data-hidden', 'yes')
-        startMenu.setAttribute('data-hidden', 'no')
-      } else {
-        startMenu.setAttribute('data-hidden', 'yes')
-        helpControlsMenu.setAttribute('data-hidden', 'no')
-      }
-    }
-    if (selectedItem === 'Game Editor') {
-      if (gameEditor.getAttribute('data-hidden') === 'no') {
-        gameEditor.setAttribute('data-hidden', 'yes')
-        startMenu.setAttribute('data-hidden', 'no')
-      } else {
-        startMenu.setAttribute('data-hidden', 'yes')
-        gameEditor.setAttribute('data-hidden', 'no')
-      }
-    }
-    if (selectedItem === 'About') {
-      if (about.getAttribute('data-hidden') === 'no') {
-        about.setAttribute('data-hidden', 'yes')
-        startMenu.setAttribute('data-hidden', 'no')
-      } else {
-        startMenu.setAttribute('data-hidden', 'yes')
-        about.setAttribute('data-hidden', 'no')
-      }
-    }
-  }
-
   // Arrow key events.
   window.addEventListener('keydown', function (event) {
     if (!startMenu) return
+    // if start menu is not selected, return
+    if (JSON.parse(window.localStorage.getItem('menuState')).menuSelected !== 'startmenu') return
     if (startMenu.getAttribute('data-hidden', 'no')) {
       if (event.key === 'ArrowDown') {
         // Select start menu item below current one.
+        console.log('down')
+        const selectedMenuItem = JSON.parse(window.localStorage.getItem('menuState')).menuItemSelected
+        
       }
       if (event.key === 'ArrowUp') {
         // Select start menu item above current one.
@@ -70,7 +40,6 @@ export default function startMenu () {
   function clearStartMenuItems () {
     startMenuItems.forEach(function (item, index) {
       item.className = ''
-      console.log('deleted')
     })
   }
 
