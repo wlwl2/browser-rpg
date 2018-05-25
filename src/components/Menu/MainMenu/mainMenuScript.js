@@ -3,32 +3,39 @@ export default function mainMenuScript () {
   const overlay = document.querySelector('.overlay')
   const startMenu = document.querySelector('.start-menu__menu')
 
-  // Set the initial state of Start Menu.
-  window.localStorage.setItem('menuState', JSON.stringify({
+  function toggleInGame (inGame) {
+    const gameState = JSON.parse(window.localStorage.getItem('gameState'))
+    gameState.inGame = inGame
+    window.localStorage.setItem('gameState', JSON.stringify(gameState))
+  }
+
+  // Set the initial state of game.
+  window.localStorage.setItem('gameState', JSON.stringify({
+    inGame: 'yes',
     menuSelected: 'startmenu',
-    menuItemSelected: '1'
+    startMenuItemSelected: '1'
   }))
 
   window.addEventListener('keydown', function (event) {
+    event.stopPropagation()
     if (event.key === 'Escape') {
       if (menuContainer.getAttribute('data-shown') === 'yes') {
         // Hide Main Menu.
         menuContainer.setAttribute('data-shown', 'no')
         overlay.setAttribute('data-shown', 'no')
+        toggleInGame('yes')
       } else {
         // Show Main Menu.
         menuContainer.setAttribute('data-shown', 'yes')
         overlay.setAttribute('data-shown', 'yes')
-
+        toggleInGame('no')
         // select item from history
-        if (window.localStorage.getItem('menuSelectedItem')) {
-          const menuSelectedItem = JSON.parse(window.localStorage.getItem('menuState')).menuItemSelected
-          var menuItems = startMenu.children
-          for (var i = 0; i < menuItems.length; i++) {
-            if (menuSelectedItem === menuItems[i].getAttribute('data-startmenuid')) {
-              menuItems[i].focus()
-              menuItems[i].setAttribute('data-selected', 'yes')
-            }
+        const menuSelectedItem = JSON.parse(window.localStorage.getItem('gameState')).startMenuItemSelected
+        var menuItems = startMenu.children
+        for (var i = 0; i < menuItems.length; i++) {
+          if (menuSelectedItem === menuItems[i].getAttribute('data-startmenuid')) {
+            menuItems[i].focus()
+            menuItems[i].setAttribute('data-selected', 'yes')
           }
         }
 

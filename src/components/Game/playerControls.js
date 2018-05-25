@@ -26,7 +26,9 @@ function playerControls (step) {
     playerControls(event)
   }, false)
   document.addEventListener('keydown', function (event) {
-    playerControls(event)
+    if (JSON.parse(window.localStorage.getItem('gameState')).inGame === 'yes') {
+      playerControls(event)
+    }
   }, false)
 }
 

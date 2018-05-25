@@ -891,7 +891,9 @@
 	    playerControls(event);
 	  }, false);
 	  document.addEventListener('keydown', function (event) {
-	    playerControls(event);
+	    if (JSON.parse(window.localStorage.getItem('gameState')).inGame === 'yes') {
+	      playerControls(event);
+	    }
 	  }, false);
 	}
 
@@ -20495,32 +20497,39 @@
 	  var overlay = document.querySelector('.overlay');
 	  var startMenu = document.querySelector('.start-menu__menu');
 
-	  // Set the initial state of Start Menu.
-	  window.localStorage.setItem('menuState', JSON.stringify({
+	  function toggleInGame(inGame) {
+	    var gameState = JSON.parse(window.localStorage.getItem('gameState'));
+	    gameState.inGame = inGame;
+	    window.localStorage.setItem('gameState', JSON.stringify(gameState));
+	  }
+
+	  // Set the initial state of game.
+	  window.localStorage.setItem('gameState', JSON.stringify({
+	    inGame: 'yes',
 	    menuSelected: 'startmenu',
-	    menuItemSelected: '1'
+	    startMenuItemSelected: '1'
 	  }));
 
 	  window.addEventListener('keydown', function (event) {
+	    event.stopPropagation();
 	    if (event.key === 'Escape') {
 	      if (menuContainer.getAttribute('data-shown') === 'yes') {
 	        // Hide Main Menu.
 	        menuContainer.setAttribute('data-shown', 'no');
 	        overlay.setAttribute('data-shown', 'no');
+	        toggleInGame('yes');
 	      } else {
 	        // Show Main Menu.
 	        menuContainer.setAttribute('data-shown', 'yes');
 	        overlay.setAttribute('data-shown', 'yes');
-
+	        toggleInGame('no');
 	        // select item from history
-	        if (window.localStorage.getItem('menuSelectedItem')) {
-	          var menuSelectedItem = JSON.parse(window.localStorage.getItem('menuState')).menuItemSelected;
-	          var menuItems = startMenu.children;
-	          for (var i = 0; i < menuItems.length; i++) {
-	            if (menuSelectedItem === menuItems[i].getAttribute('data-startmenuid')) {
-	              menuItems[i].focus();
-	              menuItems[i].setAttribute('data-selected', 'yes');
-	            }
+	        var menuSelectedItem = JSON.parse(window.localStorage.getItem('gameState')).startMenuItemSelected;
+	        var menuItems = startMenu.children;
+	        for (var i = 0; i < menuItems.length; i++) {
+	          if (menuSelectedItem === menuItems[i].getAttribute('data-startmenuid')) {
+	            menuItems[i].focus();
+	            menuItems[i].setAttribute('data-selected', 'yes');
 	          }
 	        }
 	      }
@@ -20539,55 +20548,70 @@
 	});
 	exports.default = startMenu;
 	function startMenu() {
-	  var mouseInfo = document.querySelector('.mouse-info');
-	  var startMenu = document.querySelector('.start-menu');
-	  var helpControlsMenu = document.querySelector('.help-controls');
-	  var gameMenu = document.querySelector('.game-menu');
-	  var gameEditor = document.querySelector('.tile-selector');
-	  var about = document.querySelector('.about');
+	  var startMenu = document.querySelector('.start-menu__menu');
+	  var startMenuItems = document.querySelector('.start-menu__menu').children;
 
-	  function hideAllSections() {
-	    var sections = document.querySelectorAll('.menu__section-container section');
-	    for (var i = 0; i < sections.length; i++) {
-	      sections[i].setAttribute('data-hidden', 'yes');
+	  function resetStartMenu() {
+	    for (var i = 0; i < startMenuItems.length; i++) {
+	      startMenuItems[i].setAttribute('data-selected', 'no');
 	    }
 	  }
 
-	  // Arrow key events.
+	  function selectStartMenuItem(itemSelected) {
+	    resetStartMenu();
+	    for (var i = 0; i < startMenuItems.length; i++) {
+	      if (startMenuItems[i].getAttribute('data-startmenuid') === itemSelected) {
+	        startMenuItems[i].focus();
+	        startMenuItems[i].setAttribute('data-selected', 'yes');
+	      }
+	    }
+	  }
+
+	  window.addEventListener('click', function (event) {
+	    if (!startMenu) return;
+	    var gameState = JSON.parse(window.localStorage.getItem('gameState'));
+	    if (gameState.inGame !== 'no') return;
+	    if (gameState.menuSelected !== 'startmenu') return;
+	    var startMenuItemId = event.target.getAttribute('data-startmenuid');
+	    if (!startMenuItemId) return;
+	    gameState.startMenuItemSelected = startMenuItemId;
+	    window.localStorage.setItem('gameState', JSON.stringify(gameState));
+	    selectStartMenuItem(startMenuItemId);
+	  });
+
 	  window.addEventListener('keydown', function (event) {
 	    if (!startMenu) return;
-	    // if start menu is not selected, return
-	    if (JSON.parse(window.localStorage.getItem('menuState')).menuSelected !== 'startmenu') return;
-	    if (startMenu.getAttribute('data-hidden', 'no')) {
-	      if (event.key === 'ArrowDown') {
-	        // Select start menu item below current one.
-	        console.log('down');
-	        var selectedMenuItem = JSON.parse(window.localStorage.getItem('menuState')).menuItemSelected;
+	    var gameState = JSON.parse(window.localStorage.getItem('gameState'));
+	    if (gameState.inGame !== 'no') return;
+	    if (gameState.menuSelected !== 'startmenu') return;
+	    // Select start menu item below current one.
+	    if (event.key === 'ArrowDown') {
+	      var selectedMenuItem = Number(gameState.startMenuItemSelected);
+	      if (selectedMenuItem === startMenuItems.length) {
+	        gameState.startMenuItemSelected = '1';
+	      } else {
+	        gameState.startMenuItemSelected = String(selectedMenuItem + 1);
 	      }
-	      if (event.key === 'ArrowUp') {
-	        // Select start menu item above current one.
+	      window.localStorage.setItem('gameState', JSON.stringify(gameState));
+	      selectStartMenuItem(gameState.startMenuItemSelected);
+	    }
+	    // Select start menu item above current one.
+	    if (event.key === 'ArrowUp') {
+	      var _selectedMenuItem = Number(gameState.startMenuItemSelected);
+	      if (_selectedMenuItem === 1) {
+	        gameState.startMenuItemSelected = String(startMenuItems.length);
+	      } else {
+	        gameState.startMenuItemSelected = String(_selectedMenuItem - 1);
 	      }
+	      window.localStorage.setItem('gameState', JSON.stringify(gameState));
+	      selectStartMenuItem(gameState.startMenuItemSelected);
 	    }
 
-	    if (event.key === 'Enter') {}
+	    if (event.key === 'Enter') {
+	      // data-menuid
+	      console.log(event.target);
+	    }
 	  }, false);
-
-	  var startMenuItems = document.querySelectorAll('.start-menu__menu li');
-
-	  function clearStartMenuItems() {
-	    startMenuItems.forEach(function (item, index) {
-	      item.className = '';
-	    });
-	  }
-
-	  startMenuItems.forEach(function (item, index) {
-	    item.addEventListener('click', function (event) {
-	      if (startMenu.getAttribute('data-hidden', 'no')) {
-	        clearStartMenuItems();
-	        event.target.className = 'start-selected';
-	      }
-	    }, false);
-	  });
 	}
 
 /***/ }),

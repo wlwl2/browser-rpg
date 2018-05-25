@@ -1,54 +1,66 @@
 export default function startMenu () {
-  const mouseInfo = document.querySelector('.mouse-info')
-  const startMenu = document.querySelector('.start-menu')
-  const helpControlsMenu = document.querySelector('.help-controls')
-  const gameMenu = document.querySelector('.game-menu')
-  const gameEditor = document.querySelector('.tile-selector')
-  const about = document.querySelector('.about')
+  const startMenu = document.querySelector('.start-menu__menu')
+  var startMenuItems = document.querySelector('.start-menu__menu').children
 
-  function hideAllSections () {
-    const sections = document.querySelectorAll('.menu__section-container section')
-    for (var i = 0; i < sections.length; i++) {
-      sections[i].setAttribute('data-hidden', 'yes')
+  function resetStartMenu () {
+    for (var i = 0; i < startMenuItems.length; i++) {
+      startMenuItems[i].setAttribute('data-selected', 'no')
     }
   }
 
-  // Arrow key events.
+  function selectStartMenuItem (itemSelected) {
+    resetStartMenu()
+    for (var i = 0; i < startMenuItems.length; i++) {
+      if (startMenuItems[i].getAttribute('data-startmenuid') === itemSelected) {
+        startMenuItems[i].focus()
+        startMenuItems[i].setAttribute('data-selected', 'yes')
+      }
+    }
+  }
+
+  window.addEventListener('click', function (event) {
+    if (!startMenu) return
+    const gameState = JSON.parse(window.localStorage.getItem('gameState'))
+    if (gameState.inGame !== 'no') return
+    if (gameState.menuSelected !== 'startmenu') return
+    const startMenuItemId = event.target.getAttribute('data-startmenuid')
+    if (!startMenuItemId) return
+    gameState.startMenuItemSelected = startMenuItemId
+    window.localStorage.setItem('gameState', JSON.stringify(gameState))
+    selectStartMenuItem (startMenuItemId)
+  })
+
   window.addEventListener('keydown', function (event) {
     if (!startMenu) return
-    // if start menu is not selected, return
-    if (JSON.parse(window.localStorage.getItem('menuState')).menuSelected !== 'startmenu') return
-    if (startMenu.getAttribute('data-hidden', 'no')) {
-      if (event.key === 'ArrowDown') {
-        // Select start menu item below current one.
-        console.log('down')
-        const selectedMenuItem = JSON.parse(window.localStorage.getItem('menuState')).menuItemSelected
-        
+    const gameState = JSON.parse(window.localStorage.getItem('gameState'))
+    if (gameState.inGame !== 'no') return
+    if (gameState.menuSelected !== 'startmenu') return
+    // Select start menu item below current one.
+    if (event.key === 'ArrowDown') {
+      const selectedMenuItem = Number(gameState.startMenuItemSelected)
+      if (selectedMenuItem === startMenuItems.length) {
+        gameState.startMenuItemSelected = '1'
+      } else {
+        gameState.startMenuItemSelected = String(selectedMenuItem + 1)
       }
-      if (event.key === 'ArrowUp') {
-        // Select start menu item above current one.
+      window.localStorage.setItem('gameState', JSON.stringify(gameState))
+      selectStartMenuItem(gameState.startMenuItemSelected)
+    }
+    // Select start menu item above current one.
+    if (event.key === 'ArrowUp') {
+      const selectedMenuItem = Number(gameState.startMenuItemSelected)
+      if (selectedMenuItem === 1) {
+        gameState.startMenuItemSelected = String(startMenuItems.length)
+      } else {
+        gameState.startMenuItemSelected = String(selectedMenuItem - 1)
       }
+      window.localStorage.setItem('gameState', JSON.stringify(gameState))
+      selectStartMenuItem(gameState.startMenuItemSelected)
     }
 
     if (event.key === 'Enter') {
-
+      // data-menuid
+      console.log(event.target)
     }
   }, false)
-
-  const startMenuItems = document.querySelectorAll('.start-menu__menu li')
-
-  function clearStartMenuItems () {
-    startMenuItems.forEach(function (item, index) {
-      item.className = ''
-    })
-  }
-
-  startMenuItems.forEach(function (item, index) {
-    item.addEventListener('click', function (event) {
-      if (startMenu.getAttribute('data-hidden', 'no')) {
-        clearStartMenuItems()
-        event.target.className = 'start-selected'
-      }
-    }, false)
-  })
 }
