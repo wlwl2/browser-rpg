@@ -5,6 +5,13 @@ import playerControls from './components/Game/playerControls'
 
 // import touchEvents from './touchEvents'
 import MainMenu from './components/Menu/MainMenu/MainMenu'
+window.onfocus = function () {
+  document.body.style.backgroundColor = 'rgb(230, 230, 230)'
+}
+
+window.onblur = function () {
+  document.body.style.backgroundColor = 'rgb(140, 140, 140)'
+}
 
 function init () {
   var canvas = document.createElement('canvas')

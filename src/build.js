@@ -68,6 +68,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	window.onfocus = function () {
+	  document.body.style.backgroundColor = 'rgb(230, 230, 230)';
+	};
+
+	// import touchEvents from './touchEvents'
+
+
+	window.onblur = function () {
+	  document.body.style.backgroundColor = 'rgb(140, 140, 140)';
+	};
+
 	function init() {
 	  var canvas = document.createElement('canvas');
 	  canvas.height = 320;
@@ -78,9 +89,6 @@
 	}
 
 	// For each of these steps, re-create the world.
-
-
-	// import touchEvents from './touchEvents'
 	function step(direction) {
 	  // Erases canvas.
 	  ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -20691,27 +20699,27 @@
 	      { className: "start-menu__menu" },
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "1" },
+	        { "data-selected": "no", "data-startmenuid": "1" },
 	        "New Game"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "2" },
+	        { "data-selected": "no", "data-startmenuid": "2" },
 	        "Continue"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "3" },
+	        { "data-selected": "no", "data-startmenuid": "3" },
 	        "Help/Controls"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "4" },
+	        { "data-selected": "no", "data-startmenuid": "4" },
 	        "Game Editor"
 	      ),
 	      _react2.default.createElement(
 	        "li",
-	        { tabIndex: "0", "data-selected": "no", "data-startmenuid": "5" },
+	        { "data-selected": "no", "data-startmenuid": "5" },
 	        "About"
 	      )
 	    ),

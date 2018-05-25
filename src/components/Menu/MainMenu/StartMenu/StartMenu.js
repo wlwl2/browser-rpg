@@ -11,11 +11,11 @@ const StartMenu = (props) => {
         Browser RPG
       </div>
       <ul className="start-menu__menu">
-        <li tabIndex='0' data-selected="no" data-startmenuid="1">New Game</li>
-        <li tabIndex='0' data-selected="no" data-startmenuid="2">Continue</li>
-        <li tabIndex='0' data-selected="no" data-startmenuid="3">Help/Controls</li>
-        <li tabIndex='0' data-selected="no" data-startmenuid="4">Game Editor</li>
-        <li tabIndex='0' data-selected="no" data-startmenuid="5">About</li>
+        <li data-selected="no" data-startmenuid="1">New Game</li>
+        <li data-selected="no" data-startmenuid="2">Continue</li>
+        <li data-selected="no" data-startmenuid="3">Help/Controls</li>
+        <li data-selected="no" data-startmenuid="4">Game Editor</li>
+        <li data-selected="no" data-startmenuid="5">About</li>
       </ul>
       <div className="start-menu__controls">
         <p>Use arrow keys to navigate the menu.</p>
