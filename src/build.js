@@ -46,85 +46,13 @@
 
 	'use strict';
 
-	var _World = __webpack_require__(1);
+	var _Game = __webpack_require__(49);
 
-	var _World2 = _interopRequireDefault(_World);
-
-	var _tileSelector = __webpack_require__(10);
-
-	var _tileSelector2 = _interopRequireDefault(_tileSelector);
-
-	var _tileDragging = __webpack_require__(11);
-
-	var _tileDragging2 = _interopRequireDefault(_tileDragging);
-
-	var _playerControls = __webpack_require__(12);
-
-	var _playerControls2 = _interopRequireDefault(_playerControls);
-
-	var _MainMenu = __webpack_require__(13);
-
-	var _MainMenu2 = _interopRequireDefault(_MainMenu);
+	var _Game2 = _interopRequireDefault(_Game);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	window.onfocus = function () {
-	  document.body.style.backgroundColor = 'rgb(230, 230, 230)';
-	};
-
-	// import touchEvents from './touchEvents'
-
-
-	window.onblur = function () {
-	  document.body.style.backgroundColor = 'rgb(140, 140, 140)';
-	};
-
-	function init() {
-	  var canvas = document.createElement('canvas');
-	  canvas.height = 320;
-	  canvas.width = 320;
-	  var ctx = canvas.getContext('2d');
-	  document.querySelector('.game').appendChild(canvas);
-	  return { ctx: ctx, canvas: canvas };
-	}
-
-	// For each of these steps, re-create the world.
-	function step(direction) {
-	  // Erases canvas.
-	  ctx.clearRect(0, 0, canvas.width, canvas.height);
-	  world.scene.draw(ctx, canvas);
-	  world.players.forEach(function (player) {
-	    player.move(ctx, direction, canvas, world);
-	    player.draw(ctx);
-	  });
-	  if (direction) {
-	    world.monsters.forEach(function (monster) {
-	      monster.step(canvas.height, world, 'freeze');
-	      monster.draw(ctx);
-	    });
-	  } else {
-	    world.monsters.forEach(function (monster) {
-	      monster.step(canvas.height, world);
-	      monster.draw(ctx);
-	    });
-	  }
-	}
-
-	var _init = init(),
-	    ctx = _init.ctx,
-	    canvas = _init.canvas;
-
-	var world = new _World2.default();
-	(0, _tileSelector2.default)(canvas);
-	(0, _tileDragging2.default)(canvas, world, ctx);
-
-	window.addEventListener('load', function (event) {
-	  window.setInterval(step, 500);
-	  // step()
-	}, false);
-
-	// touchEvents()
-	(0, _playerControls2.default)(step);
+	(0, _Game2.default)();
 
 /***/ }),
 /* 1 */
@@ -414,7 +342,7 @@
 	      break;
 	    case 'down':
 	      // Prevents player from moving outside the canvas when moving down.
-	      if (this.destinationY + this.speed * 2 > canvas.height) return;
+	      if (this.destinationY + this.sizeY > canvas.height) return;
 	      // Collidable terrain detection.
 	      // if (this.collidableTiles.indexOf(world.scene.grid[y + speed][x]) >= 0) return
 
@@ -436,7 +364,7 @@
 	      break;
 	    case 'right':
 	      // Prevents player from moving outside the canvas when moving right.
-	      if (this.destinationX + this.speed * 2 > canvas.width) return;
+	      if (this.destinationX + this.sizeX + this.speed > canvas.width) return;
 	      // Collidable terrain detection.
 	      // if (this.collidableTiles.indexOf(world.scene.grid[y][x + speed]) >= 0) return
 
@@ -21048,6 +20976,98 @@
 	  );
 	}; // TileSelector
 	exports.default = TileSelector;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = Game;
+
+	var _World = __webpack_require__(1);
+
+	var _World2 = _interopRequireDefault(_World);
+
+	var _tileSelector = __webpack_require__(10);
+
+	var _tileSelector2 = _interopRequireDefault(_tileSelector);
+
+	var _tileDragging = __webpack_require__(11);
+
+	var _tileDragging2 = _interopRequireDefault(_tileDragging);
+
+	var _playerControls = __webpack_require__(12);
+
+	var _playerControls2 = _interopRequireDefault(_playerControls);
+
+	var _MainMenu = __webpack_require__(13);
+
+	var _MainMenu2 = _interopRequireDefault(_MainMenu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function Game() {
+	  window.onfocus = function () {
+	    document.body.style.backgroundColor = 'rgb(230, 230, 230)';
+	  };
+
+	  window.onblur = function () {
+	    document.body.style.backgroundColor = 'rgb(140, 140, 140)';
+	  };
+
+	  function init() {
+	    var canvas = document.createElement('canvas');
+	    canvas.height = 320;
+	    canvas.width = 320;
+	    var ctx = canvas.getContext('2d');
+	    document.querySelector('.game').appendChild(canvas);
+	    return { ctx: ctx, canvas: canvas };
+	  }
+
+	  // For each of these steps, re-create the world.
+	  function step(direction) {
+	    // Erases canvas.
+	    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	    world.scene.draw(ctx, canvas);
+	    world.players.forEach(function (player) {
+	      player.move(ctx, direction, canvas, world);
+	      player.draw(ctx);
+	    });
+	    // Player moves
+	    if (direction) {
+	      world.monsters.forEach(function (monster) {
+	        monster.step(canvas.height, world, 'freeze');
+	        monster.draw(ctx);
+	      });
+	    } else {
+	      world.monsters.forEach(function (monster) {
+	        monster.step(canvas.height, world);
+	        monster.draw(ctx);
+	      });
+	    }
+	  }
+
+	  var _init = init(),
+	      ctx = _init.ctx,
+	      canvas = _init.canvas;
+
+	  var world = new _World2.default();
+	  (0, _tileSelector2.default)(canvas);
+	  (0, _tileDragging2.default)(canvas, world, ctx);
+
+	  window.addEventListener('load', function (event) {
+	    // window.setInterval(step, 500)
+	    step();
+	  }, false);
+
+	  // touchEvents()
+	  (0, _playerControls2.default)(step);
+	}
+	// import touchEvents from './touchEvents'
 
 /***/ })
 /******/ ]);

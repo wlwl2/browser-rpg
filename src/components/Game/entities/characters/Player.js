@@ -67,7 +67,7 @@ Player.prototype.move = function move (ctx, direction, canvas, world) {
       break
     case 'down':
       // Prevents player from moving outside the canvas when moving down.
-      if (this.destinationY + this.speed * 2 > canvas.height) return
+      if (this.destinationY + this.sizeY > canvas.height) return
       // Collidable terrain detection.
       // if (this.collidableTiles.indexOf(world.scene.grid[y + speed][x]) >= 0) return
 
@@ -89,7 +89,7 @@ Player.prototype.move = function move (ctx, direction, canvas, world) {
       break
     case 'right':
       // Prevents player from moving outside the canvas when moving right.
-      if (this.destinationX + this.speed * 2 > canvas.width) return
+      if (this.destinationX + this.sizeX + this.speed > canvas.width) return
       // Collidable terrain detection.
       // if (this.collidableTiles.indexOf(world.scene.grid[y][x + speed]) >= 0) return
 
