@@ -196,40 +196,28 @@ section[data-hidden="yes"] {
 .image {
   display: none; }
 
-.floor {
-  height: 30px;
-  width: 30px;
-  background-image: url("images/sprites/floor.png");
-  background-position: 0px 0px; }
-
-.wall {
-  height: 30px;
-  width: 30px;
-  background-image: url("images/sprites/wall.png");
-  background-position: 0px 0px; }
-
 .grass {
-  height: 30px;
-  width: 30px;
-  background-image: url("images/sprites/grass-attempt-2.png");
-  background-position: 0px 0px; }
+  height: 32px;
+  width: 32px;
+  background-image: url("images/gfx/Overworld.png");
+  background-position: -272px -464px; }
 
 .tree {
-  height: 30px;
-  width: 30px;
-  background-image: url("images/sprites/tree-attempt-2.png");
+  height: 32px;
+  width: 32px;
+  background-image: url("images/sprites/tree4.png");
   background-position: 0px 0px; }
 
 .player {
   width: 15px;
   height: 22px;
-  background-image: url("images/sprites/characters-min.png");
-  background-position: -9px -42px; }
+  background-image: url("images/gfx/character.png");
+  background-position: -1px -6px; }
 
 .monster {
-  width: 16px;
-  height: 14px;
-  background-image: url("images/sprites/characters-min.png");
-  background-position: -8px -114px; }
+  width: 21px;
+  height: 23px;
+  background-image: url("images/gfx/log.png");
+  background-position: -4px -7px; }
 
 /*# sourceMappingURL=style.css.map */

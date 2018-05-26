@@ -213,14 +213,14 @@
 	  this.img = document.getElementById('logImg');
 	  this.srcX = 4;
 	  this.srcY = 7;
-	  this.srcWidth = 32;
-	  this.srcHeight = 32;
+	  this.srcWidth = 21;
+	  this.srcHeight = 23;
 	  this.destX = x;
 	  this.destY = y;
 	  this.entityNumber = 3;
-	  this.destWidth = 32;
-	  this.destHeight = 32;
-	  this.size = 32;
+	  this.destWidth = 21;
+	  this.destHeight = 23;
+	  this.size = 23;
 	  this.speed = 4;
 	  this.category = 'monster';
 	  this.collidable = 'yes';
@@ -947,9 +947,9 @@
 
 	var _HelpControls2 = _interopRequireDefault(_HelpControls);
 
-	var _TileSelector = __webpack_require__(45);
+	var _Editor = __webpack_require__(48);
 
-	var _TileSelector2 = _interopRequireDefault(_TileSelector);
+	var _Editor2 = _interopRequireDefault(_Editor);
 
 	var _About = __webpack_require__(46);
 
@@ -991,7 +991,7 @@
 	              _react2.default.createElement(_GameMenu2.default, null),
 	              _react2.default.createElement('section', { className: 'continue', 'data-hidden': 'yes' }),
 	              _react2.default.createElement(_HelpControls2.default, null),
-	              _react2.default.createElement(_TileSelector2.default, null),
+	              _react2.default.createElement(_Editor2.default, null),
 	              _react2.default.createElement(_About2.default, null)
 	            )
 	          )
@@ -20903,68 +20903,7 @@
 	exports.default = HelpControls;
 
 /***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(14);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TileSelector = function TileSelector(props) {
-	  return _react2.default.createElement(
-	    "section",
-	    {
-	      className: "tile-selector",
-	      "data-hidden": "yes",
-	      "data-menuid": "editormenu",
-	      "data-startmenuid": "4"
-	    },
-	    _react2.default.createElement(
-	      "div",
-	      null,
-	      "Tile selector"
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "tile-list" },
-	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "0" }),
-	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "1" }),
-	      _react2.default.createElement("div", { className: "monster", draggable: "true", "data-entity-number": "3" }),
-	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "4" }),
-	      _react2.default.createElement("div", { className: "tree3", draggable: "true", "data-entity-number": "5" })
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "currently-selected-tile" },
-	      "Currently selected tile:"
-	    ),
-	    _react2.default.createElement(
-	      "button",
-	      { className: "reset-tile-button" },
-	      "Reset currently selected tile"
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      {
-	        "data-selected": "yes",
-	        className: "back-to-start",
-	        "data-startmenuid": "0"
-	      },
-	      "Back to Start Menu"
-	    )
-	  );
-	}; // TileSelector
-	exports.default = TileSelector;
-
-/***/ }),
+/* 45 */,
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20990,14 +20929,22 @@
 	      "data-startmenuid": "5"
 	    },
 	    _react2.default.createElement(
-	      "a",
-	      { href: "https://github.com/wlwl2/browser-rpg" },
-	      "Source"
+	      "p",
+	      null,
+	      _react2.default.createElement(
+	        "a",
+	        { href: "https://github.com/wlwl2/browser-rpg" },
+	        "Source"
+	      )
 	    ),
 	    _react2.default.createElement(
-	      "a",
-	      { href: "https://wlwl2.com" },
-	      "wlwl2"
+	      "p",
+	      null,
+	      _react2.default.createElement(
+	        "a",
+	        { href: "https://wlwl2.com" },
+	        "wlwl2"
+	      )
 	    ),
 	    _react2.default.createElement(
 	      "div",
@@ -21040,6 +20987,67 @@
 	  }
 	  openStartMenuItem(menuSelectedId);
 	}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(14);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TileSelector = function TileSelector(props) {
+	  return _react2.default.createElement(
+	    "section",
+	    {
+	      className: "tile-selector",
+	      "data-hidden": "yes",
+	      "data-menuid": "editormenu",
+	      "data-startmenuid": "4"
+	    },
+	    _react2.default.createElement(
+	      "div",
+	      null,
+	      "Game Editor"
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "tile-list" },
+	      _react2.default.createElement("div", { className: "player", draggable: "true", "data-entity-number": "2" }),
+	      _react2.default.createElement("div", { className: "monster", draggable: "true", "data-entity-number": "3" }),
+	      _react2.default.createElement("div", { className: "grass", draggable: "true", "data-entity-number": "4" }),
+	      _react2.default.createElement("div", { className: "tree", draggable: "true", "data-entity-number": "5" })
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "currently-selected-tile" },
+	      "Currently selected tile:"
+	    ),
+	    _react2.default.createElement(
+	      "button",
+	      { className: "reset-tile-button" },
+	      "Reset currently selected tile"
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      {
+	        "data-selected": "yes",
+	        className: "back-to-start",
+	        "data-startmenuid": "0"
+	      },
+	      "Back to Start Menu"
+	    )
+	  );
+	}; // TileSelector
+	exports.default = TileSelector;
 
 /***/ })
 /******/ ]);

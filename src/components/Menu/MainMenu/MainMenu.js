@@ -8,7 +8,7 @@ import gameMenuScript from './GameMenu/gameMenuScript'
 import StartMenu from './StartMenu/StartMenu'
 import GameMenu from './GameMenu/GameMenu'
 import HelpControls from './HelpControls/HelpControls'
-import TileSelector from './TileSelector/TileSelector'
+import TileSelector from './Editor/Editor'
 import About from './About/About'
 
 class MainMenu extends Component {

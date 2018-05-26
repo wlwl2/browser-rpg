@@ -9,13 +9,12 @@ const TileSelector = (props) => {
       data-menuid="editormenu"
       data-startmenuid="4"
     >
-      <div>Tile selector</div>
+      <div>Game Editor</div>
       <div className="tile-list">
-        <div className="tree3" draggable="true" data-entity-number="0"></div>
-        <div className="tree3" draggable="true" data-entity-number="1"></div>
+        <div className="player" draggable="true" data-entity-number="2"></div>
         <div className="monster" draggable="true" data-entity-number="3"></div>
-        <div className="tree3" draggable="true" data-entity-number="4"></div>
-        <div className="tree3" draggable="true" data-entity-number="5"></div>
+        <div className="grass" draggable="true" data-entity-number="4"></div>
+        <div className="tree" draggable="true" data-entity-number="5"></div>
       </div>
       <div className="currently-selected-tile">
         Currently selected tile:

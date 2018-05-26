@@ -8,12 +8,16 @@ const About = (props) => {
       data-menuid="aboutmenu"
       data-startmenuid="5"
     >
-      <a href="https://github.com/wlwl2/browser-rpg">
-        Source
-      </a>
-      <a href="https://wlwl2.com">
-        wlwl2
-      </a>
+      <p>
+        <a href="https://github.com/wlwl2/browser-rpg">
+          Source
+        </a>
+      </p>
+      <p>
+        <a href="https://wlwl2.com">
+          wlwl2
+        </a>
+      </p>
       <div
         data-selected='yes'
         className="back-to-start"
