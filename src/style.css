@@ -103,6 +103,13 @@ section[data-hidden="yes"] {
   background-color: black;
   color: white; }
 
+.back-to-start {
+  cursor: pointer; }
+
+.back-to-start[data-selected="yes"] {
+  background-color: black;
+  color: white; }
+
 .overlay {
   width: 100%;
   height: 100%;

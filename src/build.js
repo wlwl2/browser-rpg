@@ -20492,7 +20492,7 @@
 
 /***/ }),
 /* 39 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -20500,6 +20500,13 @@
 	  value: true
 	});
 	exports.default = mainMenuScript;
+
+	var _openMenu = __webpack_require__(47);
+
+	var _openMenu2 = _interopRequireDefault(_openMenu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function mainMenuScript() {
 	  var menuContainer = document.querySelector('.menu__section-container');
 	  var overlay = document.querySelector('.overlay');
@@ -20518,8 +20525,9 @@
 	    startMenuItemSelected: '1'
 	  }));
 
+	  var backToStartButtons = document.querySelectorAll('.back-to-start');
+
 	  window.addEventListener('keydown', function (event) {
-	    event.stopPropagation();
 	    if (event.key === 'Escape') {
 	      if (menuContainer.getAttribute('data-shown') === 'yes') {
 	        // Hide Main Menu.
@@ -20547,7 +20555,7 @@
 
 /***/ }),
 /* 40 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -20555,16 +20563,20 @@
 	  value: true
 	});
 	exports.default = startMenu;
-	function startMenu() {
-	  var startMenu = document.querySelector('.start-menu__menu');
-	  var startMenuItems = document.querySelector('.start-menu__menu').children;
 
+	var _openMenu = __webpack_require__(47);
+
+	var _openMenu2 = _interopRequireDefault(_openMenu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function startMenu() {
+	  var startMenuItems = document.querySelector('.start-menu__menu').children;
 	  function resetStartMenu() {
 	    for (var i = 0; i < startMenuItems.length; i++) {
 	      startMenuItems[i].setAttribute('data-selected', 'no');
 	    }
 	  }
-
 	  function selectStartMenuItem(itemSelected) {
 	    resetStartMenu();
 	    for (var i = 0; i < startMenuItems.length; i++) {
@@ -20575,23 +20587,42 @@
 	    }
 	  }
 
+	  var startMenu = document.querySelector('.start-menu__menu');
 	  window.addEventListener('click', function (event) {
 	    if (!startMenu) return;
 	    var gameState = JSON.parse(window.localStorage.getItem('gameState'));
 	    if (gameState.inGame !== 'no') return;
-	    if (gameState.menuSelected !== 'startmenu') return;
 	    var startMenuItemId = event.target.getAttribute('data-startmenuid');
 	    if (!startMenuItemId) return;
-	    gameState.startMenuItemSelected = startMenuItemId;
+	    if (startMenuItemId !== '0') {
+	      gameState.startMenuItemSelected = startMenuItemId;
+	      window.localStorage.setItem('gameState', JSON.stringify(gameState));
+	      selectStartMenuItem(startMenuItemId);
+	    }
+	    if (gameState.menuSelected === 'startmenu') {
+	      if (gameState.startMenuItemSelected === '3') {
+	        (0, _openMenu2.default)('3');
+	        gameState.menuSelected = 'helpmenu';
+	      }
+	      if (gameState.startMenuItemSelected === '4') {
+	        (0, _openMenu2.default)('4');
+	        gameState.menuSelected = 'editormenu';
+	      }
+	      if (gameState.startMenuItemSelected === '5') {
+	        (0, _openMenu2.default)('5');
+	        gameState.menuSelected = 'aboutmenu';
+	      }
+	    } else {
+	      (0, _openMenu2.default)('0');
+	      gameState.menuSelected = 'startmenu';
+	    }
 	    window.localStorage.setItem('gameState', JSON.stringify(gameState));
-	    selectStartMenuItem(startMenuItemId);
 	  });
 
 	  window.addEventListener('keydown', function (event) {
 	    if (!startMenu) return;
 	    var gameState = JSON.parse(window.localStorage.getItem('gameState'));
-	    if (gameState.inGame !== 'no') return;
-	    if (gameState.menuSelected !== 'startmenu') return;
+	    if (gameState.inGame === 'yes') return;
 	    // Select start menu item below current one.
 	    if (event.key === 'ArrowDown') {
 	      var selectedMenuItem = Number(gameState.startMenuItemSelected);
@@ -20616,8 +20647,24 @@
 	    }
 
 	    if (event.key === 'Enter') {
-	      // data-menuid
-	      // console.log(event.target)
+	      if (gameState.menuSelected === 'startmenu') {
+	        if (gameState.startMenuItemSelected === '3') {
+	          (0, _openMenu2.default)('3');
+	          gameState.menuSelected = 'helpmenu';
+	        }
+	        if (gameState.startMenuItemSelected === '4') {
+	          (0, _openMenu2.default)('4');
+	          gameState.menuSelected = 'editormenu';
+	        }
+	        if (gameState.startMenuItemSelected === '5') {
+	          (0, _openMenu2.default)('5');
+	          gameState.menuSelected = 'aboutmenu';
+	        }
+	      } else {
+	        (0, _openMenu2.default)('0');
+	        gameState.menuSelected = 'startmenu';
+	      }
+	      window.localStorage.setItem('gameState', JSON.stringify(gameState));
 	    }
 	  }, false);
 	}
@@ -20687,7 +20734,8 @@
 	    {
 	      className: "start-menu",
 	      "data-hidden": "no",
-	      "data-menuid": "startmenu"
+	      "data-menuid": "startmenu",
+	      "data-startmenuid": "0"
 	    },
 	    _react2.default.createElement(
 	      "div",
@@ -20842,7 +20890,11 @@
 	    ),
 	    _react2.default.createElement(
 	      "div",
-	      { className: "back-to-start" },
+	      {
+	        "data-selected": "yes",
+	        className: "back-to-start",
+	        "data-startmenuid": "0"
+	      },
 	      "Back to Start Menu"
 	    )
 	  );
@@ -20901,7 +20953,11 @@
 	    ),
 	    _react2.default.createElement(
 	      "div",
-	      { className: "back-to-start" },
+	      {
+	        "data-selected": "yes",
+	        className: "back-to-start",
+	        "data-startmenuid": "0"
+	      },
 	      "Back to Start Menu"
 	    )
 	  );
@@ -20945,13 +21001,45 @@
 	    ),
 	    _react2.default.createElement(
 	      "div",
-	      { className: "back-to-start" },
+	      {
+	        "data-selected": "yes",
+	        className: "back-to-start",
+	        "data-startmenuid": "0"
+	      },
 	      "Back to Start Menu"
 	    )
 	  );
 	};
 
 	exports.default = About;
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = openMenu;
+	function openMenu(menuSelectedId) {
+	  var menuSections = document.querySelector('.menu__section-container').children;
+	  function resetMenus() {
+	    for (var i = 0; i < menuSections.length; i++) {
+	      menuSections[i].setAttribute('data-hidden', 'yes');
+	    }
+	  }
+	  function openStartMenuItem(menuSelectedId) {
+	    resetMenus();
+	    for (var i = 0; i < menuSections.length; i++) {
+	      if (menuSections[i].getAttribute('data-startmenuid') === menuSelectedId) {
+	        menuSections[i].setAttribute('data-hidden', 'no');
+	      }
+	    }
+	  }
+	  openStartMenuItem(menuSelectedId);
+	}
 
 /***/ })
 /******/ ]);

@@ -1,3 +1,5 @@
+import openMenu from './openMenu'
+
 export default function mainMenuScript () {
   const menuContainer = document.querySelector('.menu__section-container')
   const overlay = document.querySelector('.overlay')
@@ -16,8 +18,9 @@ export default function mainMenuScript () {
     startMenuItemSelected: '1'
   }))
 
+  var backToStartButtons = document.querySelectorAll('.back-to-start')
+
   window.addEventListener('keydown', function (event) {
-    event.stopPropagation()
     if (event.key === 'Escape') {
       if (menuContainer.getAttribute('data-shown') === 'yes') {
         // Hide Main Menu.

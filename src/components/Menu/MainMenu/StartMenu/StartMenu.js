@@ -6,6 +6,7 @@ const StartMenu = (props) => {
       className="start-menu"
       data-hidden="no"
       data-menuid="startmenu"
+      data-startmenuid="0"
     >
       <div className="start-menu__title">
         Browser RPG

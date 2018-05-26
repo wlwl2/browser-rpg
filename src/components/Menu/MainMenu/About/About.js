@@ -14,7 +14,11 @@ const About = (props) => {
       <a href="https://wlwl2.com">
         wlwl2
       </a>
-      <div className="back-to-start">
+      <div
+        data-selected='yes'
+        className="back-to-start"
+        data-startmenuid="0"
+      >
         Back to Start Menu
       </div>
     </section>

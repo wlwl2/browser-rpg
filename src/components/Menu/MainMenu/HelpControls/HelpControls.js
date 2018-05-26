@@ -11,7 +11,13 @@ const HelpControls = (props) => {
       <p>To open/close the menu, press the escape key.</p>
       <p>Use the arrow keys to move your character.</p>
       <p>Press Enter to select a menu item.</p>
-      <div className="back-to-start">Back to Start Menu</div>
+      <div
+        data-selected='yes'
+        className="back-to-start"
+        data-startmenuid="0"
+      >
+        Back to Start Menu
+      </div>
     </section>
   )
 }

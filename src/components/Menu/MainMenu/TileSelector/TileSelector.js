@@ -21,7 +21,13 @@ const TileSelector = (props) => {
         Currently selected tile:
       </div>
       <button className="reset-tile-button">Reset currently selected tile</button>
-      <div className="back-to-start">Back to Start Menu</div>
+      <div
+        data-selected='yes'
+        className="back-to-start"
+        data-startmenuid="0"
+      >
+        Back to Start Menu
+      </div>
     </section>
   )
 }
