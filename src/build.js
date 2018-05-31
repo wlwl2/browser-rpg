@@ -122,18 +122,18 @@
 	      player.move(ctx, direction, canvas, world);
 	      player.draw(ctx);
 	    });
-	    // // Player moves
-	    // if (direction) {
-	    //   world.monsters.forEach(function (monster) {
-	    //     monster.step(canvas.height, world, 'freeze')
-	    //     monster.draw(ctx)
-	    //   })
-	    // } else {
-	    //   world.monsters.forEach(function (monster) {
-	    //     monster.step(canvas.height, world)
-	    //     monster.draw(ctx)
-	    //   })
-	    // }
+	    // Player moves
+	    if (direction) {
+	      world.monsters.forEach(function (monster) {
+	        monster.step(canvas.height, world, 'freeze');
+	        monster.draw(ctx);
+	      });
+	    } else {
+	      world.monsters.forEach(function (monster) {
+	        monster.step(canvas.height, world);
+	        monster.draw(ctx);
+	      });
+	    }
 	  }
 
 	  var _init = init(),
