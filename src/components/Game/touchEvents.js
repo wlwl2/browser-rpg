@@ -33,6 +33,7 @@ export default function touchEvents (step) {
   function handleStart (event) {
     event.preventDefault()
     console.log('touchstart.')
+    touchCounter = 0
     var numTouches = event.touches.length;
     if (numTouches === 3) {
 
@@ -62,29 +63,39 @@ export default function touchEvents (step) {
     }
   }
 
-  var counter = 1
+  var touchCounter = 0
 
   function handleMove (event) {
     event.preventDefault()
     console.log('handlemove.')
-    counter += 1
-    if (Math.abs(counter % 4) !== 0) return
+    console.log(touchCounter)
+    if (touchCounter === 1) return
     let i;
     for (i = 0; i < event.changedTouches.length; i++) {
-      // console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
       if (coord) {
         const x = coord.x - event.changedTouches[i].pageX
         const y = coord.y - event.changedTouches[i].pageY
         const absX = Math.abs(x)
         const absY = Math.abs(y)
+
+        stopAutoMove()
         if (absY > absX) {
-          if (y < 0) step('down')
-          if (y > 0) step('up')
+          if (y < 0) {
+            touchMove('down')
+          }
+          if (y > 0) {
+            touchMove('up')
+          }
         }
         if (absX > absY) {
-          if (x < 0) step('right')
-          if (x > 0) step('left')
+          if (x < 0) {
+            touchMove('right')
+          }
+          if (x > 0) {
+            touchMove('left')
+          }
         }
+        touchCounter = 1
       }
       coord = {
         x: event.changedTouches[i].pageX,
@@ -94,10 +105,24 @@ export default function touchEvents (step) {
 
   }
 
+  var movement
+  function touchMove (direction) {
+    function move () {
+      step(direction)
+      movement = setTimeout(move, 100)
+    }
+    move();
+  }
+
+  function stopAutoMove () {
+    clearTimeout(movement)
+  }
+
+
   function handleEnd (event) {
     event.preventDefault()
     console.log('handleEnd.')
-
+    stopAutoMove()
   }
 
   function handleCancel (event) {
