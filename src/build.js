@@ -100,6 +100,10 @@
 	    document.body.style.backgroundColor = 'rgb(140, 140, 140)';
 	  };
 
+	  document.querySelector('.fullscreen').addEventListener('click', function (event) {
+	    document.querySelector('.game').requestFullscreen();
+	  }, false);
+
 	  function init() {
 	    var canvas = document.createElement('canvas');
 	    canvas.height = 320;
@@ -1007,11 +1011,6 @@
 	  function handleMove(event) {
 	    event.preventDefault();
 	    console.log('handlemove.');
-	  }
-
-	  function handleEnd(event) {
-	    event.preventDefault();
-	    console.log('handleEnd.');
 	    var i = void 0;
 	    for (i = 0; i < event.changedTouches.length; i++) {
 	      // console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
@@ -1034,6 +1033,11 @@
 	        y: event.changedTouches[i].pageY
 	      };
 	    }
+	  }
+
+	  function handleEnd(event) {
+	    event.preventDefault();
+	    console.log('handleEnd.');
 	  }
 
 	  function handleCancel(event) {

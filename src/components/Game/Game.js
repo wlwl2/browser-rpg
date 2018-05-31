@@ -14,6 +14,10 @@ export default function Game () {
     document.body.style.backgroundColor = 'rgb(140, 140, 140)'
   }
 
+  document.querySelector('.fullscreen').addEventListener('click', function (event) {
+    document.querySelector('.game').requestFullscreen()
+  }, false)
+
   function init () {
     var canvas = document.createElement('canvas')
     canvas.height = 320

@@ -65,12 +65,6 @@ export default function touchEvents (step) {
   function handleMove (event) {
     event.preventDefault()
     console.log('handlemove.')
-
-  }
-
-  function handleEnd (event) {
-    event.preventDefault()
-    console.log('handleEnd.')
     let i;
     for (i = 0; i < event.changedTouches.length; i++) {
       // console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
@@ -93,6 +87,13 @@ export default function touchEvents (step) {
         y: event.changedTouches[i].pageY
       }
     }
+
+  }
+
+  function handleEnd (event) {
+    event.preventDefault()
+    console.log('handleEnd.')
+
   }
 
   function handleCancel (event) {
