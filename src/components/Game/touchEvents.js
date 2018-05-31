@@ -19,27 +19,33 @@ export default function touchEvents (step) {
     window.localStorage.setItem('gameState', JSON.stringify(gameState))
   }
 
+  function selectedItem (menuSelectedItem) {
+    var menuItems = startMenu.children
+    for (var i = 0; i < menuItems.length; i++) {
+      if (menuSelectedItem === menuItems[i].getAttribute('data-startmenuid')) {
+        menuItems[i].focus()
+        menuItems[i].setAttribute('data-selected', 'yes')
+      }
+    }
+  }
+
   let coord;
   function handleStart (event) {
     event.preventDefault()
     console.log('touchstart.')
     var numTouches = event.touches.length;
-    if (numTouches === 2) {
+    if (numTouches === 3) {
+
       // Show Main Menu.
       menuContainer.setAttribute('data-shown', 'yes')
       overlay.setAttribute('data-shown', 'yes')
       toggleInGame('no')
       // select item from history
       const menuSelectedItem = JSON.parse(window.localStorage.getItem('gameState')).startMenuItemSelected
-      var menuItems = startMenu.children
-      for (var i = 0; i < menuItems.length; i++) {
-        if (menuSelectedItem === menuItems[i].getAttribute('data-startmenuid')) {
-          menuItems[i].focus()
-          menuItems[i].setAttribute('data-selected', 'yes')
-        }
-      }
+      selectedItem(menuSelectedItem)
+
     }
-    if (numTouches === 3) {
+    if (numTouches === 2) {
       // Hide Main Menu.
       menuContainer.setAttribute('data-shown', 'no')
       overlay.setAttribute('data-shown', 'no')
