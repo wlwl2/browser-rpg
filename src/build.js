@@ -81,7 +81,7 @@
 
 	var _playerControls2 = _interopRequireDefault(_playerControls);
 
-	var _touchEvents = __webpack_require__(14);
+	var _touchEvents = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./touchEvents\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _touchEvents2 = _interopRequireDefault(_touchEvents);
 
@@ -932,88 +932,7 @@
 	exports.default = playerControls;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = touchEvents;
-	function touchEvents(step) {
-	  function startup() {
-	    window.addEventListener('touchstart', handleStart, { passive: false });
-	    window.addEventListener('touchend', handleEnd, { passive: false });
-	    window.addEventListener('touchcancel', handleCancel, { passive: false });
-	    window.addEventListener('touchmove', handleMove, { passive: false });
-	    console.log('initialized.');
-	  }
-	  startup();
-	  // var ongoingTouches = []
-
-	  var coord = void 0;
-	  function handleStart(event) {
-	    event.preventDefault();
-	    console.log('touchstart.');
-	    var touch;
-	    if (event.targetTouches.length >= 1) {
-	      touch = event.targetTouches.item(0);
-	      window.alert('multi tap');
-	    } else {
-	      touch = event.touches.item(0);
-	      window.alert('single tap');
-	    }
-	    var i = void 0;
-	    for (i = 0; i < event.changedTouches.length; i++) {
-	      // console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
-	      coord = {
-	        x: event.changedTouches[i].pageX,
-	        y: event.changedTouches[i].pageY
-	      };
-	      console.log(coord);
-	    }
-	  }
-
-	  function handleMove(event) {
-	    event.preventDefault();
-	    console.log('handlemove.');
-	  }
-
-	  function handleEnd(event) {
-	    event.preventDefault();
-	    console.log('handleEnd.');
-	    var i = void 0;
-	    for (i = 0; i < event.changedTouches.length; i++) {
-	      // console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
-	      if (coord) {
-	        var x = coord.x - event.changedTouches[i].pageX;
-	        var y = coord.y - event.changedTouches[i].pageY;
-	        var absX = Math.abs(x);
-	        var absY = Math.abs(y);
-	        if (absY > absX) {
-	          if (y < 0) step('down');
-	          if (y > 0) step('up');
-	        }
-	        if (absX > absY) {
-	          if (x < 0) step('right');
-	          if (x > 0) step('left');
-	        }
-	      }
-	      coord = {
-	        x: event.changedTouches[i].pageX,
-	        y: event.changedTouches[i].pageY
-	      };
-	    }
-	  }
-
-	  function handleCancel(event) {
-	    event.preventDefault();
-	    console.log('handleCancel.');
-	  }
-	}
-
-/***/ }),
+/* 14 */,
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 

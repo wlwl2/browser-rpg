@@ -9,17 +9,41 @@ export default function touchEvents (step) {
   startup()
   // var ongoingTouches = []
 
+  // menu
+  const menuContainer = document.querySelector('.menu__section-container')
+  const overlay = document.querySelector('.overlay')
+  const startMenu = document.querySelector('.start-menu__menu')
+  function toggleInGame (inGame) {
+    const gameState = JSON.parse(window.localStorage.getItem('gameState'))
+    gameState.inGame = inGame
+    window.localStorage.setItem('gameState', JSON.stringify(gameState))
+  }
+
   let coord;
   function handleStart (event) {
     event.preventDefault()
     console.log('touchstart.')
-    var touch;
-    if (event.targetTouches.length >= 1) {
-      touch = event.targetTouches.item(0);
-      window.alert('multi tap');
-    } else {
-      touch = event.touches.item(0);
-      window.alert('single tap');
+    var numTouches = event.touches.length;
+    if (numTouches === 2) {
+      // Show Main Menu.
+      menuContainer.setAttribute('data-shown', 'yes')
+      overlay.setAttribute('data-shown', 'yes')
+      toggleInGame('no')
+      // select item from history
+      const menuSelectedItem = JSON.parse(window.localStorage.getItem('gameState')).startMenuItemSelected
+      var menuItems = startMenu.children
+      for (var i = 0; i < menuItems.length; i++) {
+        if (menuSelectedItem === menuItems[i].getAttribute('data-startmenuid')) {
+          menuItems[i].focus()
+          menuItems[i].setAttribute('data-selected', 'yes')
+        }
+      }
+    }
+    if (numTouches === 3) {
+      // Hide Main Menu.
+      menuContainer.setAttribute('data-shown', 'no')
+      overlay.setAttribute('data-shown', 'no')
+      toggleInGame('yes')
     }
     let i;
     for (i = 0; i < event.changedTouches.length; i++) {
