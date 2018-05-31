@@ -33,7 +33,6 @@ export default function touchEvents (step) {
   function handleStart (event) {
     event.preventDefault()
     console.log('touchstart.')
-    touchCounter = 0
     var numTouches = event.touches.length;
     if (numTouches === 3) {
 
@@ -63,12 +62,9 @@ export default function touchEvents (step) {
     }
   }
 
-  var touchCounter = 0
-
   function handleMove (event) {
     event.preventDefault()
     console.log('handlemove.')
-    if (touchCounter === 1) return
     let i;
     for (i = 0; i < event.changedTouches.length; i++) {
       if (coord) {
