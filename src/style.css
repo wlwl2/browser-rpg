@@ -46,6 +46,12 @@ canvas {
   font-size: 24px;
   text-align: right; }
 
+.instructions__desktop-only {
+  display: block; }
+
+.instructions__mobile-only {
+  display: none; }
+
 @media screen and (min-aspect-ratio: 1 / 1) {
   canvas {
     height: 100vh;
@@ -67,7 +73,13 @@ canvas {
     font-size: 16px; }
 
   .menu__section-container {
-    margin: 20px; } }
+    margin: 20px; }
+
+  .instructions__desktop-only {
+    display: none; }
+
+  .instructions__mobile-only {
+    display: block; } }
 .mouse-info {
   position: absolute;
   left: 0;
