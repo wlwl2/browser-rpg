@@ -9,34 +9,52 @@ export default function touchEvents (step) {
   startup()
   // var ongoingTouches = []
 
+  let coord;
   function handleStart (event) {
     event.preventDefault()
     console.log('touchstart.')
+    let i;
+    for (i = 0; i < event.changedTouches.length; i++) {
+      // console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
+      coord = {
+        x: event.changedTouches[i].pageX,
+        y: event.changedTouches[i].pageY
+      }
+      console.log(coord)
+    }
   }
 
-  let coord;
   function handleMove (event) {
     event.preventDefault()
     console.log('handlemove.')
+
+  }
+
+  function handleEnd (event) {
+    event.preventDefault()
+    console.log('handleEnd.')
     let i;
     for (i = 0; i < event.changedTouches.length; i++) {
-      console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
+      // console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
       if (coord) {
-        if (coord.x < event.changedTouches[i].pageX + 4) step('right')
-        if (coord.x > event.changedTouches[i].pageX - 4) step('left')
-        if (coord.y > event.changedTouches[i].pageY - 4) step('up')
-        if (coord.y < event.changedTouches[i].pageY + 4) step('down')
+        const x = coord.x - event.changedTouches[i].pageX
+        const y = coord.y - event.changedTouches[i].pageY
+        const absX = Math.abs(x)
+        const absY = Math.abs(y)
+        if (absY > absX) {
+          if (y < 0) step('down')
+          if (y > 0) step('up')
+        }
+        if (absX > absY) {
+          if (x < 0) step('right')
+          if (x > 0) step('left')
+        }
       }
       coord = {
         x: event.changedTouches[i].pageX,
         y: event.changedTouches[i].pageY
       }
     }
-  }
-
-  function handleEnd (event) {
-    event.preventDefault()
-    console.log('handleEnd.')
   }
 
   function handleCancel (event) {
