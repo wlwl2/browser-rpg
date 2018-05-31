@@ -13,6 +13,13 @@ export default function touchEvents (step) {
   function handleStart (event) {
     event.preventDefault()
     console.log('touchstart.')
+    var touch;
+    if (event.targetTouches.length >= 1)
+      touch = event.targetTouches.item(0);
+      window.alert('multi tap')
+    else
+      touch = event.touches.item(0);
+      window.alert('single tap')
     let i;
     for (i = 0; i < event.changedTouches.length; i++) {
       // console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY)
