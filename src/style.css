@@ -99,7 +99,7 @@ div[data-hidden="yes"] {
 .menu__section-container {
   display: none;
   position: relative;
-  z-index: 4;
+  z-index: 5;
   background-color: white;
   padding: 20px; }
 
