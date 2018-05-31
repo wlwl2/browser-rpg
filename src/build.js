@@ -21106,10 +21106,10 @@
 	    for (i = 0; i < event.changedTouches.length; i++) {
 	      console.log(event.changedTouches[i].pageX, event.changedTouches[i].pageY);
 	      if (coord) {
-	        if (coord.x < event.changedTouches[i].pageX) step('right');
-	        if (coord.x > event.changedTouches[i].pageX) step('left');
-	        if (coord.y > event.changedTouches[i].pageY) step('up');
-	        if (coord.y < event.changedTouches[i].pageY) step('down');
+	        if (coord.x < event.changedTouches[i].pageX + 4) step('right');
+	        if (coord.x > event.changedTouches[i].pageX - 4) step('left');
+	        if (coord.y > event.changedTouches[i].pageY - 4) step('up');
+	        if (coord.y < event.changedTouches[i].pageY + 4) step('down');
 	      }
 	      coord = {
 	        x: event.changedTouches[i].pageX,
