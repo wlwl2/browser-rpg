@@ -62,9 +62,13 @@ export default function touchEvents (step) {
     }
   }
 
+  var counter = 1
+
   function handleMove (event) {
     event.preventDefault()
     console.log('handlemove.')
+    counter += 1
+    if (Math.abs(counter % 4) !== 0) return
     let i;
     for (i = 0; i < event.changedTouches.length; i++) {
       if (coord) {

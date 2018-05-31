@@ -1008,9 +1008,13 @@
 	    }
 	  }
 
+	  var counter = 1;
+
 	  function handleMove(event) {
 	    event.preventDefault();
 	    console.log('handlemove.');
+	    counter += 1;
+	    if (Math.abs(counter % 4) !== 0) return;
 	    var i = void 0;
 	    for (i = 0; i < event.changedTouches.length; i++) {
 	      if (coord) {
