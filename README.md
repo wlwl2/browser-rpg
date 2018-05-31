@@ -6,8 +6,7 @@ A 2D role-playing game engine.
 Read the Attribution.txt files in src/
 
 ## Development
-* run `npm start` on Windows 10.
-
+* run start.bat or `npm start` on Windows 10.
 
 ## Todo
 * World Map
