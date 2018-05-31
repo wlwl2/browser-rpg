@@ -2,7 +2,7 @@ import World from './World'
 import tileSelector from './tileSelector'
 import tileDragging from './tileDragging'
 import playerControls from './playerControls'
-// import touchEvents from './touchEvents'
+import touchEvents from './touchEvents'
 import MainMenu from '../../components/Menu/MainMenu/MainMenu'
 
 export default function Game () {
@@ -53,6 +53,7 @@ export default function Game () {
 
   window.addEventListener('load', function (event) {
     // window.setInterval(step, 500)
+    touchEvents(step)
     step()
   }, false)
 

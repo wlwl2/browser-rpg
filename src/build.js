@@ -46,7 +46,7 @@
 
 	'use strict';
 
-	var _Game = __webpack_require__(49);
+	var _Game = __webpack_require__(1);
 
 	var _Game2 = _interopRequireDefault(_Game);
 
@@ -63,24 +63,120 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.default = Game;
+
+	var _World = __webpack_require__(2);
+
+	var _World2 = _interopRequireDefault(_World);
+
+	var _tileSelector = __webpack_require__(11);
+
+	var _tileSelector2 = _interopRequireDefault(_tileSelector);
+
+	var _tileDragging = __webpack_require__(12);
+
+	var _tileDragging2 = _interopRequireDefault(_tileDragging);
+
+	var _playerControls = __webpack_require__(13);
+
+	var _playerControls2 = _interopRequireDefault(_playerControls);
+
+	var _touchEvents = __webpack_require__(49);
+
+	var _touchEvents2 = _interopRequireDefault(_touchEvents);
+
+	var _MainMenu = __webpack_require__(14);
+
+	var _MainMenu2 = _interopRequireDefault(_MainMenu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function Game() {
+	  window.onfocus = function () {
+	    document.body.style.backgroundColor = 'rgb(230, 230, 230)';
+	  };
+
+	  window.onblur = function () {
+	    document.body.style.backgroundColor = 'rgb(140, 140, 140)';
+	  };
+
+	  function init() {
+	    var canvas = document.createElement('canvas');
+	    canvas.height = 320;
+	    canvas.width = 320;
+	    var ctx = canvas.getContext('2d');
+	    document.querySelector('.game').appendChild(canvas);
+	    return { ctx: ctx, canvas: canvas };
+	  }
+
+	  // For each of these steps, re-create the world.
+	  function step(direction) {
+	    // Erases canvas.
+	    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	    world.scene.draw(ctx, canvas);
+	    world.players.forEach(function (player) {
+	      player.move(ctx, direction, canvas, world);
+	      player.draw(ctx);
+	    });
+	    // Player moves
+	    if (direction) {
+	      world.monsters.forEach(function (monster) {
+	        monster.step(canvas.height, world, 'freeze');
+	        monster.draw(ctx);
+	      });
+	    } else {
+	      world.monsters.forEach(function (monster) {
+	        monster.step(canvas.height, world);
+	        monster.draw(ctx);
+	      });
+	    }
+	  }
+
+	  var _init = init(),
+	      ctx = _init.ctx,
+	      canvas = _init.canvas;
+
+	  var world = new _World2.default();
+	  (0, _tileSelector2.default)(canvas);
+	  (0, _tileDragging2.default)(canvas, world, ctx);
+
+	  window.addEventListener('load', function (event) {
+	    // window.setInterval(step, 500)
+	    (0, _touchEvents2.default)(step);
+	    step();
+	  }, false);
+
+	  // touchEvents()
+	  (0, _playerControls2.default)(step);
+	}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 	exports.default = World;
 
-	var _Monster = __webpack_require__(2);
+	var _Monster = __webpack_require__(3);
 
 	var _Monster2 = _interopRequireDefault(_Monster);
 
-	var _Player = __webpack_require__(3);
+	var _Player = __webpack_require__(4);
 
 	var _Player2 = _interopRequireDefault(_Player);
 
-	var _Scene = __webpack_require__(4);
+	var _Scene = __webpack_require__(5);
 
 	var _Scene2 = _interopRequireDefault(_Scene);
 
-	var _canvasDimensions2 = __webpack_require__(9);
+	var _canvasDimensions2 = __webpack_require__(10);
 
 	var _canvasDimensions3 = _interopRequireDefault(_canvasDimensions2);
 
@@ -124,7 +220,7 @@
 	};
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -260,7 +356,7 @@
 	};
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -410,7 +506,7 @@
 	};
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -420,27 +516,27 @@
 	});
 	exports.default = Scene;
 
-	var _Monster = __webpack_require__(2);
+	var _Monster = __webpack_require__(3);
 
 	var _Monster2 = _interopRequireDefault(_Monster);
 
-	var _Player = __webpack_require__(3);
+	var _Player = __webpack_require__(4);
 
 	var _Player2 = _interopRequireDefault(_Player);
 
-	var _Wall = __webpack_require__(5);
+	var _Wall = __webpack_require__(6);
 
 	var _Wall2 = _interopRequireDefault(_Wall);
 
-	var _Floor = __webpack_require__(6);
+	var _Floor = __webpack_require__(7);
 
 	var _Floor2 = _interopRequireDefault(_Floor);
 
-	var _Grass = __webpack_require__(7);
+	var _Grass = __webpack_require__(8);
 
 	var _Grass2 = _interopRequireDefault(_Grass);
 
-	var _Tree = __webpack_require__(8);
+	var _Tree = __webpack_require__(9);
 
 	var _Tree2 = _interopRequireDefault(_Tree);
 
@@ -501,7 +597,7 @@
 	};
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -531,7 +627,7 @@
 	exports.default = Wall;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -561,7 +657,7 @@
 	exports.default = Floor;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -591,7 +687,7 @@
 	exports.default = Grass;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -621,7 +717,7 @@
 	exports.default = Grass;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -641,7 +737,7 @@
 	}
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -717,7 +813,7 @@
 	}
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -791,7 +887,7 @@
 	}
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -836,50 +932,50 @@
 	exports.default = playerControls;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _react = __webpack_require__(14);
+	var _react = __webpack_require__(15);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(25);
+	var _reactDom = __webpack_require__(26);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _mainMenuScript = __webpack_require__(39);
+	var _mainMenuScript = __webpack_require__(40);
 
 	var _mainMenuScript2 = _interopRequireDefault(_mainMenuScript);
 
-	var _startMenuScript = __webpack_require__(40);
+	var _startMenuScript = __webpack_require__(42);
 
 	var _startMenuScript2 = _interopRequireDefault(_startMenuScript);
 
-	var _gameMenuScript = __webpack_require__(41);
+	var _gameMenuScript = __webpack_require__(43);
 
 	var _gameMenuScript2 = _interopRequireDefault(_gameMenuScript);
 
-	var _StartMenu = __webpack_require__(42);
+	var _StartMenu = __webpack_require__(44);
 
 	var _StartMenu2 = _interopRequireDefault(_StartMenu);
 
-	var _GameMenu = __webpack_require__(43);
+	var _GameMenu = __webpack_require__(45);
 
 	var _GameMenu2 = _interopRequireDefault(_GameMenu);
 
-	var _HelpControls = __webpack_require__(44);
+	var _HelpControls = __webpack_require__(46);
 
 	var _HelpControls2 = _interopRequireDefault(_HelpControls);
 
-	var _Editor = __webpack_require__(48);
+	var _Editor = __webpack_require__(47);
 
 	var _Editor2 = _interopRequireDefault(_Editor);
 
-	var _About = __webpack_require__(46);
+	var _About = __webpack_require__(48);
 
 	var _About2 = _interopRequireDefault(_About);
 
@@ -944,21 +1040,21 @@
 	_reactDom2.default.render(_react2.default.createElement(MainMenu, null), document.querySelector('.menu'));
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	if (process.env.NODE_ENV === 'production') {
-	  module.exports = __webpack_require__(16);
+	  module.exports = __webpack_require__(17);
 	} else {
-	  module.exports = __webpack_require__(21);
+	  module.exports = __webpack_require__(22);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 	// shim for using process in browser
@@ -1148,7 +1244,7 @@
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @license React v16.3.2
@@ -1160,7 +1256,7 @@
 	 * LICENSE file in the root directory of this source tree.
 	 */
 
-	'use strict';var m=__webpack_require__(17),n=__webpack_require__(18),p=__webpack_require__(19),q=__webpack_require__(20),r="function"===typeof Symbol&&Symbol["for"],t=r?Symbol["for"]("react.element"):60103,u=r?Symbol["for"]("react.portal"):60106,v=r?Symbol["for"]("react.fragment"):60107,w=r?Symbol["for"]("react.strict_mode"):60108,x=r?Symbol["for"]("react.provider"):60109,y=r?Symbol["for"]("react.context"):60110,z=r?Symbol["for"]("react.async_mode"):60111,A=r?Symbol["for"]("react.forward_ref"):
+	'use strict';var m=__webpack_require__(18),n=__webpack_require__(19),p=__webpack_require__(20),q=__webpack_require__(21),r="function"===typeof Symbol&&Symbol["for"],t=r?Symbol["for"]("react.element"):60103,u=r?Symbol["for"]("react.portal"):60106,v=r?Symbol["for"]("react.fragment"):60107,w=r?Symbol["for"]("react.strict_mode"):60108,x=r?Symbol["for"]("react.provider"):60109,y=r?Symbol["for"]("react.context"):60110,z=r?Symbol["for"]("react.async_mode"):60111,A=r?Symbol["for"]("react.forward_ref"):
 	60112,B="function"===typeof Symbol&&Symbol.iterator;function C(a){for(var b=arguments.length-1,e="http://reactjs.org/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);n(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",e)}var D={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};
 	function E(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||D}E.prototype.isReactComponent={};E.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?C("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};E.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};function F(){}F.prototype=E.prototype;function G(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||D}var H=G.prototype=new F;
 	H.constructor=G;m(H,E.prototype);H.isPureReactComponent=!0;var I={current:null},J=Object.prototype.hasOwnProperty,K={key:!0,ref:!0,__self:!0,__source:!0};
@@ -1176,7 +1272,7 @@
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 	/*
@@ -1272,7 +1368,7 @@
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1328,10 +1424,10 @@
 	}
 
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1351,10 +1447,10 @@
 	}
 
 	module.exports = emptyObject;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1395,7 +1491,7 @@
 	module.exports = emptyFunction;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.3.2
@@ -1415,12 +1511,12 @@
 	  (function() {
 	'use strict';
 
-	var _assign = __webpack_require__(17);
-	var invariant = __webpack_require__(18);
-	var emptyObject = __webpack_require__(19);
-	var warning = __webpack_require__(22);
-	var emptyFunction = __webpack_require__(20);
-	var checkPropTypes = __webpack_require__(23);
+	var _assign = __webpack_require__(18);
+	var invariant = __webpack_require__(19);
+	var emptyObject = __webpack_require__(20);
+	var warning = __webpack_require__(23);
+	var emptyFunction = __webpack_require__(21);
+	var checkPropTypes = __webpack_require__(24);
 
 	// TODO: this is special because it gets imported during build.
 
@@ -2813,10 +2909,10 @@
 	  })();
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2829,7 +2925,7 @@
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(20);
+	var emptyFunction = __webpack_require__(21);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -2881,10 +2977,10 @@
 	}
 
 	module.exports = warning;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2897,9 +2993,9 @@
 	'use strict';
 
 	if (process.env.NODE_ENV !== 'production') {
-	  var invariant = __webpack_require__(18);
-	  var warning = __webpack_require__(22);
-	  var ReactPropTypesSecret = __webpack_require__(24);
+	  var invariant = __webpack_require__(19);
+	  var warning = __webpack_require__(23);
+	  var ReactPropTypesSecret = __webpack_require__(25);
 	  var loggedTypeFailures = {};
 	}
 
@@ -2947,10 +3043,10 @@
 
 	module.exports = checkPropTypes;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 	/**
@@ -2968,7 +3064,7 @@
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -3005,15 +3101,15 @@
 	  // DCE check should happen before ReactDOM bundle executes so that
 	  // DevTools can report bad minification during injection.
 	  checkDCE();
-	  module.exports = __webpack_require__(26);
+	  module.exports = __webpack_require__(27);
 	} else {
-	  module.exports = __webpack_require__(34);
+	  module.exports = __webpack_require__(35);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @license React v16.3.2
@@ -3028,7 +3124,7 @@
 	/*
 	 Modernizr 3.0.0pre (Custom Build) | MIT
 	*/
-	'use strict';var ba=__webpack_require__(18),ea=__webpack_require__(14),m=__webpack_require__(27),A=__webpack_require__(28),C=__webpack_require__(20),fa=__webpack_require__(29),ha=__webpack_require__(30),ja=__webpack_require__(31),ka=__webpack_require__(19);
+	'use strict';var ba=__webpack_require__(19),ea=__webpack_require__(15),m=__webpack_require__(28),A=__webpack_require__(29),C=__webpack_require__(21),fa=__webpack_require__(30),ha=__webpack_require__(31),ja=__webpack_require__(32),ka=__webpack_require__(20);
 	function D(a){for(var b=arguments.length-1,c="http://reactjs.org/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);ba(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}ea?void 0:D("227");
 	function ma(a,b,c,d,e,f,h,g,k){this._hasCaughtError=!1;this._caughtError=null;var v=Array.prototype.slice.call(arguments,3);try{b.apply(c,v)}catch(l){this._caughtError=l,this._hasCaughtError=!0}}
 	var E={_caughtError:null,_hasCaughtError:!1,_rethrowError:null,_hasRethrowError:!1,invokeGuardedCallback:function(a,b,c,d,e,f,h,g,k){ma.apply(E,arguments)},invokeGuardedCallbackAndCatchFirstError:function(a,b,c,d,e,f,h,g,k){E.invokeGuardedCallback.apply(this,arguments);if(E.hasCaughtError()){var v=E.clearCaughtError();E._hasRethrowError||(E._hasRethrowError=!0,E._rethrowError=v)}},rethrowCaughtError:function(){return na.apply(E,arguments)},hasCaughtError:function(){return E._hasCaughtError},clearCaughtError:function(){if(E._hasCaughtError){var a=
@@ -3265,7 +3361,7 @@
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3303,7 +3399,7 @@
 	module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	/*
@@ -3399,7 +3495,7 @@
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3440,7 +3536,7 @@
 	module.exports = getActiveElement;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3510,7 +3606,7 @@
 	module.exports = shallowEqual;
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3524,7 +3620,7 @@
 	 * 
 	 */
 
-	var isTextNode = __webpack_require__(32);
+	var isTextNode = __webpack_require__(33);
 
 	/*eslint-disable no-bitwise */
 
@@ -3552,7 +3648,7 @@
 	module.exports = containsNode;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3566,7 +3662,7 @@
 	 * @typechecks
 	 */
 
-	var isNode = __webpack_require__(33);
+	var isNode = __webpack_require__(34);
 
 	/**
 	 * @param {*} object The object to check.
@@ -3579,7 +3675,7 @@
 	module.exports = isTextNode;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -3606,7 +3702,7 @@
 	module.exports = isNode;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.3.2
@@ -3626,19 +3722,19 @@
 	  (function() {
 	'use strict';
 
-	var invariant = __webpack_require__(18);
-	var React = __webpack_require__(14);
-	var warning = __webpack_require__(22);
-	var ExecutionEnvironment = __webpack_require__(27);
-	var _assign = __webpack_require__(28);
-	var emptyFunction = __webpack_require__(20);
-	var checkPropTypes = __webpack_require__(23);
-	var getActiveElement = __webpack_require__(29);
-	var shallowEqual = __webpack_require__(30);
-	var containsNode = __webpack_require__(31);
-	var emptyObject = __webpack_require__(19);
-	var hyphenateStyleName = __webpack_require__(35);
-	var camelizeStyleName = __webpack_require__(37);
+	var invariant = __webpack_require__(19);
+	var React = __webpack_require__(15);
+	var warning = __webpack_require__(23);
+	var ExecutionEnvironment = __webpack_require__(28);
+	var _assign = __webpack_require__(29);
+	var emptyFunction = __webpack_require__(21);
+	var checkPropTypes = __webpack_require__(24);
+	var getActiveElement = __webpack_require__(30);
+	var shallowEqual = __webpack_require__(31);
+	var containsNode = __webpack_require__(32);
+	var emptyObject = __webpack_require__(20);
+	var hyphenateStyleName = __webpack_require__(36);
+	var camelizeStyleName = __webpack_require__(38);
 
 	// Relying on the `invariant()` implementation lets us
 	// have preserve the format and params in the www builds.
@@ -20264,10 +20360,10 @@
 	  })();
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -20281,7 +20377,7 @@
 
 	'use strict';
 
-	var hyphenate = __webpack_require__(36);
+	var hyphenate = __webpack_require__(37);
 
 	var msPattern = /^ms-/;
 
@@ -20308,7 +20404,7 @@
 	module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -20343,7 +20439,7 @@
 	module.exports = hyphenate;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -20357,7 +20453,7 @@
 
 	'use strict';
 
-	var camelize = __webpack_require__(38);
+	var camelize = __webpack_require__(39);
 
 	var msPattern = /^-ms-/;
 
@@ -20385,7 +20481,7 @@
 	module.exports = camelizeStyleName;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -20419,7 +20515,7 @@
 	module.exports = camelize;
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20429,7 +20525,7 @@
 	});
 	exports.default = mainMenuScript;
 
-	var _openMenu = __webpack_require__(47);
+	var _openMenu = __webpack_require__(41);
 
 	var _openMenu2 = _interopRequireDefault(_openMenu);
 
@@ -20482,7 +20578,35 @@
 	}
 
 /***/ }),
-/* 40 */
+/* 41 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = openMenu;
+	function openMenu(menuSelectedId) {
+	  var menuSections = document.querySelector('.menu__section-container').children;
+	  function resetMenus() {
+	    for (var i = 0; i < menuSections.length; i++) {
+	      menuSections[i].setAttribute('data-hidden', 'yes');
+	    }
+	  }
+	  function openStartMenuItem(menuSelectedId) {
+	    resetMenus();
+	    for (var i = 0; i < menuSections.length; i++) {
+	      if (menuSections[i].getAttribute('data-startmenuid') === menuSelectedId) {
+	        menuSections[i].setAttribute('data-hidden', 'no');
+	      }
+	    }
+	  }
+	  openStartMenuItem(menuSelectedId);
+	}
+
+/***/ }),
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20492,7 +20616,7 @@
 	});
 	exports.default = startMenu;
 
-	var _openMenu = __webpack_require__(47);
+	var _openMenu = __webpack_require__(41);
 
 	var _openMenu2 = _interopRequireDefault(_openMenu);
 
@@ -20598,7 +20722,7 @@
 	}
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -20641,7 +20765,7 @@
 	}
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20650,7 +20774,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(14);
+	var _react = __webpack_require__(15);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20724,7 +20848,7 @@
 	exports.default = StartMenu;
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20733,7 +20857,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(14);
+	var _react = __webpack_require__(15);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20777,7 +20901,7 @@
 	exports.default = GameMenu;
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20786,7 +20910,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(14);
+	var _react = __webpack_require__(15);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20831,93 +20955,7 @@
 	exports.default = HelpControls;
 
 /***/ }),
-/* 45 */,
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(14);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var About = function About(props) {
-	  return _react2.default.createElement(
-	    "section",
-	    {
-	      className: "about",
-	      "data-hidden": "yes",
-	      "data-menuid": "aboutmenu",
-	      "data-startmenuid": "5"
-	    },
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      _react2.default.createElement(
-	        "a",
-	        { href: "https://github.com/wlwl2/browser-rpg" },
-	        "Source"
-	      )
-	    ),
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      _react2.default.createElement(
-	        "a",
-	        { href: "https://wlwl2.com" },
-	        "wlwl2"
-	      )
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      {
-	        "data-selected": "yes",
-	        className: "back-to-start",
-	        "data-startmenuid": "0"
-	      },
-	      "Back to Start Menu"
-	    )
-	  );
-	};
-
-	exports.default = About;
-
-/***/ }),
 /* 47 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = openMenu;
-	function openMenu(menuSelectedId) {
-	  var menuSections = document.querySelector('.menu__section-container').children;
-	  function resetMenus() {
-	    for (var i = 0; i < menuSections.length; i++) {
-	      menuSections[i].setAttribute('data-hidden', 'yes');
-	    }
-	  }
-	  function openStartMenuItem(menuSelectedId) {
-	    resetMenus();
-	    for (var i = 0; i < menuSections.length; i++) {
-	      if (menuSections[i].getAttribute('data-startmenuid') === menuSelectedId) {
-	        menuSections[i].setAttribute('data-hidden', 'no');
-	      }
-	    }
-	  }
-	  openStartMenuItem(menuSelectedId);
-	}
-
-/***/ }),
-/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20926,7 +20964,7 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(14);
+	var _react = __webpack_require__(15);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -20978,96 +21016,117 @@
 	exports.default = TileSelector;
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(15);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var About = function About(props) {
+	  return _react2.default.createElement(
+	    "section",
+	    {
+	      className: "about",
+	      "data-hidden": "yes",
+	      "data-menuid": "aboutmenu",
+	      "data-startmenuid": "5"
+	    },
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      _react2.default.createElement(
+	        "a",
+	        { href: "https://github.com/wlwl2/browser-rpg" },
+	        "Source"
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      _react2.default.createElement(
+	        "a",
+	        { href: "https://wlwl2.com" },
+	        "wlwl2"
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      {
+	        "data-selected": "yes",
+	        className: "back-to-start",
+	        "data-startmenuid": "0"
+	      },
+	      "Back to Start Menu"
+	    )
+	  );
+	};
+
+	exports.default = About;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = Game;
+	exports.default = touchEvents;
+	function touchEvents(step) {
+	  function startup() {
+	    window.addEventListener('touchstart', handleStart, false);
+	    window.addEventListener('touchend', handleEnd, false);
+	    window.addEventListener('touchcancel', handleCancel, false);
+	    window.addEventListener('touchmove', handleMove, false);
+	    console.log('initialized.');
+	  }
+	  startup();
+	  // var ongoingTouches = []
 
-	var _World = __webpack_require__(1);
-
-	var _World2 = _interopRequireDefault(_World);
-
-	var _tileSelector = __webpack_require__(10);
-
-	var _tileSelector2 = _interopRequireDefault(_tileSelector);
-
-	var _tileDragging = __webpack_require__(11);
-
-	var _tileDragging2 = _interopRequireDefault(_tileDragging);
-
-	var _playerControls = __webpack_require__(12);
-
-	var _playerControls2 = _interopRequireDefault(_playerControls);
-
-	var _MainMenu = __webpack_require__(13);
-
-	var _MainMenu2 = _interopRequireDefault(_MainMenu);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function Game() {
-	  window.onfocus = function () {
-	    document.body.style.backgroundColor = 'rgb(230, 230, 230)';
-	  };
-
-	  window.onblur = function () {
-	    document.body.style.backgroundColor = 'rgb(140, 140, 140)';
-	  };
-
-	  function init() {
-	    var canvas = document.createElement('canvas');
-	    canvas.height = 320;
-	    canvas.width = 320;
-	    var ctx = canvas.getContext('2d');
-	    document.querySelector('.game').appendChild(canvas);
-	    return { ctx: ctx, canvas: canvas };
+	  function handleStart(event) {
+	    event.preventDefault();
+	    console.log('touchstart.');
 	  }
 
-	  // For each of these steps, re-create the world.
-	  function step(direction) {
-	    // Erases canvas.
-	    ctx.clearRect(0, 0, canvas.width, canvas.height);
-	    world.scene.draw(ctx, canvas);
-	    world.players.forEach(function (player) {
-	      player.move(ctx, direction, canvas, world);
-	      player.draw(ctx);
-	    });
-	    // Player moves
-	    if (direction) {
-	      world.monsters.forEach(function (monster) {
-	        monster.step(canvas.height, world, 'freeze');
-	        monster.draw(ctx);
-	      });
-	    } else {
-	      world.monsters.forEach(function (monster) {
-	        monster.step(canvas.height, world);
-	        monster.draw(ctx);
-	      });
+	  var coord = void 0;
+	  function handleMove(event) {
+	    event.preventDefault();
+	    console.log('handlemove.');
+	    var i = void 0;
+	    for (i = 0; i < event.changedTouches.length; i++) {
+	      if (coord) {
+	        if (coord.x < event.changedTouches[i].pageX) step('right');
+	        if (coord.x > event.changedTouches[i].pageX) step('left');
+	        if (coord.y > event.changedTouches[i].pageY) step('up');
+	        if (coord.y < event.changedTouches[i].pageY) step('down');
+	      }
+	      coord = {
+	        x: event.changedTouches[i].pageX,
+	        y: event.changedTouches[i].pageY
+	      };
 	    }
 	  }
 
-	  var _init = init(),
-	      ctx = _init.ctx,
-	      canvas = _init.canvas;
+	  function handleEnd(event) {
+	    event.preventDefault();
+	    console.log('handleEnd.');
+	  }
 
-	  var world = new _World2.default();
-	  (0, _tileSelector2.default)(canvas);
-	  (0, _tileDragging2.default)(canvas, world, ctx);
-
-	  window.addEventListener('load', function (event) {
-	    // window.setInterval(step, 500)
-	    step();
-	  }, false);
-
-	  // touchEvents()
-	  (0, _playerControls2.default)(step);
+	  function handleCancel(event) {
+	    event.preventDefault();
+	    console.log('handleCancel.');
+	  }
 	}
-	// import touchEvents from './touchEvents'
 
 /***/ })
 /******/ ]);
