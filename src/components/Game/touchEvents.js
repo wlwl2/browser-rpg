@@ -1,9 +1,9 @@
 export default function touchEvents (step) {
   function startup () {
-    window.addEventListener('touchstart', handleStart, false)
-    window.addEventListener('touchend', handleEnd, false)
-    window.addEventListener('touchcancel', handleCancel, false)
-    window.addEventListener('touchmove', handleMove, false)
+    window.addEventListener('touchstart', handleStart, {passive: false})
+    window.addEventListener('touchend', handleEnd, {passive: false})
+    window.addEventListener('touchcancel', handleCancel, {passive: false})
+    window.addEventListener('touchmove', handleMove, {passive: false})
     console.log('initialized.')
   }
   startup()
