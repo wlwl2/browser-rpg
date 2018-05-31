@@ -1014,7 +1014,6 @@
 	  function handleMove(event) {
 	    event.preventDefault();
 	    console.log('handlemove.');
-	    console.log(touchCounter);
 	    if (touchCounter === 1) return;
 	    var i = void 0;
 	    for (i = 0; i < event.changedTouches.length; i++) {
@@ -1023,7 +1022,6 @@
 	        var y = coord.y - event.changedTouches[i].pageY;
 	        var absX = Math.abs(x);
 	        var absY = Math.abs(y);
-
 	        stopAutoMove();
 	        if (absY > absX) {
 	          if (y < 0) {
@@ -1041,7 +1039,6 @@
 	            touchMove('left');
 	          }
 	        }
-	        touchCounter = 1;
 	      }
 	      coord = {
 	        x: event.changedTouches[i].pageX,

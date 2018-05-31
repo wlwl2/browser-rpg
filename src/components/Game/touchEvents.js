@@ -68,7 +68,6 @@ export default function touchEvents (step) {
   function handleMove (event) {
     event.preventDefault()
     console.log('handlemove.')
-    console.log(touchCounter)
     if (touchCounter === 1) return
     let i;
     for (i = 0; i < event.changedTouches.length; i++) {
@@ -77,7 +76,6 @@ export default function touchEvents (step) {
         const y = coord.y - event.changedTouches[i].pageY
         const absX = Math.abs(x)
         const absY = Math.abs(y)
-
         stopAutoMove()
         if (absY > absX) {
           if (y < 0) {
@@ -95,7 +93,7 @@ export default function touchEvents (step) {
             touchMove('left')
           }
         }
-        touchCounter = 1
+
       }
       coord = {
         x: event.changedTouches[i].pageX,
