@@ -933,7 +933,7 @@
 
 /***/ }),
 /* 14 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -941,16 +941,69 @@
 	  value: true
 	});
 	exports.default = touchEvents;
+
+	var _openMenu = __webpack_require__(42);
+
+	var _openMenu2 = _interopRequireDefault(_openMenu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function touchEvents(step) {
-	  function startup() {
+	  function init() {
 	    window.addEventListener('touchstart', handleStart, { passive: false });
 	    window.addEventListener('touchend', handleEnd, { passive: false });
 	    window.addEventListener('touchcancel', handleCancel, { passive: false });
 	    window.addEventListener('touchmove', handleMove, { passive: false });
 	    console.log('initialized.');
 	  }
-	  startup();
-	  // var ongoingTouches = []
+	  init();
+
+	  // start menu
+	  var startMenuItems = document.querySelector('.start-menu__menu').children;
+	  function resetStartMenu() {
+	    for (var i = 0; i < startMenuItems.length; i++) {
+	      startMenuItems[i].setAttribute('data-selected', 'no');
+	    }
+	  }
+	  function selectStartMenuItem(itemSelected) {
+	    resetStartMenu();
+	    for (var i = 0; i < startMenuItems.length; i++) {
+	      if (startMenuItems[i].getAttribute('data-startmenuid') === itemSelected) {
+	        startMenuItems[i].focus();
+	        startMenuItems[i].setAttribute('data-selected', 'yes');
+	      }
+	    }
+	  }
+	  function startMenuItemEvent(event) {
+	    if (!startMenu) return;
+	    var gameState = JSON.parse(window.localStorage.getItem('gameState'));
+	    if (gameState.inGame !== 'no') return;
+	    var startMenuItemId = event.target.getAttribute('data-startmenuid');
+	    if (!startMenuItemId) return;
+	    if (startMenuItemId !== '0') {
+	      gameState.startMenuItemSelected = startMenuItemId;
+	      window.localStorage.setItem('gameState', JSON.stringify(gameState));
+	      selectStartMenuItem(startMenuItemId);
+	    }
+	    if (gameState.menuSelected === 'startmenu') {
+	      if (gameState.startMenuItemSelected === '3') {
+	        (0, _openMenu2.default)('3');
+	        gameState.menuSelected = 'helpmenu';
+	      }
+	      if (gameState.startMenuItemSelected === '4') {
+	        (0, _openMenu2.default)('4');
+	        gameState.menuSelected = 'editormenu';
+	      }
+	      if (gameState.startMenuItemSelected === '5') {
+	        (0, _openMenu2.default)('5');
+	        gameState.menuSelected = 'aboutmenu';
+	      }
+	    } else {
+	      (0, _openMenu2.default)('0');
+	      gameState.menuSelected = 'startmenu';
+	    }
+	    window.localStorage.setItem('gameState', JSON.stringify(gameState));
+	  }
 
 	  // menu
 	  var menuContainer = document.querySelector('.menu__section-container');
@@ -1060,6 +1113,9 @@
 	    event.preventDefault();
 	    console.log('handleEnd.');
 	    stopAutoMove();
+	    if (event.target.getAttribute('data-startmenuid')) {
+	      startMenuItemEvent(event);
+	    }
 	  }
 
 	  function handleCancel(event) {
@@ -21156,11 +21212,13 @@
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(16);
 
@@ -21168,44 +21226,78 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var About = function About(props) {
-	  return _react2.default.createElement(
-	    "section",
-	    {
-	      className: "about",
-	      "data-hidden": "yes",
-	      "data-menuid": "aboutmenu",
-	      "data-startmenuid": "5"
-	    },
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      _react2.default.createElement(
-	        "a",
-	        { href: "https://github.com/wlwl2/browser-rpg" },
-	        "Source"
-	      )
-	    ),
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      _react2.default.createElement(
-	        "a",
-	        { href: "https://wlwl2.com" },
-	        "wlwl2"
-	      )
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      {
-	        "data-selected": "yes",
-	        className: "back-to-start",
-	        "data-startmenuid": "0"
-	      },
-	      "Back to Start Menu"
-	    )
-	  );
-	};
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var About = function (_Component) {
+	  _inherits(About, _Component);
+
+	  function About() {
+	    _classCallCheck(this, About);
+
+	    return _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).apply(this, arguments));
+	  }
+
+	  _createClass(About, [{
+	    key: 'goToLink',
+	    value: function goToLink(event) {
+	      // event.preventDefault()
+	      var link = event.target.getAttribute('href');
+	      window.location.href = link;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'section',
+	        {
+	          className: 'about',
+	          'data-hidden': 'yes',
+	          'data-menuid': 'aboutmenu',
+	          'data-startmenuid': '5'
+	        },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          _react2.default.createElement(
+	            'a',
+	            {
+	              href: 'https://github.com/wlwl2/browser-rpg',
+	              onTouchEnd: this.goToLink
+	            },
+	            'Source'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          _react2.default.createElement(
+	            'a',
+	            {
+	              href: 'https://wlwl2.com',
+	              onTouchEnd: this.goToLink
+	            },
+	            'wlwl2'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            'data-selected': 'yes',
+	            className: 'back-to-start',
+	            'data-startmenuid': '0'
+	          },
+	          'Back to Start Menu'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return About;
+	}(_react.Component);
 
 	exports.default = About;
 

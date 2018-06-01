@@ -1,13 +1,61 @@
+import openMenu from '../Menu/MainMenu/openMenu'
+
 export default function touchEvents (step) {
-  function startup () {
+  function init () {
     window.addEventListener('touchstart', handleStart, {passive: false})
     window.addEventListener('touchend', handleEnd, {passive: false})
     window.addEventListener('touchcancel', handleCancel, {passive: false})
     window.addEventListener('touchmove', handleMove, {passive: false})
     console.log('initialized.')
   }
-  startup()
-  // var ongoingTouches = []
+  init()
+
+  // start menu
+  var startMenuItems = document.querySelector('.start-menu__menu').children
+  function resetStartMenu () {
+    for (var i = 0; i < startMenuItems.length; i++) {
+      startMenuItems[i].setAttribute('data-selected', 'no')
+    }
+  }
+  function selectStartMenuItem (itemSelected) {
+    resetStartMenu()
+    for (var i = 0; i < startMenuItems.length; i++) {
+      if (startMenuItems[i].getAttribute('data-startmenuid') === itemSelected) {
+        startMenuItems[i].focus()
+        startMenuItems[i].setAttribute('data-selected', 'yes')
+      }
+    }
+  }
+  function startMenuItemEvent (event) {
+    if (!startMenu) return
+    const gameState = JSON.parse(window.localStorage.getItem('gameState'))
+    if (gameState.inGame !== 'no') return
+    const startMenuItemId = event.target.getAttribute('data-startmenuid')
+    if (!startMenuItemId) return
+    if (startMenuItemId !== '0') {
+      gameState.startMenuItemSelected = startMenuItemId
+      window.localStorage.setItem('gameState', JSON.stringify(gameState))
+      selectStartMenuItem (startMenuItemId)
+    }
+    if (gameState.menuSelected === 'startmenu') {
+      if (gameState.startMenuItemSelected === '3') {
+        openMenu('3')
+        gameState.menuSelected = 'helpmenu'
+      }
+      if (gameState.startMenuItemSelected === '4') {
+        openMenu('4')
+        gameState.menuSelected = 'editormenu'
+      }
+      if (gameState.startMenuItemSelected === '5') {
+        openMenu('5')
+        gameState.menuSelected = 'aboutmenu'
+      }
+    } else {
+      openMenu('0')
+      gameState.menuSelected = 'startmenu'
+    }
+    window.localStorage.setItem('gameState', JSON.stringify(gameState))
+  }
 
   // menu
   const menuContainer = document.querySelector('.menu__section-container')
@@ -121,6 +169,9 @@ export default function touchEvents (step) {
     event.preventDefault()
     console.log('handleEnd.')
     stopAutoMove()
+    if (event.target.getAttribute('data-startmenuid')) {
+      startMenuItemEvent(event)
+    }
   }
 
   function handleCancel (event) {
