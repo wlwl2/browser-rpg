@@ -8,6 +8,7 @@ const HelpControls = (props) => {
       data-menuid="helpmenu"
       data-startmenuid="3"
     >
+      <p>Tap screen with 2 fingers to close MENU.</p>
       <p>To open/close the menu, press the escape key.</p>
       <p>Use the arrow keys to move your character.</p>
       <p>Press Enter to select a menu item.</p>

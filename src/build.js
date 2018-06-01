@@ -21121,6 +21121,11 @@
 	    _react2.default.createElement(
 	      "p",
 	      null,
+	      "Tap screen with 2 fingers to close MENU."
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
 	      "To open/close the menu, press the escape key."
 	    ),
 	    _react2.default.createElement(
