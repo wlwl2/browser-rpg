@@ -182,6 +182,15 @@ section[data-hidden="yes"] {
 .start-menu__controls {
   font-size: 16px; }
 
+@media screen and (max-width: 1023px) {
+  .start-menu__title {
+    font-size: 24px; }
+
+  .start-menu__menu {
+    font-size: 16px; }
+
+  .start-menu__controls {
+    display: none; } }
 .tile-selector {
   font-size: 20px;
   font-weight: bold;
