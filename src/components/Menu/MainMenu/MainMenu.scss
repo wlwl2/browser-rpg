@@ -85,6 +85,8 @@ section[data-hidden="yes"] {
 
 .menu__horizontal-center {
   display: inline-block;
+  position: relative;
+  z-index: 8;
 }
 
 .menu ul {

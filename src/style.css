@@ -159,7 +159,9 @@ section[data-hidden="yes"] {
   vertical-align: middle; }
 
 .menu__horizontal-center {
-  display: inline-block; }
+  display: inline-block;
+  position: relative;
+  z-index: 8; }
 
 .menu ul {
   padding: 0;

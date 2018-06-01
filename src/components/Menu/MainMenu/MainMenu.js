@@ -10,12 +10,14 @@ import GameMenu from './GameMenu/GameMenu'
 import HelpControls from './HelpControls/HelpControls'
 import TileSelector from './Editor/Editor'
 import About from './About/About'
+import Instructions from '../Instructions'
 
 class MainMenu extends Component {
   render () {
     return (
       <div className='menu__container'>
         <div className='menu__vertical-middle'>
+          <Instructions />
           <div className='menu__horizontal-center'>
             <div className='menu__section-container'>
               <StartMenu />
