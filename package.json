@@ -20,12 +20,12 @@
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-1": "^6.1.18",
     "concurrently": "^3.5.1",
-    "grunt": "^1.0.1",
+    "grunt": "^1.0.4",
     "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-open": "^0.2.3",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-open": "^0.2.4",
     "standard": "^10.0.2",
-    "webpack": "^1.15.0"
+    "webpack": "^4.41.2"
   },
   "repository": {
     "type": "git",
